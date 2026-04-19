@@ -1,0 +1,1139 @@
+{
+  "actions": {
+    "burn_furnace": {
+      "burn": {
+        "13": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "13": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_iron_node": {
+      "burn": {
+        "7": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "7": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_ironref": {
+      "burn": {
+        "29": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "29": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_rock_node": {
+      "burn": {
+        "6": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "6": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_tree_node": {
+      "burn": {
+        "17": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "17": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_woodRef": {
+      "burn": {
+        "19": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "19": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_workshoop": {
+      "burn": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "16": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "Craft_xbesta": {
+      "burn": {
+        "3": {
+          "amount": 50
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "custom_001": {
+      "require": {
+        "21": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "12": {
+          "requires": "21"
+        }
+      },
+      "collect": {
+        "12": {
+          "amount": 1,
+          "seconds": 24000
+        }
+      },
+      "type": "custom"
+    },
+    "custom_002": {
+      "require": {
+        "24": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "12": {
+          "requires": "24"
+        }
+      },
+      "collect": {
+        "12": {
+          "amount": 1,
+          "seconds": 50000
+        }
+      },
+      "type": "custom"
+    },
+    "Gen_gera_mmlv2": {
+      "require": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "21": {
+          "amount": 1
+        },
+        "22": {
+          "amount": 2
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "24": {
+          "requires": "16"
+        }
+      },
+      "collect": {
+        "24": {
+          "amount": 1,
+          "seconds": 3200
+        }
+      },
+      "type": "custom"
+    },
+    "Gen_sol_token": {
+      "require": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "28": {
+          "amount": 500
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "18": {
+          "requires": "16"
+        }
+      },
+      "collect": {
+        "18": {
+          "amount": 1,
+          "seconds": 43200
+        }
+      },
+      "type": "custom"
+    },
+    "generate_furnace": {
+      "require": {
+        "13": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "3": {
+          "amount": 3
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "15": {
+          "requires": "13"
+        }
+      },
+      "collect": {
+        "15": {
+          "amount": 1,
+          "seconds": 300
+        }
+      },
+      "type": "custom"
+    },
+    "generate_gera_mmlv1": {
+      "require": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "22": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "21": {
+          "requires": "16"
+        }
+      },
+      "collect": {
+        "21": {
+          "amount": 1,
+          "seconds": 28800
+        }
+      },
+      "type": "custom"
+    },
+    "generate_iron": {
+      "require": {
+        "7": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "10": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "mintUiDropChances": true,
+      "produce": {
+        "1": {
+          "requires": "7"
+        }
+      },
+      "collect": {
+        "1": {
+          "amount": 1,
+          "seconds": 10800
+        },
+        "4": {
+          "amount": 3,
+          "seconds": 10800,
+          "chance": 7
+        }
+      },
+      "type": "custom"
+    },
+    "generate_stone": {
+      "require": {
+        "6": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "10": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "mintUiDropChances": true,
+      "produce": {
+        "0": {
+          "requires": "6"
+        }
+      },
+      "collect": {
+        "0": {
+          "amount": 3,
+          "seconds": 7200
+        },
+        "33": {
+          "amount": 10,
+          "seconds": 7200,
+          "chance": 30
+        }
+      },
+      "type": "custom"
+    },
+    "generate_wood": {
+      "require": {
+        "17": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "10": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "mintUiDropChances": true,
+      "produce": {
+        "3": {
+          "requires": "17"
+        }
+      },
+      "collect": {
+        "3": {
+          "amount": 3,
+          "seconds": 3600
+        },
+        "34": {
+          "amount": 1,
+          "seconds": 3600,
+          "chance": 15
+        }
+      },
+      "type": "custom"
+    },
+    "generate_wood-refinery": {
+      "require": {
+        "19": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "3": {
+          "amount": 3
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "20": {
+          "requires": "19"
+        }
+      },
+      "collect": {
+        "20": {
+          "amount": 1,
+          "seconds": 600
+        }
+      },
+      "type": "custom"
+    },
+    "Gerador_iron_refinery": {
+      "require": {
+        "29": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "1": {
+          "amount": 5
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "28": {
+          "requires": "29"
+        }
+      },
+      "collect": {
+        "28": {
+          "amount": 1,
+          "seconds": 1200
+        }
+      },
+      "type": "custom"
+    },
+    "hire_merc_day": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "custom"
+    },
+    "hire_merc_month": {
+      "burn": {
+        "12": {
+          "amount": 15
+        }
+      },
+      "showInShop": false,
+      "type": "custom"
+    },
+    "hire_merc_week": {
+      "burn": {
+        "12": {
+          "amount": 5
+        }
+      },
+      "showInShop": false,
+      "type": "custom"
+    },
+    "kill_reward": {
+      "mint": {
+        "11": {
+          "amount": 1,
+          "chance": 30
+        }
+      },
+      "showInShop": false,
+      "mintUiDropChances": true,
+      "type": "custom"
+    },
+    "mint_furnace": {
+      "mint": {
+        "13": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_gen_token": {
+      "mint": {
+        "18": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_iron_node": {
+      "mint": {
+        "7": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_ironref": {
+      "mint": {
+        "29": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_rock_node": {
+      "mint": {
+        "6": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_tree_node": {
+      "mint": {
+        "17": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_woodRef": {
+      "mint": {
+        "19": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_workshoop": {
+      "mint": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "refinery_iron": {
+      "require": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "1": {
+          "amount": 30
+        },
+        "4": {
+          "amount": 10
+        }
+      },
+      "mint": {
+        "29": {
+          "amount": 0
+        }
+      },
+      "showInShop": false,
+      "type": "custom"
+    },
+    "refinery_wood": {
+      "require": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "0": {
+          "amount": 50
+        },
+        "3": {
+          "amount": 50
+        }
+      },
+      "mint": {
+        "19": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "custom"
+    },
+    "remove_price": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "repair_cave": {
+      "burn": {
+        "0": {
+          "amount": 50
+        },
+        "3": {
+          "amount": 30
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "shop_001": {
+      "burn": {
+        "3": {
+          "amount": 10000
+        }
+      },
+      "mint": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "type": "shop"
+    },
+    "shop_002": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "type": "shop"
+    },
+    "shop_axe": {
+      "burn": {
+        "11": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "10": {
+          "amount": 1
+        }
+      },
+      "type": "shop"
+    },
+    "shop_cannon": {
+      "burn": {
+        "0": {
+          "amount": 30
+        },
+        "1": {
+          "amount": 50
+        },
+        "3": {
+          "amount": 20
+        }
+      },
+      "mint": {
+        "31": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "shop_gunn": {
+      "burn": {
+        "4": {
+          "amount": 30
+        },
+        "20": {
+          "amount": 20
+        },
+        "28": {
+          "amount": 10
+        }
+      },
+      "mint": {
+        "32": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "shop_iron": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "1": {
+          "amount": 50
+        }
+      },
+      "type": "shop"
+    },
+    "Shop_MM": {
+      "burn": {
+        "11": {
+          "amount": 10000
+        }
+      },
+      "mint": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "type": "shop"
+    },
+    "shop_solartoken": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "11": {
+          "amount": 500
+        }
+      },
+      "type": "shop"
+    },
+    "shop_stone": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "0": {
+          "amount": 150
+        }
+      },
+      "type": "shop"
+    },
+    "shop_vip1": {
+      "burn": {
+        "12": {
+          "amount": 3
+        }
+      },
+      "mint": {
+        "25": {
+          "amount": 1
+        }
+      },
+      "type": "shop"
+    },
+    "shop_vip2": {
+      "burn": {
+        "12": {
+          "amount": 14
+        }
+      },
+      "mint": {
+        "26": {
+          "amount": 1000
+        }
+      },
+      "type": "shop"
+    },
+    "shop_vip3": {
+      "burn": {
+        "12": {
+          "amount": 30
+        }
+      },
+      "mint": {
+        "27": {
+          "amount": 1
+        }
+      },
+      "type": "shop"
+    },
+    "shop_wood": {
+      "burn": {
+        "12": {
+          "amount": 1
+        }
+      },
+      "mint": {
+        "3": {
+          "amount": 100
+        }
+      },
+      "type": "shop"
+    },
+    "shop_xbesta": {
+      "burn": {
+        "3": {
+          "amount": 50
+        }
+      },
+      "mint": {
+        "30": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "Token_generetor_lv1": {
+      "require": {
+        "18": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "cooldownSeconds": 600,
+      "produce": {
+        "11": {
+          "requires": "18"
+        }
+      },
+      "collect": {
+        "11": {
+          "amount": 1,
+          "seconds": 600
+        }
+      },
+      "type": "custom"
+    },
+    "Workbench-_furnace": {
+      "require": {
+        "16": {
+          "amount": 1
+        }
+      },
+      "burn": {
+        "0": {
+          "amount": 500
+        },
+        "1": {
+          "amount": 50
+        },
+        "3": {
+          "amount": 100
+        },
+        "4": {
+          "amount": 5
+        }
+      },
+      "mint": {
+        "13": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "produce": {
+        "13": {
+          "msToComplete": 0,
+          "requires": "16"
+        }
+      },
+      "collect": {
+        "13": {
+          "amount": 1,
+          "seconds": 0
+        }
+      },
+      "type": "custom"
+    },
+    "burn_cannon": {
+      "burn": {
+        "31": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_gen_tokenlv1": {
+      "burn": {
+        "18": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_gun": {
+      "burn": {
+        "32": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "burn_xbesta": {
+      "burn": {
+        "30": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_cannon": {
+      "mint": {
+        "31": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_gun": {
+      "mint": {
+        "32": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_xbesta": {
+      "mint": {
+        "30": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "Burn_kill": {
+      "burn": {
+        "23": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    },
+    "mint_kill": {
+      "mint": {
+        "23": {
+          "amount": 1
+        }
+      },
+      "showInShop": false,
+      "type": "shop"
+    }
+  },
+  "items": {
+    "0": {
+      "name": "StoneM",
+      "description": "Raw stone used for crafting basic weapons",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/0.png",
+      "id": 0,
+      "initialBalance": 1
+    },
+    "1": {
+      "name": "Iron",
+      "description": "Iron Ore Rare ore from deep mines",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/1.png",
+      "id": 1,
+      "initialBalance": 1
+    },
+    "3": {
+      "name": "Wood",
+      "description": "Wood logs for crafting",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/3.png",
+      "id": 3,
+      "initialBalance": 1
+    },
+    "4": {
+      "name": "Scrap Metal",
+      "description": "Junk metal found in ruins",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/4.png",
+      "id": 4,
+      "initialBalance": 1
+    },
+    "6": {
+      "name": "Rock node",
+      "description": "A rock to mine stone",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/6.png",
+      "id": 6,
+      "initialBalance": 1
+    },
+    "7": {
+      "name": "Iron node",
+      "description": "A rock to mine iron and scrap metal",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/7.png",
+      "id": 7,
+      "initialBalance": 1
+    },
+    "10": {
+      "name": "Axe",
+      "description": "perfect for cutting wood",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/10.png",
+      "id": 10,
+      "initialBalance": 10
+    },
+    "11": {
+      "name": "Solar_token",
+      "description": "dropped in solar token generator",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/11.png",
+      "id": 11,
+      "initialBalance": 100
+    },
+    "12": {
+      "name": "MM",
+      "description": "Mine defender Michel coin",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/12.png",
+      "id": 12
+    },
+    "13": {
+      "name": "Furnace",
+      "description": "Burn wood and receive charcoal.",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/13.png",
+      "id": 13,
+      "trophy": true
+    },
+    "15": {
+      "name": "Coal",
+      "description": "Great for solar token generators.",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/15.png",
+      "id": 15,
+      "initialBalance": 1
+    },
+    "16": {
+      "name": "Workbench",
+      "description": "This is where you turn your designs into reality.",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/16.png",
+      "id": 16,
+      "initialBalance": 1,
+      "max": 1
+    },
+    "17": {
+      "name": "Tree node",
+      "description": "A tree to chop wood",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/17.png",
+      "id": 17,
+      "initialBalance": 1
+    },
+    "18": {
+      "name": "Token_generator_lv1",
+      "description": "generates tokens on a small scale",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/18.png",
+      "id": 18,
+      "initialBalance": 1
+    },
+    "19": {
+      "name": "Wood Refinery",
+      "description": "Transforms raw wood into refined materials",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/19.png",
+      "id": 19,
+      "trophy": true
+    },
+    "20": {
+      "name": "Wooden plank",
+      "description": "Refined wood plank used in advanced crafting",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/20.png",
+      "id": 20,
+      "initialBalance": 1
+    },
+    "21": {
+      "name": "MM Generator Lv1",
+      "description": "0.3 MM in 8 hours",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/21.png",
+      "id": 21,
+      "trophy": true
+    },
+    "22": {
+      "name": "Red stone",
+      "description": "A rare red stone. Required to build MM Generators.",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/22.png",
+      "id": 22,
+      "trophy": true
+    },
+    "23": {
+      "name": "Killed",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/23.png",
+      "id": 23,
+      "initialBalance": 1
+    },
+    "24": {
+      "name": "MM Generator Lv2",
+      "description": "0.3 MM in 8 hours",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/24.png",
+      "id": 24,
+      "trophy": true
+    },
+    "25": {
+      "name": "VIP 1",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/25.webp",
+      "id": 25
+    },
+    "26": {
+      "name": "VIP 2",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/26.webp",
+      "id": 26
+    },
+    "27": {
+      "name": "Vip 3",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/27.webp",
+      "id": 27
+    },
+    "28": {
+      "name": "Iron bar",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/28.png",
+      "id": 28,
+      "initialBalance": 1
+    },
+    "29": {
+      "name": "Iron refinery ",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/29.png",
+      "id": 29,
+      "trophy": true
+    },
+    "30": {
+      "name": "Xbesta ",
+      "description": "",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/30.png",
+      "id": 30,
+      "initialBalance": 1
+    },
+    "31": {
+      "name": "Old Cannon Turret",
+      "description": "",
+      "id": 31,
+      "initialBalance": 1
+    },
+    "32": {
+      "name": "Machine Gun Turret",
+      "description": "",
+      "id": 32,
+      "initialBalance": 1
+    },
+    "33": {
+      "name": "Sand",
+      "description": "small pile of fine sand.",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/33.png",
+      "id": 33,
+      "initialBalance": 1
+    },
+    "34": {
+      "name": "Tree bud",
+      "description": "An early-stage tree bud, not yet grown.",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/34.png",
+      "id": 34,
+      "initialBalance": 1
+    },
+    "35": {
+      "name": "Weapon hut",
+      "description": "small workshop used to craft basic weapons. ",
+      "image": "https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/mine-defender-michel/items/35.png",
+      "id": 35,
+      "max": 1
+    }
+  },
+  "purchases": {
+    "p_1": {
+      "flower": 10,
+      "amount": 1,
+      "itemId": 12
+    }
+  },
+  "descriptions": {
+    "title": "mine-defender",
+    "subtitle": "Mine, craft and survive the darkness",
+    "welcome": "Welcome, miner! Collect resources, craft your weapons and defend your mine.",
+    "rules": "Mine resources, craft weapons, survive each wave of monsters!"
+  },
+  "playUrl": "https://mine-defender-michel.economies.sunflower-land.com"
+}
