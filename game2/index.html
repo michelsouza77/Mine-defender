@@ -33,7 +33,7 @@ h1, h2, h3, h4, h5, h6, .btn, button, .mode-tab, .tab, .profile-menu-btn {
 
 /* Sprites continuam pixelados */
 img { image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; }
-body { background-color:#5a6b3a; background-image:url("https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/ui/3x3_bg.png"); background-size:96px 96px; background-repeat:repeat; image-rendering:pixelated; color: var(--parchment); min-height: 100vh; overflow-x: hidden; }
+body { background-color:#5a6b3a; background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png"); background-size:96px 96px; background-repeat:repeat; image-rendering:pixelated; color: var(--parchment); min-height: 100vh; overflow-x: hidden; }
 
 
 button[onclick*="remove()"][style*="font-size:22px"]:active,
@@ -237,7 +237,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .mail-delete-all{margin-top:10px;width:100%;padding:8px;background-color:#e8533f;color:#fff;font-family:'Pixelify Sans',monospace;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;}
 .mail-delete-all:hover{filter:brightness(1.1);}
 /* ===== CONFIG / PROFILE (SFL style) ===== */
-.cfg-window{max-width:380px;width:100%;display:flex;flex-direction:column;position:relative;background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px;}
+.cfg-window{max-width:380px;width:100%;max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;position:relative;background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px;box-sizing:border-box;}
 .cfg-close{position:absolute;top:-4px;right:0;z-index:40;width:42px;height:42px;}
 .cfg-body{background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:14px;}
 .cfg-tabs{display:flex;gap:6px;padding:0 10px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
@@ -380,7 +380,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .guide-table{width:100%;border-collapse:collapse;font-size:9px;margin-top:6px;}
 .guide-table th{font-family:'Pixelify Sans',monospace;color:#3a2410;font-weight:700;text-align:left;padding:4px 6px;border-bottom:2px solid #2d2840;}
 .guide-table td{padding:4px 6px;color:#4a2e14;font-weight:600;border-bottom:1px solid rgba(45,40,64,.2);}
-#battle-panel{flex:1;background-color:#5a6b3a;background-image:url("https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/ui/3x3_bg.png");background-size:96px 96px;background-repeat:repeat;image-rendering:pixelated;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+#battle-panel{flex:1;background-color:#5a6b3a;background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:96px 96px;background-repeat:repeat;image-rendering:pixelated;display:flex;flex-direction:column;position:relative;overflow:hidden;}
 .craft-map{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px 16px 60px;display:flex;flex-direction:column;gap:18px;position:relative;}
 .craft-map::-webkit-scrollbar{width:6px;}
 .craft-map::-webkit-scrollbar-thumb{background:rgba(200,150,12,.3);border-radius:4px;}
@@ -1022,17 +1022,56 @@ to{transform:scale(1) rotate(0);opacity:1;}
 /* The world is larger than the screen; we move it to follow the character (camera) */
 #explore-world{position:absolute;top:0;left:0;will-change:transform;image-rendering:pixelated;}
 /* Grass farm zone */
-#exp-ground{position:absolute;left:0;top:0;background-color:#63a14a;background-image:url("https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/ui/3x3_bg.png");background-size:84px 84px;background-repeat:repeat;image-rendering:pixelated;}
+#exp-ground{position:absolute;left:0;top:0;background-color:#63a14a;background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:48px 48px;background-repeat:repeat;image-rendering:pixelated;}
 #exp-resource-layer{position:absolute;inset:0;}
 /* A harvestable resource (tree/stone) */
 .exp-res{position:absolute;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;}
 .exp-res.hit{transform:translate(-50%,-100%) scale(.92);}
 .exp-res.depleted{opacity:.35;filter:grayscale(.6);}
+#exp-chest-layer{position:absolute;inset:0;}
+#exp-enemy-layer{position:absolute;inset:0;}
+.exp-enemy{position:absolute;width:34px;height:44px;background-repeat:no-repeat;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;pointer-events:none;}
+.exp-chest{position:absolute;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;transition:transform .12s,opacity .3s;}
+.exp-chest.exp-chest-l2{filter:drop-shadow(0 0 3px rgba(90,170,255,.9));}
+.exp-chest.exp-chest-l3{filter:drop-shadow(0 0 4px rgba(255,215,60,1));}
+.exp-chest.near{transform:translate(-50%,-100%) scale(1.15);}
+.exp-chest.opened{opacity:.45;filter:grayscale(.5) brightness(.8);pointer-events:none;}
+#exp-hand-btn{position:fixed;bottom:26px;right:22px;z-index:4010;width:72px;height:72px;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;transition:transform .1s;}
+#exp-hand-btn img{width:58%;height:58%;object-fit:contain;image-rendering:pixelated;pointer-events:none;}
+#exp-hand-btn:active{transform:scale(.92);}
+#exp-hand-btn.ready{background:rgba(255,224,138,.45);border-color:#ffe08a;animation:handPulse .7s infinite;box-shadow:0 0 12px rgba(255,215,60,.85);}
+@keyframes handPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.13);}}
+#exp-loot-panel{position:fixed;inset:0;z-index:4030;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.85);padding:14px;backdrop-filter:blur(3px);}
+.exp-loot-modal{width:100%;max-width:560px;max-height:84vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#1a1008 0%,#0d0804 100%);border:3px solid var(--gold);border-radius:8px;overflow:hidden;}
+.exp-loot-header{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(0,0,0,.5);border-bottom:2px solid var(--gold-dim);font-family:'Pixelify Sans',monospace;color:var(--gold-light);font-size:15px;font-weight:700;letter-spacing:1px;}
+.exp-loot-header button{background:none;border:none;color:var(--gold-dim);font-size:22px;cursor:pointer;padding:0 4px;}
+.exp-loot-cols{display:flex;flex:1;min-height:0;overflow:hidden;}
+.exp-loot-col{display:flex;flex-direction:column;flex:1;min-width:0;background:rgba(0,0,0,.2);}
+.exp-loot-col + .exp-loot-col{border-left:2px solid var(--gold-dim);}
+.exp-loot-col .ldoe-inv-grid{overflow-y:auto;min-height:120px;}
+.exp-loot-tappable{cursor:pointer;transition:transform .08s;}
+.exp-loot-tappable:active{transform:scale(.9);}
+.exp-loot-slot .lfb,.ldoe-slot .lfb{font-size:24px;}
+.exp-loot-all{margin:8px;padding:9px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;letter-spacing:1px;border:2px solid var(--gold-light);border-radius:4px;cursor:pointer;}
+.exp-loot-hint{padding:8px 12px;font-size:11px;color:var(--parch-dark);text-align:center;font-family:system-ui,sans-serif;background:rgba(0,0,0,.4);border-top:1px solid var(--gold-dim);}
+#exp-minimap{position:fixed;top:14px;left:14px;z-index:4010;width:104px;height:104px;border:2px solid rgba(255,255,255,.6);border-radius:8px;background:rgba(0,0,0,.4);image-rendering:pixelated;}
+#exp-hp{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:4010;width:150px;height:12px;background:rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.6);border-radius:7px;overflow:hidden;}
+#exp-hp-fill{height:100%;width:100%;background:linear-gradient(90deg,#63c74d,#8fe06a);transition:width .25s;}
+#exp-hp span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Pixelify Sans',monospace;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;}
+#exp-open-timer{position:absolute;transform:translate(-50%,-100%);z-index:4500;pointer-events:none;display:none;}
+.exp-timer-bar{width:34px;height:6px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.7);border-radius:3px;overflow:hidden;}
+.exp-timer-fill{height:100%;width:0%;background:linear-gradient(90deg,#ffe08a,#ffd700);}
+#exp-loading{position:fixed;inset:0;z-index:4060;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a1008 0%,#050302 100%);}
+.exp-loading-inner{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.exp-spinner{width:48px;height:48px;border:5px solid rgba(255,215,60,.25);border-top-color:var(--gold);border-radius:50%;animation:expSpin .8s linear infinite;}
+@keyframes expSpin{to{transform:rotate(360deg);}}
+.exp-loading-txt{font-family:'Pixelify Sans',monospace;color:var(--gold-light);font-size:14px;letter-spacing:1px;}
 /* Border clouds — placed inside the world, on the map edges (move with the map) */
-#exp-clouds{position:absolute;inset:0;pointer-events:none;z-index:6;}
+#exp-clouds{position:absolute;inset:0;pointer-events:none;z-index:5000;}
 .exp-cloud{position:absolute;image-rendering:pixelated;}
 /* Backpack button + panel */
-#exp-backpack-btn{position:fixed;top:14px;left:14px;z-index:4010;width:52px;height:52px;font-size:28px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
+#exp-backpack-btn{position:fixed;bottom:112px;right:28px;z-index:4010;width:60px;height:60px;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;}
+#exp-backpack-btn img{width:60%;height:60%;object-fit:contain;image-rendering:pixelated;}
 /* Explore reward screen */
 #explore-rewards{position:fixed;inset:0;z-index:4030;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;}
 .exp-rw-box{max-width:360px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:14px;}
@@ -1046,16 +1085,16 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .exp-rw-btn:hover{filter:brightness(1.1);}
 #exp-backpack-panel{display:none;position:fixed;inset:0;z-index:4020;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:20px;}
 #exp-backpack-panel.open{display:flex;}
-.exp-bp-window{max-width:340px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:16px;}
-.exp-bp-title{font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;color:#3a2410;text-align:center;margin-bottom:12px;}
-.exp-bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-height:70px;}
+.exp-bp-window{max-width:360px;width:100%;background:linear-gradient(180deg,#1a1008 0%,#0d0804 100%);border:3px solid var(--gold);border-radius:8px;padding:14px;}
+.exp-bp-title{font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;letter-spacing:1px;color:var(--gold-light);text-align:center;margin-bottom:12px;}
+.exp-bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;min-height:70px;}
 .exp-bp-slot{aspect-ratio:1;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
 .exp-bp-slot img{width:60%;height:60%;object-fit:contain;image-rendering:pixelated;}
 .exp-bp-slot .qty{position:absolute;bottom:2px;right:4px;font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:14px;color:#fff;text-shadow:1px 1px 0 #2d2840;font-weight:700;}
 .exp-bp-empty{grid-column:1/-1;text-align:center;color:#6b4a28;font-family:'Pixelify Sans',monospace;font-size:12px;padding:14px;}
 .exp-bp-close{width:100%;margin-top:12px;padding:8px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;}
-#explore-char{position:absolute;width:48px;height:48px;transform:translate(-50%,-50%);z-index:5;}
-#explore-char-img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;display:block;}
+#explore-char{position:absolute;width:84px;height:56px;transform:translate(-50%,-50%);z-index:5;}
+#explore-char-img{width:100%;height:100%;background-repeat:no-repeat;image-rendering:pixelated;display:block;}
 #explore-char-img.flip{transform:scaleX(-1);}
 #explore-close{position:fixed;top:14px;right:14px;z-index:4010;width:44px;height:44px;background-color:#e8533f;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 #explore-joystick{position:fixed;bottom:40px;left:40px;width:120px;height:120px;z-index:4010;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;touch-action:none;}
@@ -1173,14 +1212,14 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Disc buttons in a VERTICAL column: Settings, Season, Mailbox -->
 <div class="hud-disc-col" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
 <button class="hud-disc" id="profile-btn" onclick="showProfileMenu()" title="Perfil">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/settings_disc.png" alt="Config" onerror="this.outerHTML='⚙️';">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" alt="Config" onerror="this.outerHTML='⚙️';">
 </button>
 <button class="hud-disc" id="season-btn" onclick="showSeasonInfo()" title="Temporada">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
 <img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chapter_icon_3.webp" class="hud-disc-fg" alt="Temporada" onerror="this.outerHTML='📗';">
 </button>
 <button class="hud-disc" id="mailbox-btn" onclick="showMailbox()" title="Mensagens">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/letter_disc.png" alt="Mensagens" onerror="this.outerHTML='📩';">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/letter_disc.png" alt="Mensagens" onerror="this.outerHTML='📩';">
 <span class="hud-mailbox-badge" id="mailbox-badge" style="display:none;"></span>
 </button>
 </div>
@@ -1192,18 +1231,18 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Bottom-left disc stack: shop on top, battle below (SFL style) -->
 <div class="hud-corner-discs">
 <button class="hud-disc" id="marketplace-btn" onclick="showMarketplace()" title="Mercado SFL">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/trade_disc.png" alt="Loja" onerror="this.outerHTML='🛒';">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/trade_disc.png" alt="Loja" onerror="this.outerHTML='🛒';">
 </button>
 <button class="hud-disc hud-disc-battle" id="battle-btn" onclick="toggleRightPanel()" title="Batalha">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
 <img src="https://sunflower-land.com/game-assets/icons/sword.png" class="hud-disc-fg" alt="Batalha" onerror="this.outerHTML='⚔️';">
 </button>
 </div>
 <!-- Menu button below energy (top-left) -->
 <div class="hud-menu-disc">
 <button class="hud-disc" id="menu-disc-btn" onclick="toggleLeftPanel()" title="Menu">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
-<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/chest.png" class="hud-disc-fg" alt="Menu" onerror="this.outerHTML='🎒';">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
+<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" class="hud-disc-fg" alt="Menu" onerror="this.outerHTML='🎒';">
 </button>
 </div>
 <!-- ═══ MAIN ═══ -->
@@ -1216,25 +1255,25 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Tab buttons -->
 <div class="tab-nav">
 <button class="tab-btn active" onclick="switchTab('inventory')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/codex.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🎴';"></span><span data-i18n="menu.collection">Coleção</span>
+<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🎴';"></span><span data-i18n="menu.collection">Coleção</span>
 </button>
 <button class="tab-btn" onclick="switchTab('eggs')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/pet_egg.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🥚';"></span><span data-i18n="menu.eggs">Ovos</span>
+<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/pet_egg.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🥚';"></span><span data-i18n="menu.eggs">Ovos</span>
 </button>
 <button class="tab-btn" onclick="switchTab('items')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/chest.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦';"></span><span data-i18n="menu.items">Itens</span>
+<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦';"></span><span data-i18n="menu.items">Itens</span>
 </button>
 <button class="tab-btn" onclick="switchTab('fusion')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/gem.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚗️';"></span><span data-i18n="menu.fusion">Fusão</span>
+<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/gem.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚗️';"></span><span data-i18n="menu.fusion">Fusão</span>
 </button>
 <button class="tab-btn" onclick="switchTab('guide')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/world_book.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📜';"></span><span data-i18n="menu.guide">Guia</span>
+<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📜';"></span><span data-i18n="menu.guide">Guia</span>
 </button>
 </div>
 <!-- INVENTORY -->
 <div class="panel-content active" id="tab-inventory">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon" id="coll-info-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/codex.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🦕'"></span><span id="coll-info-title" data-i18n="section.collection.short">Minha Coleção</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon" id="coll-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🦕'"></span><span id="coll-info-title" data-i18n="section.collection.short">Minha Coleção</span></div>
 <div class="sfl-info-desc" id="coll-info-desc"><span id="total-cards-count">0/99</span> cartas • Clique numa carta para ver os stats</div>
 </div>
 <!-- COMUNS -->
@@ -1314,7 +1353,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- ITEMS -->
 <div class="panel-content" id="tab-items">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon" id="items-info-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/chest.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦'"></span><span id="items-info-title" data-i18n="section.items.short">Materiais & Recursos</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon" id="items-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦'"></span><span id="items-info-title" data-i18n="section.items.short">Materiais & Recursos</span></div>
 <div class="sfl-info-desc" id="items-info-desc" data-i18n="items.subtitle">Itens coletados em batalhas de defesa e fabricação</div>
 </div>
 <div id="items-grid"></div>
@@ -1322,7 +1361,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- FUSION -->
 <div class="panel-content" id="tab-fusion">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/lightning.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚡'"></span><span data-i18n="section.fusion.short">Altar de Fusão</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚡'"></span><span data-i18n="section.fusion.short">Altar de Fusão</span></div>
 <div class="sfl-info-desc" data-i18n="fusion.subtitle.full">Queime 3 cartas iguais para evoluir à próxima raridade</div>
 </div>
 <div class="fusion-area">
@@ -1369,11 +1408,11 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- GUIDE -->
 <div class="panel-content" id="tab-guide">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/world_book.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📖'"></span><span data-i18n="section.guide.short">Guia do Caçador</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📖'"></span><span data-i18n="section.guide.short">Guia do Caçador</span></div>
 <div class="sfl-info-desc" data-i18n="guide.intro.body">Colecione cartas, monte seu deck e batalhe! Suba de nível para desbloquear novas áreas.</div>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.intro.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🦕'">Bem-vindo</h3>
+<h3 data-i18n="guide.intro.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🦕'">Bem-vindo</h3>
 <p data-i18n="guide.intro.body">Colecione cartas de dinossauros, monte seu deck e batalhe! Suba de nível com o Ancião para desbloquear novas áreas e recursos.</p>
 </div>
 <div class="guide-section">
@@ -1385,11 +1424,11 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <p data-i18n="guide.battle.body" data-i18n-html="1">Cada carta acumula energia por turno e ataca ao encher a barra. O <strong>escudo</strong> reduz o dano até quebrar. O <strong>ataque especial</strong> causa dano extra, 1× por batalha.</p>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.elder.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🧙'">Ancião da Tribo</h3>
+<h3 data-i18n="guide.elder.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🧙'">Ancião da Tribo</h3>
 <p data-i18n="guide.elder.body">Entregue recursos ao Ancião para subir de Nível de Caçador. Cada nível desbloqueia uma nova parte do jogo: bancadas, mercado, modos e mais.</p>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.craft.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🔨'">Bancadas</h3>
+<h3 data-i18n="guide.craft.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🔨'">Bancadas</h3>
 <p data-i18n="guide.craft.body" data-i18n-html="1">No mapa você fabrica e processa recursos: gerar energia, fundir metais, chocar ovos e criar poções. Cada bancada é desbloqueada com o Ancião.</p>
 </div>
 <div class="guide-section">
@@ -1401,7 +1440,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <p data-i18n="guide.cashcoin.body" data-i18n-html="1">Acumule <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;" onerror="this.outerHTML='💵'"> Cash Coin nas batalhas e troque por itens raros. Quanto mais você tem, mais alto fica no Ranking.</p>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.fusion.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='⚡'">Fusão & Raridades</h3>
+<h3 data-i18n="guide.fusion.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='⚡'">Fusão & Raridades</h3>
 <p data-i18n="guide.fusion.body" data-i18n-html="1">Funda 3 cartas iguais para evoluir à próxima raridade. São 8 raridades: Comum → Incomum → Raro → Épico → Lendário → Mítico → Ancestral → TITÃ.</p>
 </div>
 </div>
@@ -1538,7 +1577,7 @@ Defender Sunflower Land
 <div class="deck-picker-box" onclick="event.stopPropagation()">
 <button class="panel-close-x" style="position:absolute;top:-4px;right:0;z-index:40;width:42px;height:42px;" onclick="document.getElementById('deck-picker').classList.remove('open')"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:26px;height:26px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
 <div class="deck-picker-tabs">
-<button class="deck-picker-tab active"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='🦕'"><span data-i18n="deck.picker.title.short">Escolher Carta</span></button>
+<button class="deck-picker-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='🦕'"><span data-i18n="deck.picker.title.short">Escolher Carta</span></button>
 </div>
 <div class="deck-picker-content">
 <div class="deck-picker-grid" id="deck-picker-grid"></div>
@@ -2113,19 +2152,19 @@ var I18N = {
   'guide.items.use.crystal': 'Item raro',
   'guide.items.use.sand': 'Material comum',
   'guide.items.use.bone': 'Material orgânico',
-  'guide.craft.title': '<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bancadas (Crafting)',
+  'guide.craft.title': '<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bancadas (Crafting)',
   'guide.craft.bonfire': '<strong>Fogueira</strong> — gera energia (3 madeira → 1⚡ a cada 5min) e carvão (5 madeira → 1 carvão a cada 2min).',
   'guide.craft.workbench': '<strong>Workbench</strong> — fabrica itens refinados (3 madeira → 1 tábua a cada 1min).',
   'guide.craft.tip': 'Construa as bancadas no mapa central com pedra, madeira e sucata.',
   'guide.rarities.title': '🏆 Raridades das Cartas',
   'guide.rarities.col_rarity': 'Raridade',
   'guide.rarities.col_total': 'Total',
-  'guide.fusion.title': '<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Fusão de Cartas',
+  'guide.fusion.title': '<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Fusão de Cartas',
   'guide.fusion.body': 'Funda 3 cartas iguais para evoluir à próxima raridade. São 8 raridades: Comum → Incomum → Raro → Épico → Lendário → Mítico → Ancestral → TITÃ.',
-  'guide.intro.title':'<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bem-vindo','guide.intro.body':'Colecione cartas de dinossauros, monte seu deck e batalhe! Suba de nível com o Ancião para desbloquear novas áreas e recursos.',
+  'guide.intro.title':'<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bem-vindo','guide.intro.body':'Colecione cartas de dinossauros, monte seu deck e batalhe! Suba de nível com o Ancião para desbloquear novas áreas e recursos.',
   'guide.modes.body':'<strong>Arena</strong> — enfrente inimigos por <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/1.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> DinoCoins e <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cash Coin.<br><strong>Defesa</strong> — defenda a Sunflower Land por recursos e <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cash Coin.<br><strong>Caçada</strong> — em breve!',
   'guide.battle.body':'Cada carta acumula energia por turno e ataca ao encher a barra. O <strong>escudo</strong> reduz o dano até quebrar. O <strong>ataque especial</strong> causa dano extra, 1× por batalha.',
-  'guide.craft.body':'No mapa você fabrica e processa recursos: gerar energia, fundir metais, chocar ovos e criar poções. Cada bancada é desbloqueada com o Ancião.','guide.elder.title':'<img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Ancião da Tribo','guide.elder.body':'O Ancião guia sua jornada como caçador. Entregue recursos a ele para subir de Nível de Caçador e desbloquear novas áreas, bancadas e modos de jogo. Cada nível abre uma parte nova do jogo.',
+  'guide.craft.body':'No mapa você fabrica e processa recursos: gerar energia, fundir metais, chocar ovos e criar poções. Cada bancada é desbloqueada com o Ancião.','guide.elder.title':'<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Ancião da Tribo','guide.elder.body':'O Ancião guia sua jornada como caçador. Entregue recursos a ele para subir de Nível de Caçador e desbloquear novas áreas, bancadas e modos de jogo. Cada nível abre uma parte nova do jogo.',
   'guide.equip.title':'<img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/106.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Equipamentos',
   'guide.equip.body':'Equipe suas cartas com itens para fortalecê-las em batalha. Cada slot aceita um tipo de equipamento. Exemplos: <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/106.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cristal aumenta o primeiro ataque, <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/125.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Poção aumenta o HP, e os <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/127.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Totens dão bônus especiais como slot extra ou reviver a carta.',
   'guide.cashcoin.title':'<img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Cash Coin & Ranking','guide.cashcoin.body':'O <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cash Coin é o token da Temporada Beta. Ganhe nas batalhas de Defesa e Arena, e troque por itens raros na loja do SFL. Quanto mais Cash Coin você acumula, mais alto fica no Ranking dos caçadores.',
@@ -2777,7 +2816,7 @@ var SFL_ITEMS_INFO = {
 var ITEM_IMG_VERSION = '4';
 // UI icons from the SFL asset pack (hosted on GitHub raw).
 // Used to replace emojis in the interface with real game sprites.
-var UI_ICON_BASE = 'https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/';
+var UI_ICON_BASE = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/';
 function uiIcon(filename) { return UI_ICON_BASE + filename; }
 // Returns an <img> tag for a UI icon, with an emoji fallback if it fails to load.
 function uiIconImg(filename, emojiFallback, size) {
@@ -3022,7 +3061,7 @@ function showSeasonInfo() {
     // SFL shop-style grid card: lightning top-left, item image, price pill bottom
     return `
     <div class="season-shop-card ${enabled ? '' : 'disabled'}" onclick="showSeasonItemInfo(${tr.id})" title="${nm}">
-      ${tr.boost ? '<img class="season-card-bolt" src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/lightning.png" onerror="this.outerHTML=\'⚡\'">' : ''}
+      ${tr.boost ? '<img class="season-card-bolt" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" onerror="this.outerHTML=\'⚡\'">' : ''}
       ${soldOut ? '<div class="season-card-check">✓</div>' : ''}
       <div class="season-card-img">
         <img src="${sflItemImageUrl(tr.id)}" style="width:80%;height:80%;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';" />
@@ -3038,8 +3077,8 @@ function showSeasonInfo() {
   <div class="season-window">
     <button class="panel-close-x season-close" onclick="document.getElementById('season-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="season-tabs">
-      <button class="season-tab active" onclick="switchSeasonTab('shop',this)"><img class="season-tab-icon" src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/shop.png" onerror="this.outerHTML='🏪'">${t('season.tab.shop')}<span class="season-tab-timer"><img src="https://sunflower-land.com/game-assets/icons/stopwatch.png" style="width:12px;height:12px;image-rendering:pixelated;vertical-align:-1px;margin-right:2px;" onerror="this.outerHTML='⏳'">${t('season.timer')}</span></button>
-      <button class="season-tab" onclick="switchSeasonTab('rewards',this)"><img class="season-tab-icon" src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/gift.png" onerror="this.outerHTML='🎁'">${t('season.tab.rewards')}</button>
+      <button class="season-tab active" onclick="switchSeasonTab('shop',this)"><img class="season-tab-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/shop.png" onerror="this.outerHTML='🏪'">${t('season.tab.shop')}<span class="season-tab-timer"><img src="https://sunflower-land.com/game-assets/icons/stopwatch.png" style="width:12px;height:12px;image-rendering:pixelated;vertical-align:-1px;margin-right:2px;" onerror="this.outerHTML='⏳'">${t('season.timer')}</span></button>
+      <button class="season-tab" onclick="switchSeasonTab('rewards',this)"><img class="season-tab-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/gift.png" onerror="this.outerHTML='🎁'">${t('season.tab.rewards')}</button>
     </div>
     <div class="season-body">
       <div class="season-scroll" id="season-page-shop">
@@ -3318,7 +3357,7 @@ function showMailbox() {
   <div class="mail-window">
     <button class="panel-close-x mail-close" onclick="document.getElementById('mailbox-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="mail-tabs">
-      <button class="mail-tab active"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/letter_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='📬'">${t('mail.title')}</button>
+      <button class="mail-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/letter_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='📬'">${t('mail.title')}</button>
     </div>
     <div class="mail-body">
       <div class="mail-scroll">
@@ -3791,7 +3830,7 @@ function showProfileMenu() {
   <div class="cfg-window">
     <button class="panel-close-x cfg-close" onclick="document.getElementById('profile-menu-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="cfg-tabs">
-      <button class="cfg-tab active"><img src="https://raw.githubusercontent.com/michelsouza77/Mine-defender/main/Src-portal-sunflower/src/assets/icons/settings_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='⚙️'">${t('profile.title')}</button>
+      <button class="cfg-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='⚙️'">${t('profile.title')}</button>
     </div>
     <div class="cfg-body">
       ${renderBumpkinAvatar()}
@@ -3814,10 +3853,60 @@ function showProfileMenu() {
         <span class="cfg-btn-label">${t('tutorial.replay')}</span>
       </button>
       </div>
+      ${renderCfgFooter()}
     </div>
   </div>
   `;
   document.body.appendChild(modal);
+}
+
+// ── Version + bumpkin diagnostic footer (Settings) ──
+// DINOHUNT_VERSION: bump this on every change so Michel can confirm the live build.
+const DINOHUNT_VERSION = 'v1.9.1';
+const DINOHUNT_BUILD = '2026-06-25';
+function renderCfgFooter(){
+  let session=false, farmId='—', eqPath='(roupas não encontradas)', tokenUri='—', eqDump='';
+  try{
+    const s = window._sflLastSession;
+    session = !!s;
+    if (window.firebaseUid && String(window.firebaseUid).startsWith('sfl_'))
+      farmId = String(window.firebaseUid).replace('sfl_','');
+    const cands = {
+      'data.bumpkin.equipped'        : s?.data?.bumpkin?.equipped,
+      'bumpkin.equipped'             : s?.bumpkin?.equipped,
+      'data.farm.bumpkin.equipped'   : s?.data?.farm?.bumpkin?.equipped,
+      'data.state.bumpkin.equipped'  : s?.data?.state?.bumpkin?.equipped,
+      'data.playerEconomy.bumpkin.equipped': s?.data?.playerEconomy?.bumpkin?.equipped
+    };
+    let eq=null; for(const k in cands){ if(cands[k]){ eq=cands[k]; eqPath=k; break; } }
+    const u = getBumpkinAnimUrls();
+    tokenUri = u.tokenUri || '—';
+    eqDump = eq ? JSON.stringify(eq).slice(0,220) : '(nenhum caminho tinha roupas — me manda este print)';
+  } catch(e){ eqDump = 'erro: '+e; }
+  const t = tokenUri, f = farmId;
+  // Probe several possible character sources; each lights up ✅/❌ in the print.
+  const probes = [
+    ['A · animate prod (sheet)', `https://animations.sunflower-land.com/animate/0_v1_${t}/idle_walking`],
+    ['B · animate dev (sheet)',  `https://animations-dev.sunflower-land.com/animate/0_v1_${t}/idle_walking`],
+    ['C · animate só idle',      `https://animations.sunflower-land.com/animate/0_v1_${t}/idle`],
+    ['D · CDN teste (deve ✅)',  `https://sunflower-land.com/game-assets/icons/sword.png`],
+    ['E · bumpkin_image',        `https://animations.sunflower-land.com/bumpkin_image/${f}`]
+  ];
+  const rows = probes.map(([name,src])=>`
+    <div style="display:flex;align-items:center;gap:8px;margin:3px 0;">
+      <img src="${src}" style="width:38px;height:38px;image-rendering:pixelated;object-fit:contain;background:#e9b98a;border-radius:6px;flex-shrink:0;" onload="this.nextElementSibling.firstElementChild.textContent='✅';this.nextElementSibling.firstElementChild.style.color='#1b5e20';" onerror="this.style.opacity='0.12';this.nextElementSibling.firstElementChild.textContent='❌';this.nextElementSibling.firstElementChild.style.color='#8b1a1a';">
+      <span style="min-width:0;"><strong style="font-weight:700;">…</strong> ${name}</span>
+    </div>`).join('');
+  return `
+  <div style="margin-top:12px;padding:10px 11px;background-color:#c98a64;image-rendering:pixelated;border-radius:11px;font-family:'Pixelify Sans',monospace;font-size:10px;color:#2d1810;line-height:1.5;word-break:break-all;">
+    <div style="font-weight:700;margin-bottom:5px;">🔎 Diagnóstico do personagem</div>
+    <div>SFL: ${session?'conectado ✅':'offline'} · Farm ${farmId}</div>
+    <div>roupas: ${eqPath}</div>
+    <div style="margin-bottom:6px;">tokenUri: ${tokenUri}</div>
+    ${rows}
+    <div style="opacity:.8;margin-top:6px;">${eqDump}</div>
+    <div style="text-align:center;margin-top:9px;font-weight:700;letter-spacing:.5px;color:#4a2e14;">🦖 DinoHunt ${DINOHUNT_VERSION} · ${DINOHUNT_BUILD}</div>
+  </div>`;
 }
 
 // Render the player's Bumpkin avatar from SFL (if available).
@@ -10237,16 +10326,16 @@ function showHuntLevelSelect() {
   const grid = document.getElementById('level-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  const total = 5;
+  const total = 10;
   for (let n = 1; n <= total; n++) {
     const div = document.createElement('div');
-    const unlocked = n === 1; // only level 1 available for now
+    const unlocked = true; // all hunt levels available
     div.className = 'level-card' + (unlocked ? ' unlocked' : '');
     div.innerHTML = `<div class="level-number">${n}</div>`;
     if (unlocked) {
       div.onclick = () => {
         document.getElementById('level-modal').classList.remove('open');
-        openExplore();
+        openExplore(n);
       };
     } else {
       div.style.opacity = '.5';
@@ -11276,11 +11365,76 @@ const EXPLORE = {
   mapSize: 1200,           // square map: mapSize x mapSize px
   border: 100,            // cloud border thickness (px) — under here = exit
   resources: [],
+  chests: [], chestsOpened: { 1: 0, 2: 0, 3: 0 },
   wood: 0, stone: 0, exiting: false,
 };
 const EXP_TREE = 'https://sunflower-land.com/game-assets/resources/tree.png';
+// 3 chest tiers (SFL official chest art) — level 1/2/3.
+const SFL_RAW = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/';
+const EXP_CHEST_IMG = { 1: SFL_RAW + 'basic_chest.png', 2: SFL_RAW + 'rare_chest.png', 3: SFL_RAW + 'luxury_chest.png' };
+const EXP_CHEST_NAME = { 1: 'Baú Comum', 2: 'Baú Raro', 3: 'Baú de Luxo' };
+const EXP_CHEST_NAME_EN = { 1: 'Common Chest', 2: 'Rare Chest', 3: 'Luxury Chest' };
+const EXP_CHEST_FB = { 1: '📦', 2: '🧰', 3: '💰' };
+// Drop chance (%) of each chest tier per Hunt level (Michel's table). c1=comum, c2=raro, c3=épico.
+const CHEST_DROP_TABLE = {
+  1:  { c1: 60, c2: 8,  c3: 0  },
+  2:  { c1: 58, c2: 12, c3: 1  },
+  3:  { c1: 54, c2: 16, c3: 2  },
+  4:  { c1: 50, c2: 22, c3: 4  },
+  5:  { c1: 45, c2: 28, c3: 7  },
+  6:  { c1: 40, c2: 33, c3: 11 },
+  7:  { c1: 34, c2: 38, c3: 16 },
+  8:  { c1: 28, c2: 42, c3: 22 },
+  9:  { c1: 22, c2: 45, c3: 30 },
+  10: { c1: 15, c2: 48, c3: 40 },
+};
+// Loot item catalog (placeholder loot until Michel defines the real drop table).
+const LOOT_ITEMS = {
+  wood:  { img: 'https://sunflower-land.com/game-assets/resources/wood.png', fb: '🪵', pt: 'Madeira', en: 'Wood' },
+  stone: { img: 'https://sunflower-land.com/game-assets/resources/stone.png', fb: '🪨', pt: 'Pedra', en: 'Stone' },
+  iron:  { img: 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/resources/iron_ore.png', fb: '⚙️', pt: 'Ferro', en: 'Iron' },
+  gold:  { img: 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/resources/gold_ore.png', fb: '🥇', pt: 'Ouro', en: 'Gold' },
+  coin:  { img: 'https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/1.png', fb: '🪙', pt: 'DinoCoin', en: 'DinoCoin' },
+};
+function _lootRnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+function lootItem(key, qty) {
+  const d = LOOT_ITEMS[key];
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  return { key, img: d.img, fb: d.fb, name: isEN ? d.en : d.pt, qty };
+}
+// Placeholder loot per chest tier.
+function makeChestLoot(level) {
+  if (level === 3) return [lootItem('coin', _lootRnd(100, 300)), lootItem('gold', _lootRnd(1, 3)), lootItem('iron', _lootRnd(2, 4)), lootItem('stone', _lootRnd(3, 6))];
+  if (level === 2) return [lootItem('coin', _lootRnd(20, 60)), lootItem('iron', _lootRnd(1, 2)), lootItem('wood', _lootRnd(3, 5)), lootItem('stone', _lootRnd(2, 4))];
+  return [lootItem('wood', _lootRnd(2, 4)), lootItem('stone', _lootRnd(1, 3))];
+}
+const CHEST_SLOTS = 7;   // candidate chest spots per run; each rolls the table (may be empty)
+const EXP_INV_MAX = 10;  // backpack holds at most 10 item stacks
+// Enemy goblins (SFL big_goblin spritesheet: 4 frames of 27x35).
+const EXP_GOBLIN = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/big_goblin.png';
+const GOB_FW = 27, GOB_FH = 35, GOB_FRAMES = 4, GOB_SCALE = 1.25, GOB_SPEED = 22;
+const EXP_MAGNET_RANGE = 80;   // how far the hand button will pull you to a chest
+const EXP_OPEN_TIME = 1.3;     // seconds to open a chest once you arrive
+// Roll a chest tier (0 = empty) for a given hunt level using the drop table as weights.
+function rollChestLevel(lvl) {
+  const r = CHEST_DROP_TABLE[lvl] || CHEST_DROP_TABLE[1];
+  const none = Math.max(0, 100 - (r.c1 + r.c2 + r.c3));
+  let roll = Math.random() * (none + r.c1 + r.c2 + r.c3);
+  if ((roll -= none) < 0) return 0;
+  if ((roll -= r.c1) < 0) return 1;
+  if ((roll -= r.c2) < 0) return 2;
+  return 3;
+}
 const EXP_STONE = 'https://sunflower-land.com/game-assets/resources/stone_rock.png';
 const EXP_CLOUD = 'https://sunflower-land.com/game-assets/land/clouds/cloud_1.webp';
+
+// SFL character spritesheet: frames are 96x64. In the "idle_walking" sheet,
+// idle = frames 0..8, walking = frames 9..16 (same layout SFL's Phaser uses).
+const EXP_FRAME_W = 96, EXP_FRAME_H = 64;
+const EXP_DISP_W = 84, EXP_DISP_H = 56;                 // on-screen size (scale 0.875)
+const EXP_SPRITE_SCALE = EXP_DISP_W / EXP_FRAME_W;
+const EXP_ANIM = { idle: [0, 8], walk: [9, 16] };       // inclusive frame ranges
+const EXP_ANIM_FPS = 9;
 
 function getBumpkinAnimUrls() {
   const ANIM = 'https://animations.sunflower-land.com';
@@ -11291,14 +11445,38 @@ function getBumpkinAnimUrls() {
     if (eq) tokenUri = buildBumpkinTokenUri(eq);
     else if (s?.data?.bumpkin?.tokenUri) tokenUri = s.data.bumpkin.tokenUri;
   } catch(e) {}
-  if (!tokenUri) tokenUri = '0_1_5_13_20_0_22_23';
-  return { idle: `${ANIM}/animated_webp/0_v1_${tokenUri}/idle`, walk: `${ANIM}/animated_webp/0_v1_${tokenUri}/walking` };
+  if (!tokenUri) tokenUri = '32_1_5_13_20_22_23';
+  // Single spritesheet PNG with idle + walking frames (this is what works cross-origin).
+  return { sheet: `${ANIM}/animate/0_v1_${tokenUri}/idle_walking`, tokenUri };
 }
+
+// Point the sprite div at a given frame index of the loaded sheet.
+function setExploreFrame(i) {
+  const el = document.getElementById('explore-char-img');
+  if (!el || !EXPLORE.sheetCols) return;
+  const col = i % EXPLORE.sheetCols;
+  const row = Math.floor(i / EXPLORE.sheetCols);
+  el.style.backgroundPosition =
+    `-${col * EXP_FRAME_W * EXP_SPRITE_SCALE}px -${row * EXP_FRAME_H * EXP_SPRITE_SCALE}px`;
+}
+const BUMPKIN_ITEM_IDS = {"Beige Farmer Potion":1,"Dark Brown Farmer Potion":2,"Light Brown Farmer Potion":3,"Goblin Potion":4,"Basic Hair":5,"Rancher Hair":6,"Explorer Hair":7,"Red Farmer Shirt":13,"Yellow Farmer Shirt":14,"Blue Farmer Shirt":15,"Chef Apron":16,"Warrior Shirt":17,"Farmer Overalls":18,"Lumberjack Overalls":19,"Farmer Pants":20,"Warrior Pants":21,"Black Farmer Boots":22,"Farmer Pitchfork":23,"Farmer Hat":24,"Chef Hat":25,"Warrior Helmet":26,"Sunflower Amulet":27,"Carrot Amulet":28,"Beetroot Amulet":29,"Green Amulet":30,"Sunflower Shield":31,"Farm Background":32,"Fancy Top":33,"Brown Boots":34,"Brown Suspenders":35,"Fancy Pants":36,"Maiden Skirt":37,"Maiden Top":38,"Peasant Skirt":39,"SFL T-Shirt":40,"Yellow Boots":41,"Buzz Cut":42,"Parlour Hair":43,"Blue Suspenders":46,"Forest Background":47,"Seashore Background":48,"Brown Long Hair":50,"Sun Spots":51,"White Long Hair":52,"Cemetery Background":53,"Teal Mohawk":54,"Space Background":55,"Jail Background":57,"Golden Spatula":58,"Artist Scarf":59,"Bumpkin Art Competition Merch":60,"Project Dignity Hoodie":61,"Developer Hoodie":62,"Blacksmith Hair":63,"Bumpkin Boots":65,"Fire Shirt":66,"Red Long Hair":67,"Snowman Onesie":68,"Reindeer Suit":69,"Shark Onesie":70,"Christmas Background":71,"Devil Wings":72,"Angel Wings":73,"Fire Hair":74,"Luscious Hair":75,"Ancient War Hammer":76,"Ancient Goblin Sword":77,"Mountain View Background":78,"Skull Hat":79,"Reindeer Antlers":80,"Santa Hat":81,"Pineapple Shirt":82,"China Town Background":83,"Lion Dance Mask":84,"Fruit Picker Shirt":85,"Fruit Picker Apron":86,"Fruit Bowl":87,"Striped Blue Shirt":88,"Peg Leg":89,"Pirate Potion":90,"Pirate Hat":91,"Pirate General Coat":92,"Pirate Pants":93,"Pirate Leather Polo":94,"Crab Claw":95,"Pirate Scimitar":96,"Cupid Hair":97,"Cupid Dress":98,"Cupid Sandals":99,"Love Quiver":100,"SFL Office Background":101,"Bumpkin Puppet":102,"Goblin Puppet":103,"Hawaiian Shirt":104,"Bear Onesie":105,"Frog Onesie":106,"Tiger Onesie":107,"Beach Sarong":108,"Lifeguard Hat":109,"Lifeguard Pants":110,"Lifeguard Shirt":111,"Sleeping Otter":112,"Tropical Sarong":113,"Sequence Hat":114,"Sequence Shirt":115,"St Patricks Hat":116,"Bunny Onesie":117,"Light Brown Worried Farmer Potion":118,"Polkastarter Shirt":119,"Beach Trunks":120,"Club Polo":121,"Dawn Breaker Background":122,"Dawn Lamp":123,"Eggplant Onesie":124,"Fox Hat":125,"Grave Diggers Shovel":126,"Infected Potion":127,"Mushroom Hat":128,"Mushroom Lamp":129,"Mushroom Lights Background":130,"Mushroom Pants":131,"Mushroom Shield":132,"Mushroom Shoes":133,"Mushroom Sweater":134,"Rash Vest":135,"Squid Hat":136,"Striped Red Shirt":137,"Striped Yellow Shirt":138,"Summer Top":139,"Sunburst Potion":140,"Water Gun":141,"Wavy Pants":142,"White Turtle Neck":143,"Trial Tee":144,"Auction Megaphone":145,"Auctioneer Slacks":146,"Bidder's Brocade":147,"Harry's Hat":148,"Leather Shoes":149,"Tangerine Hair":150,"Straw Hat":151,"Traveller's Backpack":152,"Traveller's Pants":153,"Traveller's Shirt":154,"Witching Wardrobe":155,"Witch's Broom":156,"Infernal Bumpkin Potion":157,"Infernal Goblin Potion":158,"Imp Costume":159,"Ox Costume":160,"Luna's Hat":161,"Infernal Pitchfork":162,"Infernal Horns":163,"Crumple Crown":165,"Merch Bucket Hat":166,"Merch Coffee Mug":167,"Dawn Breaker Tee":168,"Merch Tee":169,"Merch Hoodie":170,"Birthday Hat":171,"Double Harvest Cap":172,"Streamer Helmet":173,"Corn Onesie":174,"Crow Wings":175,"Witches' Eve Tee":176,"Wise Beard":177,"Pumpkin Hat":178,"Wise Book":179,"Wise Hair":180,"Wise Robes":181,"Wise Slacks":182,"Wise Staff":183,"Greyed Glory":184,"Tattered Jacket":185,"Hoary Chin":186,"Tattered Slacks":187,"Old Shoes":188,"Bat Wings":189,"Gothic Twilight":190,"Dark Enchantment Gown":191,"Goth Hair":192,"Pale Potion":193,"Stretched Jeans":194,"Skull Shirt":195,"Victorian Hat":196,"Boater Hat":197,"Antique Dress":198,"Crimson Skirt":199,"Chic Gala Blouse":200,"Ash Ponytail":201,"Pink Ponytail":202,"Silver Streaks":203,"Brown Rancher Hair":204,"Parsnip Horns":205,"Potato Suit":206,"Whale Hat":207,"Pumpkin Shirt":208,"Grey Merch Hoodie":211,"Unicorn Horn":212,"Unicorn Hat":213,"Feather Hat":214,"Valoria Wreath":215,"Earn Alliance Sombrero":216,"Fresh Catch Vest":217,"Fish Pro Vest":218,"Reel Fishing Vest":219,"Clown Shirt":220,"Luminous Anglerfish Topper":221,"Abyssal Angler Hat":222,"Ancient Rod":224,"Fishing Hat":225,"Infernal Rod":227,"Bucket O' Worms":228,"Coconut Mask":229,"Crab Trap":230,"Seaside Tank Top":231,"Fish Trap":232,"Fishing Pants":233,"Angler Waders":234,"Fishing Spear":235,"Flip Flops":236,"Saw Fish":238,"Skinning Knife":239,"Sunflower Rod":240,"Tackle Box":241,"Mermaid Potion":242,"Squirrel Monkey Potion":243,"Koi Fish Hat":244,"Normal Fish Hat":245,"Stockeye Salmon Onesie":246,"Tiki Armor":247,"Tiki Mask":248,"Tiki Pants":249,"Banana Amulet":250,"Banana Onesie":251,"Blossom Dumbo":252,"Companion Cap":253,"Radiant Dumbo":254,"Deep Sea Helm":255,"Maple Dumbo":256,"Pickaxe Shark":257,"Seedling Hat":258,"Gloomy Dumbo":259,"Ugly Christmas Sweater":260,"Candy Cane":261,"Elf Hat":262,"Elf Potion":263,"Elf Shoes":264,"Elf Suit":265,"Santa Beard":266,"Santa Suit":267,"Butterfly Wings":268,"Cozy Hoodie":269,"New Years Tiara":270,"Northern Lights Background":271,"Short Shorts":272,"Winter Jacket":273,"Beehive Staff":274,"Bee Smoker":275,"Bee Suit":276,"Bee Wings":277,"Beekeeper Hat":278,"Beekeeper Suit":279,"Crimstone Boots":280,"Crimstone Pants":281,"Crimstone Armor":282,"Gardening Overalls":283,"Crimstone Hammer":284,"Crimstone Amulet":285,"Full Bloom Shirt":286,"Blue Blossom Shirt":287,"Fairy Sandals":288,"Daisy Tee":289,"Propeller Hat":290,"Honeycomb Shield":291,"Hornet Mask":292,"Flower Crown":293,"Blue Monarch Dress":294,"Green Monarch Dress":295,"Orange Monarch Dress":296,"Blue Monarch Shirt":297,"Green Monarch Shirt":298,"Orange Monarch Shirt":299,"Queen Bee Crown":300,"Rose Dress":301,"Blue Rose Dress":302,"Chicken Hat":303,"Lucky Red Hat":304,"Lucky Red Suit":305,"Valentine's Field Background":306,"Love's Topper":307,"Oil Can":308,"Non La Hat":309,"Olive Shield":310,"Paw Shield":311,"Royal Robe":312,"Soybean Onesie":315,"Gift Giver":316,"Olive Royalty Shirt":317,"Royal Scepter":318,"Tofu Mask":319,"Goblin Armor":320,"Goblin Helmet":321,"Goblin Pants":322,"Goblin Sabatons":323,"Goblin Axe":324,"Nightshade Armor":325,"Nightshade Helmet":326,"Nightshade Pants":327,"Nightshade Sabatons":328,"Nightshade Sword":329,"Bumpkin Armor":330,"Bumpkin Helmet":331,"Bumpkin Sword":332,"Bumpkin Pants":333,"Bumpkin Sabatons":334,"Sunflorian Armor":335,"Sunflorian Sword":336,"Sunflorian Helmet":337,"Sunflorian Pants":338,"Sunflorian Sabatons":339,"Cap n Bells":340,"Knight Gambit":341,"Pixel Perfect Hoodie":342,"Queen's Crown":343,"Royal Dress":344,"Royal Braids":346,"Painter's Cap":347,"Festival of Colors Background":348,"Pharaoh Headdress":349,"Camel Onesie":350,"Amber Amulet":351,"Desert Background":352,"Explorer Shirt":353,"Dev Wrench":354,"Rock Hammer":355,"Sun Scarab Amulet":356,"Explorer Hat":357,"Oil Protection Hat":358,"Explorer Shorts":359,"Oil Overalls":360,"Desert Merchant Turban":361,"Desert Merchant Shoes":362,"Desert Merchant Suit":363,"Desert Camel Background":364,"Water Gourd":365,"Rocket Onesie":366,"Coin Aura":367,"Ankh Shirt":368,"Ancient Shovel":369,"Infernal Drill":370,"Lemon Shield":371,"Scarab Wings":372,"Grape Pants":373,"Bionic Drill":374,"Fossil Head":375,"Bumpkin Crown":376,"Goblin Crown":377,"Nightshade Crown":378,"Sunflorian Crown":379,"Bumpkin Shield":380,"Goblin Shield":381,"Nightshade Shield":382,"Sunflorian Shield":383,"Bumpkin Quiver":384,"Goblin Quiver":385,"Nightshade Quiver":386,"Sunflorian Quiver":387,"Bumpkin Medallion":388,"Goblin Medallion":389,"Nightshade Medallion":390,"Sunflorian Medallion":391,"Pumpkin Plaza Background":392,"Goblin Retreat Background":393,"Kingdom Background":394,"Gam3s Cap":395,"Cowboy Hat":396,"Cowboy Shirt":397,"Cowboy Trouser":398,"Cowboy Boots":399,"Infernal Bullwhip":400,"White Sheep Onesie":401,"Black Sheep Onesie":402,"Chicken Suit":403,"Cowgirl Skirt":404,"Merino Jumper":405,"Dream Scarf":406,"Cowbell Necklace":407,"Milk Apron":408,"Shepherd Staff":409,"Sol & Luna":410,"Fossil Armor":411,"Fossil Pants":412,"Rice Shirt":413,"Speed Boots":415,"Tomato Apron":416,"Adventurer's Suit":417,"Adventurer's Torch":418,"Pumpkin Head":419,"Gingerbread Onesie":420,"New Years Crown":421,"Ladybug Suit":422,"Acorn Hat":423,"Crab Hat":424,"Weather Hat":425,"Sakura Shirt":426,"Squirrel Onesie":427,"Locust Onesie":428,"Locust King Onesie":429,"Glacial Plume":430,"Solflare Aegis":431,"Blossom Ward":432,"Autumn's Embrace":433,"Frozen Heart":434,"Love Heart Onesie":435,"Love Bear Onesie":436,"Flower Bouquet":437,"Streamer Hat":438,"Dino Onesie":439,"Golden Wings":440,"Flower Mask":441,"Luvvy Head":442,"Grumpy Cat":443,"Love Puff Aura":444,"Carrot Pitchfork":445,"Handheld Bunny":446,"Bunny Pants":447,"Bunny Mask":448,"Easter Apron":449,"Bloomwarden Suit":450,"Embersteel Suit":451,"Amberfall Suit":452,"Glacierguard Suit":453,"Broccoli Hat":454,"Frost Sword":455,"Medic Apron":456,"Obsidian Necklace":457,"Red Pepper Onesie":458,"Love Charm Shirt":459,"Sky Island Background":460,"Oracle Syringe":461,"Coin Head":462,"Paint Splattered Hair":463,"Paint Splattered Shirt":464,"Paint Splattered Overalls":465,"Paint Spray Can":466,"Slime Hat":467,"Slime Wings":468,"Slime Aura":469,"Brush Back Hair":470,"Chemist Potion":472,"Diamond Patterned Vest":473,"Recycle Shirt":474,"Garbage Bin Hat":475,"Turd Topper":476,"Architect Ruler":477,"Onion Leek":478,"Oil Gallon":479,"Alchemist Apron":480,"Lava Swimwear":481,"Wooly Dress":482,"Raccoon Onesie":483,"Golden Seedling":484,"Moonseeker Potion":485,"Frizzy Bob Cut":486,"Two-toned Layered":487,"Halloween Deathscythe":488,"Moonseeker Hand Puppet":489,"Sweet Devil Horns":490,"Trick and Treat":491,"Jack O'Sweets":492,"Frank Onesie":493,"Research Uniform":494,"Sweet Devil Dress":495,"Underworld Stimpack":496,"Sweet Devil Wings":497,"Wisp Aura":498,"Luna's Crescent":499,"Master Chef's Cleaver":500,"Training Whistle":501,"Chef Shirt":502,"Pet Specialist Shirt":503,"Pet Specialist Pants":504,"Pet Specialist Hat":505,"Xmas Top Hat":506,"Reindeer Mask":507,"Snowman Mask":508,"Cool Glasses":509,"Comfy Xmas Pants":510,"Holiday Feast Background":511,"Comfy Xmas Sweater":512,"Candy Halbred":513,"Cookie Shield":514,"Cozy Reindeer Onesie":515,"Diamond Snow Aura":516,"2026 Tiara":517,"Walrus Onesie":518,"Crimstone Spikes Hair":519,"Paw Aura":520,"Victoria's Apron":521,"Beast Shoes":522,"Fish Hook Hat":523,"Fish Hook Vest":524,"Fish Hook Waders":525,"Corn Silk Hair":526,"Neon Noiz Jacket":527,"404 Chic Top":528,"Neon Noiz Pants":529,"404 Chic Skirt":530,"Admin Fools Tools":531,"Neon Noiz Shoes":532,"404 Chic Boots":533,"Aether Specs":534,"Faulty Barrier Background":535,"Cardboard Wings":536,"Glitch Aura":537};
+const BUMPKIN_SLOT = {background:0,body:1,hair:2,shirt:3,pants:4,shoes:5,tool:6,hat:7,necklace:8,secondaryTool:9,coat:10,onesie:11,suit:12,wings:13,dress:14,beard:15,aura:16};
+// Convert an SFL "equipped" object (wearable NAMES) into the numeric tokenUri
+// the animation server expects, replicating SFL's tokenUriBuilder (slot order + trailing-zero trim).
 function buildBumpkinTokenUri(eq) {
-  if (!eq) return '0_1_5_13_20_0_22';
+  if (!eq) return '32_1_5_13_20_22_23';
   if (typeof eq === 'string') return eq;
-  if (eq.tokenUri) return eq.tokenUri;
-  return '0_1_5_13_20_0_22';
+  if (typeof eq.tokenUri === 'string' && /^\d/.test(eq.tokenUri)) return eq.tokenUri;
+  const ids = new Array(17).fill(0);
+  for (const part in BUMPKIN_SLOT) {
+    const id = BUMPKIN_ITEM_IDS[eq[part]];
+    if (id != null) ids[BUMPKIN_SLOT[part]] = id;
+  }
+  let last = ids.length - 1;
+  while (last > 0 && ids[last] === 0) last--;
+  const trimmed = ids.slice(0, last + 1);
+  if (trimmed.every(v => v === 0)) return '32_1_5_13_20_22_23';
+  return trimmed.join('_');
 }
 
 // Spawn 10–20 trees & stones inside the playable area, never overlapping each other
@@ -11311,12 +11489,12 @@ function generateExploreResources() {
   const minX = B + 60, maxX = M - B - 60;
   const minY = B + 60, maxY = M - B - 60;
   const placed = [];
-  const SPACING = 90;               // min distance between resources
-  const PLAYER_CLEAR = 160;         // keep player spawn corner clear
+  const SPACING = 74;               // min distance between resources
+  const PLAYER_CLEAR = 150;         // keep player spawn corner clear
   const playerStart = { x: B + 80, y: B + 80 }; // top-left corner
-  const total = 10 + Math.floor(Math.random() * 11); // 10–20
+  const total = 26 + Math.floor(Math.random() * 15); // 26–40
   let attempts = 0;
-  while (placed.length < total && attempts < 600) {
+  while (placed.length < total && attempts < 1200) {
     attempts++;
     const x = minX + Math.random() * (maxX - minX);
     const y = minY + Math.random() * (maxY - minY);
@@ -11328,13 +11506,15 @@ function generateExploreResources() {
   }
   placed.forEach((pos, i) => {
     const type = Math.random() < 0.55 ? 'tree' : 'stone';
-    const w = type === 'tree' ? 52 : 40;
+    // Sprite widths (px, in world units) — tweak these to scale resources vs the character.
+    const w = type === 'tree' ? 38 : 28;
     const img = document.createElement('img');
     img.className = 'exp-res';
     img.src = type === 'tree' ? EXP_TREE : EXP_STONE;
     img.style.left = pos.x + 'px';
     img.style.top = pos.y + 'px';
     img.style.width = w + 'px';
+    img.style.zIndex = Math.round(pos.y);   // depth: lower on map = drawn in front
     img.onerror = () => { img.style.opacity = '0.0001'; };
     layer.appendChild(img);
     // Collision hitbox = small box at the BASE of the sprite (where it touches ground).
@@ -11343,10 +11523,135 @@ function generateExploreResources() {
       el: img, x: pos.x, y: pos.y, type,
       hp: type === 'tree' ? 3 : 4, maxHp: type === 'tree' ? 3 : 4,
       // hitbox: half-width and half-height of a small rectangle at the base
-      hw: type === 'tree' ? 11 : 14,   // half width
-      hh: type === 'tree' ? 8 : 9,     // half height (thin, at the base)
+      hw: type === 'tree' ? 8 : 10,    // half width
+      hh: type === 'tree' ? 6 : 6,     // half height (thin, at the base)
     });
   });
+}
+
+// Scatter chests around the map (levels 1/2/3). Guarantees one of each, plus a few random.
+function generateExploreChests() {
+  EXPLORE.chests = [];
+  EXPLORE.chestsOpened = { 1: 0, 2: 0, 3: 0 };
+  const layer = document.getElementById('exp-chest-layer');
+  if (!layer) return;
+  layer.innerHTML = '';
+  const B = EXPLORE.border, M = EXPLORE.mapSize;
+  const minX = B + 60, maxX = M - B - 60;
+  const minY = B + 60, maxY = M - B - 60;
+  const playerStart = { x: B + 80, y: B + 80 };
+  const huntLevel = EXPLORE.level || 1;
+  // Each slot rolls the drop table for this hunt level (may come up empty).
+  for (let slot = 0; slot < CHEST_SLOTS; slot++) {
+    const level = rollChestLevel(huntLevel);
+    if (level === 0) continue;
+    let x, y, ok = false, tries = 0;
+    while (!ok && tries < 200) {
+      tries++;
+      x = minX + Math.random() * (maxX - minX);
+      y = minY + Math.random() * (maxY - minY);
+      if (Math.hypot(x - playerStart.x, y - playerStart.y) < 170) continue;
+      if (EXPLORE.resources.some(r => Math.hypot(r.x - x, r.y - y) < 60)) continue;
+      if (EXPLORE.chests.some(c => Math.hypot(c.x - x, c.y - y) < 110)) continue;
+      ok = true;
+    }
+    if (!ok) continue;
+    const w = level === 3 ? 18 : level === 2 ? 17 : 16;
+    // Render as a div so we ALWAYS see the chest: emoji first, swapped for the
+    // real art only if it loads (image failure no longer makes chests invisible).
+    const el = document.createElement('div');
+    el.className = 'exp-chest exp-chest-l' + level;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.zIndex = Math.round(y);   // depth-sorted with the player
+    el.style.width = w + 'px';
+    el.style.height = w + 'px';
+    el.style.fontSize = w + 'px';
+    el.style.lineHeight = w + 'px';
+    el.style.textAlign = 'center';
+    el.textContent = EXP_CHEST_FB[level];
+    const pre = new Image();
+    pre.onload = () => {
+      el.textContent = '';
+      el.style.backgroundImage = `url("${EXP_CHEST_IMG[level]}")`;
+      el.style.backgroundSize = 'contain';
+      el.style.backgroundRepeat = 'no-repeat';
+      el.style.backgroundPosition = 'center bottom';
+    };
+    pre.src = EXP_CHEST_IMG[level];
+    layer.appendChild(el);
+    EXPLORE.chests.push({ el, x, y, level, opened: false, loot: makeChestLoot(level) });
+  }
+  // Temporary on-screen count so we can confirm chests actually spawn.
+  const dbg = document.getElementById('exp-debug');
+  if (dbg) dbg.textContent = '🎁 ' + EXPLORE.chests.length;
+}
+
+// Spawn a few wandering goblins (visual for now — no combat yet).
+function generateExploreEnemies() {
+  EXPLORE.enemies = [];
+  const layer = document.getElementById('exp-enemy-layer');
+  if (!layer) return;
+  layer.innerHTML = '';
+  const B = EXPLORE.border, M = EXPLORE.mapSize, pad = 80;
+  const count = 3 + Math.floor(Math.random() * 3); // 3–5
+  for (let i = 0; i < count; i++) {
+    let x, y, ok = false, tries = 0;
+    while (!ok && tries < 30) {
+      tries++;
+      x = B + pad + Math.random() * (M - 2 * B - 2 * pad);
+      y = B + pad + Math.random() * (M - 2 * B - 2 * pad);
+      if (Math.hypot(x - (B + 80), y - (B + 80)) > 220) ok = true;  // away from player spawn
+    }
+    const el = document.createElement('div');
+    el.className = 'exp-enemy';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.backgroundSize = `${GOB_FW * GOB_FRAMES * GOB_SCALE}px ${GOB_FH * GOB_SCALE}px`;
+    // Emoji fallback if the goblin sheet fails to load (so enemies are never invisible).
+    const en = { el, x, y, dir: null, frame: 0, animAcc: 0, moveTimer: Math.random() * 2, facing: 'right', noSheet: false };
+    const pre = new Image();
+    pre.onload = () => { el.style.backgroundImage = `url("${EXP_GOBLIN}")`; };
+    pre.onerror = () => { en.noSheet = true; el.style.backgroundImage = 'none'; el.textContent = '👹'; el.style.fontSize = '30px'; el.style.textAlign = 'center'; el.style.lineHeight = '44px'; };
+    pre.src = EXP_GOBLIN;
+    layer.appendChild(el);
+    EXPLORE.enemies.push(en);
+  }
+  const dbg = document.getElementById('exp-debug');
+  if (dbg) dbg.textContent = '🎁 ' + (EXPLORE.chests ? EXPLORE.chests.length : 0) + '  👹 ' + EXPLORE.enemies.length;
+}
+function updateEnemies(dt) {
+  if (!EXPLORE.enemies) return;
+  const B = EXPLORE.border, M = EXPLORE.mapSize, pad = 50;
+  for (const e of EXPLORE.enemies) {
+    e.moveTimer -= dt;
+    if (e.moveTimer <= 0) {
+      e.dir = Math.random() < 0.28 ? null : Math.random() * Math.PI * 2;  // sometimes idle
+      e.moveTimer = 1.2 + Math.random() * 2.6;
+    }
+    let moving = false;
+    if (e.dir != null) {
+      let nx = e.x + Math.cos(e.dir) * GOB_SPEED * dt;
+      let ny = e.y + Math.sin(e.dir) * GOB_SPEED * dt;
+      if (nx < B + pad || nx > M - B - pad) { e.dir = Math.PI - e.dir; nx = e.x; }
+      if (ny < B + pad || ny > M - B - pad) { e.dir = -e.dir; ny = e.y; }
+      e.x = Math.min(Math.max(nx, B + pad), M - B - pad);
+      e.y = Math.min(Math.max(ny, B + pad), M - B - pad);
+      moving = true;
+      const cx = Math.cos(e.dir);
+      if (cx < -0.05) e.facing = 'left'; else if (cx > 0.05) e.facing = 'right';
+    }
+    if (moving) {
+      e.animAcc += dt;
+      if (e.animAcc >= 1 / 6) { e.animAcc = 0; e.frame = (e.frame + 1) % GOB_FRAMES; }
+    } else { e.frame = 0; }
+    const el = e.el;
+    el.style.left = e.x + 'px';
+    el.style.top = e.y + 'px';
+    el.style.zIndex = Math.round(e.y);
+    el.style.backgroundPosition = `-${e.frame * GOB_FW * GOB_SCALE}px 0px`;
+    el.style.transform = 'translate(-50%,-100%)' + (e.facing === 'left' ? ' scaleX(-1)' : '');
+  }
 }
 
 // Place several rows of clouds around the map edges (so you can't see past them)
@@ -11380,43 +11685,65 @@ function buildExploreClouds() {
   }
 }
 
-function openExplore() {
+function openExplore(level) {
   const ov = document.getElementById('explore-overlay');
   if (!ov) return;
+  EXPLORE.level = level || 1;
   const urls = getBumpkinAnimUrls();
-  EXPLORE.idleUrl = urls.idle; EXPLORE.walkUrl = urls.walk;
-  EXPLORE.zoom = window.innerWidth < 500 ? 3 : 4;
+  EXPLORE.sheetUrl = urls.sheet;
+  EXPLORE.zoom = computeExploreZoom();
+  if (!window._expResizeBound) { window.addEventListener('resize', onExploreResize); window._expResizeBound = true; }
   // player starts in the top-left corner (inside the border), safe from enemies later
   EXPLORE.x = EXPLORE.border + 80;
   EXPLORE.y = EXPLORE.border + 80;
   EXPLORE.vx = 0; EXPLORE.vy = 0; EXPLORE.moving = false; EXPLORE.lastT = 0;
+  EXPLORE.sheetCols = 0; EXPLORE.animFrame = 0; EXPLORE.animAcc = 0;
   EXPLORE.wood = 0; EXPLORE.stone = 0; EXPLORE.exiting = false;
+  EXPLORE.inv = {}; EXPLORE.openChest = null;
+  EXPLORE.autoTarget = null; EXPLORE.openTimer = null; EXPLORE.paused = false;
+  EXPLORE.hp = 100; EXPLORE.hpMax = 100; updateExploreHP();
   // size the ground to the square map
   const ground = document.getElementById('exp-ground');
   if (ground) { ground.style.width = EXPLORE.mapSize + 'px'; ground.style.height = EXPLORE.mapSize + 'px'; }
   generateExploreResources();
+  generateExploreChests();
+  generateExploreEnemies();
   buildExploreClouds();
   renderBackpackGrid();
   ov.classList.add('open');
   const world = document.getElementById('explore-world');
   if (world) world.style.transformOrigin = '0 0';
-  const img = document.getElementById('explore-char-img');
+  const spriteEl = document.getElementById('explore-char-img');
   const charBox = document.getElementById('explore-char');
-  if (img) {
-    img.classList.remove('flip'); img.style.display='block';
-    img.onerror = () => { img.style.display = 'none';
+  if (spriteEl) {
+    spriteEl.classList.remove('flip');
+    spriteEl.style.display = 'block';
+    spriteEl.style.backgroundImage = 'none';
+    const fbOld = charBox && charBox.querySelector('.explore-fallback');
+    if (fbOld) fbOld.remove();
+    // Load the spritesheet, compute columns from its natural size, then show frame 0.
+    const sheet = new Image();
+    sheet.onload = () => {
+      EXPLORE.sheetCols = Math.max(1, Math.round(sheet.naturalWidth / EXP_FRAME_W));
+      spriteEl.style.display = 'block';
+      spriteEl.style.backgroundImage = `url("${EXPLORE.sheetUrl}")`;
+      spriteEl.style.backgroundSize = `${sheet.naturalWidth * EXP_SPRITE_SCALE}px ${sheet.naturalHeight * EXP_SPRITE_SCALE}px`;
+      EXPLORE.animFrame = EXP_ANIM.idle[0];
+      setExploreFrame(EXPLORE.animFrame);
+      const fb = charBox && charBox.querySelector('.explore-fallback'); if (fb) fb.remove();
+    };
+    sheet.onerror = () => {
+      EXPLORE.sheetCols = 0;
+      spriteEl.style.display = 'none';
       if (charBox && !charBox.querySelector('.explore-fallback')) {
         const fb = document.createElement('div');
         fb.className = 'explore-fallback';
-        fb.style.cssText = 'font-size:42px;text-align:center;line-height:48px;';
+        fb.style.cssText = 'font-size:42px;text-align:center;line-height:56px;';
         fb.textContent = '🧑\u200d🌾';
         charBox.appendChild(fb);
       }
     };
-    img.onload = () => { img.style.display = 'block';
-      const fb = charBox && charBox.querySelector('.explore-fallback'); if (fb) fb.remove();
-    };
-    img.src = EXPLORE.idleUrl;
+    sheet.src = EXPLORE.sheetUrl;
   }
   updateExploreCamera();
   setupExploreControls();
@@ -11433,12 +11760,28 @@ function closeExplore() {
 }
 
 // Camera follows the player (world moves, player stays screen-centered)
+// Fixed vision (LDOE): zoom scales with the viewport so the same amount of world
+// is always visible — going fullscreen no longer reveals more of the map.
+function computeExploreZoom() {
+  const s = Math.min(window.innerWidth, window.innerHeight);
+  return Math.max(3.5, Math.min(9, s / 200));
+}
+function onExploreResize() {
+  const ov = document.getElementById('explore-overlay');
+  if (!ov || !ov.classList.contains('open')) return;
+  EXPLORE.zoom = computeExploreZoom();
+  updateExploreCamera();
+}
 function updateExploreCamera() {
   const char = document.getElementById('explore-char');
   const world = document.getElementById('explore-world');
   if (!world) return;
   const z = EXPLORE.zoom;
-  if (char) { char.style.left = EXPLORE.x + 'px'; char.style.top = EXPLORE.y + 'px'; }
+  if (char) {
+    char.style.left = EXPLORE.x + 'px';
+    char.style.top = EXPLORE.y + 'px';
+    char.style.zIndex = Math.round(EXPLORE.y + 16);  // feet Y → depth vs resources
+  }
   const tx = window.innerWidth / 2 - EXPLORE.x * z;
   const ty = window.innerHeight / 2 - EXPLORE.y * z;
   world.style.transform = `translate(${tx}px, ${ty}px) scale(${z})`;
@@ -11481,80 +11824,376 @@ function exploreLoop(t) {
   if (exploreKeys['arrowup'] || exploreKeys['w']) ky -= 1;
   if (exploreKeys['arrowdown'] || exploreKeys['s']) ky += 1;
   let mx = kx + EXPLORE.vx, my = ky + EXPLORE.vy;
-  const mag = Math.hypot(mx, my);
+  let mag = Math.hypot(mx, my);
+  const manual = mag > 0.12;
+  // Manual control cancels the magnet / opening in progress.
+  if (manual && (EXPLORE.autoTarget || EXPLORE.openTimer)) {
+    EXPLORE.autoTarget = null; EXPLORE.openTimer = null; hideOpenTimer();
+  }
+  // Opening a chest: stand still, tick the timer, open the panel when done.
+  if (EXPLORE.openTimer) {
+    EXPLORE.openTimer.elapsed += dt;
+    updateOpenTimerUI();
+    if (EXPLORE.openTimer.elapsed >= EXP_OPEN_TIME) {
+      const ch = EXPLORE.openTimer.chest;
+      EXPLORE.openTimer = null; hideOpenTimer();
+      openChestLootPanel(ch);
+    }
+    mx = 0; my = 0; mag = 0;
+  } else if (EXPLORE.autoTarget) {
+    // Magnet: walk to the target chest (stopping at its edge), then start the timer.
+    const c = EXPLORE.autoTarget;
+    const dx = c.x - EXPLORE.x, dy = c.y - (EXPLORE.y + 16);
+    const dist = Math.hypot(dx, dy);
+    // "stuck" = the magnet couldn't get closer last frame (blocked by the chest edge).
+    const moved = Math.hypot(EXPLORE.x - (EXPLORE._amx ?? EXPLORE.x), EXPLORE.y - (EXPLORE._amy ?? EXPLORE.y));
+    const stuck = EXPLORE._amInit && moved < 0.4;
+    EXPLORE._amx = EXPLORE.x; EXPLORE._amy = EXPLORE.y; EXPLORE._amInit = true;
+    if (dist < 24 || (stuck && dist < 60)) {
+      EXPLORE.autoTarget = null; EXPLORE._amInit = false;
+      EXPLORE.openTimer = { chest: c, elapsed: 0 };
+      showOpenTimer(c);
+      mx = 0; my = 0; mag = 0;
+    } else { mx = dx / dist; my = dy / dist; mag = 1; }
+  } else { EXPLORE._amInit = false; }
   const isMoving = mag > 0.12;
   if (isMoving) {
     if (mag > 1) { mx /= mag; my /= mag; }
     const stepX = mx * EXPLORE.speed * dt;
     const stepY = my * EXPLORE.speed * dt;
-    // Box collision: player's feet (small box) vs resource base box.
-    // Player anchor is center; feet are slightly below center.
     const PHW = 8, PHH = 6;          // player feet half-size
     const feetOffsetY = 16;          // feet are below the sprite center
     const collides = (px, py) => {
       const fx = px, fy = py + feetOffsetY;
-      return EXPLORE.resources.some(res => {
+      const hitRes = EXPLORE.resources.some(res => {
         if (res.hp <= 0) return false;
         return Math.abs(res.x - fx) < res.hw + PHW &&
                Math.abs(res.y - fy) < res.hh + PHH;
       });
+      if (hitRes) return true;
+      return EXPLORE.chests.some(c =>
+        Math.abs(c.x - fx) < 8 + PHW && Math.abs(c.y - fy) < 5 + PHH);
     };
-    if (!collides(EXPLORE.x + stepX, EXPLORE.y)) EXPLORE.x += stepX;
-    if (!collides(EXPLORE.x, EXPLORE.y + stepY)) EXPLORE.y += stepY;
-    // facing
+    // Escape hatch: if already overlapping something (e.g. spawned/pushed onto a chest),
+    // let the player move out instead of being trapped.
+    const alreadyStuck = collides(EXPLORE.x, EXPLORE.y);
+    if (alreadyStuck || !collides(EXPLORE.x + stepX, EXPLORE.y)) EXPLORE.x += stepX;
+    if (alreadyStuck || !collides(EXPLORE.x, EXPLORE.y + stepY)) EXPLORE.y += stepY;
+    EXPLORE.heading = Math.atan2(my, mx);   // for the minimap triangle
     const img = document.getElementById('explore-char-img');
     if (mx < -0.05 && EXPLORE.facing !== 'left') { EXPLORE.facing = 'left'; img && img.classList.add('flip'); }
     else if (mx > 0.05 && EXPLORE.facing !== 'right') { EXPLORE.facing = 'right'; img && img.classList.remove('flip'); }
-    // exit when stepping onto the cloud border tiles
     const B = EXPLORE.border, M = EXPLORE.mapSize;
     if (EXPLORE.x < B || EXPLORE.x > M - B || EXPLORE.y < B || EXPLORE.y > M - B) {
-      exitExploreWithLoot();
+      exitExploreFlow();
       return;
     }
   }
-  if (isMoving !== EXPLORE.moving) {
-    EXPLORE.moving = isMoving;
-    const img = document.getElementById('explore-char-img');
-    if (img) img.src = isMoving ? EXPLORE.walkUrl : EXPLORE.idleUrl;
+  // Chest highlight + hand-button "ready" when a chest is within magnet range.
+  if (EXPLORE.chests && EXPLORE.chests.length) {
+    let inReach = false;
+    for (const c of EXPLORE.chests) {
+      const d = Math.hypot(c.x - EXPLORE.x, c.y - (EXPLORE.y + 8));
+      if (c.el) c.el.classList.toggle('near', d < 52);
+      if (d < EXP_MAGNET_RANGE) inReach = true;
+    }
+    const hb = document.getElementById('exp-hand-btn');
+    if (hb) hb.classList.toggle('ready', inReach);
   }
+  drawMinimap();
+  // Advance the sprite animation: cycle idle frames (0..8) or walking frames (9..16).
+  EXPLORE.moving = isMoving;
+  if (EXPLORE.sheetCols) {
+    EXPLORE.animAcc += dt;
+    if (EXPLORE.animAcc >= 1 / EXP_ANIM_FPS) {
+      EXPLORE.animAcc = 0;
+      const range = isMoving ? EXP_ANIM.walk : EXP_ANIM.idle;
+      let f = EXPLORE.animFrame + 1;
+      if (f < range[0] || f > range[1]) f = range[0];
+      EXPLORE.animFrame = f;
+      setExploreFrame(f);
+    }
+  }
+  updateEnemies(dt);
   updateExploreCamera();
   EXPLORE.raf = requestAnimationFrame(exploreLoop);
 }
 
-function exitExploreWithLoot() {
+// Reaching the border exits immediately: loading screen, then the reward screen.
+function exitExploreFlow() {
   if (EXPLORE.exiting) return;
   EXPLORE.exiting = true;
   if (EXPLORE.raf) cancelAnimationFrame(EXPLORE.raf);
   EXPLORE.raf = null;
   window.removeEventListener('keydown', exploreKeyDown);
   window.removeEventListener('keyup', exploreKeyUp);
-  showExploreRewards();
+  const lp = document.getElementById('exp-loot-panel'); if (lp) lp.remove();
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  let load = document.getElementById('exp-loading');
+  if (load) load.remove();
+  load = document.createElement('div');
+  load.id = 'exp-loading';
+  load.innerHTML = `<div class="exp-loading-inner"><div class="exp-spinner"></div><div class="exp-loading-txt">${isEN ? 'Leaving the island…' : 'Saindo da ilha…'}</div></div>`;
+  document.body.appendChild(load);
+  setTimeout(() => {
+    const l = document.getElementById('exp-loading'); if (l) l.remove();
+    // Hide the whole explore screen BEFORE showing rewards, so the reward
+    // modal isn't stuck behind the overlay (which caused the "frozen" exit).
+    const ov = document.getElementById('explore-overlay'); if (ov) ov.classList.remove('open');
+    showExploreRewards();
+  }, 1300);
 }
-// Reward screen — shows everything collected, SFL style
+// ✋ Hand button = magnet: auto-walk to the nearest chest, then it opens on arrival.
+function openNearestChest() {
+  if (EXPLORE.exiting || EXPLORE.paused || !EXPLORE.chests) return;
+  if (EXPLORE.openTimer) return;
+  let best = null, bd = Infinity;
+  for (const c of EXPLORE.chests) {
+    const d = Math.hypot(c.x - EXPLORE.x, c.y - (EXPLORE.y + 16));
+    if (d < bd) { bd = d; best = c; }
+  }
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  if (best && bd < EXP_MAGNET_RANGE) {
+    if (bd < 12) { EXPLORE.openTimer = { chest: best, elapsed: 0 }; showOpenTimer(best); }
+    else EXPLORE.autoTarget = best;   // magnet pulls the player over
+  } else if (typeof showToast === 'function') {
+    showToast(isEN ? '✋ No chest nearby' : '✋ Nenhum baú por perto', 'info');
+  }
+}
+
+// ── Open timer shown above the chest while it's being opened ──
+function showOpenTimer(c) {
+  const world = document.getElementById('explore-world');
+  if (!world) return;
+  let el = document.getElementById('exp-open-timer');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'exp-open-timer';
+    el.innerHTML = '<div class="exp-timer-bar"><div class="exp-timer-fill"></div></div>';
+    world.appendChild(el);
+  }
+  el.style.left = c.x + 'px';
+  el.style.top = (c.y - 26) + 'px';
+  el.style.display = 'block';
+  updateOpenTimerUI();
+}
+function updateOpenTimerUI() {
+  const el = document.getElementById('exp-open-timer');
+  if (!el || !EXPLORE.openTimer) return;
+  const pct = Math.min(1, EXPLORE.openTimer.elapsed / EXP_OPEN_TIME);
+  const fill = el.querySelector('.exp-timer-fill');
+  if (fill) fill.style.width = (pct * 100) + '%';
+}
+function hideOpenTimer() {
+  const el = document.getElementById('exp-open-timer');
+  if (el) el.style.display = 'none';
+}
+
+// Player HP bar (thin, top). No combat yet, so it stays full for now.
+function updateExploreHP() {
+  const fill = document.getElementById('exp-hp-fill');
+  const txt = document.getElementById('exp-hp-txt');
+  const pct = Math.max(0, Math.min(1, (EXPLORE.hp || 0) / (EXPLORE.hpMax || 100)));
+  if (fill) fill.style.width = (pct * 100) + '%';
+  if (txt) txt.textContent = Math.max(0, Math.round(EXPLORE.hp || 0));
+}
+
+// ── Minimap (top-left): local radar centered on the player (LDOE style) ──
+const MINI_SPAN = 460;   // world px shown across the minimap (fixed vision, doesn't grow)
+let _miniLastDraw = 0;
+function drawMinimap() {
+  const cv = document.getElementById('exp-minimap');
+  if (!cv || !cv.getContext) return;
+  const now = performance.now();
+  if (now - _miniLastDraw < 70) return;
+  _miniLastDraw = now;
+  const ctx = cv.getContext('2d');
+  const S = cv.width, half = S / 2, sc = S / MINI_SPAN;
+  const px = EXPLORE.x, py = EXPLORE.y;
+  const mX = wx => half + (wx - px) * sc;
+  const mY = wy => half + (wy - py) * sc;
+  const vis = (x, y) => x > -4 && x < S + 4 && y > -4 && y < S + 4;
+  ctx.clearRect(0, 0, S, S);
+  ctx.fillStyle = '#3f6b32'; ctx.fillRect(0, 0, S, S);
+  // playable-area border (so you see the edge as you approach it)
+  const B = EXPLORE.border, M = EXPLORE.mapSize;
+  ctx.strokeStyle = 'rgba(0,0,0,.55)'; ctx.lineWidth = 1.5;
+  ctx.strokeRect(mX(B), mY(B), (M - 2 * B) * sc, (M - 2 * B) * sc);
+  for (const r of EXPLORE.resources) {
+    if (r.hp <= 0) continue;
+    const x = mX(r.x), y = mY(r.y); if (!vis(x, y)) continue;
+    ctx.fillStyle = r.type === 'tree' ? '#0e3d0a' : '#c9c9c9';
+    ctx.fillRect(x - 1, y - 1, 2.6, 2.6);
+  }
+  for (const c of EXPLORE.chests) {
+    const x = mX(c.x), y = mY(c.y); if (!vis(x, y)) continue;
+    ctx.fillStyle = c.level === 3 ? '#ffd700' : c.level === 2 ? '#5aa0ff' : '#ffffff';
+    ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill();
+    ctx.lineWidth = 0.5; ctx.strokeStyle = '#000'; ctx.stroke();
+  }
+  if (EXPLORE.enemies) {
+    ctx.fillStyle = '#ff2222';
+    for (const e of EXPLORE.enemies) { const x = mX(e.x), y = mY(e.y); if (!vis(x, y)) continue; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill(); }
+  }
+  // player = yellow triangle at the centre, pointing in the walk direction
+  ctx.save();
+  ctx.translate(half, half);
+  ctx.rotate(EXPLORE.heading || 0);
+  ctx.fillStyle = '#ffe000'; ctx.strokeStyle = '#000'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(6, 0); ctx.lineTo(-4, -4.5); ctx.lineTo(-4, 4.5); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+
+// ── Chest loot panel (bottom sheet): chest contents on top, your bag below.
+// Double-tap a chest item to collect it into your bag. ──
+function addToInv(it) {
+  if (!EXPLORE.inv[it.key]) EXPLORE.inv[it.key] = { key: it.key, img: it.img, fb: it.fb, name: it.name, qty: 0 };
+  EXPLORE.inv[it.key].qty += it.qty;
+}
+function invKeyCount() { return Object.keys(EXPLORE.inv || {}).length; }
+function invFullFor(key) { return !EXPLORE.inv[key] && invKeyCount() >= EXP_INV_MAX; }
+let _lootLastTap = { id: '', t: 0 };
+// side = 'chest' (collect) or 'inv' (put back). Double-tap to move a stack.
+function lootTap(side, id) {
+  const k = side + ':' + id, now = Date.now();
+  if (_lootLastTap.id === k && now - _lootLastTap.t < 350) {
+    _lootLastTap = { id: '', t: 0 };
+    if (side === 'chest') collectLootItem(Number(id)); else returnLootItem(id);
+  } else {
+    _lootLastTap = { id: k, t: now };
+  }
+}
+function collectLootItem(idx) {
+  const c = EXPLORE.openChest; if (!c || !c.loot) return;
+  const it = c.loot[idx]; if (!it) return;
+  if (invFullFor(it.key)) {
+    const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+    if (typeof showToast === 'function') showToast(isEN ? `Backpack full (${EXP_INV_MAX})` : `Mochila cheia (${EXP_INV_MAX})`, 'error');
+    return;
+  }
+  addToInv(it);
+  c.loot.splice(idx, 1);
+  renderChestLootPanel();
+  renderBackpackGrid();
+}
+// Move a stack from the backpack back into the open chest.
+function returnLootItem(key) {
+  const c = EXPLORE.openChest; if (!c) return;
+  const inv = EXPLORE.inv[key]; if (!inv) return;
+  const existing = (c.loot || []).find(l => l.key === key);
+  if (existing) existing.qty += inv.qty;
+  else { c.loot = c.loot || []; c.loot.push({ key, img: inv.img, fb: inv.fb, name: inv.name, qty: inv.qty }); }
+  delete EXPLORE.inv[key];
+  renderChestLootPanel();
+  renderBackpackGrid();
+}
+function collectAllLoot() {
+  const c = EXPLORE.openChest; if (!c || !c.loot) return;
+  const kept = [];
+  for (const it of c.loot) {
+    if (invFullFor(it.key)) { kept.push(it); continue; }  // no room — leave in chest
+    addToInv(it);
+  }
+  c.loot = kept;
+  if (kept.length) {
+    const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+    if (typeof showToast === 'function') showToast(isEN ? `Backpack full (${EXP_INV_MAX})` : `Mochila cheia (${EXP_INV_MAX})`, 'error');
+  }
+  renderChestLootPanel();
+  renderBackpackGrid();
+}
+function closeChestLootPanel() {
+  const p = document.getElementById('exp-loot-panel'); if (p) p.remove();
+  EXPLORE.openChest = null;
+}
+function openChestLootPanel(c) {
+  EXPLORE.openChest = c;
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const name = isEN ? EXP_CHEST_NAME_EN[c.level] : EXP_CHEST_NAME[c.level];
+  let panel = document.getElementById('exp-loot-panel');
+  if (panel) panel.remove();
+  panel = document.createElement('div');
+  panel.id = 'exp-loot-panel';
+  panel.innerHTML = `
+    <div class="exp-loot-modal">
+      <div class="exp-loot-header">
+        <span>${EXP_CHEST_FB[c.level]} ${name}</span>
+        <button onclick="closeChestLootPanel()">✕</button>
+      </div>
+      <div class="exp-loot-cols">
+        <div class="exp-loot-col">
+          <div class="ldoe-section-title">🎒 <span>${isEN ? 'Backpack' : 'Mochila'}</span></div>
+          <div class="ldoe-inv-grid" id="exp-loot-inv-grid"></div>
+        </div>
+        <div class="exp-loot-col">
+          <div class="ldoe-section-title">${EXP_CHEST_FB[c.level]} <span>${isEN ? 'Chest' : 'Baú'}</span></div>
+          <div class="ldoe-inv-grid" id="exp-loot-chest-grid"></div>
+          <button class="exp-loot-all" onclick="collectAllLoot()">${isEN ? 'Collect all' : 'Coletar tudo'}</button>
+        </div>
+      </div>
+      <div class="exp-loot-hint">${isEN ? 'Double-tap to move an item (chest ↔ backpack)' : 'Toque 2× para mover item (baú ↔ mochila)'}</div>
+    </div>`;
+  const host = document.getElementById('explore-overlay') || document.body;
+  host.appendChild(panel);
+  renderChestLootPanel();
+}
+// onclick = full lootTap(...) call string, or '' for a non-tappable slot.
+function _lootSlot(it, onclick) {
+  const cls = onclick ? ' exp-loot-tappable' : '';
+  const oc = onclick ? ` onclick="${onclick}"` : '';
+  return `
+    <div class="ldoe-slot ldoe-slot-item${cls}"${oc} title="${it.name}">
+      <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
+      <div class="ldoe-slot-qty">${it.qty}</div>
+    </div>`;
+}
+function _padSlots(n, total) {
+  let h = ''; for (let i = n; i < total; i++) h += '<div class="ldoe-slot ldoe-slot-empty"></div>';
+  return h;
+}
+function renderChestLootPanel() {
+  const c = EXPLORE.openChest; if (!c) return;
+  const cg = document.getElementById('exp-loot-chest-grid');
+  const ig = document.getElementById('exp-loot-inv-grid');
+  if (cg) {
+    const loot = c.loot || [];
+    cg.innerHTML = loot.map((it, i) => _lootSlot(it, `lootTap('chest',${i})`)).join('') + _padSlots(loot.length, Math.max(8, Math.ceil((loot.length || 1) / 4) * 4));
+  }
+  if (ig) {
+    const inv = Object.values(EXPLORE.inv || {});
+    ig.innerHTML = inv.map(it => _lootSlot(it, `lootTap('inv','${it.key}')`)).join('') + _padSlots(inv.length, EXP_INV_MAX);
+  }
+}
+
+// Reward screen — same visual pattern as the battle/defense reward screens (lvprev-box).
 function showExploreRewards() {
-  const items = [];
-  if (EXPLORE.wood > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/wood.png', fb: '🪵', qty: EXPLORE.wood, name: 'Madeira' });
-  if (EXPLORE.stone > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/stone.png', fb: '🪨', qty: EXPLORE.stone, name: 'Pedra' });
-  EXPLORE.collected && EXPLORE.collected.forEach(it => items.push(it));
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const items = Object.values(EXPLORE.inv || {});
   const tiles = items.length
     ? items.map(it => `
-        <div class="exp-rw-slot">
-          <img src="${it.img}" onerror="this.outerHTML='<span style=&quot;font-size:30px&quot;>${it.fb}</span>'">
-          <span class="exp-rw-qty">${it.qty}</span>
+        <div class="drop-tile" style="opacity:1;">
+          <div class="drop-tile-img-wrap">
+            <img src="${it.img}" style="width:40px;height:40px;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="drop-tile-fallback" style="display:none;">${it.fb}</div>
+          </div>
+          <div class="drop-tile-qty" style="color:#7eff7e;">+${it.qty}</div>
         </div>`).join('')
-    : '<div class="exp-rw-empty">Você não coletou nada desta vez.</div>';
-
+    : `<div style="grid-column:1/-1;text-align:center;color:var(--parch-dark);font-size:12px;padding:16px;">${isEN ? 'You collected nothing this time.' : 'Você não coletou nada desta vez.'}</div>`;
+  const cols = Math.min(Math.max(items.length, 1), 4);
   let modal = document.getElementById('explore-rewards');
   if (modal) modal.remove();
   modal = document.createElement('div');
   modal.id = 'explore-rewards';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:4100;display:flex;align-items:center;justify-content:center;padding:14px;';
   modal.innerHTML = `
-    <div class="exp-rw-box">
-      <div class="exp-rw-title">🎒 Recursos Coletados</div>
-      <div class="exp-rw-grid">${tiles}</div>
-      <button class="exp-rw-btn" onclick="finishExplore()">COLETAR</button>
-    </div>
-  `;
+    <div class="lvprev-box" style="max-width:380px;">
+      <div class="lvprev-num">${isEN ? 'Loot collected' : 'Saque coletado'}</div>
+      <div class="drop-tiles-grid lvprev-drops" style="grid-template-columns:repeat(${cols},1fr);">
+        ${tiles}
+      </div>
+      <button class="lvprev-play" onclick="finishExplore()">${isEN ? 'Collect' : 'Coletar'}</button>
+    </div>`;
   document.body.appendChild(modal);
 }
 function finishExplore() {
@@ -11578,12 +12217,13 @@ function renderBackpackGrid() {
   const items = [];
   if (EXPLORE.wood > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/wood.png', fb: '🪵', qty: EXPLORE.wood });
   if (EXPLORE.stone > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/stone.png', fb: '🪨', qty: EXPLORE.stone });
+  Object.values(EXPLORE.inv || {}).forEach(it => items.push({ img: it.img, fb: it.fb, qty: it.qty }));
   if (!items.length) { grid.innerHTML = '<div class="exp-bp-empty">Mochila vazia.<br>Colete recursos pelo mapa!</div>'; return; }
   grid.innerHTML = items.map(it => `
-    <div class="exp-bp-slot">
-      <img src="${it.img}" onerror="this.outerHTML='<span style=&quot;font-size:24px&quot;>${it.fb}</span>'">
-      <span class="qty">${it.qty}</span>
-    </div>`).join('');
+    <div class="ldoe-slot ldoe-slot-item">
+      <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
+      <div class="ldoe-slot-qty">${it.qty}</div>
+    </div>`).join('') + _padSlots(items.length, 8);
 }
 
 window.openExplore = openExplore;
@@ -11600,12 +12240,20 @@ window.toggleBackpack = toggleBackpack;
     <div id="exp-clouds"></div>
     <!-- Resources (trees/stones) populated by JS -->
     <div id="exp-resource-layer"></div>
+    <!-- Chests (levels 1/2/3) populated by JS -->
+    <div id="exp-chest-layer"></div>
+    <!-- Enemies (goblins) populated by JS -->
+    <div id="exp-enemy-layer"></div>
     <div id="explore-char">
-      <img id="explore-char-img" src="" alt="" draggable="false">
+      <div id="explore-char-img"></div>
     </div>
   </div>
   <!-- Backpack button + panel -->
-  <button id="exp-backpack-btn" onclick="toggleBackpack()" title="Mochila">🎒</button>
+  <button id="exp-backpack-btn" onclick="toggleBackpack()" title="Mochila"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sack.png" alt="Mochila" onerror="this.outerHTML='🎒'"></button>
+  <button id="exp-hand-btn" onclick="openNearestChest()" title="Abrir baú"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/hand_wave.png" alt="Abrir" onerror="this.outerHTML='✋'"></button>
+  <canvas id="exp-minimap" width="150" height="150"></canvas>
+  <div id="exp-hp"><div id="exp-hp-fill"></div><span id="exp-hp-txt">100</span></div>
+  <div id="exp-debug" style="position:fixed;top:40px;left:50%;transform:translateX(-50%);z-index:4010;background:rgba(0,0,0,.55);color:#fff;font-family:'Pixelify Sans',monospace;font-size:12px;padding:3px 9px;border-radius:8px;">🎁 –</div>
   <div id="exp-backpack-panel">
     <div class="exp-bp-window">
       <div class="exp-bp-title">Mochila</div>
@@ -11613,7 +12261,6 @@ window.toggleBackpack = toggleBackpack;
       <button class="exp-bp-close" onclick="toggleBackpack()">Fechar</button>
     </div>
   </div>
-  <button id="explore-close" onclick="closeExplore()" title="Sair"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
   <!-- Virtual joystick (mobile) -->
   <div id="explore-joystick">
     <div id="explore-joystick-knob"></div>
