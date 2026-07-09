@@ -33,7 +33,22 @@ h1, h2, h3, h4, h5, h6, .btn, button, .mode-tab, .tab, .profile-menu-btn {
 
 /* Sprites continuam pixelados */
 img { image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; }
-body { background-color:#5a6b3a; background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png"); background-size:96px 96px; background-repeat:repeat; image-rendering:pixelated; color: var(--parchment); min-height: 100vh; overflow-x: hidden; }
+body { background-color:#2e6499; image-rendering:pixelated; color: var(--parchment); min-height: 100vh; overflow-x: hidden; }
+/* Home backdrop: sea gradient + a centered grass island with a sandy border */
+#home-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 46%, #57a8dd 0%, #3f86bf 42%, #2e6499 74%, #234d79 100%);}
+#home-island{position:absolute;top:50%;left:50%;width:min(82vw,660px);height:min(66vh,560px);transform:translate(-50%,-50%);background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:56px 56px;background-repeat:repeat;image-rendering:pixelated;border-radius:46% 54% 50% 50%/53% 47% 53% 47%;box-shadow:0 0 0 12px #e3c079,0 0 0 18px #c39f57,0 24px 46px rgba(0,0,0,.4);animation:homeIslandFloat 9s ease-in-out infinite alternate;}
+@keyframes homeIslandFloat{from{transform:translate(-50%,-52%);}to{transform:translate(-50%,-48%);}}
+/* Island home (step 1) */
+#island-home{position:fixed;inset:0;z-index:2500;display:none;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse 92% 82% at 50% 46%,#57a8dd 0%,#3f86bf 42%,#2e6499 74%,#234d79 100%);}
+#ih-island{position:relative;width:min(92vw,760px);height:min(82vh,640px);background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:52px 52px;background-repeat:repeat;image-rendering:pixelated;border-radius:46% 54% 50% 50%/52% 48% 52% 48%;box-shadow:0 0 0 13px #e3c079,0 0 0 19px #c39f57,0 24px 48px rgba(0,0,0,.45);}
+#ih-title{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;color:#3a2410;background:rgba(255,255,255,.4);padding:4px 14px;border-radius:10px;white-space:nowrap;}
+.ih-station{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:8px 12px;cursor:pointer;font-family:'Pixelify Sans',monospace;box-sizing:border-box;transition:transform .1s,filter .1s;}
+.ih-station:hover{filter:brightness(1.08);transform:translate(-50%,-50%) scale(1.06);}
+.ih-station:active{transform:translate(-50%,-50%) scale(.95);}
+.ih-station .ih-ic{font-size:34px;line-height:1;display:flex;align-items:center;justify-content:center;height:56px;}
+.ih-station .ih-ic img{width:56px;height:56px;object-fit:contain;image-rendering:pixelated;}
+.ih-station .ih-lb{font-size:12px;font-weight:700;color:#3a2410;letter-spacing:.5px;white-space:nowrap;}
+#ih-close{position:absolute;top:14px;right:14px;z-index:2;width:44px;height:44px;background-color:#e8533f;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 
 
 button[onclick*="remove()"][style*="font-size:22px"]:active,
@@ -77,9 +92,10 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .hud-stat-label{font-family:'Pixelify Sans',monospace;font-size:10px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:1px;}
 .hud-stat-value{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:26px;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;}
 .energy-bar-wrap{display:flex;align-items:center;gap:8px;}
-.energy-bar-bg{position:relative;width:120px;height:14px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;box-shadow:inset 0 0 0 1px #0a1f20;}
+.energy-bar-bg{position:relative;width:132px;height:19px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;box-shadow:inset 0 0 0 1px #0a1f20;}
+.hud-timer-btn{align-self:center;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:.5px;padding:5px 11px;border:2px solid var(--gold-light);border-radius:9px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);cursor:pointer;white-space:nowrap;line-height:1.1;box-shadow:0 2px 6px rgba(0,0,0,.35);}
 .energy-bar-fill{height:100%;width:100%;background:#63c74d;border-radius:0;transition:width 0.4s steps(10);image-rendering:pixelated;}
-.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Pixelify Sans',monospace;font-size:11px !important;font-weight:700;color:#fff;text-shadow:-1px -1px 0 #2d2840,1px -1px 0 #2d2840,-1px 1px 0 #2d2840,1px 1px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
+.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Pixelify Sans',monospace;font-size:14px !important;font-weight:700;color:#fff;text-shadow:-1px -1px 0 #2d2840,1px -1px 0 #2d2840,-1px 1px 0 #2d2840,1px 1px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
 @keyframes pulse-energy{0%,100%{opacity:1;}
 50%{opacity:.7;}
 }
@@ -285,9 +301,14 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .panel-content .item-qty,.panel-content .drop-tile-qty{color:#2d1810;font-family:'SFLSecondary','Pixelify Sans',monospace;}
 /* Summary banners on beige */
 .panel-content .collection-banner{background:rgba(93,58,26,0.15)!important;border-color:var(--sfl-brown)!important;}
-.profile-menu-btn{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;background:rgba(0,0,0,.4);border:1.5px solid var(--gold-dim);border-radius:6px;color:var(--parch-light);font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:all 0.15s ease;text-align:left;}
+.profile-menu-btn{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;color:#fff;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:filter 0.15s ease;text-align:left;text-shadow:1px 1px 0 #2d2840;}
 .profile-menu-btn:hover{background:rgba(200,150,12,.2);border-color:var(--gold-light);color:var(--gold-light);}
 .profile-menu-btn-active{background:linear-gradient(180deg,rgba(200,150,12,.3) 0%,rgba(60,40,12,.5) 100%);border-color:var(--gold-light);color:var(--gold-light);}
+.cfg-vol{margin-top:10px;padding-top:10px;border-top:1px solid var(--gold-dim);display:flex;flex-direction:column;gap:8px;}
+.cfg-vol-title{font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--gold-light);}
+.cfg-vol-row{display:flex;align-items:center;gap:10px;font-family:'Pixelify Sans',monospace;font-size:12px;color:var(--parch-light);}
+.cfg-vol-row span{flex:0 0 92px;}
+.cfg-vol-row input[type=range]{flex:1;accent-color:var(--gold);cursor:pointer;}
 .panel-content{flex:1;overflow-y:auto;padding:12px;display:none;flex-direction:column;gap:10px;width:100%;max-width:760px;margin:0 auto;font-size:15px;}
 .panel-content.active{display:flex;}
 @media (min-width:600px){.panel-content{padding:20px 24px;font-size:16px;}
@@ -369,7 +390,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .fusion-slot.filled img{width:100%;height:100%;object-fit:cover;border-radius:4px;}
 .fusion-arrow{font-size:20px;color:var(--amber);text-shadow:0 0 8px var(--amber);}
 .fusion-result{width:80px;height:80px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:32px;}
-.fusion-btn{width:100%;padding:10px;background:#63c74d;border:2px solid #2d2840;color:#fff;font-family:'Pixelify Sans',monospace;font-size:13px;letter-spacing:2px;border-radius:6px;cursor:pointer;transition:filter .2s;margin-top:10px;font-weight:700;text-shadow:1px 1px 0 #3a6b2a;}
+.fusion-btn{width:100%;padding:10px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:13px;letter-spacing:2px;font-weight:700;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;transition:filter .2s;margin-top:10px;text-shadow:1px 1px 0 #3a6b2a;}
 .fusion-btn:hover:not(:disabled){background:linear-gradient(180deg,var(--green-light),var(--green-mid));color:var(--wood-dark);box-shadow:0 0 12px rgba(90,144,80,.5);}
 .fusion-btn:disabled{opacity:0.4;cursor:not-allowed;filter:grayscale(0.8);}
 .fusion-slot-plus{font-size:28px;color:var(--gold-dim);}
@@ -563,7 +584,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 50%{text-shadow:0 0 24px rgba(220,50,50,.9),0 0 40px rgba(220,50,50,.4);}
 }
 .battle-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.battle-btn{padding:10px 24px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;transition:all .25s;border:2px solid;text-transform:uppercase;}
+.battle-btn{padding:10px 24px;font-family:'Pixelify Sans',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;transition:filter .2s;text-transform:uppercase;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;}
 .battle-btn-attack{background:linear-gradient(180deg,#8b1a1a,#4a0808);border-color:#c04040;color:#f0a0a0;}
 .battle-btn-attack:hover{background:linear-gradient(180deg,#c02020,#8b1a1a);color:#fff;box-shadow:0 0 16px rgba(192,32,32,.5);transform:translateY(-2px);}
 .battle-btn-special{background:linear-gradient(180deg,#5a2080,#2a0840);border-color:#9060c0;color:#d0a0f0;}
@@ -635,7 +656,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .special-label{font-family:'Pixelify Sans',monospace;font-size:8px;color:#b080e0;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
 .special-name{font-size:12px;color:#d0a0f0;font-style:italic;}
 .modal-actions{display:flex;gap:8px;}
-.modal-btn{flex:1;padding:8px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;border:2px solid;transition:all .2s;text-transform:uppercase;}
+.modal-btn{flex:1;padding:8px;font-family:'Pixelify Sans',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;transition:filter .2s;text-transform:uppercase;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;}
 .modal-btn-equip{background-color:#63c74d;color:#fff;text-shadow:1px 1px 0 #3a6b2a;}
 .modal-btn-equip:hover{background:var(--green-light);color:var(--wood-dark);}
 .modal-btn-close{background:linear-gradient(180deg,var(--wood-light),var(--wood-dark));border-color:var(--gold-dim);color:var(--gold-dim);}
@@ -696,7 +717,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .battle-arena2-col{display:flex;flex-direction:column;align-items:center;flex:1;}
 .battle-vs{text-align:center;font-family:'Pixelify Sans',monospace;font-size:20px;color:var(--gold);font-weight:900;text-shadow:0 0 10px rgba(240,160,32,0.8);padding:2px 0;}
 .battle-actions{display:flex;gap:8px;margin-top:4px;}
-.battle-btn{flex:1;padding:10px 8px;font-family:'Pixelify Sans',monospace;font-size:11px;font-weight:700;letter-spacing:1px;border:2px solid;border-radius:4px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
+.battle-btn{flex:1;padding:10px 8px;font-family:'Pixelify Sans',monospace;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:filter 0.2s;text-transform:uppercase;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;}
 .battle-btn-special{background:linear-gradient(145deg,#8040c0,#6020a0);border-color:#c080ff;color:#fff;box-shadow:0 0 12px rgba(192,128,255,0.4);}
 .battle-btn-special:hover:not(:disabled){background:linear-gradient(145deg,#9050d0,#7030b0);transform:translateY(-2px);}
 .battle-btn-special:disabled{background:#3a2040;border-color:#5a4060;color:#807080;cursor:not-allowed;opacity:0.5;box-shadow:none;}
@@ -732,7 +753,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .hud-stat-value{font-size:22px !important;font-weight:700;}
 .energy-bar-wrap{gap:3px !important;}
 .energy-bar-bg{width:90px !important;height:18px !important;}
-.energy-bar-text{font-size:11px !important;}
+.energy-bar-text{font-size:13px !important;}
 .amber-coin{width:22px !important;height:22px !important;}
 .coin-img{width:26px !important;height:26px !important;image-rendering:-webkit-optimize-contrast !important;image-rendering:crisp-edges !important;}
 .hud-coin-wrap{background:rgba(40,38,55,.45) !important;border:none !important;padding:4px 12px 4px 8px !important;border-radius:4px !important;}
@@ -741,7 +762,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .hud-player-name{font-size:9px !important;line-height:1.1;white-space:nowrap;}
 .hud-player-level{font-size:8px !important;line-height:1.1;white-space:nowrap;}
 #recharge-timer{font-size:10px !important;}
-#collect-energy-btn{padding:2px 6px !important;font-size:9px !important;flex-shrink:0;}
+#collect-energy-btn{padding:4px 8px !important;font-size:11px !important;flex-shrink:0;}
 .hud-energy-top{display:flex !important;align-items:center !important;justify-content:center !important;gap:6px !important;}
 #right-panel{width:100% !important;max-width:100% !important;}
 #left-panel{left:8px !important;right:8px !important;width:auto !important;max-width:none !important;}
@@ -764,7 +785,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 @media (max-width:400px){.hud-stat-label{display:none;}
 .hud-logo{font-size:10px !important;}
 .energy-bar-bg{width:75px !important;}
-.energy-bar-text{font-size:10px !important;}
+.energy-bar-text{font-size:12px !important;}
 }
 .deck-slots-row{display:flex;justify-content:center;gap:10px;margin:20px 0;flex-wrap:wrap;}
 .deck-slot-col{display:flex;flex-direction:column;align-items:stretch;gap:4px;width:90px;}
@@ -912,7 +933,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .egg-reveal-name{font-family:'Pixelify Sans',monospace;font-size:20px;color:var(--gold-light);margin-bottom:6px;letter-spacing:1.5px;}
 .egg-reveal-rarity{font-size:13px;color:var(--parch-dark);margin-bottom:14px;font-family:'Pixelify Sans',monospace;letter-spacing:2px;}
 .egg-reveal-refund{font-size:12px;color:var(--parch-dark);margin-bottom:18px;line-height:1.5;}
-.egg-reveal-close{background:linear-gradient(145deg,var(--gold),var(--gold-light));border:2px solid var(--gold-light);color:var(--wood-dark);padding:10px 28px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;transition:all 0.3s ease;}
+.egg-reveal-close{background-color:#63c74d;color:#fff;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px 28px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;transition:filter 0.2s ease;text-shadow:1px 1px 0 #3a6b2a;}
 .egg-reveal-close:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(200,149,12,0.5);}
 .toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);background:linear-gradient(145deg,var(--wood-panel),var(--wood-dark));border:2px solid var(--gold);color:var(--parchment);padding:12px 20px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:13px;z-index:5000;opacity:0;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:0 8px 24px rgba(0,0,0,0.6);max-width:90%;text-align:center;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
@@ -962,9 +983,9 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .tut-title{font-family:'Pixelify Sans',monospace;font-size:16px;color:var(--gold-light);letter-spacing:1px;text-align:center;margin:0 0 10px;}
 .tut-text{font-size:13px;color:var(--parch-light);line-height:1.5;text-align:center;margin:0 0 14px;}
 .tut-buttons{display:flex;gap:8px;align-items:center;}
-.tut-btn-skip{background:none;border:1.5px solid #806020;color:#c0a070;padding:8px 12px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:11px;letter-spacing:1px;cursor:pointer;flex:0 0 auto;}
+.tut-btn-skip{background-color:#b96f50;color:#fff;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:8px 12px;font-family:'Pixelify Sans',monospace;font-size:11px;letter-spacing:1px;cursor:pointer;flex:0 0 auto;text-shadow:1px 1px 0 #2d2840;}
 .tut-btn-skip:hover{background:rgba(128,96,32,0.2);}
-.tut-btn-next{background:linear-gradient(145deg,var(--gold),var(--gold-light));border:2px solid var(--gold-light);color:var(--wood-dark);padding:10px 14px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;cursor:pointer;flex:1;box-shadow:0 0 12px rgba(240,160,32,0.5);animation:tut-pulse-btn 1.5s ease-in-out infinite;}
+.tut-btn-next{background-color:#63c74d;color:#fff;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px 14px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;cursor:pointer;flex:1;text-shadow:1px 1px 0 #3a6b2a;animation:tut-pulse-btn 1.5s ease-in-out infinite;}
 @keyframes tut-pulse-btn{0%,100%{box-shadow:0 0 12px rgba(240,160,32,0.5);}
 50%{box-shadow:0 0 22px rgba(240,160,32,0.9);}
 }
@@ -1038,13 +1059,19 @@ to{transform:scale(1) rotate(0);opacity:1;}
 @keyframes expShake{from{background-position:0 0;}to{background-position:-420px 0;}}
 .exp-fall-fx{position:absolute;image-rendering:pixelated;transform:translate(-50%,-100%);pointer-events:none;background-repeat:no-repeat;width:72px;height:43px;background-size:936px 43px;animation:expFall .45s steps(11) 1 forwards;} /* fall sheet: 11 of 13 frames × 72px */
 @keyframes expFall{from{background-position:0 0;}to{background-position:-792px 0;}}
+/* Rock = an SFL strike sheet. Idle shows frame 0; mining plays the 6-frame spark on the SAME element. */
+.exp-rock{position:absolute;image-rendering:pixelated;pointer-events:none;background-repeat:no-repeat;z-index:3;}
+.exp-rock-strike{animation:expStrike .26s steps(6) 1;}       /* strike sheet: 6 frames × 224px */
+@keyframes expStrike{from{background-position:0 0;}to{background-position:-1344px 0;}}
 .exp-wood-float{position:absolute;transform:translate(-50%,-100%);z-index:4600;pointer-events:none;font-family:'Pixelify Sans',monospace;font-weight:700;color:#fff;font-size:13px;text-shadow:1px 1px 0 #2d1810,0 0 3px #000;display:flex;align-items:center;gap:3px;animation:expWoodFloat 1s ease-out forwards;}
 .exp-wood-float img{width:14px;height:14px;image-rendering:pixelated;}
 @keyframes expWoodFloat{0%{opacity:0;transform:translate(-50%,-60%);}20%{opacity:1;}100%{opacity:0;transform:translate(-50%,-180%);}}
 #exp-axe-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;background:#8a5a2b;border:2px solid #ffe08a;border-radius:9px;color:#fff;font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;box-sizing:border-box;}
 #exp-chest-layer{position:absolute;inset:0;}
 #exp-enemy-layer{position:absolute;inset:0;}
-.exp-enemy{position:absolute;width:34px;height:44px;background-repeat:no-repeat;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;pointer-events:none;}
+.exp-enemy{position:absolute;width:66px;height:44px;background-repeat:no-repeat;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;pointer-events:none;}
+.exp-enemy.exp-enemy-hit{filter:brightness(1.6) drop-shadow(0 0 3px #ff3030);}
+.exp-enemy.exp-enemy-hurt{filter:brightness(2.2) saturate(.2) drop-shadow(0 0 4px #fff);}
 .exp-chest{position:absolute;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;transition:transform .12s,opacity .3s;}
 .exp-chest.exp-chest-l2{filter:drop-shadow(0 0 3px rgba(90,170,255,.9));}
 .exp-chest.exp-chest-l3{filter:drop-shadow(0 0 4px rgba(255,215,60,1));}
@@ -1053,21 +1080,33 @@ to{transform:scale(1) rotate(0);opacity:1;}
 #exp-hand-btn{position:absolute;bottom:26px;right:22px;z-index:4010;width:72px;height:72px;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;transition:transform .1s;}
 #exp-hand-btn img{width:58%;height:58%;object-fit:contain;image-rendering:pixelated;pointer-events:none;}
 #exp-hand-btn:active{transform:scale(.92);}
+#exp-mute-btn{position:absolute;top:14px;right:14px;z-index:4010;width:40px;height:40px;background:rgba(45,40,64,.4);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;padding:0;box-sizing:border-box;}
+#exp-mute-btn:active{transform:scale(.92);}
+#exp-vol-panel{position:fixed;top:62px;right:14px;z-index:4200;flex-direction:column;gap:10px;width:196px;padding:12px 14px;box-sizing:border-box;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+#exp-vol-panel .vol-row{display:flex;flex-direction:column;gap:3px;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#3a2410;}
+#exp-vol-panel input[type=range]{width:100%;accent-color:#8a5a2b;cursor:pointer;}
 #exp-hand-btn.ready{background:rgba(255,224,138,.45);border-color:#ffe08a;animation:handPulse .7s infinite;box-shadow:0 0 12px rgba(255,215,60,.85);}
 @keyframes handPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.13);}}
 #exp-loot-panel{position:fixed;inset:0;z-index:4030;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.85);padding:14px;backdrop-filter:blur(3px);}
-.exp-loot-modal{width:100%;max-width:560px;max-height:84vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#1a1008 0%,#0d0804 100%);border:3px solid var(--gold);border-radius:8px;overflow:hidden;}
-.exp-loot-header{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(0,0,0,.5);border-bottom:2px solid var(--gold-dim);font-family:'Pixelify Sans',monospace;color:var(--gold-light);font-size:15px;font-weight:700;letter-spacing:1px;}
-.exp-loot-header button{background:none;border:none;color:var(--gold-dim);font-size:22px;cursor:pointer;padding:0 4px;}
-.exp-loot-cols{display:flex;flex:1;min-height:0;overflow:hidden;}
-.exp-loot-col{display:flex;flex-direction:column;flex:1;min-width:0;background:rgba(0,0,0,.2);}
-.exp-loot-col + .exp-loot-col{border-left:2px solid var(--gold-dim);}
+.exp-loot-modal{width:100%;max-width:560px;max-height:84vh;display:flex;flex-direction:column;background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;overflow:hidden;box-sizing:border-box;}
+.exp-loot-header{display:flex;justify-content:space-between;align-items:center;padding:9px 12px 4px;font-family:'Pixelify Sans',monospace;color:#3a2410;font-size:15px;font-weight:700;letter-spacing:1px;}
+.exp-loot-header button{background:none;border:none;color:#6b4a28;font-size:22px;cursor:pointer;padding:0 4px;}
+.exp-loot-cols{display:flex;flex:1;min-height:0;overflow:hidden;gap:6px;padding:0 8px;}
+.exp-loot-col{display:flex;flex-direction:column;flex:1;min-width:0;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;overflow:hidden;}
 .exp-loot-col .ldoe-inv-grid{overflow-y:auto;min-height:120px;}
 .exp-loot-tappable{cursor:pointer;transition:transform .08s;}
 .exp-loot-tappable:active{transform:scale(.9);}
 .exp-loot-slot .lfb,.ldoe-slot .lfb{font-size:24px;}
-.exp-loot-all{margin:8px;padding:9px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;letter-spacing:1px;border:2px solid var(--gold-light);border-radius:4px;cursor:pointer;}
-.exp-loot-hint{padding:8px 12px;font-size:11px;color:var(--parch-dark);text-align:center;font-family:system-ui,sans-serif;background:rgba(0,0,0,.4);border-top:1px solid var(--gold-dim);}
+.exp-loot-all{margin:8px;padding:9px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;box-sizing:border-box;}
+.exp-loot-hint{padding:8px 12px;font-size:11px;color:#6b4a28;text-align:center;font-family:'Pixelify Sans',monospace;}
+/* SFL-styled slots + titles inside the chest loot panel */
+#exp-loot-panel .ldoe-section-title{color:#3a2410;background:transparent;border-bottom:none;font-family:'Pixelify Sans',monospace;padding:8px 10px 4px;}
+#exp-loot-panel .ldoe-slot,#exp-loot-panel .ldoe-slot-item{background:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;min-height:48px;}
+#exp-loot-panel .ldoe-slot-empty{opacity:.55;}
+#exp-loot-panel .ldoe-slot-qty{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:14px;color:#fff;text-shadow:1px 1px 0 #2d2840;bottom:2px;right:5px;}
+/* Reward screen tiles → SFL slots */
+#explore-rewards .drop-tile{background:#b96f50;image-rendering:pixelated;border:none;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;padding:6px 4px;}
+#explore-rewards .drop-tile-qty{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:15px;color:#fff;text-shadow:1px 1px 0 #2d2840;}
 #exp-minimap{position:absolute;top:12px;left:12px;z-index:4010;width:170px;height:170px;border:2px solid rgba(255,255,255,.6);border-radius:8px;background:rgba(0,0,0,.4);image-rendering:pixelated;box-shadow:0 3px 10px rgba(0,0,0,.5);}
 #exp-hp{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:4010;width:300px;max-width:60%;height:24px;background:rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.6);border-radius:12px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,.5);}
 #exp-hp-fill{height:100%;width:100%;background:linear-gradient(90deg,#63c74d,#8fe06a);transition:width .25s;}
@@ -1082,7 +1121,8 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .exp-loading-txt{font-family:'Pixelify Sans',monospace;color:var(--gold-light);font-size:14px;letter-spacing:1px;}
 /* Border clouds — placed inside the world, on the map edges (move with the map) */
 #exp-clouds{position:absolute;inset:0;pointer-events:none;z-index:5000;}
-.exp-cloud{position:absolute;image-rendering:pixelated;}
+.exp-cloud{position:absolute;image-rendering:pixelated;will-change:transform;}
+@keyframes cloudSway{from{transform:translateX(-3px);}to{transform:translateX(3px);}}
 /* Backpack button + panel */
 #exp-backpack-btn{position:absolute;bottom:112px;right:28px;z-index:4010;width:60px;height:60px;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;}
 #exp-backpack-btn img{width:60%;height:60%;object-fit:contain;image-rendering:pixelated;}
@@ -1099,8 +1139,8 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .exp-rw-btn:hover{filter:brightness(1.1);}
 #exp-backpack-panel{display:none;position:fixed;inset:0;z-index:4020;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:20px;}
 #exp-backpack-panel.open{display:flex;}
-.exp-bp-window{max-width:360px;width:100%;background:linear-gradient(180deg,#1a1008 0%,#0d0804 100%);border:3px solid var(--gold);border-radius:8px;padding:14px;}
-.exp-bp-title{font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;letter-spacing:1px;color:var(--gold-light);text-align:center;margin-bottom:12px;}
+.exp-bp-window{max-width:360px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:16px;box-sizing:border-box;}
+.exp-bp-title{font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;letter-spacing:1px;color:#3a2410;text-align:center;margin-bottom:12px;}
 .exp-bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;min-height:70px;}
 .exp-bp-slot{aspect-ratio:1;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
 .exp-bp-slot img{width:60%;height:60%;object-fit:contain;image-rendering:pixelated;}
@@ -1110,6 +1150,15 @@ to{transform:scale(1) rotate(0);opacity:1;}
 #explore-char{position:absolute;width:84px;height:56px;transform:translate(-50%,-50%);z-index:5;}
 #explore-char-img{width:100%;height:100%;background-repeat:no-repeat;image-rendering:pixelated;display:block;}
 #explore-char-img.flip{transform:scaleX(-1);}
+/* Death: the character quickly greys out and fades; the death screen shows a falling skull. */
+#explore-char.exp-dead{animation:expDie .5s ease-out forwards;}
+@keyframes expDie{to{filter:grayscale(1) brightness(.4);opacity:0;transform:translate(-50%,-50%) scale(.85);}}
+.exp-death-skull{font-size:82px;line-height:1;animation:expSkullFall 1s cubic-bezier(.5,0,.7,1.4) both;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6));}
+@keyframes expSkullFall{0%{transform:translateY(-150px) rotate(-25deg);opacity:0;}40%{opacity:1;}72%{transform:translateY(12px) rotate(6deg);}86%{transform:translateY(-6px) rotate(-3deg);}100%{transform:translateY(0) rotate(0);opacity:1;}}
+.exp-death-title{font-family:'Pixelify Sans',monospace;font-size:30px;font-weight:700;color:#ff5a5a;text-shadow:2px 2px 0 #2d0808,0 0 14px rgba(255,0,0,.6);}
+.exp-death-sub{font-family:'Pixelify Sans',monospace;font-size:13px;color:#e0b0b0;text-align:center;max-width:280px;}
+.exp-hurt-flash{position:absolute;inset:0;pointer-events:none;z-index:4550;background:radial-gradient(circle,transparent 52%,rgba(200,0,0,.5));animation:expHurt .4s ease-out forwards;}
+@keyframes expHurt{from{opacity:.9;}to{opacity:0;}}
 #explore-close{position:fixed;top:14px;right:14px;z-index:4010;width:44px;height:44px;background-color:#e8533f;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 #explore-joystick{position:absolute;bottom:40px;left:40px;width:120px;height:120px;z-index:4010;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;touch-action:none;}
 #explore-joystick-knob{position:absolute;top:50%;left:50%;width:54px;height:54px;transform:translate(-50%,-50%);background:rgba(255,255,255,.7);border:3px solid #2d2840;border-radius:50%;pointer-events:none;}
@@ -1168,6 +1217,20 @@ to{transform:scale(1) rotate(0);opacity:1;}
 </script>
 </head>
 <body>
+<!-- Home backdrop: an SFL-style island surrounded by sea -->
+<div id="home-bg"><div id="home-island"></div></div>
+<!-- Island home (step 1): a walkable-style island where each menu is a station you click -->
+<div id="island-home" style="display:none;">
+  <button id="ih-close" onclick="closeIslandHome()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
+  <div id="ih-island">
+    <div id="ih-title">⚒️ Bancadas</div>
+    <button class="ih-station" style="left:26%;top:28%" onclick="ihWork('bonfire')"><span class="ih-ic"><img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/110.png" onerror="this.outerHTML='🔥'"></span><span class="ih-lb">Fogueira</span></button>
+    <button class="ih-station" style="left:64%;top:24%" onclick="ihWork('coalgenerator')"><span class="ih-ic"><img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/126.png" onerror="this.outerHTML='⚙️'"></span><span class="ih-lb">Gerador de Carvão</span></button>
+    <button class="ih-station" style="left:80%;top:56%" onclick="ihWork('workbench')"><span class="ih-ic"><img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/109.png" onerror="this.outerHTML='🪚'"></span><span class="ih-lb">Sawbench</span></button>
+    <button class="ih-station" style="left:44%;top:60%" onclick="ihWork('brooder')"><span class="ih-ic"><img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/119.png" onerror="this.outerHTML='🪺'"></span><span class="ih-lb">Chocadeira</span></button>
+    <button class="ih-station" style="left:20%;top:60%" onclick="ihWork('portiontable')"><span class="ih-ic"><img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/123.png" onerror="this.outerHTML='🧪'"></span><span class="ih-lb">Mesa de Poções</span></button>
+  </div>
+</div>
 <!-- ═══════════════════════════════════════════════
 🎓 TUTORIAL OVERLAY (hidden by default)
 ═══════════════════════════════════════════════ -->
@@ -1195,11 +1258,6 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <div class="hud-stat">
 <img class="hud-energy-img" src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/100.png" alt="Energy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
 <span class="hud-stat-icon" style="color:var(--energy-col);display:none">⚡</span>
-<div style="display:flex;flex-direction:column;align-items:stretch;min-width:0;">
-<div class="hud-energy-top" style="display:flex;align-items:center;justify-content:center;gap:6px;min-height:16px;margin-bottom:2px;">
-<span id="recharge-timer" style="color:var(--gold);font-size:11px;font-family:'Pixelify Sans',monospace;letter-spacing:0.5px;"></span>
-<button id="collect-energy-btn" onclick="collectEnergy()" title="Coletar +25 energia" style="display:none;background:linear-gradient(145deg,var(--gold),var(--gold-light));border:2px solid var(--gold-light);color:var(--wood-dark);padding:2px 8px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:10px;font-weight:700;cursor:pointer;letter-spacing:1px;animation:label-pulse 1.5s ease-in-out infinite;line-height:1.2;">+25⚡</button>
-</div>
 <div class="energy-bar-wrap">
 <div class="energy-bar-bg">
 <div class="energy-bar-fill" id="energy-fill"></div>
@@ -1207,7 +1265,9 @@ to{transform:scale(1) rotate(0);opacity:1;}
 </div>
 </div>
 </div>
-</div>
+<!-- Regen timer / collect, in its OWN button beside the energy -->
+<button id="collect-energy-btn" class="hud-timer-btn" onclick="collectEnergy()" title="Recarga de energia" style="display:none;">+25⚡</button>
+<span id="recharge-timer" style="display:none"></span>
 <!-- Right column: disc buttons on top, currencies below (SFL layout) -->
 <div class="hud-right-col" style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
 <!-- Currencies on TOP -->
@@ -1225,6 +1285,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 </div>
 <!-- Disc buttons in a VERTICAL column: Settings, Season, Mailbox -->
 <div class="hud-disc-col" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<button class="hud-disc" id="island-home-btn" onclick="openIslandHome()" title="Ilha" style="font-size:20px;display:flex;align-items:center;justify-content:center;">🏝️</button>
 <button class="hud-disc" id="profile-btn" onclick="showProfileMenu()" title="Perfil">
 <img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" alt="Config" onerror="this.outerHTML='⚙️';">
 </button>
@@ -3866,6 +3927,11 @@ function showProfileMenu() {
         <span class="cfg-btn-icon">${uiIconImg('scroll.webp', '🎓', 18)}</span>
         <span class="cfg-btn-label">${t('tutorial.replay')}</span>
       </button>
+      </div>
+      <div class="cfg-vol">
+        <div class="cfg-vol-title">🔊 ${I18N_LANG === 'en' ? 'Audio' : 'Áudio'}</div>
+        <div class="cfg-vol-row"><span>🎵 ${I18N_LANG === 'en' ? 'Music' : 'Fundo'}</span><input type="range" min="0" max="100" value="${Math.round(AMB_VOL * 100)}" oninput="setAmbVol(this.value/100)"></div>
+        <div class="cfg-vol-row"><span>🔊 ${I18N_LANG === 'en' ? 'Effects' : 'Efeitos'}</span><input type="range" min="0" max="100" value="${Math.round(SFX_VOL * 100)}" oninput="setSfxVol(this.value/100)"></div>
       </div>
       ${renderCfgFooter()}
     </div>
@@ -10347,10 +10413,7 @@ function showHuntLevelSelect() {
     div.className = 'level-card' + (unlocked ? ' unlocked' : '');
     div.innerHTML = `<div class="level-number">${n}</div>`;
     if (unlocked) {
-      div.onclick = () => {
-        document.getElementById('level-modal').classList.remove('open');
-        openExplore(n);
-      };
+      div.onclick = () => showHuntLevelPreview(n);
     } else {
       div.style.opacity = '.5';
       div.style.cursor = 'not-allowed';
@@ -10358,6 +10421,59 @@ function showHuntLevelSelect() {
     grid.appendChild(div);
   }
   document.getElementById('level-modal').classList.add('open');
+}
+// Difficulty label + energy cost per hunt level (tweak the cost table freely).
+const HUNT_LEVEL_COST = { 1:3, 2:3, 3:4, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10 };
+function huntLevelInfo(n) {
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  let diff;
+  if (n <= 2) diff = isEN ? 'Easy' : 'Fácil';
+  else if (n <= 4) diff = isEN ? 'Medium' : 'Médio';
+  else if (n <= 7) diff = isEN ? 'Hard' : 'Difícil';
+  else diff = isEN ? 'Extreme' : 'Extremo';
+  return { isEN, diff, cost: HUNT_LEVEL_COST[n] || (2 + n) };
+}
+// Pre-level screen for the Hunt/Explore mode: difficulty, energy, possible rewards.
+function showHuntLevelPreview(n) {
+  let modal = document.getElementById('level-preview');
+  if (modal) modal.remove();
+  const { isEN, diff, cost } = huntLevelInfo(n);
+  const tbl = CHEST_DROP_TABLE[n] || CHEST_DROP_TABLE[1];
+  const tile = (img, fb, qty, chance, chanceColor) => `
+    <div class="drop-tile">
+      <div class="drop-tile-img-wrap"><img src="${img}" style="width:34px;height:34px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<div class=&quot;drop-tile-fallback&quot;>${fb}</div>'"></div>
+      ${qty ? `<div class="drop-tile-qty" style="color:var(--parch-light);">${qty}</div>` : ''}
+      ${chance ? `<div class="drop-tile-chance" style="color:${chanceColor};">${chance}</div>` : ''}
+    </div>`;
+  let tiles = '';
+  tiles += tile('https://sunflower-land.com/game-assets/resources/wood.png', '🪵', 'x2', isEN ? 'tree' : 'árvore', '#7eff7e');
+  tiles += tile('https://sunflower-land.com/game-assets/resources/stone.png', '🪨', 'x2', isEN ? 'rock' : 'rocha', '#7eff7e');
+  [1, 2, 3].forEach(lvl => {
+    const pct = tbl['c' + lvl];
+    if (pct > 0) tiles += tile(EXP_CHEST_IMG[lvl], EXP_CHEST_FB[lvl], '', pct + '%', pct >= 25 ? '#7eff7e' : pct >= 10 ? '#ffd060' : '#d09040');
+  });
+  modal = document.createElement('div');
+  modal.id = 'level-preview';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3650;display:flex;align-items:center;justify-content:center;padding:18px;';
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  modal.innerHTML = `
+    <div class="lvprev-box">
+      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:36px;height:36px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
+      <div class="lvprev-num">${isEN ? `Hunt · Level ${n}` : `Caçada · Nível ${n}`}</div>
+      <div class="lvprev-diff">${isEN ? 'Difficulty' : 'Dificuldade'}: <b>${diff}</b></div>
+      <div class="lvprev-info">
+        <div class="lvprev-row"><span>${isEN ? 'Energy needed' : 'Energia necessária'}:</span> <b>${cost} ⚡</b></div>
+      </div>
+      <div class="lvprev-drops-label">${isEN ? 'POSSIBLE REWARDS' : 'RECOMPENSAS POSSÍVEIS'}</div>
+      <div class="drop-tiles-grid lvprev-drops">${tiles}</div>
+      <button class="lvprev-play" onclick="huntPlay(${n})">${isEN ? 'EXPLORE' : 'EXPLORAR'}</button>
+    </div>`;
+  document.body.appendChild(modal);
+}
+function huntPlay(n) {
+  const p = document.getElementById('level-preview'); if (p) p.remove();
+  const lm = document.getElementById('level-modal'); if (lm) lm.classList.remove('open');
+  openExplore(n);
 }
 function showDefenseLevelSelect() {
   const modalHeader = document.querySelector('#level-modal .modal-header h2');
@@ -11381,12 +11497,12 @@ const EXPLORE = {
   resources: [],
   chests: [], chestsOpened: { 1: 0, 2: 0, 3: 0 },
   wood: 0, stone: 0, exiting: false,
-  axeCount: 0, axeUsed: 0, axeMode: false,  // axe durability: whole axes owned + trees felled on the current one
+  axeCount: 0, axeUsed: 0, pickCount: 0, pickUsed: 0, toolMode: null,  // axe/pickaxe durability + which tool the button shows
 };
 const EXP_TREE = 'https://sunflower-land.com/game-assets/resources/tree.png';
 // 3 chest tiers (SFL official chest art) — level 1/2/3.
 const SFL_RAW = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/';
-const EXP_CHEST_IMG = { 1: SFL_RAW + 'basic_chest.png', 2: SFL_RAW + 'rare_chest.png', 3: SFL_RAW + 'luxury_chest.png' };
+const EXP_CHEST_IMG = { 1: SFL_RAW + 'basic_chest.png', 2: SFL_RAW + 'wooden_chest.png', 3: SFL_RAW + 'luxury_chest.png' };  // L2 = green (rare_chest was identical to luxury)
 const EXP_CHEST_NAME = { 1: 'Baú Comum', 2: 'Baú Raro', 3: 'Baú de Luxo' };
 const EXP_CHEST_NAME_EN = { 1: 'Common Chest', 2: 'Rare Chest', 3: 'Luxury Chest' };
 const EXP_CHEST_FB = { 1: '📦', 2: '🧰', 3: '💰' };
@@ -11426,8 +11542,167 @@ function makeChestLoot(level) {
 const CHEST_SLOTS = 7;   // candidate chest spots per run; each rolls the table (may be empty)
 const EXP_INV_MAX = 10;  // backpack holds at most 10 item stacks
 // Enemy goblins (SFL big_goblin spritesheet: 4 frames of 27x35).
-const EXP_GOBLIN = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/big_goblin.png';
-const GOB_FW = 27, GOB_FH = 35, GOB_FRAMES = 4, GOB_SCALE = 1.25, GOB_SPEED = 22;
+// Enemies are dressed SFL bumpkins (same animation system as the player).
+// To change/add an enemy: dress a bumpkin in the game, open your profile, copy the number
+// (e.g. "0_v1_83_1_51_...") and paste it here. Each run picks one at random.
+const EXP_ENEMY_ANIM = 'https://animations.sunflower-land.com';
+const EXP_ENEMY_TOKENS = [
+  '0_v1_0_4_0_320_322_323_324_321_0_0_0_0_0_0_0_0_0',   // goblin warrior (axe + horned helmet)
+  '0_v1_0_4_0_320_322_323_77_377_0_0_0_0_0_0_0_0_0',    // goblin king (sword + crown)
+  '0_v1_0_4_0_13_20_22_324_0_0_0_0_0_0_0_0_0',          // classic goblin (red shirt + axe)
+  '0_v1_0_4_0_325_327_328_329_326_0_0_0_0_0_0_0_0_0',   // dark knight goblin (nightshade)
+  '0_v1_0_4_0_320_322_323_76_79_0_0_0_0_0_0_0_0_0',     // skull brute (hammer + skull)
+  '0_v1_0_4_180_320_322_323_183_0_0_0_0_0_0_0_0_0_0',   // goblin mage (staff + wise hair)
+  '0_v1_0_4_0_320_322_323_96_91_0_0_92_0_0_0_0_0_0',    // goblin pirate (scimitar + pirate hat/coat)
+  '0_v1_0_4_0_320_322_323_162_163_0_0_0_0_0_0_0_0_0',   // infernal goblin (pitchfork + horns)
+  '0_v1_0_4_5_13_20_22_23_0_0_0_0_0_0_0_0_0_0',         // peasant goblin (pitchfork)
+  '0_v1_0_4_0_320_322_323_76_80_0_0_0_0_0_0_0_0_0',     // antlered brute (hammer + antlers)
+];
+const GOB_FRAME_W = 96, GOB_FRAME_H = 64;              // bumpkin sheet frame
+const GOB_DISP_W = 66, GOB_DISP_H = 44;                // on-screen enemy size
+const GOB_SPRITE_SCALE = GOB_DISP_W / GOB_FRAME_W;     // 0.6875
+const GOB_ANIM = { idle: [0, 8], walk: [9, 16] };      // inclusive frame ranges (same as player)
+const GOB_ANIM_FPS = 9;
+const GOB_SPEED = 22;
+// Enemy types 1–10 (index 0 = type 1). Each maps to EXP_ENEMY_TOKENS by index.
+const ENEMY_TYPES = [
+  { hp: 60,   dmg: 6,   speed: 4.8, size: 0.8 },  // 1 small & nimble
+  { hp: 90,   dmg: 10,  speed: 3.8, size: 1.0 },  // 2 standard
+  { hp: 140,  dmg: 15,  speed: 5.6, size: 0.9 },  // 3 small but fast
+  { hp: 220,  dmg: 24,  speed: 2.9, size: 1.5 },  // 4 slow giant
+  { hp: 340,  dmg: 34,  speed: 4.3, size: 1.2 },  // 5 balanced
+  { hp: 500,  dmg: 48,  speed: 3.2, size: 1.8 },  // 6 huge & tanky
+  { hp: 760,  dmg: 68,  speed: 6.0, size: 1.1 },  // 7 fast assassin
+  { hp: 1100, dmg: 95,  speed: 2.5, size: 2.3 },  // 8 colossus
+  { hp: 1600, dmg: 130, speed: 4.7, size: 1.6 },  // 9 big & aggressive
+  { hp: 2300, dmg: 180, speed: 3.5, size: 2.8 },  // 10 boss
+];
+const ENEMY_SPEED_K = 6.5;   // speed value → px/s
+// Per hunt level: resource-node count (dropMin..dropMax) + how many of each enemy type spawn.
+const MAP_SPAWN = {
+  1:  { dropMin: 20, dropMax: 28, enemies: [18, 8, 2, 0, 0, 0, 0, 0, 0, 0] },
+  2:  { dropMin: 20, dropMax: 28, enemies: [15, 8, 5, 2, 0, 0, 0, 0, 0, 0] },
+  3:  { dropMin: 21, dropMax: 29, enemies: [12, 8, 6, 5, 3, 0, 0, 0, 0, 0] },
+  4:  { dropMin: 21, dropMax: 29, enemies: [8, 8, 7, 6, 5, 3, 0, 0, 0, 0] },
+  5:  { dropMin: 22, dropMax: 30, enemies: [5, 6, 7, 6, 6, 5, 3, 0, 0, 0] },
+  6:  { dropMin: 22, dropMax: 30, enemies: [3, 5, 5, 6, 6, 6, 5, 3, 1, 0] },
+  7:  { dropMin: 23, dropMax: 31, enemies: [2, 3, 4, 5, 6, 6, 6, 4, 3, 1] },
+  8:  { dropMin: 23, dropMax: 31, enemies: [1, 2, 3, 4, 5, 6, 6, 5, 4, 2] },
+  9:  { dropMin: 24, dropMax: 32, enemies: [0, 1, 2, 3, 4, 5, 6, 6, 5, 4] },
+  10: { dropMin: 24, dropMax: 32, enemies: [0, 0, 1, 2, 3, 4, 5, 6, 6, 5] },
+};
+const GOB_AGGRO = 140;         // distance at which a goblin notices & chases the player
+const GOB_ATTACK_RANGE = 26;   // distance at which it hits the player
+const GOB_DMG = 7;             // damage per hit
+const GOB_ATK_CD = 0.9;        // seconds between hits
+const GOB_HP = 16;            // enemy health
+const PLAYER_DMG = 8;         // player sword damage per hit
+const EXP_ATTACK_RANGE = 46;  // how close to attack an enemy with the sword
+const EXP_SWORD_ICON = 'https://sunflower-land.com/game-assets/icons/sword.png';
+
+// ── Map sound effects (SFL sfx CDN) ──
+const SFX_BASE = 'https://sunflower-land.com/game-assets';
+const EXP_SFX = {
+  chop:      SFX_BASE + '/sfx/Resources/chop.mp3',
+  treefall:  SFX_BASE + '/sfx/Resources/tree_fall.mp3',
+  mining:    SFX_BASE + '/sfx/Resources/mining.mp3',
+  rockbreak: SFX_BASE + '/sfx/Resources/mining_fall.mp3',
+  collect:   SFX_BASE + '/sfx/Menu_UI/Collects/Farm_Game_User_Interface_Collect_Item_1_Click_Pop_Fun_Cartoon.mp3',
+  chest:     SFX_BASE + '/sfx/Farming/Door/Farm_Game_Farming_Door_Open_Chest_2_Wood_Creak_Storage_Hinge.mp3',
+  step:      SFX_BASE + '/sfx/Footsteps/Dirt/Farm_Game_Footsteps_Dirt_1_Soil_Walk_Run_Ground_Surface.mp3',
+  hurt:      SFX_BASE + '/sfx/Animals/Human/Farm_Game_Animal_Vocal_Human_Character_Voice_Farmer_Ouph_Pain.mp3',
+  death:     SFX_BASE + '/sfx/Misc/game_over.mp3',
+  swing:     SFX_BASE + '/sfx/Games/ChickenFight/punch.mp3',
+  hit:       SFX_BASE + '/sfx/Games/ChickenFight/hit.mp3',
+  reward:    SFX_BASE + '/sfx/Notifications/Farm_Game_Notification_Alert_Task_Complete_1_Musical_Drum_Pop_Success_Single_2.mp3',
+  ambience:  SFX_BASE + '/sfx/Loops/Nature%20Loops/Farm_Game_Loop_Nature_Ambience_Windy_Gusty_Day_Atmosphere.mp3',  // lonely windy atmosphere
+  sting:     SFX_BASE + '/sfx/Notifications/Farm_Game_Notification_Alert_Dark_Deep_Bass_Negative_Tonal_Slide_1.mp3', // ominous dark-bass sting
+  click:     SFX_BASE + '/sfx/Menu_UI/Designed/Farm_Game_User_Interface_Designed_Tab_Click_Bass_HIt_Thump_Plastic_4.mp3',
+  close:     SFX_BASE + '/sfx/Menu_UI/Designed/Farm_Game_User_Interface_Designed_Slide_Bass_Hit_Thump_Click_2.mp3',
+  buy:       SFX_BASE + '/sfx/Notifications/Farm_Game_Notification_Alert_Coins_Buy_1_Shop.mp3',
+  tab:       SFX_BASE + '/sfx/Menu_UI/Designed/Farm_Game_User_Interface_Designed_Tab_Click_Bass_HIt_Thump_Plastic_3.mp3',
+  danger:    SFX_BASE + '/sfx/Misc/war_chant.mp3',   // tense loop while a goblin is chasing
+};
+let SFX_VOL = 0.7, AMB_VOL = 0.18;
+try { const v = parseFloat(localStorage.getItem('dh_sfx_vol')); if (!isNaN(v)) SFX_VOL = Math.max(0, Math.min(1, v)); } catch (e) {}
+try { const v = parseFloat(localStorage.getItem('dh_amb_vol')); if (!isNaN(v)) AMB_VOL = Math.max(0, Math.min(1, v)); } catch (e) {}
+function playSfx(key, vol) {
+  if (SFX_VOL <= 0) return;
+  try { const url = EXP_SFX[key]; if (!url) return; const a = new Audio(url); a.volume = Math.max(0, Math.min(1, (vol == null ? 0.5 : vol) * SFX_VOL)); a.play().catch(() => {}); } catch (e) {}
+}
+function startAmbience() {
+  if (AMB_VOL <= 0 || EXPLORE._ambience) return;
+  try { const a = new Audio(EXP_SFX.ambience); a.loop = true; a.volume = AMB_VOL; a.play().catch(() => {}); EXPLORE._ambience = a; } catch (e) {}
+}
+function stopAmbience() {
+  if (EXPLORE._ambience) { try { EXPLORE._ambience.pause(); } catch (e) {} EXPLORE._ambience = null; }
+  if (EXPLORE._stingTimer) { clearTimeout(EXPLORE._stingTimer); EXPLORE._stingTimer = null; }
+  stopDanger();
+}
+// Occasional ominous dark-bass sting for tension while exploring.
+function scheduleSting() {
+  if (EXPLORE._stingTimer) clearTimeout(EXPLORE._stingTimer);
+  EXPLORE._stingTimer = setTimeout(() => {
+    if (EXPLORE._ambience) { playSfx('sting', 0.16); scheduleSting(); }
+  }, 16000 + Math.random() * 20000);   // every ~16–36s
+}
+// Tense "danger" loop that plays while a goblin is chasing you.
+function setDanger(on) {
+  if (on) {
+    if (AMB_VOL <= 0 || EXPLORE._danger) return;
+    try { const a = new Audio(EXP_SFX.danger); a.loop = true; a.volume = Math.min(0.55, AMB_VOL + 0.15); a.play().catch(() => {}); EXPLORE._danger = a; } catch (e) {}
+  } else stopDanger();
+}
+function stopDanger() { if (EXPLORE._danger) { try { EXPLORE._danger.pause(); } catch (e) {} EXPLORE._danger = null; } }
+function setAmbVol(v) {
+  AMB_VOL = Math.max(0, Math.min(1, v));
+  try { localStorage.setItem('dh_amb_vol', AMB_VOL); } catch (e) {}
+  if (AMB_VOL <= 0) stopAmbience();
+  else { if (EXPLORE._ambience) EXPLORE._ambience.volume = AMB_VOL; else { const ov = document.getElementById('explore-overlay'); if (ov && ov.classList.contains('open')) startAmbience(); } }
+}
+function setSfxVol(v) { SFX_VOL = Math.max(0, Math.min(1, v)); try { localStorage.setItem('dh_sfx_vol', SFX_VOL); } catch (e) {} }
+function toggleVolPanel() {
+  const p = document.getElementById('exp-vol-panel'); if (!p) return;
+  const showing = p.style.display === 'flex';
+  p.style.display = showing ? 'none' : 'flex';
+  if (!showing) {
+    const av = document.getElementById('exp-vol-amb'); if (av) av.value = Math.round(AMB_VOL * 100);
+    const sv = document.getElementById('exp-vol-sfx'); if (sv) sv.value = Math.round(SFX_VOL * 100);
+  }
+}
+// Differentiated UI click sound for the LOBBY (explore handles its own sounds).
+function lobbyClickSound(el) {
+  const txt = (el.textContent || '').trim(), cls = String(el.className || '');
+  if (el.matches('.buy-btn, .sii-buy') || /buy/i.test(cls) || /^(comprar|buy)/i.test(txt)) return 'buy';
+  if (el.matches('.panel-close-x') || /close/i.test(cls) || txt === '✕' || txt === '×' || /^(fechar|close)$/i.test(txt)) return 'close';
+  if (el.matches('.mode-tab') || /\btab\b/i.test(cls)) return 'tab';
+  return 'click';
+}
+document.addEventListener('click', (e) => {
+  if (SFX_VOL <= 0) return;
+  const t = e.target;
+  const el = t && t.closest && t.closest('button, .buy-btn, .mode-tab, .level-card, .lvprev-play, .profile-menu-btn, .fusion-btn, .mission-claim, .sii-buy, .hud-disc, .panel-toggle, .right-panel-toggle, .panel-close-x');
+  if (!el || el.closest('#explore-overlay')) return;   // explore has its own click sounds
+  playSfx(lobbyClickSound(el), 0.4);
+}, true);
+// ── Island home (step 1): the island scene where each station opens a menu ──
+function openIslandHome() { const el = document.getElementById('island-home'); if (el) el.style.display = 'flex'; }
+function closeIslandHome() { const el = document.getElementById('island-home'); if (el) el.style.display = 'none'; }
+function ihGo(what) {
+  closeIslandHome();
+  try {
+    if (what === 'collection' && typeof switchTab === 'function') switchTab('inventory');
+    else if ((what === 'eggs' || what === 'items' || what === 'fusion' || what === 'guide') && typeof switchTab === 'function') switchTab(what);
+    else if (what === 'battle' && typeof toggleRightPanel === 'function') toggleRightPanel();
+    else if (what === 'shop' && typeof showSeasonInfo === 'function') showSeasonInfo();
+    else if (what === 'market' && typeof showMarketplace === 'function') showMarketplace();
+  } catch (e) {}
+}
+// Open a crafting workbench (bancada) from the island.
+function ihWork(key) {
+  closeIslandHome();
+  try { if (typeof openWorkbench === 'function') openWorkbench(key); } catch (e) {}
+}
 const EXP_MAGNET_RANGE = 80;   // how far the hand button will pull you to a chest
 const EXP_OPEN_TIME = 1.3;     // seconds to open a chest once you arrive
 // Roll a chest tier (0 = empty) for a given hunt level using the drop table as weights.
@@ -11455,12 +11730,53 @@ const EXP_TREE_HW = 4;   // trunk half-width (smaller = tighter solid)
 const EXP_TREE_HH = 3;   // trunk half-height
 const EXP_TREE_DX = 11;  // shift the solid left(-)/right(+) onto the trunk
 const EXP_TREE_DY = -2;  // shift the solid up(-)/down(+) onto the trunk base
-const EXP_CHOP_RANGE = 28;      // how close you must stand to actually chop (smaller = must be right next to it)
+const EXP_CHOP_RANGE = 18;      // how close you must stand to actually chop (smaller = must be right next to it)
+const EXP_EXIT_MARGIN = 62;     // exit fires only when you walk THIS deep into the cloud border (smaller = deeper)
+const EXP_HIT_DELAY = 430;      // ms between harvest hits (so trees/rocks don't break instantly on spam-click)
 const WOOD_PER_TREE  = 2;       // wood granted when a tree falls
 const EXP_AXE_DURABILITY = 5;   // how many trees one axe can fell before it breaks
+
+// ── Rock mining (pickaxe with durability). Uses SFL's 6-frame "strike" spark sheet. ──
+const EXP_ROCK_SHEET = 'https://sunflower-land.com/game-assets/resources/stone/stone_rock_spark.png'; // 6 frames · 112×48
+const EXP_ROCK_EMPTY = 'https://sunflower-land.com/game-assets/resources/stone_small.png';            // depleted rock
+const EXP_PICK_ICON  = 'https://sunflower-land.com/game-assets/tools/stone_pickaxe.png';
+const STONE_PER_ROCK = 2;               // stone granted when a rock breaks
+const EXP_PICK_DURABILITY = 5;          // rocks one pickaxe can break
+const EXP_PICK_ITEM_ID = null;          // TODO(SFL): pickaxe item id (Michel creates it, like axe=130)
+const EXP_PICK_ACTION = 'burn_pickaxe'; // burns 1 pickaxe when it breaks (every 5th rock)
+const EXP_TEST_PICKS = 3;               // pickaxes handed out while there's no pickaxe item yet / offline
+// Rock strike-sheet display (scale 2 → rock ≈28px). The rock's base sits at native (40.5,31).
+const ROCK_FW = 224, ROCK_FH = 96, ROCK_BG_W = 1344;
+const ROCK_ANCHOR_X = 81, ROCK_ANCHOR_Y = 62;
+const EXP_ROCK_DX = 0, EXP_ROCK_DY = 0;   // fine-tune the rock/solid position
+function getPickBalance() {
+  if (EXP_PICK_ITEM_ID != null && typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
+    const bal = window._sflLastSession?.data?.playerEconomy?.balances || {};
+    return Math.floor(Number(bal[EXP_PICK_ITEM_ID]) || 0);
+  }
+  return EXP_TEST_PICKS;   // no pickaxe item yet (or offline) → test picks so mining is playable
+}
+function remainingMines() { return EXPLORE.pickCount * EXP_PICK_DURABILITY - EXPLORE.pickUsed; }
+function hasPick() { return EXPLORE.pickCount > 0 && remainingMines() > 0; }
+// Break a rock: track durability, burn 1 pickaxe only when the current one breaks (5th rock).
+function usePickCharge() {
+  if (EXPLORE.pickCount <= 0) return false;
+  EXPLORE.pickUsed++;
+  if (EXPLORE.pickUsed >= EXP_PICK_DURABILITY) { EXPLORE.pickUsed = 0; EXPLORE.pickCount--; burnOnePick(); }
+  return true;
+}
+function burnOnePick() {
+  if (typeof sflExecuteAction !== 'function' || EXP_PICK_ITEM_ID == null) return;
+  sflExecuteAction(EXP_PICK_ACTION, { [String(EXP_PICK_ITEM_ID)]: 1 }).then(res => {
+    if (!res || !res.ok) console.warn(EXP_PICK_ACTION + ' failed:', res && res.error);
+  });
+}
 // SFL "machado" (axe) item id + the action that mints wood and burns the axe.
 const EXP_AXE_ITEM_ID = 130;
-const EXP_WOOD_ACTION = 'collect_wood_common';  // mints 2 wood, burns 0–1 axe (we pass the amount)
+const EXP_AXE_ACTION = 'burn_axe';          // burns 1 axe — called only when an axe breaks (every 5th tree)
+const EXP_DEPOSIT_ACTION = 'deposit_wood';  // on SAFE exit: mints the loot collected this run
+// SFL item ids per loot type (fill each once the deposit action can mint it). coin = DinoCoin = 1.
+const EXP_LOOT_ITEM_IDS = { wood: null, stone: null, iron: null, gold: null, coin: null };
 const EXP_TEST_AXES = 3;   // axes handed out when playing offline (not connected to SFL)
 function getAxeBalance() {
   if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
@@ -11472,21 +11788,32 @@ function getAxeBalance() {
 // axeCount = whole axes owned; axeUsed = trees felled on the current axe (0..DURABILITY).
 function remainingChops() { return EXPLORE.axeCount * EXP_AXE_DURABILITY - EXPLORE.axeUsed; }
 function hasAxe() { return EXPLORE.axeCount > 0 && remainingChops() > 0; }
-// Called when a tree falls: mint 2 wood, and burn 1 axe only on the 5th tree (durability).
+// Called when a tree falls: track durability, and burn 1 axe only when the current axe breaks (5th tree).
 function useAxeCharge() {
   if (EXPLORE.axeCount <= 0) return false;
   EXPLORE.axeUsed++;
-  let burn = 0;
-  if (EXPLORE.axeUsed >= EXP_AXE_DURABILITY) { EXPLORE.axeUsed = 0; EXPLORE.axeCount--; burn = 1; }
-  creditWoodChop(burn);
+  if (EXPLORE.axeUsed >= EXP_AXE_DURABILITY) { EXPLORE.axeUsed = 0; EXPLORE.axeCount--; burnOneAxe(); }
   return true;
 }
-// Credit the felled tree on SFL: collect_wood_common mints 2 wood + burns `burnAxe` (0 or 1) axes.
-// (Offline, sflExecuteAction is a no-op, so the mechanic still works for testing.)
-function creditWoodChop(burnAxe) {
+// Burn 1 axe on SFL — only when an axe breaks (every 5th tree). Offline this is a no-op.
+function burnOneAxe() {
   if (typeof sflExecuteAction !== 'function') return;
-  sflExecuteAction(EXP_WOOD_ACTION, { [String(EXP_AXE_ITEM_ID)]: burnAxe }).then(res => {
-    if (!res || !res.ok) console.warn('collect_wood_common failed:', res && res.error);
+  sflExecuteAction(EXP_AXE_ACTION, { [String(EXP_AXE_ITEM_ID)]: 1 }).then(res => {
+    if (!res || !res.ok) console.warn(EXP_AXE_ACTION + ' failed:', res && res.error);
+  });
+}
+// Safe exit only: mint the loot collected this run (built from the inventory). Death never calls this → lost.
+function depositRunGains() {
+  const inv = EXPLORE.inv || {};
+  const amounts = {};
+  for (const key in inv) {
+    const id = EXP_LOOT_ITEM_IDS[key];
+    const qty = inv[key] && inv[key].qty;
+    if (id != null && qty > 0) amounts[String(id)] = (amounts[String(id)] || 0) + qty;
+  }
+  if (!Object.keys(amounts).length || typeof sflExecuteAction !== 'function') return;
+  sflExecuteAction(EXP_DEPOSIT_ACTION, amounts).then(res => {
+    if (!res || !res.ok) console.warn(EXP_DEPOSIT_ACTION + ' failed:', res && res.error);
   });
 }
 
@@ -11554,7 +11881,7 @@ function generateExploreResources() {
   const SPACING = 74;               // min distance between resources
   const PLAYER_CLEAR = 150;         // keep player spawn corner clear
   const playerStart = { x: B + 80, y: B + 80 }; // top-left corner
-  const total = 26 + Math.floor(Math.random() * 15); // 26–40
+  const total = 26 + Math.floor(Math.random() * 15); // 26–40 resource nodes
   let attempts = 0;
   while (placed.length < total && attempts < 1200) {
     attempts++;
@@ -11568,35 +11895,37 @@ function generateExploreResources() {
   }
   placed.forEach((pos, i) => {
     const type = Math.random() < 0.55 ? 'tree' : 'stone';
+    const isTree = type === 'tree';
     let el;
-    if (type === 'tree') {
-      // The tree IS the shake sheet at frame 0 (idle). Chopping animates this same element,
-      // so static and animated tree are always the exact same art / size / position.
+    if (isTree) {
+      // The tree IS the shake sheet at frame 0 (idle) — static & animated are the same element.
       el = document.createElement('div');
       el.className = 'exp-res exp-tree';
       el.style.backgroundImage = `url("${EXP_TREE_SHAKE}")`;
+      el.style.left = pos.x + 'px';
+      el.style.top = pos.y + 'px';
     } else {
-      el = document.createElement('img');
-      el.className = 'exp-res';
-      el.src = EXP_STONE;
-      el.style.width = '28px';       // stone size (world px)
-      el.onerror = () => { el.style.opacity = '0.0001'; };
+      // The rock IS the SFL strike sheet at frame 0. Anchored so the rock base sits at (pos.x,pos.y).
+      el = document.createElement('div');
+      el.className = 'exp-rock';
+      el.style.backgroundImage = `url("${EXP_ROCK_SHEET}")`;
+      el.style.width = ROCK_FW + 'px';
+      el.style.height = ROCK_FH + 'px';
+      el.style.backgroundSize = ROCK_BG_W + 'px ' + ROCK_FH + 'px';
+      el.style.backgroundPosition = '0 0';
+      el.style.left = (pos.x - ROCK_ANCHOR_X + EXP_ROCK_DX) + 'px';
+      el.style.top = (pos.y - ROCK_ANCHOR_Y + EXP_ROCK_DY) + 'px';
     }
-    el.style.left = pos.x + 'px';
-    el.style.top = pos.y + 'px';
     el.style.zIndex = Math.round(pos.y);   // depth: lower on map = drawn in front
     layer.appendChild(el);
-    // Collision hitbox = small box at the BASE of the sprite (where it touches ground).
-    // The element is anchored bottom-center (translate -50%,-100%), so the base point IS (pos.x, pos.y).
-    // cx/cy = the solid point, nudged to sit on the trunk (tunable via EXP_TREE_DX/DY).
-    const isTree = type === 'tree';
+    // cx/cy = the solid point on the ground, nudged to sit on the trunk/rock (tunable DX/DY).
     EXPLORE.resources.push({
       el, x: pos.x, y: pos.y, type,
-      cx: pos.x + (isTree ? EXP_TREE_DX : 0),
-      cy: pos.y + (isTree ? EXP_TREE_DY : 0),
-      hp: isTree ? 3 : 4, maxHp: isTree ? 3 : 4,
-      hw: isTree ? EXP_TREE_HW : 10,   // half width
-      hh: isTree ? EXP_TREE_HH : 6,    // half height (thin, at the base)
+      cx: pos.x + (isTree ? EXP_TREE_DX : EXP_ROCK_DX),
+      cy: pos.y + (isTree ? EXP_TREE_DY : EXP_ROCK_DY),
+      hp: 3, maxHp: 3,
+      hw: isTree ? EXP_TREE_HW : 9,
+      hh: isTree ? EXP_TREE_HH : 6,
     });
   });
 }
@@ -11666,64 +11995,284 @@ function generateExploreEnemies() {
   if (!layer) return;
   layer.innerHTML = '';
   const B = EXPLORE.border, M = EXPLORE.mapSize, pad = 80;
-  const count = 3 + Math.floor(Math.random() * 3); // 3–5
-  for (let i = 0; i < count; i++) {
+  const spawn = MAP_SPAWN[EXPLORE.level || 1] || MAP_SPAWN[1];
+  const total = spawn.dropMin + Math.floor(Math.random() * (spawn.dropMax - spawn.dropMin + 1));  // enemies on this map
+  const weights = spawn.enemies, wsum = weights.reduce((a, b) => a + b, 0) || 1;
+  for (let i = 0; i < total; i++) {
+    // pick the enemy type by weight (I1..I10)
+    let r = Math.random() * wsum, ti = 0;
+    for (let k = 0; k < weights.length; k++) { r -= weights[k]; if (r < 0) { ti = k; break; } }
+    const type = ENEMY_TYPES[ti]; if (!type) continue;
     let x, y, ok = false, tries = 0;
     while (!ok && tries < 30) {
       tries++;
       x = B + pad + Math.random() * (M - 2 * B - 2 * pad);
       y = B + pad + Math.random() * (M - 2 * B - 2 * pad);
-      if (Math.hypot(x - (B + 80), y - (B + 80)) > 220) ok = true;  // away from player spawn
+      if (Math.hypot(x - (B + 80), y - (B + 80)) > 240) ok = true;  // away from player spawn
     }
-    const el = document.createElement('div');
-    el.className = 'exp-enemy';
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.backgroundSize = `${GOB_FW * GOB_FRAMES * GOB_SCALE}px ${GOB_FH * GOB_SCALE}px`;
-    // Emoji fallback if the goblin sheet fails to load (so enemies are never invisible).
-    const en = { el, x, y, dir: null, frame: 0, animAcc: 0, moveTimer: Math.random() * 2, facing: 'right', noSheet: false };
-    const pre = new Image();
-    pre.onload = () => { el.style.backgroundImage = `url("${EXP_GOBLIN}")`; };
-    pre.onerror = () => { en.noSheet = true; el.style.backgroundImage = 'none'; el.textContent = '👹'; el.style.fontSize = '30px'; el.style.textAlign = 'center'; el.style.lineHeight = '44px'; };
-    pre.src = EXP_GOBLIN;
-    layer.appendChild(el);
-    EXPLORE.enemies.push(en);
+    spawnEnemy(x, y, ti, type, layer);
   }
   const dbg = document.getElementById('exp-debug');
   if (dbg) dbg.textContent = '🎁 ' + (EXPLORE.chests ? EXPLORE.chests.length : 0) + '  👹 ' + EXPLORE.enemies.length;
 }
+// Create one enemy of a given type at (x,y). Sprite/HP/damage/speed/size come from the type.
+function spawnEnemy(x, y, ti, type, layer) {
+  const el = document.createElement('div');
+  el.className = 'exp-enemy';
+  const scale = EXP_SPRITE_SCALE * type.size;   // player scale × the type's size multiplier
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  el.style.width = (GOB_FRAME_W * scale) + 'px';
+  el.style.height = (GOB_FRAME_H * scale) + 'px';
+  const token = EXP_ENEMY_TOKENS[ti % EXP_ENEMY_TOKENS.length];
+  const sheetUrl = `${EXP_ENEMY_ANIM}/animate/${token}/idle_walking`;
+  const en = {
+    el, x, y, dir: null, frame: GOB_ANIM.idle[0], animAcc: 0, moveTimer: Math.random() * 2, facing: 'right',
+    cols: 0, token, sheetUrl, mainW: 0, mainH: 0, attacking: false, dead: false,
+    type: ti, hp: type.hp, hpMax: type.hp, dmg: type.dmg, speed: type.speed * ENEMY_SPEED_K, scale,
+    atkRange: Math.round(20 + 9 * (type.size - 1)), aggro: false,   // tight reach (only bigger enemies reach a bit more)
+  };
+  const img = new Image();
+  img.onload = () => {
+    en.cols = Math.max(1, Math.round(img.naturalWidth / GOB_FRAME_W));   // 17
+    en.mainW = img.naturalWidth; en.mainH = img.naturalHeight;
+    el.style.backgroundImage = `url("${sheetUrl}")`;
+    el.style.backgroundSize = `${img.naturalWidth * scale}px ${img.naturalHeight * scale}px`;
+  };
+  img.onerror = () => { en.cols = 0; el.style.backgroundImage = 'none'; el.textContent = '👹'; el.style.fontSize = (30 * type.size) + 'px'; el.style.textAlign = 'center'; el.style.lineHeight = (GOB_FRAME_H * scale) + 'px'; };
+  img.src = sheetUrl;
+  layer.appendChild(el);
+  EXPLORE.enemies.push(en);
+}
 function updateEnemies(dt) {
   if (!EXPLORE.enemies) return;
+  if (EXPLORE.dead || EXPLORE.exiting) return;   // enemies stay active even with panels open
   const B = EXPLORE.border, M = EXPLORE.mapSize, pad = 50;
+  const px = EXPLORE.x, py = EXPLORE.y + 4;   // player body point
+  let anyChasing = false;
   for (const e of EXPLORE.enemies) {
-    e.moveTimer -= dt;
-    if (e.moveTimer <= 0) {
-      e.dir = Math.random() < 0.28 ? null : Math.random() * Math.PI * 2;  // sometimes idle
-      e.moveTimer = 1.2 + Math.random() * 2.6;
-    }
+    if (e.dead) continue;
+    e.atkCd = Math.max(0, (e.atkCd || 0) - dt);
+    const ddx = px - e.x, ddy = py - e.y;
+    const pdist = Math.hypot(ddx, ddy);
     let moving = false;
-    if (e.dir != null) {
-      let nx = e.x + Math.cos(e.dir) * GOB_SPEED * dt;
-      let ny = e.y + Math.sin(e.dir) * GOB_SPEED * dt;
-      if (nx < B + pad || nx > M - B - pad) { e.dir = Math.PI - e.dir; nx = e.x; }
-      if (ny < B + pad || ny > M - B - pad) { e.dir = -e.dir; ny = e.y; }
+    // Vision: the enemy only notices you once you enter GOB_AGGRO; it then chases until you get
+    // far enough away again (hysteresis). Otherwise it just stands still (no wandering).
+    if (e.aggro) { if (pdist > GOB_AGGRO * 1.4) e.aggro = false; }
+    else if (pdist < GOB_AGGRO) e.aggro = true;
+    if (e.aggro) anyChasing = true;
+    if (e.aggro && pdist <= e.atkRange) {
+      // In reach → attack (on cooldown).
+      e.facing = ddx < 0 ? 'left' : 'right';
+      if (e.atkCd <= 0) { e.atkCd = GOB_ATK_CD; playEnemyAttack(e); }   // damage lands mid-swing (see playEnemyAttack)
+    } else if (e.aggro) {
+      // Chase the player at the type's own speed.
+      const inv = 1 / (pdist || 1);
+      let nx = e.x + ddx * inv * e.speed * dt;
+      let ny = e.y + ddy * inv * e.speed * dt;
       e.x = Math.min(Math.max(nx, B + pad), M - B - pad);
       e.y = Math.min(Math.max(ny, B + pad), M - B - pad);
       moving = true;
-      const cx = Math.cos(e.dir);
-      if (cx < -0.05) e.facing = 'left'; else if (cx > 0.05) e.facing = 'right';
+      e.facing = ddx < 0 ? 'left' : 'right';
+    } else {
+      // Not aggroed → stand still (idle animation).
     }
-    if (moving) {
+    if (e.cols && !e.attacking) {   // cycle idle (0..8) when still, walking (9..16) when moving
       e.animAcc += dt;
-      if (e.animAcc >= 1 / 6) { e.animAcc = 0; e.frame = (e.frame + 1) % GOB_FRAMES; }
-    } else { e.frame = 0; }
+      if (e.animAcc >= 1 / GOB_ANIM_FPS) {
+        e.animAcc = 0;
+        const range = moving ? GOB_ANIM.walk : GOB_ANIM.idle;
+        let f = e.frame + 1;
+        if (f < range[0] || f > range[1]) f = range[0];
+        e.frame = f;
+      }
+      const col = e.frame % e.cols, row = Math.floor(e.frame / e.cols);
+      e.el.style.backgroundPosition = `-${col * GOB_FRAME_W * e.scale}px -${row * GOB_FRAME_H * e.scale}px`;
+    }
     const el = e.el;
     el.style.left = e.x + 'px';
     el.style.top = e.y + 'px';
     el.style.zIndex = Math.round(e.y);
-    el.style.backgroundPosition = `-${e.frame * GOB_FW * GOB_SCALE}px 0px`;
     el.style.transform = 'translate(-50%,-100%)' + (e.facing === 'left' ? ' scaleX(-1)' : '');
   }
+  // Tense danger music while (or shortly after) a goblin is chasing.
+  if (anyChasing) EXPLORE._dangerUntil = performance.now() + 2500;
+  setDanger(performance.now() < (EXPLORE._dangerUntil || 0));
+}
+// Play an enemy's own "attack" bumpkin animation (10 frames) once, then back to idle/walk.
+function playEnemyAttack(e) {
+  if (!e.el || e.dead) return;
+  const doHit = () => {
+    if (e.dead || EXPLORE.dead || EXPLORE.exiting) return;
+    // Only connect if the player is STILL in reach at the impact frame (attacks are dodgeable).
+    if (Math.hypot(EXPLORE.x - e.x, (EXPLORE.y + 4) - e.y) > e.atkRange + 4) return;
+    enemyHitPlayer(e.dmg);
+    if (e.el) { e.el.classList.add('exp-enemy-hit'); setTimeout(() => e.el && e.el.classList.remove('exp-enemy-hit'), 140); }
+  };
+  if (!e.cols || e.attacking) { doHit(); return; }   // no attack sheet ready → just deal the damage
+  const url = `${EXP_ENEMY_ANIM}/animate/${e.token}/attack`;
+  const start = (natW, natH) => {
+    e.attacking = true;
+    const cols = Math.max(1, Math.round(natW / GOB_FRAME_W));
+    const hitFrame = Math.min(cols - 1, Math.round(cols * 0.6));   // impact ≈ 60% into the swing
+    e.el.style.backgroundImage = `url("${url}")`;
+    e.el.style.backgroundSize = `${natW * e.scale}px ${natH * e.scale}px`;
+    let f = 0;
+    if (e._atkTimer) clearInterval(e._atkTimer);
+    e._atkTimer = setInterval(() => {
+      if (e.dead || EXPLORE.dead || EXPLORE.exiting) { clearInterval(e._atkTimer); e._atkTimer = null; e.attacking = false; return; }
+      e.el.style.backgroundPosition = `-${(f % cols) * GOB_FRAME_W * e.scale}px 0px`;
+      if (f === hitFrame) doHit();   // damage syncs with the swing's impact frame
+      f++;
+      if (f >= cols) { clearInterval(e._atkTimer); e._atkTimer = null; endEnemyAttack(e); }
+    }, 50);
+  };
+  const im = e._atkImg;
+  if (im && im.naturalWidth) start(im.naturalWidth, im.naturalHeight);
+  else { const n = new Image(); n.onload = () => { e._atkImg = n; start(n.naturalWidth, n.naturalHeight); }; n.onerror = () => { doHit(); }; n.src = url; }
+}
+function endEnemyAttack(e) {
+  e.attacking = false;
+  if (!e.el || !e.sheetUrl) return;
+  e.el.style.backgroundImage = `url("${e.sheetUrl}")`;
+  if (e.mainW) e.el.style.backgroundSize = `${e.mainW * e.scale}px ${e.mainH * e.scale}px`;
+}
+// Nearest live enemy within `range` of the player.
+function nearestEnemy(range) {
+  if (!EXPLORE.enemies) return null;
+  let best = null, bd = range;
+  for (const e of EXPLORE.enemies) {
+    if (e.dead || e.hp <= 0) continue;
+    const d = Math.hypot(e.x - EXPLORE.x, e.y - (EXPLORE.y + 4));
+    if (d < bd) { bd = d; best = e; }
+  }
+  return best;
+}
+// Player swings the sword at the nearest enemy (bumpkin "attack" animation).
+function attackNearestEnemy() {
+  const e = nearestEnemy(EXP_ATTACK_RANGE);
+  if (!e) return;
+  if (performance.now() - (EXPLORE._lastHit || 0) < EXP_HIT_DELAY) return;
+  EXPLORE._lastHit = performance.now();
+  const img = document.getElementById('explore-char-img');
+  if (e.x < EXPLORE.x) { EXPLORE.facing = 'left'; img && img.classList.add('flip'); }
+  else { EXPLORE.facing = 'right'; img && img.classList.remove('flip'); }
+  playToolAnim('attack');
+  playSfx('swing', 0.4);
+  e.hp -= PLAYER_DMG;
+  playSfx('hit', 0.45);
+  if (e.el) { e.el.classList.add('exp-enemy-hurt'); setTimeout(() => e.el && e.el.classList.remove('exp-enemy-hurt'), 200); }
+  if (e.hp <= 0) killEnemy(e);
+}
+// Enemy dies: fade out and remove.
+function killEnemy(e) {
+  e.dead = true; e.hp = 0; e.attacking = false;
+  if (e._atkTimer) { clearInterval(e._atkTimer); e._atkTimer = null; }
+  const el = e.el;
+  if (!el) return;
+  const fadeOut = () => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 420); };
+  if (!e.cols) { fadeOut(); return; }   // no bumpkin sheet → just fade
+  // Play the bumpkin "death" animation (13 frames), then fade out.
+  const url = `${EXP_ENEMY_ANIM}/animate/${e.token}/death`;
+  const im = new Image();
+  im.onload = () => {
+    const cols = Math.max(1, Math.round(im.naturalWidth / GOB_FRAME_W));   // 13
+    el.style.backgroundImage = `url("${url}")`;
+    el.style.backgroundSize = `${im.naturalWidth * e.scale}px ${im.naturalHeight * e.scale}px`;
+    let f = 0;
+    if (e._deathTimer) clearInterval(e._deathTimer);
+    e._deathTimer = setInterval(() => {
+      el.style.backgroundPosition = `-${(f % cols) * GOB_FRAME_W * e.scale}px 0px`;
+      f++;
+      if (f >= cols) { clearInterval(e._deathTimer); e._deathTimer = null; fadeOut(); }
+    }, 55);
+  };
+  im.onerror = fadeOut;
+  im.src = url;
+}
+// Enemy deals damage to the player; on 0 HP the player dies.
+function enemyHitPlayer(dmg) {
+  if (EXPLORE.dead || EXPLORE.exiting) return;
+  EXPLORE.hp = Math.max(0, (EXPLORE.hp || 0) - dmg);
+  updateExploreHP();
+  flashHurt();
+  playSfx('hurt', 0.5);
+  if (EXPLORE.hp <= 0) playerDeath();
+}
+// Red screen flash when hit.
+function flashHurt() {
+  const vp = document.getElementById('explore-viewport');
+  if (!vp) return;
+  const f = document.createElement('div');
+  f.className = 'exp-hurt-flash';
+  vp.appendChild(f);
+  setTimeout(() => f.remove(), 400);
+}
+// Player death: play the death animation, then load the reward screen (keep collected loot).
+function playerDeath() {
+  if (EXPLORE.dead || EXPLORE.exiting) return;
+  EXPLORE.dead = true;
+  EXPLORE.exiting = true;   // blocks the loop / other exit paths / interactions
+  stopAmbience(); playSfx('death', 0.55);
+  if (EXPLORE.raf) cancelAnimationFrame(EXPLORE.raf);
+  EXPLORE.raf = null;
+  window.removeEventListener('keydown', exploreKeyDown);
+  window.removeEventListener('keyup', exploreKeyUp);
+  const lp = document.getElementById('exp-loot-panel'); if (lp) lp.remove();
+  const bp = document.getElementById('exp-backpack-panel'); if (bp) bp.classList.remove('open');
+  if (EXPLORE._toolTimer) { clearInterval(EXPLORE._toolTimer); EXPLORE._toolTimer = null; } EXPLORE.toolAnimActive = false;
+  // No deposit on death → the loot collected this run (still in EXPLORE.inv) is simply lost.
+  // No rewards on death. Play the character's own death animation, then show the death screen.
+  if (EXPLORE.sheetCols) {
+    playDeathAnimation(() => showDeathScreen());     // real bumpkin "death" spritesheet
+  } else {
+    const box = document.getElementById('explore-char');
+    if (box) box.classList.add('exp-dead');          // emoji fallback → quick fade
+    setTimeout(showDeathScreen, 700);
+  }
+}
+// Play the SFL bumpkin "death" animation (13 frames of 96×64) once, holding the last frame, then onDone.
+function playDeathAnimation(onDone) {
+  const spriteEl = document.getElementById('explore-char-img');
+  if (!spriteEl) { onDone(); return; }
+  const deathUrl = `https://animations.sunflower-land.com/animate/0_v1_${getBumpkinAnimUrls().tokenUri}/death`;
+  let done = false;
+  const finish = () => { if (done) return; done = true; onDone(); };
+  const img = new Image();
+  img.onload = () => {
+    const cols = Math.max(1, Math.round(img.naturalWidth / EXP_FRAME_W));  // 13 frames
+    spriteEl.classList.remove('flip');
+    spriteEl.style.backgroundImage = `url("${deathUrl}")`;
+    spriteEl.style.backgroundSize = `${img.naturalWidth * EXP_SPRITE_SCALE}px ${img.naturalHeight * EXP_SPRITE_SCALE}px`;
+    let f = 0;
+    const step = () => {
+      const col = f % cols, row = Math.floor(f / cols);
+      spriteEl.style.backgroundPosition = `-${col * EXP_FRAME_W * EXP_SPRITE_SCALE}px -${row * EXP_FRAME_H * EXP_SPRITE_SCALE}px`;
+      f++;
+      if (f < cols) EXPLORE._deathTimer = setTimeout(step, 95);
+      else EXPLORE._deathTimer = setTimeout(finish, 600);   // hold the skull-on-ground frame
+    };
+    step();
+  };
+  img.onerror = finish;
+  img.src = deathUrl;
+  setTimeout(finish, 2600);   // safety net
+}
+function showDeathScreen() {
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  let modal = document.getElementById('explore-death'); if (modal) modal.remove();
+  modal = document.createElement('div');
+  modal.id = 'explore-death';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(10,4,4,.92);z-index:4100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px;';
+  modal.innerHTML = `
+    <div class="exp-death-title">${isEN ? 'You died' : 'Você morreu'}</div>
+    <div class="exp-death-sub">${isEN ? 'You lost the loot you were carrying.' : 'Você perdeu o saque que carregava.'}</div>
+    <button class="lvprev-play" style="max-width:220px;" onclick="leaveDeath()">${isEN ? 'Leave' : 'Sair'}</button>`;
+  document.body.appendChild(modal);
+}
+function leaveDeath() {
+  const m = document.getElementById('explore-death'); if (m) m.remove();
+  const ov = document.getElementById('explore-overlay'); if (ov) ov.classList.remove('open');
 }
 
 // Place several rows of clouds around the map edges (so you can't see past them)
@@ -11739,6 +12288,9 @@ function buildExploreClouds() {
     img.style.left = x + 'px';
     img.style.top = y + 'px';
     img.style.width = CW + 'px';
+    // Gentle sway. NEGATIVE delay = each cloud starts mid-motion (no frozen/janky start on entry).
+    const dur = 10 + Math.random() * 6;
+    img.style.animation = 'cloudSway ' + dur.toFixed(1) + 's ease-in-out ' + (-(Math.random() * dur)).toFixed(1) + 's infinite alternate';
     img.onerror = () => { img.style.opacity = '0.0001'; };
     layer.appendChild(img);
   };
@@ -11769,12 +12321,19 @@ function openExplore(level) {
   EXPLORE.x = EXPLORE.border + 80;
   EXPLORE.y = EXPLORE.border + 80;
   EXPLORE.vx = 0; EXPLORE.vy = 0; EXPLORE.moving = false; EXPLORE.lastT = 0;
+  for (const k in exploreKeys) exploreKeys[k] = false;   // clear stuck keys (fixes "walks by itself" on re-entry)
   EXPLORE.sheetCols = 0; EXPLORE.animFrame = 0; EXPLORE.animAcc = 0;
-  EXPLORE.wood = 0; EXPLORE.stone = 0; EXPLORE.exiting = false;
+  EXPLORE.wood = 0; EXPLORE.stone = 0; EXPLORE.exiting = false; EXPLORE.dead = false;
+  if (EXPLORE._deathTimer) { clearTimeout(EXPLORE._deathTimer); EXPLORE._deathTimer = null; }
+  if (EXPLORE._toolTimer) { clearInterval(EXPLORE._toolTimer); EXPLORE._toolTimer = null; } EXPLORE.toolAnimActive = false;
+  { const cb = document.getElementById('explore-char'); if (cb) cb.classList.remove('exp-dead'); }
+  document.querySelectorAll('.exp-hurt-flash, #explore-death').forEach(el => el.remove());
   EXPLORE.inv = {}; EXPLORE.openChest = null;
   EXPLORE.autoTarget = null; EXPLORE.openTimer = null; EXPLORE.paused = false; EXPLORE.chopWalk = null;
-  EXPLORE.hp = 100; EXPLORE.hpMax = 100; updateExploreHP();
-  EXPLORE.axeCount = getAxeBalance(); EXPLORE.axeUsed = 0; EXPLORE.axeMode = false;
+  EXPLORE.hp = 2500; EXPLORE.hpMax = 2500; updateExploreHP();   // TEST value
+  EXPLORE.axeCount = getAxeBalance(); EXPLORE.axeUsed = 0;
+  EXPLORE.pickCount = getPickBalance(); EXPLORE.pickUsed = 0; EXPLORE.toolMode = null;
+  startAmbience();
   // size the ground to the square map
   const ground = document.getElementById('exp-ground');
   if (ground) { ground.style.width = EXPLORE.mapSize + 'px'; ground.style.height = EXPLORE.mapSize + 'px'; }
@@ -11784,6 +12343,10 @@ function openExplore(level) {
   buildExploreClouds();
   renderBackpackGrid();
   ov.classList.add('open');
+  // Give the game keyboard focus immediately (inside the SFL iframe you'd otherwise have to click first).
+  ov.tabIndex = -1;
+  try { ov.focus({ preventScroll: true }); } catch (e) { try { ov.focus(); } catch (_) {} }
+  try { window.focus(); } catch (e) {}
   const world = document.getElementById('explore-world');
   if (world) world.style.transformOrigin = '0 0';
   const spriteEl = document.getElementById('explore-char-img');
@@ -11798,6 +12361,7 @@ function openExplore(level) {
     const sheet = new Image();
     sheet.onload = () => {
       EXPLORE.sheetCols = Math.max(1, Math.round(sheet.naturalWidth / EXP_FRAME_W));
+      EXPLORE._mainSheetW = sheet.naturalWidth; EXPLORE._mainSheetH = sheet.naturalHeight;
       spriteEl.style.display = 'block';
       spriteEl.style.backgroundImage = `url("${EXPLORE.sheetUrl}")`;
       spriteEl.style.backgroundSize = `${sheet.naturalWidth * EXP_SPRITE_SCALE}px ${sheet.naturalHeight * EXP_SPRITE_SCALE}px`;
@@ -11826,6 +12390,7 @@ function openExplore(level) {
 function closeExplore() {
   const ov = document.getElementById('explore-overlay');
   if (ov) ov.classList.remove('open');
+  stopAmbience();
   if (EXPLORE.raf) cancelAnimationFrame(EXPLORE.raf);
   EXPLORE.raf = null;
   window.removeEventListener('keydown', exploreKeyDown);
@@ -11836,21 +12401,19 @@ function closeExplore() {
 // Fixed camera (PC): the viewport is a fixed box and the same slice of world is
 // visible for everyone — going fullscreen / using a bigger monitor never reveals
 // more of the map. The box shrinks to fit small windows but never shows MORE world.
-const EXP_VIEW_MAX = { w: 1000, h: 620 };  // max camera box (px)
-const EXP_SPAN_X   = 220;                   // world px visible across the box width (fixed field of view)
-function computeExploreView() {
-  const aspect = EXP_VIEW_MAX.w / EXP_VIEW_MAX.h;
-  let w = Math.min(EXP_VIEW_MAX.w, window.innerWidth);
-  let h = w / aspect;
-  if (h > window.innerHeight) { h = Math.min(EXP_VIEW_MAX.h, window.innerHeight); w = h * aspect; }
-  return { w: Math.round(w), h: Math.round(h) };
-}
+const EXP_VIEW = { w: 1000, h: 620 };  // fixed internal "screen" size (world + HUD live at this size)
+const EXP_SPAN_X = 220;                 // world px across the width (fixed field of view)
 function applyExploreView() {
-  const v = computeExploreView();
-  EXPLORE.view = v;
-  EXPLORE.zoom = v.w / EXP_SPAN_X;   // same world span visible on every screen
+  EXPLORE.view = EXP_VIEW;
+  EXPLORE.zoom = EXP_VIEW.w / EXP_SPAN_X;   // constant → same world span on every screen
   const vp = document.getElementById('explore-viewport');
-  if (vp) { vp.style.width = v.w + 'px'; vp.style.height = v.h + 'px'; }
+  if (vp) {
+    // Scale the WHOLE camera box (world + minimap + buttons) as one unit, fit to the window.
+    const s = Math.min(window.innerWidth / EXP_VIEW.w, window.innerHeight / EXP_VIEW.h);
+    vp.style.width = EXP_VIEW.w + 'px';
+    vp.style.height = EXP_VIEW.h + 'px';
+    vp.style.transform = `translate(-50%,-50%) scale(${s})`;
+  }
 }
 function onExploreResize() {
   const ov = document.getElementById('explore-overlay');
@@ -11863,8 +12426,8 @@ function updateExploreCamera() {
   const world = document.getElementById('explore-world');
   if (!world) return;
   const z = EXPLORE.zoom;
-  const vw = (EXPLORE.view && EXPLORE.view.w) || EXP_VIEW_MAX.w;
-  const vh = (EXPLORE.view && EXPLORE.view.h) || EXP_VIEW_MAX.h;
+  const vw = (EXPLORE.view && EXPLORE.view.w) || EXP_VIEW.w;
+  const vh = (EXPLORE.view && EXPLORE.view.h) || EXP_VIEW.h;
   if (char) {
     char.style.left = EXPLORE.x + 'px';
     char.style.top = EXPLORE.y + 'px';
@@ -11881,6 +12444,11 @@ function exploreKeyUp(e){ exploreKeys[e.key.toLowerCase()] = false; }
 function setupExploreControls() {
   window.addEventListener('keydown', exploreKeyDown);
   window.addEventListener('keyup', exploreKeyUp);
+  const ov = document.getElementById('explore-overlay');
+  if (ov && !ov._focusBound) {
+    ov._focusBound = true;
+    ov.addEventListener('pointerdown', () => { try { ov.focus({ preventScroll: true }); } catch (e) {} });
+  }
   const joy = document.getElementById('explore-joystick');
   const knob = document.getElementById('explore-joystick-knob');
   if (!joy || joy._setup) return;
@@ -11953,12 +12521,17 @@ function exploreLoop(t) {
       const moved = Math.hypot(EXPLORE.x - (EXPLORE._amx ?? EXPLORE.x), EXPLORE.y - (EXPLORE._amy ?? EXPLORE.y));
       const stuck = EXPLORE._amInit && moved < 0.4;
       EXPLORE._amx = EXPLORE.x; EXPLORE._amy = EXPLORE.y; EXPLORE._amInit = true;
-      if (dist <= EXP_CHOP_RANGE - 2 || (stuck && dist < EXP_CHOP_RANGE + 14)) { EXPLORE.chopWalk = null; EXPLORE._amInit = false; }
-      else { mx = dx / dist; my = dy / dist; mag = 1; }
+      if (dist <= EXP_CHOP_RANGE - 4 || (stuck && dist < EXP_CHOP_RANGE + 18)) {
+        EXPLORE.chopWalk = null; EXPLORE._amInit = false; mx = 0; my = 0; mag = 0;
+        // Arrived via magnet → land the first hit automatically (no need to press again).
+        if (tg.type === 'tree') chopTree(tg); else if (tg.type === 'stone') mineRock(tg);
+      } else { mx = dx / dist; my = dy / dist; mag = 1; }
     }
   } else { EXPLORE._amInit = false; }
   const isMoving = mag > 0.12;
   if (isMoving) {
+    EXPLORE._stepAcc = (EXPLORE._stepAcc || 0) + dt;
+    if (EXPLORE._stepAcc >= 0.34) { EXPLORE._stepAcc = 0; playSfx('step', 0.2); }
     if (mag > 1) { mx /= mag; my /= mag; }
     const stepX = mx * EXPLORE.speed * dt;
     const stepY = my * EXPLORE.speed * dt;
@@ -11967,7 +12540,7 @@ function exploreLoop(t) {
     const collides = (px, py) => {
       const fx = px, fy = py + feetOffsetY;
       const hitRes = EXPLORE.resources.some(res => {
-        if (res.hp <= 0) return false;
+        if (res.hp <= 0 && res.type !== 'stone') return false;   // felled trees walkable; broken rocks stay solid
         return Math.abs((res.cx ?? res.x) - fx) < res.hw + PHW &&
                Math.abs((res.cy ?? res.y) - fy) < res.hh + PHH;
       });
@@ -11984,8 +12557,8 @@ function exploreLoop(t) {
     const img = document.getElementById('explore-char-img');
     if (mx < -0.05 && EXPLORE.facing !== 'left') { EXPLORE.facing = 'left'; img && img.classList.add('flip'); }
     else if (mx > 0.05 && EXPLORE.facing !== 'right') { EXPLORE.facing = 'right'; img && img.classList.remove('flip'); }
-    const B = EXPLORE.border, M = EXPLORE.mapSize;
-    if (EXPLORE.x < B || EXPLORE.x > M - B || EXPLORE.y < B || EXPLORE.y > M - B) {
+    const M = EXPLORE.mapSize, EM = EXP_EXIT_MARGIN;
+    if (EXPLORE.x < EM || EXPLORE.x > M - EM || EXPLORE.y < EM || EXPLORE.y > M - EM) {
       exitExploreFlow();
       return;
     }
@@ -12002,15 +12575,22 @@ function exploreLoop(t) {
     }
     const tree = nearestChoppableTree(EXP_MAGNET_RANGE);
     const treeD = tree ? Math.hypot((tree.cx ?? tree.x) - EXPLORE.x, (tree.cy ?? tree.y) - (EXPLORE.y + 12)) : Infinity;
-    const axeMode = !!tree && treeD <= chestD;   // tree in reach and closer than any chest
-    updateAxeButton(axeMode);
+    const rock = nearestMinableRock(EXP_MAGNET_RANGE);
+    const rockD = rock ? Math.hypot((rock.cx ?? rock.x) - EXPLORE.x, (rock.cy ?? rock.y) - (EXPLORE.y + 12)) : Infinity;
+    const enemy = nearestEnemy(EXP_ATTACK_RANGE + 6);
+    const enemyD = enemy ? Math.hypot(enemy.x - EXPLORE.x, enemy.y - (EXPLORE.y + 4)) : Infinity;
+    let mode = null, ready = chestReach;   // nearest interactable wins (enemy > tree > rock > chest)
+    if (enemy && enemyD <= treeD && enemyD <= rockD && enemyD <= chestD) { mode = 'sword'; ready = true; }
+    else if (tree && treeD <= rockD && treeD <= chestD) { mode = 'axe'; ready = hasAxe(); }
+    else if (rock && rockD <= chestD) { mode = 'pick'; ready = hasPick(); }
+    updateToolButton(mode);
     const hb = document.getElementById('exp-hand-btn');
-    if (hb) hb.classList.toggle('ready', axeMode ? hasAxe() : chestReach);
+    if (hb) hb.classList.toggle('ready', ready);
   }
   drawMinimap();
   // Advance the sprite animation: cycle idle frames (0..8) or walking frames (9..16).
   EXPLORE.moving = isMoving;
-  if (EXPLORE.sheetCols) {
+  if (EXPLORE.sheetCols && !EXPLORE.toolAnimActive) {
     EXPLORE.animAcc += dt;
     if (EXPLORE.animAcc >= 1 / EXP_ANIM_FPS) {
       EXPLORE.animAcc = 0;
@@ -12022,6 +12602,7 @@ function exploreLoop(t) {
     }
   }
   updateEnemies(dt);
+  if (EXPLORE.dead || EXPLORE.exiting) return;   // stopped by death / exit
   updateExploreCamera();
   EXPLORE.raf = requestAnimationFrame(exploreLoop);
 }
@@ -12030,6 +12611,7 @@ function exploreLoop(t) {
 function exitExploreFlow() {
   if (EXPLORE.exiting) return;
   EXPLORE.exiting = true;
+  stopAmbience();
   if (EXPLORE.raf) cancelAnimationFrame(EXPLORE.raf);
   EXPLORE.raf = null;
   window.removeEventListener('keydown', exploreKeyDown);
@@ -12080,40 +12662,55 @@ function nearestChoppableTree(range) {
   }
   return best;
 }
-// Swap the action button between hand (chests) and axe (trees), and show the durability badge.
-function updateAxeButton(axeMode) {
-  if (EXPLORE.axeMode === axeMode && !axeMode) return;   // nothing to refresh when idle
-  EXPLORE.axeMode = axeMode;
+// Swap the action button between hand (chests), axe (trees) and pickaxe (rocks) + durability badge.
+function updateToolButton(mode) {   // mode: 'axe' | 'pick' | null
+  if (EXPLORE.toolMode === mode && !mode) return;   // nothing to refresh when idle
+  EXPLORE.toolMode = mode;
   const hand = document.getElementById('exp-hand-icon');
   const axe = document.getElementById('exp-axe-icon');
+  const pick = document.getElementById('exp-pick-icon');
+  const sword = document.getElementById('exp-sword-icon');
   const badge = document.getElementById('exp-axe-badge');
-  if (hand) hand.style.display = axeMode ? 'none' : '';
-  if (axe) axe.style.display = axeMode ? '' : 'none';
+  if (hand) hand.style.display = mode ? 'none' : '';
+  if (axe) axe.style.display = mode === 'axe' ? '' : 'none';
+  if (pick) pick.style.display = mode === 'pick' ? '' : 'none';
+  if (sword) sword.style.display = mode === 'sword' ? '' : 'none';
   if (badge) {
-    if (axeMode) { badge.style.display = 'flex'; badge.textContent = remainingChops(); }
-    else badge.style.display = 'none';
+    if (mode === 'axe') { badge.style.display = 'flex'; badge.textContent = remainingChops(); }
+    else if (mode === 'pick') { badge.style.display = 'flex'; badge.textContent = remainingMines(); }
+    else badge.style.display = 'none';   // sword/hand → no durability badge
   }
 }
 // The action button: chop the tree next to us; if a tree is nearby but out of reach,
 // the magnet walks us over to it; otherwise open a chest.
 function expActionButton() {
   if (EXPLORE.exiting || EXPLORE.paused) return;
-  if (EXPLORE.axeMode) {
+  if (EXPLORE.toolMode === 'sword') { EXPLORE.chopWalk = null; attackNearestEnemy(); return; }
+  if (EXPLORE.toolMode === 'axe') {
     const near = nearestChoppableTree(EXP_CHOP_RANGE);
-    if (near) { chopTree(near); return; }
+    if (near) { EXPLORE.chopWalk = null; chopTree(near); return; }   // direct hit cancels any magnet
     const far = nearestChoppableTree(EXP_MAGNET_RANGE);
     if (far) { EXPLORE.chopWalk = far; return; }   // magnet: auto-walk to the tree
+  } else if (EXPLORE.toolMode === 'pick') {
+    const near = nearestMinableRock(EXP_CHOP_RANGE);
+    if (near) { EXPLORE.chopWalk = null; mineRock(near); return; }   // direct hit cancels any magnet
+    const far = nearestMinableRock(EXP_MAGNET_RANGE);
+    if (far) { EXPLORE.chopWalk = far; return; }   // magnet: auto-walk to the rock
   }
   openNearestChest();
 }
 // One axe hit: shake the tree, drop 1 HP; on the 3rd hit (HP 0) the tree falls.
 function chopTree(tree) {
   if (tree._falling) return;
+  if (performance.now() - (EXPLORE._lastHit || 0) < EXP_HIT_DELAY) return;   // delay between hits
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
   if (!hasAxe()) {
     if (typeof showToast === 'function') showToast(isEN ? '🪓 You need an axe' : '🪓 Precisa de um machado', 'error');
     return;
   }
+  EXPLORE._lastHit = performance.now();
+  playToolAnim('axe');   // the bumpkin swings its axe
+  playSfx('chop', 0.45);
   playTreeAnim(tree);
   tree.hp--;
   if (tree.hp <= 0) fellTree(tree);
@@ -12165,21 +12762,123 @@ function fellTree(tree) {
   useAxeCharge();
   showStump(tree);      // stump appears instantly — no delay
   spawnFallFx(tree);    // falling-tree animation plays over it, then fades
-  EXPLORE.wood += WOOD_PER_TREE;
-  floatWood(tree.x, tree.y - 30, WOOD_PER_TREE);
+  playSfx('treefall', 0.5);
+  // Wood goes into the shared inventory so it shows everywhere (backpack, chest panel, exit rewards).
+  addToInv(lootItem('wood', WOOD_PER_TREE));   // banked to SFL only on a safe exit (see depositRunGains)
+  floatDrop(tree.x, tree.y - 30, WOOD_PER_TREE, 'https://sunflower-land.com/game-assets/resources/wood.png');
   if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
+  if (typeof renderChestLootPanel === 'function' && EXPLORE.openChest) renderChestLootPanel();
 }
-// Floating "+N 🪵" over the felled tree.
-function floatWood(x, y, qty) {
+// Floating "+N" drop over a harvested resource.
+function floatDrop(x, y, qty, img) {
   const layer = document.getElementById('exp-resource-layer');
   if (!layer) return;
   const el = document.createElement('div');
   el.className = 'exp-wood-float';
   el.style.left = x + 'px';
   el.style.top = y + 'px';
-  el.innerHTML = `<img src="https://sunflower-land.com/game-assets/resources/wood.png" onerror="this.remove()">+${qty}`;
+  el.innerHTML = `<img src="${img}" onerror="this.remove()">+${qty}`;
   layer.appendChild(el);
   setTimeout(() => el.remove(), 1050);
+}
+// ── Rock mining (pickaxe) ──────────────────────────────────────────────────
+// Nearest minable rock within `range` (measured from the player's feet).
+function nearestMinableRock(range) {
+  if (!EXPLORE.resources) return null;
+  let best = null, bd = range;
+  for (const r of EXPLORE.resources) {
+    if (r.type !== 'stone' || r.hp <= 0 || r._falling) continue;
+    const d = Math.hypot((r.cx ?? r.x) - EXPLORE.x, (r.cy ?? r.y) - (EXPLORE.y + 12));
+    if (d < bd) { bd = d; best = r; }
+  }
+  return best;
+}
+// One pickaxe hit: strike the rock, drop 1 HP; on the 3rd hit it breaks into stone.
+function mineRock(rock) {
+  if (rock._falling) return;
+  if (performance.now() - (EXPLORE._lastHit || 0) < EXP_HIT_DELAY) return;   // delay between hits
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  if (!hasPick()) {
+    if (typeof showToast === 'function') showToast(isEN ? '⛏️ You need a pickaxe' : '⛏️ Precisa de uma picareta', 'error');
+    return;
+  }
+  EXPLORE._lastHit = performance.now();
+  playToolAnim('mining');   // the bumpkin swings its pickaxe
+  playSfx('mining', 0.45);
+  playRockStrike(rock);
+  rock.hp--;
+  if (rock.hp <= 0) breakRock(rock);
+}
+// Play the 6-frame strike/spark on the rock's own element.
+function playRockStrike(rock) {
+  const el = rock.el;
+  if (!el) return;
+  el.classList.remove('exp-rock-strike'); void el.offsetWidth; el.classList.add('exp-rock-strike');
+  setTimeout(() => { if (rock.hp > 0) el.classList.remove('exp-rock-strike'); }, 280);
+}
+// Rock breaks: spend a pickaxe charge, grant stone, leave a small depleted rock.
+function breakRock(rock) {
+  rock._falling = true;
+  usePickCharge();
+  playSfx('rockbreak', 0.5);
+  addToInv(lootItem('stone', STONE_PER_ROCK));   // banked to SFL only on a safe exit
+  floatDrop(rock.x, rock.y - 20, STONE_PER_ROCK, 'https://sunflower-land.com/game-assets/resources/stone.png');
+  if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
+  if (typeof renderChestLootPanel === 'function' && EXPLORE.openChest) renderChestLootPanel();
+  showDepletedRock(rock);
+}
+// Leave a small depleted rock (non-solid — you can walk over it).
+function showDepletedRock(rock) {
+  const el = rock.el;
+  if (!el) return;
+  rock.hw = 6; rock.hh = 4;   // shrink the solid to match the small depleted rock
+  el.classList.remove('exp-rock-strike');
+  el.style.animation = 'none';
+  el.style.backgroundImage = `url("${EXP_ROCK_EMPTY}")`;
+  el.style.backgroundSize = 'contain';
+  el.style.backgroundPosition = 'center bottom';
+  el.style.width = '22px';
+  el.style.height = '16px';
+  el.style.left = (rock.x - 11 + EXP_ROCK_DX) + 'px';   // center on the rock point
+  el.style.top = (rock.y - 16 + EXP_ROCK_DY) + 'px';    // base rests on the ground
+}
+// Play the bumpkin's own tool swing (axe / mining, 10 frames each) once, then resume idle/walk.
+function playToolAnim(kind) {
+  const el = document.getElementById('explore-char-img');
+  if (!el || !EXPLORE.sheetCols) return;   // only with the real bumpkin sheet (connected)
+  const url = `https://animations.sunflower-land.com/animate/0_v1_${getBumpkinAnimUrls().tokenUri}/${kind}`;
+  const begin = (natW, natH) => {
+    EXPLORE.toolAnimActive = true;
+    el.style.backgroundImage = `url("${url}")`;
+    el.style.backgroundSize = `${natW * EXP_SPRITE_SCALE}px ${natH * EXP_SPRITE_SCALE}px`;
+    const cols = Math.max(1, Math.round(natW / EXP_FRAME_W));
+    const stepMs = Math.max(28, Math.floor((EXP_HIT_DELAY - 40) / cols));   // the swing fits within the hit delay
+    let f = 0;
+    if (EXPLORE._toolTimer) clearInterval(EXPLORE._toolTimer);
+    EXPLORE._toolTimer = setInterval(() => {
+      if (EXPLORE.dead || EXPLORE.exiting || !EXPLORE.toolAnimActive) { clearInterval(EXPLORE._toolTimer); EXPLORE._toolTimer = null; return; }
+      el.style.backgroundPosition = `-${(f % cols) * EXP_FRAME_W * EXP_SPRITE_SCALE}px 0px`;
+      f++;
+      if (f >= cols) { clearInterval(EXPLORE._toolTimer); EXPLORE._toolTimer = null; endToolAnim(); }
+    }, stepMs);
+  };
+  EXPLORE._toolCache = EXPLORE._toolCache || {};
+  const cached = EXPLORE._toolCache[kind];
+  if (cached && cached.naturalWidth) begin(cached.naturalWidth, cached.naturalHeight);
+  else {
+    const im = new Image();
+    im.onload = () => { EXPLORE._toolCache[kind] = im; begin(im.naturalWidth, im.naturalHeight); };
+    im.onerror = () => {};
+    im.src = url;
+  }
+}
+function endToolAnim() {
+  EXPLORE.toolAnimActive = false;
+  const el = document.getElementById('explore-char-img');
+  if (!el || !EXPLORE.sheetUrl) return;
+  el.style.backgroundImage = `url("${EXPLORE.sheetUrl}")`;   // restore idle/walking sheet
+  if (EXPLORE._mainSheetW) el.style.backgroundSize = `${EXPLORE._mainSheetW * EXP_SPRITE_SCALE}px ${EXPLORE._mainSheetH * EXP_SPRITE_SCALE}px`;
+  setExploreFrame(EXPLORE.animFrame || 0);
 }
 
 // ── Open timer shown above the chest while it's being opened ──
@@ -12240,6 +12939,10 @@ function drawMinimap() {
   const B = EXPLORE.border, M = EXPLORE.mapSize;
   ctx.strokeStyle = 'rgba(0,0,0,.55)'; ctx.lineWidth = 1.5;
   ctx.strokeRect(mX(B), mY(B), (M - 2 * B) * sc, (M - 2 * B) * sc);
+  // Vision radar: any enemy inside this circle can see you and will chase.
+  ctx.beginPath(); ctx.arc(half, half, GOB_AGGRO * sc, 0, 7);
+  ctx.fillStyle = 'rgba(255,60,60,.10)'; ctx.fill();
+  ctx.strokeStyle = 'rgba(255,90,90,.6)'; ctx.lineWidth = 1.2; ctx.stroke();
   for (const r of EXPLORE.resources) {
     if (r.hp <= 0) continue;
     const x = mX(r.x), y = mY(r.y); if (!vis(x, y)) continue;
@@ -12248,13 +12951,13 @@ function drawMinimap() {
   }
   for (const c of EXPLORE.chests) {
     const x = mX(c.x), y = mY(c.y); if (!vis(x, y)) continue;
-    ctx.fillStyle = c.level === 3 ? '#ffd700' : c.level === 2 ? '#5aa0ff' : '#ffffff';
+    ctx.fillStyle = c.level === 3 ? '#ffd700' : c.level === 2 ? '#3fd35a' : '#ffffff';
     ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill();
     ctx.lineWidth = 0.5; ctx.strokeStyle = '#000'; ctx.stroke();
   }
   if (EXPLORE.enemies) {
     ctx.fillStyle = '#ff2222';
-    for (const e of EXPLORE.enemies) { const x = mX(e.x), y = mY(e.y); if (!vis(x, y)) continue; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill(); }
+    for (const e of EXPLORE.enemies) { if (e.dead || e.hp <= 0) continue; const x = mX(e.x), y = mY(e.y); if (!vis(x, y)) continue; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill(); }
   }
   // player = yellow triangle at the centre, pointing in the walk direction
   ctx.save();
@@ -12294,6 +12997,7 @@ function collectLootItem(idx) {
     return;
   }
   addToInv(it);
+  playSfx('collect', 0.5);
   c.loot.splice(idx, 1);
   renderChestLootPanel();
   renderBackpackGrid();
@@ -12317,6 +13021,7 @@ function collectAllLoot() {
     addToInv(it);
   }
   c.loot = kept;
+  playSfx('collect', 0.5);
   if (kept.length) {
     const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
     if (typeof showToast === 'function') showToast(isEN ? `Backpack full (${EXP_INV_MAX})` : `Mochila cheia (${EXP_INV_MAX})`, 'error');
@@ -12325,11 +13030,13 @@ function collectAllLoot() {
   renderBackpackGrid();
 }
 function closeChestLootPanel() {
+  playSfx('close', 0.4);
   const p = document.getElementById('exp-loot-panel'); if (p) p.remove();
   EXPLORE.openChest = null;
 }
 function openChestLootPanel(c) {
   EXPLORE.openChest = c;
+  playSfx('chest', 0.5);
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
   const name = isEN ? EXP_CHEST_NAME_EN[c.level] : EXP_CHEST_NAME[c.level];
   let panel = document.getElementById('exp-loot-panel');
@@ -12389,6 +13096,7 @@ function renderChestLootPanel() {
 
 // Reward screen — same visual pattern as the battle/defense reward screens (lvprev-box).
 function showExploreRewards() {
+  playSfx('reward', 0.5);
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
   const items = Object.values(EXPLORE.inv || {});
   const tiles = items.length
@@ -12422,13 +13130,14 @@ function finishExplore() {
   if (modal) modal.remove();
   const ov = document.getElementById('explore-overlay');
   if (ov) ov.classList.remove('open');
-  // TODO (SFL): grant collected resources to the player via sflExecuteAction
+  depositRunGains();   // safe exit → bank the wood collected this run
 }
 
 // Backpack
 function toggleBackpack() {
   const panel = document.getElementById('exp-backpack-panel');
   if (!panel) return;
+  playSfx('click', 0.4);
   if (panel.classList.contains('open')) panel.classList.remove('open');
   else { renderBackpackGrid(); panel.classList.add('open'); }
 }
@@ -12476,6 +13185,8 @@ window.toggleBackpack = toggleBackpack;
     <button id="exp-hand-btn" onclick="expActionButton()" title="Ação">
       <img id="exp-hand-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/hand_wave.png" alt="Ação" onerror="this.style.visibility='hidden'">
       <img id="exp-axe-icon" src="https://sunflower-land.com/game-assets/tools/axe.png" alt="Machado" style="display:none" onerror="this.style.visibility='hidden'">
+      <img id="exp-pick-icon" src="https://sunflower-land.com/game-assets/tools/stone_pickaxe.png" alt="Picareta" style="display:none" onerror="this.style.visibility='hidden'">
+      <img id="exp-sword-icon" src="https://sunflower-land.com/game-assets/icons/sword.png" alt="Espada" style="display:none" onerror="this.style.visibility='hidden'">
       <span id="exp-axe-badge">0</span>
     </button>
     <canvas id="exp-minimap" width="180" height="180"></canvas>
