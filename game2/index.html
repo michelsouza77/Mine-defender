@@ -65,12 +65,13 @@ body { background-color:#06131c; image-rendering:pixelated; color: var(--parchme
 #base-island .hb-spot .craft-station:hover{transform:none;}
 #base-island .craft-station .craft-station-img{background:none;width:auto;height:auto;}
 #base-island .craft-station .craft-station-img img{width:62px;height:62px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3));}
-#base-island .craft-station-label{font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#fff;text-shadow:1px 1px 0 #000;background:rgba(20,16,10,.55);padding:1px 7px;border-radius:7px;white-space:nowrap;}
+#base-island .craft-station-label{font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.85),0 0 5px rgba(0,0,0,.45);white-space:nowrap;background:none;padding:0;}
 #base-island .craft-station-status{font-size:10px;color:#ffe08a;background:rgba(0,0,0,.42);padding:0 6px;border-radius:6px;white-space:nowrap;}
 .hb-build{position:absolute;transform:translate(-50%,-50%);background:none;border:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;}
 .hb-build img{image-rendering:pixelated;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3));}
-.hb-build .hb-lb{font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#fff;text-shadow:1px 1px 0 #000;background:rgba(20,16,10,.55);padding:1px 7px;border-radius:7px;white-space:nowrap;}
-#home-char{position:absolute;width:84px;height:56px;transform:translate(-50%,-60%);image-rendering:pixelated;background-repeat:no-repeat;pointer-events:none;z-index:2;}
+.hb-lb{font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.85),0 0 5px rgba(0,0,0,.45);white-space:nowrap;}
+#home-char{position:absolute;width:84px;height:56px;transform:translate(-50%,-60%);image-rendering:pixelated;background-repeat:no-repeat;cursor:pointer;z-index:2;}
+.home-npc{position:absolute;width:84px;height:56px;transform:translate(-50%,-60%);image-rendering:pixelated;background-repeat:no-repeat;cursor:pointer;z-index:2;}
 #home-island{display:none;}   /* the real base island lives in the centre panel now */
 @keyframes homeIslandFloat{from{transform:translate(-50%,-52%);}to{transform:translate(-50%,-48%);}}
 /* Island home (step 1) */
@@ -98,7 +99,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .hud-divider{width:2px;height:32px;background:linear-gradient(180deg,transparent,var(--gold-dim),transparent);}
 .hud-stat{display:flex;align-items:center;gap:6px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:3px 10px;position:relative;}
 .hud-stat-icon{font-size:18px;filter:drop-shadow(0 0 4px currentColor);}
-.hud-energy-img{width:28px;height:28px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 4px var(--energy-col));}
+.hud-energy-img{width:38px;height:38px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 4px var(--energy-col));}
 @media (pointer:coarse) and (max-width:600px){.hud-energy-img{width:24px;height:24px;}}
 .hud-market .hud-stat-icon{font-size:26px;}
 .hud-market{padding:4px 8px;}
@@ -107,9 +108,10 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 }
 .hud-menu-disc{position:fixed;left:12px;top:64px;z-index:140;}
 .hud-corner-discs{position:fixed;left:12px;bottom:16px;z-index:140;display:flex;flex-direction:column;gap:10px;}
+.hud-corner-discs-right{position:fixed;right:12px;bottom:16px;z-index:140;display:flex;flex-direction:column;gap:10px;}
 .hud-disc-battle{width:52px;height:52px;}
 .hud-disc-col{position:fixed;right:12px;top:62px;z-index:140;}
-.hud-disc{position:relative;width:52px;height:52px;border:none;background:transparent;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;}
+.hud-disc{position:relative;width:100px;height:100px;border:none;background:transparent;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;}
 .hud-disc:active{transform:scale(0.92);}
 .hud-disc img{width:100%;height:100%;image-rendering:pixelated;object-fit:contain;}
 .hud-disc .hud-disc-bg{position:absolute;inset:0;width:100%;height:100%;}
@@ -125,19 +127,19 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 50%{box-shadow:0 0 14px rgba(231,76,60,1);transform:scale(1.15);}
 }
 .hud-stat-label{font-family:'Pixelify Sans',monospace;font-size:10px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:1px;}
-.hud-stat-value{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:26px;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;}
+.hud-stat-value{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:32px;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;}
 .energy-bar-wrap{display:flex;align-items:center;gap:8px;}
-.energy-bar-bg{position:relative;width:132px;height:19px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;box-shadow:inset 0 0 0 1px #0a1f20;}
+.energy-bar-bg{position:relative;width:190px;height:26px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;box-shadow:inset 0 0 0 1px #0a1f20;}
 .hud-timer-btn{align-self:center;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:.5px;padding:5px 11px;border:2px solid var(--gold-light);border-radius:9px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);cursor:pointer;white-space:nowrap;line-height:1.1;box-shadow:0 2px 6px rgba(0,0,0,.35);}
 .energy-bar-fill{height:100%;width:100%;background:#63c74d;border-radius:0;transition:width 0.4s steps(10);image-rendering:pixelated;}
-.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Pixelify Sans',monospace;font-size:14px !important;font-weight:700;color:#fff;text-shadow:-1px -1px 0 #2d2840,1px -1px 0 #2d2840,-1px 1px 0 #2d2840,1px 1px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
+.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Pixelify Sans',monospace;font-size:18px !important;font-weight:700;color:#fff;text-shadow:-1px -1px 0 #2d2840,1px -1px 0 #2d2840,-1px 1px 0 #2d2840,1px 1px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
 @keyframes pulse-energy{0%,100%{opacity:1;}
 50%{opacity:.7;}
 }
 .hud-coin-wrap{display:flex;align-items:center;gap:6px;padding:4px 12px 4px 8px !important;background:rgba(40,38,55,.45) !important;border:none !important;border-radius:4px !important;box-shadow:none !important;}
 .hud-clickable{cursor:pointer;transition:transform 0.15s ease,border-color 0.15s ease;}
 .hud-clickable:hover{transform:translateY(-1px);border-color:var(--gold-light);}
-.coin-img{width:30px;height:30px;object-fit:contain;image-rendering:pixelated;background:transparent;display:block;}
+.coin-img{width:40px;height:40px;object-fit:contain;image-rendering:pixelated;background:transparent;display:block;}
 .amber-coin{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#d4780a,#f0a020);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;position:relative;animation:amber-glow 3s ease-in-out infinite;}
 .amber-coin-inner{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.3),transparent 50%),linear-gradient(45deg,#b85a00,#d4780a);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 6px rgba(0,0,0,.4);}
 .amber-coin-skull{font-size:8px;color:rgba(0,0,0,.7);text-shadow:0 0 2px rgba(255,255,255,.3);}
@@ -149,7 +151,9 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .hud-avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);background:linear-gradient(135deg,var(--wood-light),var(--stone));display:flex;align-items:center;justify-content:center;font-size:18px;}
 .hud-player-name{font-family:'Pixelify Sans',monospace;font-size:10px;color:var(--parch-dark);white-space:nowrap;}
 .hud-player-level{font-family:'Pixelify Sans',monospace;font-size:8px;color:var(--gold-dim);white-space:nowrap;}
-.panel-close-x{position:absolute;top:4px;right:4px;z-index:40;width:44px;height:44px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:transform .15s;color:var(--sfl-brown-dark);font-size:18px;font-weight:700;}
+/* !important beats the many inline width/height overrides scattered on individual ✕ buttons */
+.panel-close-x{position:absolute;top:4px;right:4px;z-index:40;width:62px !important;height:62px !important;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:transform .15s;color:var(--sfl-brown-dark);font-size:30px;font-weight:700;}
+.panel-close-x img{width:42px !important;height:42px !important;}
 .panel-close-x:hover{transform:scale(1.12);}
 .panel-toggle{position:fixed;top:50%;left:4px;transform:translateY(-50%);z-index:200;background:linear-gradient(135deg,var(--wood-mid),var(--wood-dark));border:2px solid var(--gold-dim);border-radius:0 8px 8px 0;width:28px;height:100px;color:var(--gold-light);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:2px 0 12px rgba(0,0,0,.5);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:2px;}
 .panel-toggle:hover{border-color:var(--gold-light);transform:translateY(-50%) translateX(3px);box-shadow:4px 0 16px rgba(200,150,12,.4);}
@@ -157,13 +161,14 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .right-panel-toggle{position:fixed;top:50%;right:4px;transform:translateY(-50%);z-index:200;background:linear-gradient(135deg,var(--wood-mid),var(--wood-dark));border:2px solid var(--gold-dim);border-radius:0 0 0 8px;width:28px;height:100px;color:var(--gold-light);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:-2px 0 12px rgba(0,0,0,.5);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:2px;}
 .right-panel-toggle:hover{border-color:var(--gold-light);transform:translateY(-50%) translateX(-3px);box-shadow:-4px 0 16px rgba(200,150,12,.4);}
 .right-panel-toggle.closed{right:0px;background:linear-gradient(135deg,var(--wood-dark),var(--stone));}
-#main{display:flex;height:calc(var(--apph) - 56px);gap:0;position:relative;}
-#left-panel{background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;overflow:hidden;position:fixed;top:8px;left:8px;right:8px;bottom:8px;transition:transform .4s cubic-bezier(.25,.46,.45,.94);z-index:200;padding:10px;}
+#app-root{display:flex;flex-direction:column;}
+#main{display:flex;flex:1;min-height:0;gap:0;position:relative;}
+#left-panel{background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;overflow:hidden;position:fixed;top:14px;left:90px;right:90px;bottom:14px;transition:transform .4s cubic-bezier(.25,.46,.45,.94);z-index:200;padding:10px;}
 #left-panel.closed{transform:translateX(calc(-1 * var(--appw) - 40px));}
 #left-panel::before{content:'';position:absolute;top:0;right:-1px;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--gold-light) 30%,var(--gold-light) 70%,transparent);opacity:.4;}
 /* ═══ SFL-STYLE WINDOW — tabs use real SFL button border-images ═══ */
 .tab-nav{display:flex;background:transparent;flex-wrap:nowrap;padding:0 4px;gap:8px;width:100%;max-width:760px;margin:0 auto;margin-bottom:-6px;position:relative;z-index:6;align-items:flex-end;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.tab-btn{padding:8px 12px;color:#3a2410;font-family:'Pixelify Sans',monospace;font-size:11px;letter-spacing:.3px;cursor:pointer;display:flex;flex-direction:row;align-items:center;gap:5px;transition:all .1s;position:relative;background:transparent;border:none;opacity:0.7;flex-shrink:0;white-space:nowrap;}
+.tab-btn{padding:14px 20px;color:#3a2410;font-family:'Pixelify Sans',monospace;font-size:19px;letter-spacing:.3px;cursor:pointer;display:flex;flex-direction:row;align-items:center;gap:7px;transition:all .1s;position:relative;background:transparent;border:none;opacity:0.7;flex-shrink:0;white-space:nowrap;}
 .tab-btn .tab-icon{font-size:16px;display:inline-flex;}
 .tab-nav::-webkit-scrollbar{display:none;}
 .tab-btn{flex-shrink:0;white-space:nowrap;}
@@ -175,10 +180,10 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .cat-label-icon{width:38px;height:38px;image-rendering:pixelated;object-fit:contain;margin-left:-24px;margin-right:4px;margin-top:-10px;margin-bottom:-10px;filter:drop-shadow(1px 1px 0 rgba(0,0,0,.3));position:relative;z-index:2;}
 #tab-items .sfl-info-box{position:sticky;top:-14px;z-index:5;}
 .sfl-info-box{background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px 12px;margin-bottom:12px;position:relative;z-index:1;}
-.sfl-info-title{display:flex;align-items:center;gap:8px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;color:#3a2410;margin-bottom:4px;}
+.sfl-info-title{display:flex;align-items:center;gap:8px;font-family:'Pixelify Sans',monospace;font-size:21px;font-weight:700;color:#3a2410;margin-bottom:4px;}
 .sfl-info-icon{font-size:18px;display:inline-flex;}
 .sfl-info-icon img{width:20px;height:20px;image-rendering:pixelated;object-fit:contain;}
-.sfl-info-desc{font-size:11px;color:#6b4a28;line-height:1.4;font-family:'Pixelify Sans',monospace;}
+.sfl-info-desc{font-size:16px;color:#6b4a28;line-height:1.4;font-family:'Pixelify Sans',monospace;}
 .menu-window{position:relative;flex:1;display:flex;flex-direction:column;width:100%;max-width:100%;margin:0 auto;min-height:0;overflow:hidden;box-sizing:border-box;padding-top:42px;}
 .menu-window .tab-nav{margin-bottom:0;padding-top:4px;}
 .menu-window .panel-content{max-width:100% !important;margin:0 !important;}
@@ -187,41 +192,41 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .mission-summary:hover{filter:brightness(1.05);}
 .mission-sum-icon{width:44px;height:44px;background-color:#b96f50;image-rendering:pixelated;border:3px solid #2d2840;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .mission-sum-mid{flex:1;min-width:0;}
-.mission-sum-title{font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#3a2410;}
-.mission-sum-reward{font-family:'Pixelify Sans',monospace;font-size:11px;color:#4a2e14;margin-top:2px;}
+.mission-sum-title{font-family:'Pixelify Sans',monospace;font-size:18px;font-weight:700;color:#3a2410;}
+.mission-sum-reward{font-family:'Pixelify Sans',monospace;font-size:15px;color:#4a2e14;margin-top:3px;}
 .mission-sum-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
 .mission-sum-arrow{font-size:18px;color:#6b4a28;}
-.mission-status{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:11px;font-weight:700;color:#2d2840;background-color:#c5cdd9;border:2px solid #2d2840;border-radius:3px;padding:2px 8px;}
+.mission-status{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:15px;font-weight:700;color:#2d2840;background-color:#c5cdd9;border:2px solid #2d2840;border-radius:4px;padding:3px 10px;}
 .mission-status.ready{background-color:#63c74d;color:#fff;}
 .mission-status.done{background-color:#9a9a9a;color:#fff;}
 /* Mission back + progress bar */
-.mission-back{background:none;border:none;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#3a2410;cursor:pointer;padding:0;}
-.mission-progress-label{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:11px;color:#3a2410;text-align:center;font-weight:700;}
-.mission-bar-bg{width:100%;height:16px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;}
+.mission-back{background:none;border:none;font-family:'Pixelify Sans',monospace;font-size:17px;font-weight:700;color:#3a2410;cursor:pointer;padding:0;}
+.mission-progress-label{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:17px;color:#3a2410;text-align:center;font-weight:700;}
+.mission-bar-bg{width:100%;height:24px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;}
 .mission-bar-fill{height:100%;background:#63c74d;transition:width .3s steps(10);}
 .mission-claim.off{background-color:#9a9a9a;cursor:not-allowed;filter:grayscale(.3);}
 /* Daily mission card */
 .mission-card{width:100%;box-sizing:border-box;background-color:#e9b98a;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:10px;}
 .mission-head{display:flex;justify-content:space-between;align-items:center;}
 .mission-badge{background-color:#c5cdd9;color:#2d2840;font-family:'Pixelify Sans',monospace;font-size:10px;font-weight:700;padding:3px 10px;border:2px solid #2d2840;border-radius:3px;text-transform:uppercase;}
-.mission-timer{font-family:'Pixelify Sans',monospace;font-size:10px;color:#6b4a28;}
-.mission-title{font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;color:#3a2410;}
+.mission-timer{font-family:'Pixelify Sans',monospace;font-size:14px;color:#6b4a28;}
+.mission-title{font-family:'Pixelify Sans',monospace;font-size:22px;font-weight:700;color:#3a2410;}
 .mission-flow{display:flex;align-items:center;justify-content:center;gap:10px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px;}
-.mission-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'Pixelify Sans',monospace;font-size:10px;color:#fff;text-shadow:1px 1px 0 #2d2840;text-align:center;}
+.mission-item{display:flex;flex-direction:column;align-items:center;gap:5px;font-family:'Pixelify Sans',monospace;font-size:15px;color:#fff;text-shadow:1px 1px 0 #2d2840;text-align:center;}
 .mission-arrow{font-size:18px;color:#fff;text-shadow:1px 1px 0 #2d2840;}
 .mission-reward-row{display:flex;align-items:center;gap:8px;justify-content:center;background-color:#c5cdd9;border:2px solid #2d2840;border-radius:4px;padding:5px 12px;}
-.mission-reward-label{font-family:'Pixelify Sans',monospace;font-size:12px;color:#2d2840;font-weight:700;}
-.mission-reward-val{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:15px;color:#2d1810;font-weight:700;}
-.mission-claim{width:100%;padding:9px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;}
+.mission-reward-label{font-family:'Pixelify Sans',monospace;font-size:17px;color:#2d2840;font-weight:700;}
+.mission-reward-val{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:20px;color:#2d1810;font-weight:700;}
+.mission-claim{width:100%;padding:15px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:19px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;}
 .mission-claim:hover{filter:brightness(1.1);}
 .mission-claim.done{background-color:#9a9a9a;cursor:not-allowed;filter:grayscale(.3);}
 /* Season item info overlay */
 .season-item-info-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:3600;padding:20px;}
-.season-item-info-box{position:relative;max-width:300px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:18px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;}
-.sii-img{width:104px;height:104px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;}
-.sii-name{font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;color:#3a2410;text-align:center;}
-.sii-desc{font-size:12px;color:#4a2e14;line-height:1.4;text-align:center;}
-.sii-stock{display:flex;gap:16px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#2d2840;background-color:#c5cdd9;border:2px solid #2d2840;border-radius:4px;padding:6px 14px;}
+.season-item-info-box{position:relative;max-width:580px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:18px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.sii-img{width:168px;height:168px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;}
+.sii-name{font-family:'Pixelify Sans',monospace;font-size:22px;font-weight:700;color:#3a2410;text-align:center;}
+.sii-desc{font-size:16px;color:#4a2e14;line-height:1.5;text-align:center;font-family:'Pixelify Sans',monospace;}
+.sii-stock{display:flex;gap:20px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;color:#2d2840;background-color:#c5cdd9;border:2px solid #2d2840;border-radius:6px;padding:8px 18px;}
 .sii-stock b{color:#2d1810;font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:15px;}
 .sii-buy{display:inline-flex;align-items:center;justify-content:center;gap:8px;background-color:#63c74d;color:#fff;font-weight:700;padding:10px 26px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;margin-top:6px;width:100%;}
 .sii-buy-val{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:26px;}
@@ -237,13 +242,13 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 /* Season tabs (2 tabs, active connects to body like the menu) */
 .season-tabs{display:flex;gap:6px;padding:0 10px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
 .season-tab-icon{width:18px;height:18px;image-rendering:pixelated;object-fit:contain;}
-.season-tab{display:flex;align-items:center;gap:6px;padding:7px 14px;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#3a2410;cursor:pointer;background:transparent;border:none;opacity:0.7;white-space:nowrap;}
+.season-tab{display:flex;align-items:center;gap:8px;padding:12px 22px;font-family:'Pixelify Sans',monospace;font-size:17px;font-weight:700;color:#3a2410;cursor:pointer;background:transparent;border:none;opacity:0.7;white-space:nowrap;}
 .season-tab.active{opacity:1;z-index:7;position:relative;margin-bottom:-5px;padding-bottom:10px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/tab_border_middle.png") 20%;border-image-repeat:stretch;border-radius:13px 13px 0 0;border-bottom:none;}
 .season-tab.active::after{content:"";position:absolute;left:2px;right:2px;bottom:-3px;height:6px;background:#e4a672;z-index:8;}
 .season-tab-timer{display:inline-block;background-color:#e8533f;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border:2px solid #2d2840;border-radius:3px;margin-left:4px;}
 .season-body{flex:1;display:flex;flex-direction:column;min-height:0;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;overflow:hidden;position:relative;z-index:1;}
-.season-welcome{font-size:12px;color:#5d3a1a;line-height:1.5;font-family:'Pixelify Sans',monospace;margin-bottom:14px;}
-.season-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.season-welcome{font-size:18px;color:#5d3a1a;line-height:1.5;font-family:'Pixelify Sans',monospace;margin-bottom:14px;}
+.season-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-bottom:18px;}
 .season-shop-card{position:relative;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:filter .1s;padding-bottom:14px;}
 .season-shop-card:hover{filter:brightness(1.08);}
 .season-shop-card.disabled{cursor:not-allowed;}
@@ -258,7 +263,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .season-earn-title{font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#2d2840;margin-bottom:5px;}
 .season-earn-body{font-size:10px;color:#3a3a4a;line-height:1.4;}
 /* ===== MARKETPLACE (tabs per category, click → SFL marketplace) ===== */
-.mkt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.mkt-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;}
 .mkt-card{position:relative;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:6px 4px 4px;gap:4px;}
 .mkt-card:hover{filter:brightness(1.1);}
 .mkt-card-img{width:100%;flex:1;min-height:42px;display:flex;align-items:center;justify-content:center;}
@@ -292,14 +297,15 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .cfg-close{position:absolute;top:-4px;right:0;z-index:40;width:42px;height:42px;}
 .cfg-body{background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:14px;}
 .cfg-tabs{display:flex;gap:6px;padding:0 10px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
-.cfg-tab{display:flex;align-items:center;gap:6px;padding:7px 14px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#3a2410;cursor:default;white-space:nowrap;}
+.cfg-tab{display:flex;align-items:center;gap:8px;padding:13px 24px;font-family:'Pixelify Sans',monospace;font-size:19px;font-weight:700;color:#3a2410;cursor:default;white-space:nowrap;}
+.cfg-avatar-title{font-family:'Pixelify Sans',monospace;font-size:18px;font-weight:700;color:#3a2410;margin-bottom:2px;}
 .cfg-tab.active{z-index:7;position:relative;margin-bottom:-5px;padding-bottom:10px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/tab_border_middle.png") 20%;border-image-repeat:stretch;border-radius:13px 13px 0 0;border-bottom:none;}
 .cfg-tab.active::after{content:"";position:absolute;left:2px;right:2px;bottom:-3px;height:6px;background:#e4a672;z-index:8;}
 .cfg-avatar-box{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:14px;padding:14px;background-color:#e9b98a;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;}
 .cfg-avatar-circle{position:relative;width:96px;height:96px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .cfg-avatar-name{font-family:'Pixelify Sans',monospace;color:#3a2410;font-size:13px;font-weight:700;letter-spacing:1px;}
 .cfg-btn-list{display:flex;flex-direction:column;gap:8px;}
-.cfg-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;font-family:'Pixelify Sans',monospace;font-size:13px;color:#fff;text-shadow:1px 1px 0 #2d2840;transition:filter .1s;}
+.cfg-btn{display:flex;align-items:center;gap:12px;padding:16px 16px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;font-family:'Pixelify Sans',monospace;font-size:16px;color:#fff;text-shadow:1px 1px 0 #2d2840;transition:filter .1s;}
 .cfg-btn:hover{filter:brightness(1.08);}
 .cfg-btn-icon{width:22px;display:inline-flex;justify-content:center;align-items:center;font-size:18px;}
 .cfg-btn-label{flex:1;text-align:left;}
@@ -569,21 +575,21 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 /* ===== BATTLE (SFL style) ===== */
 .battle-window{display:flex;flex-direction:column;flex:1;min-height:0;background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px;box-sizing:border-box;}
 .battle-mode-tabs{display:flex;gap:6px;padding:0 12px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
-.battle-mode-tab{display:flex;align-items:center;gap:6px;padding:8px 14px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#3a2410;cursor:pointer;white-space:nowrap;background:none;border:none;opacity:.7;}
+.battle-mode-tab{display:flex;align-items:center;gap:8px;padding:12px 22px;font-family:'Pixelify Sans',monospace;font-size:18px;font-weight:700;color:#3a2410;cursor:pointer;white-space:nowrap;background:none;border:none;opacity:.7;}
 .battle-mode-tab:hover{opacity:.9;}
-.bmt-icon{width:18px;height:18px;image-rendering:pixelated;object-fit:contain;}
+.bmt-icon{width:26px;height:26px;image-rendering:pixelated;object-fit:contain;}
 .battle-mode-tab.active{opacity:1;z-index:7;position:relative;margin-bottom:-5px;padding-bottom:11px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/tab_border_middle.png") 20%;border-image-repeat:stretch;border-radius:13px 13px 0 0;border-bottom:none;}
 .battle-mode-tab.active::after{content:"";position:absolute;left:2px;right:2px;bottom:-3px;height:6px;background:#e4a672;z-index:8;}
 .bmt-soon{opacity:.45;cursor:help;filter:saturate(.4);}
 .battle-body{background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:14px;flex:1;overflow-y:auto;}
-.battle-deck-label{font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;color:#3a2410;margin-bottom:4px;}
-.battle-deck-hint{font-size:11px;color:#6b4a28;margin:0 0 14px;}
-.battle-deck-count{font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#3a2410;margin:14px 0;}
-.battle-action-btn{width:100%;margin-top:20px;padding:12px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;}
+.battle-deck-label{font-family:'Pixelify Sans',monospace;font-size:22px;font-weight:700;color:#3a2410;margin-bottom:6px;}
+.battle-deck-hint{font-size:16px;color:#6b4a28;margin:0 0 16px;font-family:'Pixelify Sans',monospace;}
+.battle-deck-count{font-family:'Pixelify Sans',monospace;font-size:17px;font-weight:700;color:#3a2410;margin:16px 0;}
+.battle-action-btn{width:100%;margin-top:22px;padding:18px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:21px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;}
 .battle-action-btn:hover{filter:brightness(1.1);}
 .battle-title{font-family:'Pixelify Sans',monospace;font-size:16px;color:var(--gold-light);text-shadow:0 0 16px var(--amber);letter-spacing:3px;}
 .mode-tabs{display:flex;gap:8px;padding:12px 16px 0;border-bottom:1px solid rgba(200,150,12,.2);}
-.mode-tab{flex:1;background:rgba(0,0,0,.3);color:var(--parch-mid);border:1.5px solid var(--gold-dim);border-bottom:none;border-radius:0 8px 0 0;padding:10px 8px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:600;letter-spacing:1.2px;cursor:pointer;transition:all 0.25s ease;position:relative;}
+.mode-tab{flex:1;background:rgba(0,0,0,.3);color:var(--parch-mid);border:1.5px solid var(--gold-dim);border-bottom:none;border-radius:0 8px 0 0;padding:13px 10px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600;letter-spacing:1.2px;cursor:pointer;transition:all 0.25s ease;position:relative;}
 .mode-tab-soon{opacity:0.55;cursor:help;filter:saturate(0.4);}
 .mode-tab-soon:hover{opacity:0.7;}
 .mode-tab:hover{background:rgba(200,150,12,.15);color:var(--gold-light);}
@@ -594,7 +600,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .mode-tab-sub{font-size:8px;}
 }
 .battle-level-select{display:flex;gap:6px;}
-.level-btn{padding:4px 10px;background:var(--wood-dark);border:1px solid var(--gold-dim);color:var(--gold-dim);font-family:'Pixelify Sans',monospace;font-size:9px;border-radius:4px;cursor:pointer;transition:all .2s;letter-spacing:1px;}
+.level-btn{padding:7px 14px;background:var(--wood-dark);border:1px solid var(--gold-dim);color:var(--gold-dim);font-family:'Pixelify Sans',monospace;font-size:13px;border-radius:4px;cursor:pointer;transition:all .2s;letter-spacing:1px;}
 .level-btn:hover,.level-btn.active{border-color:var(--gold-light);color:var(--gold-light);background:rgba(200,150,12,.15);}
 .level-btn.active{box-shadow:0 0 8px rgba(200,150,12,.3);}
 .battle-arena{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:16px;}
@@ -875,15 +881,15 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .equip-slot-emoji,.equip-slot-emoji-bg{font-size:18px;}
 .equip-slot-label{font-size:8px;}
 }
-.deck-slot{width:84px;height:112px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:filter .15s;position:relative;overflow:hidden;}
+.deck-slot{width:130px;height:172px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:filter .15s;position:relative;overflow:hidden;}
 .deck-slot:hover{border-color:var(--gold-light);background:rgba(200,150,12,0.12);transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.4);}
 .deck-slot.filled{border-style:solid;border-color:var(--gold);padding:0;}
 .deck-slot.filled .deck-slot-img-wrap{width:100%;height:70%;overflow:hidden;background:rgba(0,0,0,0.3);}
 .deck-slot.filled .deck-slot-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
 .deck-slot.filled .deck-slot-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;}
-.deck-slot-empty{font-size:30px;color:#e9d9c0;margin-bottom:4px;font-weight:700;}
+.deck-slot-empty{font-size:44px;color:#e9d9c0;margin-bottom:4px;font-weight:700;}
 .deck-slot-label{font-family:'Pixelify Sans',monospace;font-size:9px;color:#e9d9c0;font-weight:700;letter-spacing:1px;}
-.deck-slot-name{font-family:'Pixelify Sans',monospace;font-size:9px;color:var(--gold-light);padding:4px 2px;text-align:center;line-height:1.1;width:100%;background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);min-height:2.4em;display:flex;align-items:center;justify-content:center;}
+.deck-slot-name{font-family:'Pixelify Sans',monospace;font-size:14px;color:var(--gold-light);padding:4px 2px;text-align:center;line-height:1.1;width:100%;background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);min-height:2.4em;display:flex;align-items:center;justify-content:center;}
 .deck-slot-remove{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(139,26,26,0.9);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--gold);z-index:5;}
 .deck-slot-remove:hover{background:#c02020;transform:scale(1.15);}
 #deck-picker{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:3200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
@@ -975,7 +981,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);background:linear-gradient(145deg,var(--wood-panel),var(--wood-dark));border:2px solid var(--gold);color:var(--parchment);padding:12px 20px;border-radius:4px;font-family:'Pixelify Sans',monospace;font-size:13px;z-index:5000;opacity:0;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:0 8px 24px rgba(0,0,0,0.6);max-width:90%;text-align:center;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.error{border-color:#e05050;background:linear-gradient(145deg,#3a1010,#1a0808);}
-.rarity-label{display:inline-flex;align-items:center;gap:6px;margin:16px 0 8px 6px;padding:4px 12px;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#3a2410;background-color:#c5cdd9;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;text-shadow:none;}
+.rarity-label{display:inline-flex;align-items:center;gap:6px;margin:16px 0 8px 6px;padding:5px 14px;font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#3a2410;background-color:#c5cdd9;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;text-shadow:none;}
 #big-card-modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:3000;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(8px);}
 #big-card-modal.open{display:flex;opacity:1;}
 .big-card-close{position:fixed;top:20px;right:20px;width:50px;height:50px;background:linear-gradient(145deg,var(--red-rare),#c04040);border:3px solid var(--gold);border-radius:50%;color:var(--parchment);font-size:22px;font-weight:700;cursor:pointer;z-index:3100;box-shadow:0 4px 20px rgba(0,0,0,0.6);transition:all 0.3s ease;font-family:'Pixelify Sans',monospace;}
@@ -1099,6 +1105,15 @@ to{transform:scale(1) rotate(0);opacity:1;}
 /* Rock = an SFL strike sheet. Idle shows frame 0; mining plays the 6-frame spark on the SAME element. */
 .exp-rock{position:absolute;image-rendering:pixelated;pointer-events:none;background-repeat:no-repeat;z-index:3;}
 .exp-decor{position:absolute;transform:translate(-50%,-100%);image-rendering:pixelated;pointer-events:none;}
+/* loose wood/stone/mushroom on the ground (≈ half the character's size): a crisp dark circle
+   appears under the item when you're in hand reach (pick up with ✋) */
+.exp-ground-item{position:absolute;transform:translate(-50%,-100%);width:8px;height:8px;background-size:0 0;pointer-events:none;}
+/* layer 0: the crisp circle shadow (always UNDER the item) */
+.exp-ground-item::before{content:"";position:absolute;left:50%;bottom:-2px;width:12px;height:6px;transform:translateX(-50%);border-radius:50%;background:rgba(0,0,0,.45);box-shadow:0 0 0 1px rgba(255,255,255,.75);opacity:0;transition:opacity .12s;z-index:0;}
+/* layer 1: the item itself, gently bobbing up and down, centred over the shadow */
+.exp-ground-item::after{content:"";position:absolute;inset:0;background-image:inherit;background-size:contain;background-repeat:no-repeat;background-position:center bottom;image-rendering:pixelated;z-index:1;animation:groundBob 2.1s ease-in-out infinite alternate;}
+@keyframes groundBob{from{transform:translateY(0);}to{transform:translateY(-3px);}}
+.exp-ground-item.near::before{opacity:1;}
 .exp-rock-strike{animation:expStrike .26s steps(6) 1;}       /* strike sheet: 6 frames × 224px */
 @keyframes expStrike{from{background-position:0 0;}to{background-position:-1344px 0;}}
 .exp-rock-strike2{animation:expStrike2 .26s steps(6) 1;}     /* l2/l3 stone sheets: 6 frames × 96px */
@@ -1347,11 +1362,13 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Panel toggle buttons -->
 <button class="panel-toggle closed" onclick="toggleLeftPanel()" id="toggle-btn" title="Menu" style="display:none;">MENU</button>
 <button class="right-panel-toggle closed" onclick="toggleRightPanel()" id="right-toggle-btn" title="Arena" style="display:none;">ARENA</button>
-<!-- Bottom-left disc stack: shop on top, battle below (SFL style) -->
+<!-- Bottom corners: P2P market bottom-LEFT, battle bottom-RIGHT (same height) -->
 <div class="hud-corner-discs">
 <button class="hud-disc" id="marketplace-btn" onclick="showMarketplace()" title="Mercado SFL">
 <img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/trade_disc.png" alt="Loja" onerror="this.outerHTML='🛒';">
 </button>
+</div>
+<div class="hud-corner-discs-right">
 <button class="hud-disc hud-disc-battle" id="battle-btn" onclick="toggleRightPanel()" title="Batalha">
 <img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
 <img src="https://sunflower-land.com/game-assets/icons/sword.png" class="hud-disc-fg" alt="Batalha" onerror="this.outerHTML='⚔️';">
@@ -1573,8 +1590,16 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <div id="base-island">
 <!-- Elder's House: future level/rewards screen -->
 <button class="hb-build" style="left:51%;top:42%;" onclick="anciaoClick()"><img src="https://sunflower-land.com/game-assets/buildings/manor.png" style="width:120px;" onerror="this.outerHTML='🏛️'"><span class="hb-lb">🏛️ Casa do Ancião</span></button>
-<!-- Your bumpkin, idling by the house -->
-<div id="home-char" style="left:67%;top:57%;"></div>
+<!-- Your bumpkin, idling by the house (name on top; click = coming soon) -->
+<div id="home-char" style="left:67%;top:57%;" onclick="homeCharClick()"><div class="hb-lb" id="home-char-name" style="position:absolute;left:50%;top:46px;transform:translate(-50%,-100%);white-space:nowrap;"></div></div>
+<!-- The ELDER (level NPC): wise bumpkin standing on the road by the top stones -->
+<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><div class="hb-lb" style="position:absolute;left:50%;top:42px;transform:translate(-50%,-100%);white-space:nowrap;">🧙 Ancião</div></div>
+<!-- FERRARIA (blacksmith bench with anvil): bottom-right corner of the island -->
+<button class="craft-station hb-station" id="craft-station-ferraria" style="left:84%;top:74%;" onclick="openWorkbench('ferraria')" title="Ferraria">
+<div class="craft-station-img"><img src="https://sunflower-land.com/game-assets/buildings/workbench.png" alt="Ferraria" style="width:82px;height:82px;" onerror="this.outerHTML='<span style=&quot;font-size:48px;&quot;>⚒️</span>';" /></div>
+<div class="craft-station-label">Ferraria</div>
+<div class="craft-station-status" id="status-ferraria" data-i18n="map.workbench.empty">— vazia —</div>
+</button>
 <!-- Constructions (same ids the workbench/lock logic already uses) -->
 <button class="craft-station hb-station" id="craft-station-bonfire" style="left:64%;top:27%;" onclick="openWorkbench('bonfire')" title="Fogueira">
 <div class="craft-station-img"><img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/110.png" alt="Fogueira" style="width:80px;height:80px;" onerror="this.outerHTML='<span style=&quot;font-size:48px;&quot;>🔥</span>';" /></div>
@@ -1630,6 +1655,10 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <div class="battle-window">
 <!-- Mode Selection Tabs (SFL connected tabs) -->
 <div class="battle-mode-tabs">
+<button class="battle-mode-tab" id="mode-tab-hunt" onclick="switchBattleMode('hunt', this)">
+<span class="bmt-icon">🏹</span>
+<span data-i18n="mode.hunt.short">Caçada</span>
+</button>
 <button class="battle-mode-tab active" id="mode-tab-defense" onclick="switchBattleMode('defense', this)">
 <img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sfl.webp" class="bmt-icon" onerror="this.outerHTML='🌻'">
 <span data-i18n="mode.defense.short">Defesa</span>
@@ -1637,10 +1666,6 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <button class="battle-mode-tab" id="mode-tab-arena" onclick="switchBattleMode('arena', this)">
 <img src="https://sunflower-land.com/game-assets/icons/sword.png" class="bmt-icon" onerror="this.outerHTML='⚔️'">
 <span data-i18n="mode.arena.short">Arena</span>
-</button>
-<button class="battle-mode-tab" id="mode-tab-hunt" onclick="switchBattleMode('hunt', this)">
-<span class="bmt-icon">🏹</span>
-<span data-i18n="mode.hunt.short">Caçada</span>
 </button>
 </div>
 <div class="battle-body">
@@ -1917,7 +1942,7 @@ var I18N = {
   'market.tip2': 'Clique em qualquer item pra ver no mercado SFL.',
   'leaderboard.title': '🏆 CLASSIFICAÇÃO','season.title':'Temporada Beta','season.shop_name':'Megastore Dino','rewards.intro':'Complete missões diárias e ganhe tokens de temporada!','rewards.daily_badge':'Missão Diária','rewards.resets':'Reseta em 24h','rewards.mission1.title':'Fabrique Ferro','rewards.mission1.req':'Sucata','rewards.mission1.result':'Ferro','rewards.reward':'Recompensa','rewards.claim':'Resgatar','rewards.claimed':'✓ Resgatado hoje','rewards.claim_toast':'Recompensa resgatada! +50 tokens','rewards.progress':'Progresso','rewards.ready':'Pronto!','rewards.locked':'Bloqueado','rewards.claimed_short':'✓','rewards.back':'Voltar','season.item.have':'Você tem','season.item.your_balance':'Você tem','season.item.left':'Disponível','season.item.no_desc':'Item da temporada.','season.item.no_funds':'Saldo insuficiente','season.item.sold_out':'Esgotado',
   'item.desc.128':'Totem que revive uma carta uma vez por batalha.','item.desc.118':'Ovo lendário com chance de dinos raros.','item.desc.114':'Ovo comum para chocar dinossauros.','item.desc.106':'Cristal da sorte: +ataque no primeiro golpe.',
-  'item.desc.125':'Poção que dá +5% de HP máximo.','item.desc.127':'Totem Beta: concede um slot extra de equipamento.','season.tab.shop':'Loja de Temporada','season.tab.rewards':'Recompensas','season.rewards.body':'Complete desafios da temporada e ganhe recompensas exclusivas. Em breve!','season.timer':'58d 8h','season.welcome':'Bem-vindo à loja da temporada! Junte Cash Coin vencendo batalhas e troque por itens raros antes que a temporada acabe!','season.earn.title':'Como ganhar Cash Coin','season.earn.body':'O Cash Coin é o token da Temporada Beta. Você ganha vencendo batalhas de Defesa e Arena, e também coletando recompensas nas bancadas. Quanto mais você joga, mais acumula!','season.trades.title':'Trocar por Cash Coin','season.dinocoin.title':'Exclusivo DinoCoin','season.stock':'Estoque','season.more':'Mais trocas em breve...','season.trade_btn':'TROCAR','season.sold_out':'Limite atingido!','season.confirm_trade':'Confirmar esta troca?','season.trade_success':'🎉 Troca realizada!',
+  'item.desc.125':'Poção que dá +5% de HP máximo.','item.desc.127':'Totem Beta: concede um slot extra de equipamento.','season.tab.shop':'Loja de Temporada','season.tab.rewards':'Missões','season.rewards.body':'Complete missões da temporada e ganhe recompensas exclusivas. Em breve!','season.timer':'58d 8h','season.welcome':'Bem-vindo à loja da temporada! Junte Cash Coin vencendo batalhas e troque por itens raros antes que a temporada acabe!','season.earn.title':'Como ganhar Cash Coin','season.earn.body':'O Cash Coin é o token da Temporada Beta. Você ganha vencendo batalhas de Defesa e Arena, e também coletando recompensas nas bancadas. Quanto mais você joga, mais acumula!','season.trades.title':'Trocar por Cash Coin','season.dinocoin.title':'Exclusivo DinoCoin','season.stock':'Estoque','season.more':'Mais trocas em breve...','season.trade_btn':'TROCAR','season.sold_out':'Limite atingido!','season.confirm_trade':'Confirmar esta troca?','season.trade_success':'🎉 Troca realizada!',
   'leaderboard.coming_soon': 'Em Breve',
   'leaderboard.subtitle': 'TOP CAÇADORES POR CASH COIN','leaderboard.loading':'Carregando ranking...',
   'leaderboard.row.placeholder': '— em breve —',
@@ -2218,7 +2243,7 @@ var I18N = {
   'rarity.comum':'Comum','rarity.incomum':'Incomum','rarity.raro':'Raro','rarity.epico':'Épico','rarity.lendario':'Lendária',
   'toast.offline_action':'⚠️ Conecte-se ao SFL pra essa ação',
   'items.cat.crafted': 'Fabricados',
-  'items.cat.structures': 'Estruturas','items.cat.equipment':'Equipamentos','items.cat.currency':'Tokens de Temporada',
+  'items.cat.structures': 'Estruturas','items.cat.equipment':'Equipamentos','items.cat.currency':'Tokens de Temporada','items.cat.tools':'Ferramentas',
   'guide.energy.title': '⚡ Sistema de Energia',
   'guide.energy.body': 'Energia máxima de 100. Cada batalha de Arena custa 25⚡. Defesa custa 1⚡ no Lv1. A energia regenera 25⚡ a cada 6 horas (gerador automático).',
   'guide.modes.title': '<img src="https://sunflower-land.com/game-assets/icons/sword.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Modos de Batalha',
@@ -2423,7 +2448,7 @@ var I18N = {
   'market.tip2': 'Click any item to view it on the SFL market.',
   'leaderboard.title': '🏆 LEADERBOARD','season.title':'Beta Season','season.shop_name':'Dino Megastore','rewards.intro':'Complete daily missions and earn season tokens!','rewards.daily_badge':'Daily Mission','rewards.resets':'Resets in 24h','rewards.mission1.title':'Craft Iron','rewards.mission1.req':'Scrap','rewards.mission1.result':'Iron','rewards.reward':'Reward','rewards.claim':'Claim','rewards.claimed':'✓ Claimed today','rewards.claim_toast':'Reward claimed! +50 tokens','rewards.progress':'Progress','rewards.ready':'Ready!','rewards.locked':'Locked','rewards.claimed_short':'✓','rewards.back':'Back','season.item.have':'You have','season.item.your_balance':'You have','season.item.left':'Available','season.item.no_desc':'Season item.','season.item.no_funds':'Not enough balance','season.item.sold_out':'Sold out',
   'item.desc.128':'Totem that revives a card once per battle.','item.desc.118':'Legendary egg with a chance of rare dinos.','item.desc.114':'Common egg to hatch dinosaurs.','item.desc.106':'Lucky crystal: +attack on first hit.',
-  'item.desc.125':'Potion granting +5% max HP.','item.desc.127':'Beta Totem: grants an extra equipment slot.','season.tab.shop':'Season Shop','season.tab.rewards':'Rewards','season.rewards.body':'Complete season challenges and earn exclusive rewards. Coming soon!','season.timer':'58d 8h','season.welcome':'Welcome to the season shop! Gather Cash Coin by winning battles and trade for rare items before the season ends!','season.earn.title':'How to earn Cash Coin','season.earn.body':'Cash Coin is the Beta Season token. Earn it by winning Defense and Arena battles, and by collecting rewards at the workstations. The more you play, the more you accumulate!','season.trades.title':'Trade for Cash Coin','season.dinocoin.title':'DinoCoin Exclusive','season.stock':'Stock','season.more':'More trades coming soon...','season.trade_btn':'TRADE','season.sold_out':'Limit reached!','season.confirm_trade':'Confirm this trade?','season.trade_success':'🎉 Trade complete!',
+  'item.desc.125':'Potion granting +5% max HP.','item.desc.127':'Beta Totem: grants an extra equipment slot.','season.tab.shop':'Season Shop','season.tab.rewards':'Missions','season.rewards.body':'Complete season missions and earn exclusive rewards. Coming soon!','season.timer':'58d 8h','season.welcome':'Welcome to the season shop! Gather Cash Coin by winning battles and trade for rare items before the season ends!','season.earn.title':'How to earn Cash Coin','season.earn.body':'Cash Coin is the Beta Season token. Earn it by winning Defense and Arena battles, and by collecting rewards at the workstations. The more you play, the more you accumulate!','season.trades.title':'Trade for Cash Coin','season.dinocoin.title':'DinoCoin Exclusive','season.stock':'Stock','season.more':'More trades coming soon...','season.trade_btn':'TRADE','season.sold_out':'Limit reached!','season.confirm_trade':'Confirm this trade?','season.trade_success':'🎉 Trade complete!',
   'leaderboard.coming_soon': 'Coming Soon',
   'leaderboard.subtitle': 'TOP HUNTERS BY CASH COIN','leaderboard.loading':'Loading ranking...',
   'leaderboard.row.placeholder': '— coming soon —',
@@ -2723,7 +2748,7 @@ var I18N = {
   'rarity.comum':'Common','rarity.incomum':'Uncommon','rarity.raro':'Rare','rarity.epico':'Epic','rarity.lendario':'Legendary',
   'toast.offline_action':'⚠️ Connect to SFL for this action',
   'items.cat.crafted': 'Crafted',
-  'items.cat.structures': 'Structures','items.cat.equipment':'Equipment','items.cat.currency':'Season Tokens',
+  'items.cat.structures': 'Structures','items.cat.equipment':'Equipment','items.cat.currency':'Season Tokens','items.cat.tools':'Tools',
   'guide.energy.title': '⚡ Energy System',
   'guide.energy.body': 'Maximum energy is 100. Each Arena battle costs 25⚡. Defense costs 1⚡ at Lv1. Energy regenerates 25⚡ every 6 hours (automatic generator).',
   'guide.modes.title': '⚔️ Battle Modes',
@@ -2907,6 +2932,8 @@ var SFL_ITEMS_INFO = {
   127: { emoji: '🗿', name: 'Totem Beta', sflName: 'Totem beta', desc: 'Equipamento (slot Totem). +1 slot universal de equipamento. Exclusivo da Temporada Beta.' },
   128: { emoji: '🦴', name: 'Totem Dino', sflName: 'Totem dino', desc: 'Equipamento (slot Totem). Revive a carta com 50% HP uma vez por batalha.' },
   129: { emoji: '💵', name: 'Cash Coin', sflName: 'Cash coin', desc: 'Token da Temporada Beta. Troque por itens raros na loja SFL.' },
+  130: { emoji: '🪓', name: 'Machado', sflName: 'Axe', desc: 'Corta árvores no modo Explorar. Quebra após 5 árvores.' },
+  131: { emoji: '⛏️', name: 'Picareta', sflName: 'Pickaxe', desc: 'Minera pedra, ferro e ouro no modo Explorar. Quebra após 5 rochas.' },
 };
 var ITEM_IMG_VERSION = '4';
 // UI icons from the SFL asset pack (hosted on GitHub raw).
@@ -3283,9 +3310,9 @@ function backToMissionSummary() {
 }
 function renderMissionDetail() {
   const st = getDailyMissionState();
-  const tokenImg = `<img src="${sflItemImageUrl(129)}" style="width:22px;height:22px;image-rendering:pixelated;vertical-align:-5px;" onerror="this.outerHTML='💵';">`;
-  const reqImg = `<img src="${sflItemImageUrl(DAILY_MISSION.reqId)}" style="width:28px;height:28px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
-  const resultImg = `<img src="${sflItemImageUrl(DAILY_MISSION.resultId)}" style="width:28px;height:28px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
+  const tokenImg = `<img src="${sflItemImageUrl(129)}" style="width:30px;height:30px;image-rendering:pixelated;vertical-align:-7px;" onerror="this.outerHTML='💵';">`;
+  const reqImg = `<img src="${sflItemImageUrl(DAILY_MISSION.reqId)}" style="width:48px;height:48px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
+  const resultImg = `<img src="${sflItemImageUrl(DAILY_MISSION.resultId)}" style="width:48px;height:48px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
   const pct = Math.round((st.progress / DAILY_MISSION.goal) * 100);
   const ready = st.progress >= DAILY_MISSION.goal && !st.claimed;
   const claimed = st.claimed;
@@ -3369,7 +3396,7 @@ function showSeasonItemInfo(itemId) {
   ov.innerHTML = `
     <div class="season-item-info-box">
       <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:36px;height:36px;" onclick="document.getElementById('season-item-info').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
-      <div class="sii-img"><img src="${sflItemImageUrl(tr.id)}" style="width:88px;height:88px;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';"></div>
+      <div class="sii-img"><img src="${sflItemImageUrl(tr.id)}" style="width:140px;height:140px;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';"></div>
       <div class="sii-name">${nm}</div>
       <div class="sii-desc">${desc}</div>
       <div class="sii-stock">
@@ -3920,7 +3947,7 @@ function showProfileMenu() {
   <div class="cfg-window">
     <button class="panel-close-x cfg-close" onclick="document.getElementById('profile-menu-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="cfg-tabs">
-      <button class="cfg-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='⚙️'">${t('profile.title')}</button>
+      <button class="cfg-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" style="width:26px;height:26px;image-rendering:pixelated;" onerror="this.outerHTML='⚙️'">${(typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en') ? 'Settings' : 'Configurações'}</button>
     </div>
     <div class="cfg-body">
       ${renderBumpkinAvatar()}
@@ -3937,10 +3964,6 @@ function showProfileMenu() {
         <span class="cfg-btn-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chapter_icon_2.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;" onerror="this.outerHTML='🌐'"></span>
         <span class="cfg-btn-label">${t('profile.language')}</span>
         <span class="cfg-btn-arrow">›</span>
-      </button>
-      <button onclick="document.getElementById('profile-menu-modal').remove(); resetTutorial();" class="cfg-btn">
-        <span class="cfg-btn-icon">${uiIconImg('scroll.webp', '🎓', 18)}</span>
-        <span class="cfg-btn-label">${t('tutorial.replay')}</span>
       </button>
       </div>
       <div class="cfg-vol">
@@ -3983,6 +4006,7 @@ function renderBumpkinAvatar() {
   } catch (e) {}
   return `
     <div class="cfg-avatar-box">
+      <div class="cfg-avatar-title">👤 ${(typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en') ? 'Profile' : 'Perfil'}</div>
       <div class="cfg-avatar-circle">${avatarInner}</div>
       ${farmId ? `<div class="cfg-avatar-name">Farm #${farmId}</div>` : ''}
     </div>
@@ -4125,6 +4149,13 @@ function setLanguage(lang) {
   if (m) m.remove();
 }
 function startTutorial(steps, options) {
+  // ⛔ OLD TUTORIAL DISABLED — the new one (Elder gives materials and teaches building) replaces it.
+  try {
+    localStorage.setItem('dinohunt_tutorial_part1_done', 'true');
+    localStorage.setItem('dinohunt_tutorial_part2_done', 'true');
+    localStorage.setItem('dinohunt_tutorial_part3_done', 'true');
+  } catch (e) {}
+  return;
   options = options || {};
   tutorialState.active = true;
   tutorialState.currentStep = 0;
@@ -4711,6 +4742,38 @@ function showSflDebug() {
 }
 // ═══════════════════════════════════════════════════
 var CRAFT_STATIONS = {
+  ferraria: {
+  id: 'ferraria',
+  name: 'Ferraria',
+  emoji: '⚒️',
+  structureItemId: 0,
+  alwaysBuilt: true,        // the ONLY free station — no build cost, ready from the start
+  buildAction: null,
+  coinCost: 0,
+  buildCost: {},
+  recipes: [
+    {
+    id: 'axe',
+    actionId: 'Axe_craft_ferraria',       // TODO(SFL): criar a regra (queima 1 Sucata + 1 Madeira + 3 Pedras, minta 1× item 130)
+    name: 'Forjar Machado',
+    emoji: '🪓',
+    burn: { 103: 1, 101: 1, 102: 3 },     // 1 Sucata + 1 Madeira + 3 Pedras
+    produces: 130,                         // Machado
+    amount: 1,
+    seconds: 60
+    },
+    {
+    id: 'pickaxe',
+    actionId: 'Pickaxe_craft_ferraria',   // TODO(SFL): criar a regra (mesmos materiais, minta 1× item 131)
+    name: 'Forjar Picareta',
+    emoji: '⛏️',
+    burn: { 103: 1, 101: 1, 102: 3 },     // 1 Sucata + 1 Madeira + 3 Pedras
+    produces: 131,                         // Picareta
+    amount: 1,
+    seconds: 60
+    }
+  ]
+  },
   bonfire: {
   id: 'bonfire',
   name: 'Fogueira',
@@ -4868,6 +4931,7 @@ var CRAFT_STATIONS = {
 function isStationBuilt(stationKey) {
   const cfg = CRAFT_STATIONS[stationKey];
   if (!cfg) return false;
+  if (cfg.alwaysBuilt) return true;   // Ferraria: free, ready from the start
   const balances = SFL_CONNECTED
   ? (window._sflLastSession?.data?.playerEconomy?.balances || {})
   : {};
@@ -5021,6 +5085,7 @@ function updateCraftMapStatus() {
   }
 }
 var stationStates = {
+  ferraria:     { level: 1, slots: [null, null, null, null, null] },
   bonfire:      { level: 1, slots: [null, null, null, null, null] },
   workbench:    { level: 1, slots: [null, null, null, null, null] },
   brooder:      { level: 1, slots: [null, null, null, null, null] },
@@ -5634,14 +5699,14 @@ function renderWorkbenchBuild(cfg) {
   const itemName = t('item.name.' + itemId, {}) !== ('item.name.' + itemId) ? t('item.name.' + itemId) : info.name;
   const imgUrl = sflItemImageUrl(parseInt(itemId));
   return `
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(0,0,0,.10);border:2px solid ${ok?'#4a7c3a':'#b3564a'};border-radius:9px;margin-bottom:6px;">
-    <div class="ldoe-slot" style="width:40px;min-height:40px;flex:none;">
-      <img src="${imgUrl}" style="width:30px;height:30px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span style=&quot;font-size:22px;&quot;>${info.emoji}</span>';" />
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:rgba(0,0,0,.10);border:2px solid ${ok?'#4a7c3a':'#b3564a'};border-radius:9px;margin-bottom:8px;">
+    <div class="ldoe-slot" style="width:68px;min-height:68px;flex:none;">
+      <img src="${imgUrl}" style="width:52px;height:52px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span style=&quot;font-size:38px;&quot;>${info.emoji}</span>';" />
     </div>
     <div style="flex:1;">
-      <div style="font-size:12px;color:var(--gold-light);font-family:'Pixelify Sans',monospace;">${itemName}</div>
+      <div style="font-size:21px;color:var(--gold-light);font-family:'Pixelify Sans',monospace;">${itemName}</div>
     </div>
-    <div style="font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:14px;font-weight:700;color:${ok?'#1b5e20':'#b3261e'};">${have}/${needed}</div>
+    <div style="font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:24px;font-weight:700;color:${ok?'#1b5e20':'#b3261e'};">${have}/${needed}</div>
     </div>
   `;
   }).join('');
@@ -5649,30 +5714,30 @@ function renderWorkbenchBuild(cfg) {
   // Materials header with Coins cost displayed at the right
   const coinsHeader = coinsNeed > 0 ? `
     <div style="display:flex;align-items:center;gap:6px;">
-      <img src="${sflItemImageUrl(122)}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span>🟡</span>';" />
-      <span style="font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:14px;font-weight:700;color:${coinsOk?'#1b5e20':'#b3261e'};">${coinsHave.toLocaleString()}/${coinsNeed.toLocaleString()}</span>
+      <img src="${sflItemImageUrl(122)}" style="width:28px;height:28px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span>🟡</span>';" />
+      <span style="font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:22px;font-weight:700;color:${coinsOk?'#1b5e20':'#b3261e'};">${coinsHave.toLocaleString()}/${coinsNeed.toLocaleString()}</span>
     </div>
   ` : '';
   
   return `
   <div style="text-align:center;padding:16px 0 14px;">
-    <div style="width:120px;height:120px;background:rgba(0,0,0,.4);border:3px dashed var(--gold-dim);border-radius:4px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;opacity:0.55;filter:grayscale(0.4) brightness(0.85);">
+    <div style="width:180px;height:180px;background:rgba(0,0,0,.15);border:3px dashed var(--gold-dim);border-radius:9px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;opacity:0.6;filter:grayscale(0.4) brightness(0.9);">
     <img src="${sflItemImageUrl(cfg.structureItemId)}"
-       style="width:90px;height:90px;object-fit:contain;image-rendering:pixelated;"
-       onerror="this.outerHTML='<span style=&quot;font-size:64px;&quot;>${cfg.emoji}</span>';" />
+       style="width:140px;height:140px;object-fit:contain;image-rendering:pixelated;"
+       onerror="this.outerHTML='<span style=&quot;font-size:96px;&quot;>${cfg.emoji}</span>';" />
     </div>
-    <div style="font-family:'Pixelify Sans',monospace;font-size:14px;color:var(--gold-dim);letter-spacing:1.5px;">${t('craft.in_ruins_full')}</div>
-    <div style="font-size:11px;color:var(--parch-dark);margin-top:6px;">${t('craft.build_hint')}</div>
+    <div style="font-family:'Pixelify Sans',monospace;font-size:20px;color:var(--gold-dim);letter-spacing:1.5px;">${t('craft.in_ruins_full')}</div>
+    <div style="font-size:16px;color:var(--parch-dark);margin-top:8px;font-family:'Pixelify Sans',monospace;">${t('craft.build_hint')}</div>
   </div>
-  <div style="margin:14px 0 8px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
-      <div style="font-family:'Pixelify Sans',monospace;font-size:11px;color:var(--gold-dim);letter-spacing:1.5px;">${t('craft.materials_needed')}</div>
+  <div style="margin:16px 0 8px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;">
+      <div style="font-family:'Pixelify Sans',monospace;font-size:16px;color:var(--gold-dim);letter-spacing:1.5px;">${t('craft.materials_needed')}</div>
       ${coinsHeader}
     </div>
     ${costRows}
   </div>
   <button onclick="buildStation('${cfg.id}')" ${canBuild?'':'disabled'}
-      style="width:100%;padding:14px;margin-top:14px;font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;letter-spacing:2px;border:2px solid ${canBuild?'var(--gold-light)':'#444'};border-radius:4px;background:${canBuild?'linear-gradient(145deg,var(--gold),var(--gold-light))':'#222'};color:${canBuild?'var(--wood-dark)':'#666'};cursor:${canBuild?'pointer':'not-allowed'};box-shadow:${canBuild?'0 0 14px rgba(240,160,32,0.5)':'none'};">
+      style="width:100%;padding:18px;margin-top:16px;font-family:'Pixelify Sans',monospace;font-size:20px;font-weight:700;letter-spacing:2px;border:2px solid ${canBuild?'var(--gold-light)':'#8a7a66'};border-radius:9px;background:${canBuild?'#63c74d':'#9a8874'};color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.35);cursor:${canBuild?'pointer':'not-allowed'};box-shadow:${canBuild?'0 3px 10px rgba(0,0,0,0.25)':'none'};">
     ${lockedByPlayerLevel ? t('locked.lv6') : (lockedByDefense ? t('locked.lv2') : (canBuild ? t('craft.btn.build_full') : t('craft.btn.insufficient')))}
   </button>
   `;
@@ -7806,6 +7871,8 @@ function buildItemsGrid() {
   { id: 127, category: 'Equipamentos', catKey: 'items.cat.equipment' },
   { id: 128, category: 'Equipamentos', catKey: 'items.cat.equipment' },
   { id: 129, category: 'Moedas', catKey: 'items.cat.currency' },
+  { id: 130, category: 'Ferramentas', catKey: 'items.cat.tools' },
+  { id: 131, category: 'Ferramentas', catKey: 'items.cat.tools' },
   ];
   const groups = {};
   const groupLabels = {};
@@ -11919,6 +11986,20 @@ function generateExploreDecor() {
         ok = true;
       }
       if (!ok) continue;
+      if (d.pick) {
+        // collectible (mushroom): same system as loose wood/stone — crisp circle + hand pickup
+        const el = document.createElement('div');
+        el.className = 'exp-ground-item';
+        el.style.backgroundImage = `url("${d.img}")`;
+        el.style.width = '9px'; el.style.height = '9px';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.zIndex = Math.round(y);
+        layer.appendChild(el);
+        if (!EXPLORE.groundLoot) EXPLORE.groundLoot = [];
+        EXPLORE.groundLoot.push({ el, x, y, key: d.pick, taken: false });
+        continue;
+      }
       const el = document.createElement('img');
       el.src = d.img;
       el.className = 'exp-decor';
@@ -11930,12 +12011,82 @@ function generateExploreDecor() {
       el.onerror = () => el.remove();
       layer.appendChild(el);
       EXPLORE.decor.push({
-        el, x, y, pick: d.pick || null, taken: false,
-        solid: !d.pick,   // decorations block movement; collectibles (mushrooms) stay walkable
+        el, x, y, taken: false, solid: true,
         hw: Math.max(5, Math.round(d.w * 0.4)), hh: Math.max(3, Math.round(d.w * 0.18)),
       });
     }
   }
+}
+// Loose wood & stone lying on the ground (5–10 of each). Picked up with the HAND button
+// when close — a glowing circle under the item shows it's in reach.
+function generateGroundLoot() {
+  EXPLORE.groundLoot = [];
+  const layer = document.getElementById('exp-resource-layer');
+  if (!layer) return;
+  const B = EXPLORE.border, M = EXPLORE.mapSize;
+  const minX = B + 50, maxX = M - B - 50, minY = B + 50, maxY = M - B - 50;
+  const playerStart = { x: B + 80, y: B + 80 };
+  const kinds = [];
+  for (const k of ['wood', 'stone']) {
+    const n = 5 + Math.floor(Math.random() * 6);   // 5–10 of each
+    for (let i = 0; i < n; i++) kinds.push(k);
+  }
+  for (const k of kinds) {
+    let x, y, ok = false, tries = 0;
+    while (!ok && tries < 50) {
+      tries++;
+      x = minX + Math.random() * (maxX - minX);
+      y = minY + Math.random() * (maxY - minY);
+      if (Math.hypot(x - playerStart.x, y - playerStart.y) < 100) continue;
+      if (EXPLORE.resources.some(r => Math.hypot((r.cx ?? r.x) - x, (r.cy ?? r.y) - y) < 30)) continue;
+      if (EXPLORE.groundLoot.some(g => Math.hypot(g.x - x, g.y - y) < 26)) continue;
+      ok = true;
+    }
+    if (!ok) continue;
+    const el = document.createElement('div');
+    el.className = 'exp-ground-item';
+    el.style.backgroundImage = `url("${LOOT_ITEMS[k].img}")`;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.zIndex = Math.round(y);
+    layer.appendChild(el);
+    EXPLORE.groundLoot.push({ el, x, y, key: k, taken: false });
+  }
+}
+// Nearest loose ground item within `range` (from the player's feet).
+function nearestGroundItem(range) {
+  if (!EXPLORE.groundLoot) return null;
+  let best = null, bd = range;
+  for (const g of EXPLORE.groundLoot) {
+    if (g.taken) continue;
+    const d = Math.hypot(g.x - EXPLORE.x, g.y - (EXPLORE.y + 16));
+    if (d < bd) { bd = d; best = g; }
+  }
+  return best;
+}
+// Actually pick a loose item up (assumes we're close enough).
+function doPickupGround(g) {
+  if (!g || g.taken) return;
+  if (invFullFor(g.key)) {
+    const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+    if (typeof showToast === 'function') showToast(isEN ? `Backpack full (${EXP_INV_MAX})` : `Mochila cheia (${EXP_INV_MAX})`, 'error');
+    return;
+  }
+  g.taken = true;
+  addToInv(lootItem(g.key, 1));
+  floatDrop(g.x, g.y - 10, 1, LOOT_ITEMS[g.key].img);
+  playSfx('collect', 0.5);
+  if (g.el) { g.el.style.transition = 'opacity .2s'; g.el.style.opacity = '0'; setTimeout(() => g.el && g.el.remove(), 220); }
+  if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
+}
+// Hand button on a loose item: walk over to it first, pick up on arrival (close = instant).
+function collectGroundItem() {
+  const g = nearestGroundItem(42);
+  if (!g) return false;
+  const d = Math.hypot(g.x - EXPLORE.x, g.y - (EXPLORE.y + 16));
+  if (d <= 14) doPickupGround(g);
+  else EXPLORE.itemWalk = g;   // auto-walk, collected on arrival (see exploreLoop)
+  return true;
 }
 // Apply the current level's theme to the ground/viewport + show the level title (called on hunt start).
 function applyExploreTheme() {
@@ -11962,7 +12113,7 @@ const STONE_PER_ROCK = 2;               // stone granted when a rock breaks
 const IRON_PER_ROCK = 1;                // iron granted when an iron rock breaks
 const GOLD_PER_ROCK = 1;                // gold granted when a gold rock breaks
 const EXP_PICK_DURABILITY = 5;          // rocks one pickaxe can break
-const EXP_PICK_ITEM_ID = null;          // TODO(SFL): pickaxe item id (Michel creates it, like axe=130)
+const EXP_PICK_ITEM_ID = 131;           // pickaxe item (created in the editor; stone-pickaxe sprite)
 const EXP_PICK_ACTION = 'burn_pickaxe'; // burns 1 pickaxe when it breaks (every 5th rock)
 const EXP_TEST_PICKS = 3;               // pickaxes handed out while there's no pickaxe item yet / offline
 // Rock strike-sheet display (scale 2 → rock ≈28px). The rock's base sits at native (40.5,31).
@@ -12131,11 +12282,28 @@ function setupHomeChar() {
   if (!el) return;
   const { sheet } = getBumpkinAnimUrls();
   if (el._sheet === sheet) return;   // already showing this skin
-  const S = 1.6;   // lobby character scale (bigger than in-game so he reads well on the base)
+  const S = 2.3;   // lobby character scale (big — he's the star of the base)
+  animateHomeSprite(el, sheet, S);
+  // player name above the head (SFL username when available, else the farm number)
+  const nameEl = document.getElementById('home-char-name');
+  if (nameEl) {
+    let label = 'Você';
+    try {
+      const s = window._sflLastSession;
+      const uname = s?.data?.username || s?.data?.farm?.username || s?.data?.player?.username;
+      if (uname) label = uname;
+      else if (window.firebaseUid && String(window.firebaseUid).startsWith('sfl_')) label = 'Farm #' + String(window.firebaseUid).replace('sfl_', '');
+    } catch (e) {}
+    nameEl.textContent = label;
+  }
+  setupHomeElder();
+}
+// Shared: run a bumpkin idle loop (frames 0..8) on an element, at the given scale.
+function animateHomeSprite(el, sheet, S) {
+  if (!el || el._sheet === sheet) return;
   const im = new Image();
   im.onload = () => {
     el._sheet = sheet;
-    el.textContent = '';
     const cols = Math.max(1, Math.round(im.naturalWidth / EXP_FRAME_W));
     el.style.width = (EXP_FRAME_W * S) + 'px';
     el.style.height = (EXP_FRAME_H * S) + 'px';
@@ -12143,13 +12311,25 @@ function setupHomeChar() {
     el.style.backgroundSize = `${im.naturalWidth * S}px ${im.naturalHeight * S}px`;
     let f = 0;
     if (el._t) clearInterval(el._t);
-    el._t = setInterval(() => {   // idle frames 0..8
+    el._t = setInterval(() => {
       f = (f + 1) % 9;
       el.style.backgroundPosition = `-${(f % cols) * EXP_FRAME_W * S}px -${Math.floor(f / cols) * EXP_FRAME_H * S}px`;
     }, 140);
   };
-  im.onerror = () => { if (!el._sheet) { el.textContent = '🧑‍🌾'; el.style.fontSize = '64px'; el.style.textAlign = 'center'; el.style.lineHeight = '100px'; } };
+  im.onerror = () => { if (!el._sheet) { el.style.fontSize = '54px'; el.style.textAlign = 'center'; el.style.lineHeight = (EXP_FRAME_H * S) + 'px'; el.insertAdjacentText('beforeend', '🧑‍🌾'); } };
   im.src = sheet;
+}
+// The Elder NPC (level keeper): wise robes, beard and staff — the "Wise" SFL set.
+function setupHomeElder() {
+  const el = document.getElementById('home-elder');
+  if (!el) return;
+  animateHomeSprite(el, 'https://animations.sunflower-land.com/animate/0_v1_0_1_180_13_182_22_183_0_0_0_181_0_0_0_0_177/idle_walking', 2.1);
+}
+function homeCharClick() {
+  if (typeof showToast === 'function') showToast('🧑‍🌾 Em breve!', 'info');
+}
+function ferrariaClick() {
+  if (typeof showToast === 'function') showToast('⚒️ Ferraria — em breve!', 'info');
 }
 window.addEventListener('load', () => {
   setTimeout(setupHomeChar, 700);    // first paint (default skin if the SFL session isn't in yet)
@@ -12764,7 +12944,7 @@ function openExplore(level) {
   document.querySelectorAll('.exp-hurt-flash, #explore-death').forEach(el => el.remove());
   EXPLORE.inv = {}; EXPLORE.openChest = null;
   EXPLORE.autoTarget = null; EXPLORE.openTimer = null; EXPLORE.paused = false; EXPLORE.chopWalk = null;
-  EXPLORE.hp = 2500; EXPLORE.hpMax = 2500; updateExploreHP();   // TEST value
+  EXPLORE.hp = 100; EXPLORE.hpMax = 100; updateExploreHP();
   EXPLORE.axeCount = getAxeBalance(); EXPLORE.axeUsed = 0;
   EXPLORE.pickCount = getPickBalance(); EXPLORE.pickUsed = 0; EXPLORE.toolMode = null;
   startAmbience();
@@ -12774,7 +12954,8 @@ function openExplore(level) {
   applyExploreTheme();   // level theme: ground/trees/rocks (Planícies → Arena do Chefe)
   generateExploreResources();
   generateExploreChests();
-  generateExploreDecor();   // theme decorations (fences, cacti, skulls… + collectible mushrooms)
+  generateGroundLoot();     // loose wood/stone picked up by hand
+  generateExploreDecor();   // theme decorations (fences, cacti, skulls…) + mushrooms (also hand-pickup)
   generateExploreEnemies();
   buildExploreClouds();
   renderBackpackGrid();
@@ -12979,8 +13160,8 @@ function exploreLoop(t) {
   let mag = Math.hypot(mx, my);
   const manual = mag > 0.12;
   // Manual control cancels the magnet / opening in progress.
-  if (manual && (EXPLORE.autoTarget || EXPLORE.openTimer || EXPLORE.chopWalk)) {
-    EXPLORE.autoTarget = null; EXPLORE.openTimer = null; EXPLORE.chopWalk = null; hideOpenTimer();
+  if (manual && (EXPLORE.autoTarget || EXPLORE.openTimer || EXPLORE.chopWalk || EXPLORE.itemWalk)) {
+    EXPLORE.autoTarget = null; EXPLORE.openTimer = null; EXPLORE.chopWalk = null; EXPLORE.itemWalk = null; hideOpenTimer();
   }
   // Opening a chest: stand still, tick the timer, open the panel when done.
   if (EXPLORE.openTimer) {
@@ -13021,6 +13202,21 @@ function exploreLoop(t) {
         EXPLORE.chopWalk = null; EXPLORE._amInit = false; mx = 0; my = 0; mag = 0;
         // Arrived via magnet → land the first hit automatically (no need to press again).
         if (tg.type === 'tree') chopTree(tg); else mineRock(tg);   // stone/iron/gold all mine
+      } else { mx = dx / dist; my = dy / dist; mag = 1; }
+    }
+  } else if (EXPLORE.itemWalk) {
+    // Item magnet: walk to the loose item, pick it up on arrival.
+    const g = EXPLORE.itemWalk;
+    if (g.taken) { EXPLORE.itemWalk = null; }
+    else {
+      const dx = g.x - EXPLORE.x, dy = g.y - (EXPLORE.y + 16);
+      const dist = Math.hypot(dx, dy);
+      const moved = Math.hypot(EXPLORE.x - (EXPLORE._amx ?? EXPLORE.x), EXPLORE.y - (EXPLORE._amy ?? EXPLORE.y));
+      const stuck = EXPLORE._amInit && moved < 0.4;
+      EXPLORE._amx = EXPLORE.x; EXPLORE._amy = EXPLORE.y; EXPLORE._amInit = true;
+      if (dist <= 12 || (stuck && dist < 40)) {
+        EXPLORE.itemWalk = null; EXPLORE._amInit = false; mx = 0; my = 0; mag = 0;
+        doPickupGround(g);
       } else { mx = dx / dist; my = dy / dist; mag = 1; }
     }
   } else { EXPLORE._amInit = false; }
@@ -13077,31 +13273,26 @@ function exploreLoop(t) {
       if (d < EXP_MAGNET_RANGE) chestReach = true;
       if (d < chestD) chestD = d;
     }
+    // loose ground items: glow circle when in hand reach
+    if (EXPLORE.groundLoot) for (const g of EXPLORE.groundLoot) {
+      if (g.taken || !g.el) continue;
+      g.el.classList.toggle('near', Math.hypot(g.x - EXPLORE.x, g.y - (EXPLORE.y + 16)) < 42);
+    }
     const tree = nearestChoppableTree(EXP_MAGNET_RANGE);
     const treeD = tree ? Math.hypot((tree.cx ?? tree.x) - EXPLORE.x, (tree.cy ?? tree.y) - (EXPLORE.y + 12)) : Infinity;
     const rock = nearestMinableRock(EXP_MAGNET_RANGE);
     const rockD = rock ? Math.hypot((rock.cx ?? rock.x) - EXPLORE.x, (rock.cy ?? rock.y) - (EXPLORE.y + 12)) : Infinity;
     const enemy = nearestEnemy(EXP_ATTACK_RANGE + 6);
     const enemyD = enemy ? Math.hypot(enemy.x - EXPLORE.x, (enemy.y - enemy.footOff) - (EXPLORE.y + EXP_PLAYER_FEET)) : Infinity;
-    let mode = null, ready = chestReach;   // nearest interactable wins (enemy > tree > rock > chest)
-    if (enemy && enemyD <= treeD && enemyD <= rockD && enemyD <= chestD) { mode = 'sword'; ready = true; }
-    else if (tree && treeD <= rockD && treeD <= chestD) { mode = 'axe'; ready = hasAxe(); }
-    else if (rock && rockD <= chestD) { mode = 'pick'; ready = hasPick(); }
+    const gItem = nearestGroundItem(42);
+    const gD = gItem ? Math.hypot(gItem.x - EXPLORE.x, gItem.y - (EXPLORE.y + 16)) : Infinity;
+    let mode = null, ready = chestReach || !!gItem;   // NEAREST interactable wins (enemy > item/tree/rock > chest)
+    if (enemy && enemyD <= treeD && enemyD <= rockD && enemyD <= chestD && enemyD <= gD) { mode = 'sword'; ready = true; }
+    else if (tree && treeD <= rockD && treeD <= chestD && treeD <= gD) { mode = 'axe'; ready = hasAxe(); }
+    else if (rock && rockD <= chestD && rockD <= gD) { mode = 'pick'; ready = hasPick(); }
     updateToolButton(mode);
     const hb = document.getElementById('exp-hand-btn');
     if (hb) hb.classList.toggle('ready', ready);
-  }
-  // Collectible decorations (mushrooms): walk over one to pick it up.
-  if (EXPLORE.decor) for (const d of EXPLORE.decor) {
-    if (!d.pick || d.taken) continue;
-    if (Math.hypot(d.x - EXPLORE.x, d.y - (EXPLORE.y + 16)) > 16) continue;
-    if (invFullFor(d.pick)) continue;   // backpack full → leave it on the ground
-    d.taken = true;
-    addToInv(lootItem(d.pick, 1));
-    floatDrop(d.x, d.y - 14, 1, LOOT_ITEMS[d.pick].img);
-    playSfx('step', 0.55);
-    if (d.el) { d.el.style.transition = 'opacity .25s'; d.el.style.opacity = '0'; setTimeout(() => d.el && d.el.remove(), 260); }
-    if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
   }
   drawMinimap();
   // Advance the sprite animation: cycle idle frames (0..8) or walking frames (9..16).
@@ -13213,6 +13404,7 @@ function expActionButton() {
     const far = nearestMinableRock(EXP_MAGNET_RANGE);
     if (far) { EXPLORE.chopWalk = far; return; }   // magnet: auto-walk to the rock
   }
+  if (collectGroundItem()) return;   // loose wood/stone in reach → hand picks it up
   openNearestChest();
 }
 // One axe hit: shake the tree, drop 1 HP; on the 3rd hit (HP 0) the tree falls.
