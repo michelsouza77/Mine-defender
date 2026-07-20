@@ -4793,7 +4793,7 @@ var CRAFT_STATIONS = {
     burn: { 132: 1, 102: 3 },             // 1 Graveto + 3 Pedras
     produces: 131,                         // Picareta
     amount: 1,
-    seconds: 60
+    seconds: 62
     }
   ]
   },
@@ -4816,7 +4816,7 @@ var CRAFT_STATIONS = {
     burn: { 101: 5 },        // 5 Wood
     produces: 104,            // Coal
     amount: 1,
-    seconds: 120              // 2 minutes
+    seconds: 120              // JSON: coal_craft_bonfire collect 120s
     },
     {
     id: 'ingot',
@@ -4871,7 +4871,7 @@ var CRAFT_STATIONS = {
     burn: { 101: 1 },        // 1 Madeira
     produces: 132,            // Graveto (stick)
     amount: 3,
-    seconds: 5
+    seconds: 5                // JSON: stick_craft_sawbench collect 5s
     },
     {
     id: 'wooden',
@@ -4882,7 +4882,7 @@ var CRAFT_STATIONS = {
     burn: { 101: 3 },        // 3 Madeira
     produces: 105,            // Tábua (wooden)
     amount: 1,
-    seconds: 60
+    seconds: 60               // ⚠ wooden_craft_sawbench não estava no JSON enviado — ajustar se for outro
     }
   ]
   },
@@ -4965,7 +4965,12 @@ function isStationBuilt(stationKey) {
   const cfg = CRAFT_STATIONS[stationKey];
   if (!cfg) return false;
   // Ferraria is tracked by a local flag (built during the tutorial as a visual scene).
-  if (stationKey === 'ferraria') { try { return localStorage.getItem('dinohunt_ferraria_built') === 'true'; } catch (e) { return false; } }
+  if (stationKey === 'ferraria') {
+  // Built if you OWN the real Workbench item (133) on SFL, OR the tutorial marked it (offline).
+  const _bal = window._sflLastSession?.data?.playerEconomy?.balances || {};
+  if ((Number(_bal['133']) || 0) >= 1) return true;
+  try { return localStorage.getItem('dinohunt_ferraria_built') === 'true'; } catch (e) { return false; }
+  }
   const balances = SFL_CONNECTED
   ? (window._sflLastSession?.data?.playerEconomy?.balances || {})
   : {};
@@ -5214,6 +5219,7 @@ function offlineBalances() {
     const add = (id, n) => { b[id] = (Number(b[id]) || 0) + n; };
     add('101', 100); add('102', 100); add('103', 50); add('105', 30);
     add('112', 30); add('122', 3000); add('132', 30);
+    add('109', 1); add('133', 1);   // own both benches offline so crafting is testable
   }
   return b;
 }
@@ -5697,6 +5703,7 @@ async function autoFillRecipe(stationKey, slotIdx) {
   for (const [matId, qty] of Object.entries(recipe.burn)) burnAmounts[String(matId)] = qty;
   const res = await sflExecuteAction(recipe.actionId, burnAmounts);
   if (!res.ok) {
+  console.error('CRAFT FAIL →', recipe.actionId, 'amounts:', burnAmounts, 'error:', res.error);
   { const t = translateSflError(res.error); showToast(t.msg, t.severity); }
   return;
   }
@@ -9613,12 +9620,16 @@ function translateSflError(rawError) {
   return { msg: t('err.already_producing'), severity: 'info' };
   }
   if (s.includes('HTTP 4')) {
-  return { msg: t('err.http_4xx'), severity: 'error' };
+  // Show the server's ACTUAL reason (the response body) instead of a generic message.
+  const body = s.replace(/^[\s\S]*?HTTP \d+:\s*/, '').trim();
+  const detail = (body && body !== s) ? body : s;
+  const shortB = detail.length > 150 ? detail.substring(0, 150) + '…' : detail;
+  return { msg: '❌ ' + shortB, severity: 'error' };
   }
   if (s.includes('HTTP 5') || s.includes('Network')) {
   return { msg: t('err.network'), severity: 'error' };
   }
-  const short = s.length > 60 ? s.substring(0, 60) + '…' : s;
+  const short = s.length > 120 ? s.substring(0, 120) + '…' : s;
   return { msg: `❌ ${short}`, severity: 'error' };
 }
 function showToast(msg, type) {
