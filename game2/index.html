@@ -528,6 +528,16 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .craft-cloud-4{font-size:56px;}
 }
 .ldoe-split{display:flex;height:100%;min-height:0;}
+/* Ancião level screen (LDOE crater style): inventory left, goal + unlocks right */
+.anciao-split{flex:1;min-height:0;display:flex;}
+.anciao-inv{width:38%;min-width:190px;display:flex;flex-direction:column;border-right:2px solid #b3824f;padding:10px;overflow:hidden;}
+.anciao-inv-grid{flex:1;overflow-y:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;align-content:start;}
+.anciao-goal{flex:1;display:flex;flex-direction:column;padding:12px 16px;overflow-y:auto;}
+.anciao-unlocks{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;}
+.anciao-unlock{display:flex;flex-direction:column;align-items:center;gap:3px;width:72px;}
+.anciao-unlock-ic{width:58px;height:58px;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:11px;display:flex;align-items:center;justify-content:center;}
+.anciao-unlock-lb{font-family:'Pixelify Sans',monospace;font-size:11px;font-weight:700;color:#3a2410;text-align:center;line-height:1.15;}
+@media (pointer:coarse) and (max-width:600px){.anciao-inv{width:34%;min-width:120px;}.anciao-inv-grid{grid-template-columns:repeat(2,1fr);}}
 .ldoe-left,.ldoe-right{display:flex;flex-direction:column;flex:1;background:rgba(0,0,0,.2);}
 .ldoe-left{border-right:2px solid var(--gold-dim);}
 .ldoe-section-title{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(0,0,0,.5);border-bottom:1px solid var(--gold-dim);font-family:'Pixelify Sans',monospace;font-size:12px;letter-spacing:1.5px;color:var(--gold-light);}
@@ -1615,7 +1625,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Your bumpkin, idling by the house (name on top; click = coming soon) -->
 <div id="home-char" style="left:67%;top:57%;" onclick="homeCharClick()"><div class="hb-lb" id="home-char-name" style="position:absolute;left:50%;top:46px;transform:translate(-50%,-100%);white-space:nowrap;"></div></div>
 <!-- The ELDER (level NPC): wise bumpkin standing on the road by the top stones -->
-<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><div class="hb-lb" style="position:absolute;left:50%;top:42px;transform:translate(-50%,-100%);white-space:nowrap;">🧙 Ancião</div></div>
+<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><img id="home-elder-shield" style="position:absolute;left:50%;top:44px;transform:translate(-50%,-100%);width:26px;height:26px;image-rendering:pixelated;display:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4));" alt=""><div class="hb-lb" style="position:absolute;left:50%;top:74px;transform:translate(-50%,-100%);white-space:nowrap;">🧙 Ancião</div></div>
 <!-- WORKBENCH (blacksmith bench with anvil): bottom-right corner of the island -->
 <button class="craft-station hb-station" id="craft-station-ferraria" style="left:84%;top:74%;" onclick="openWorkbench('ferraria')" title="Workbench">
 <div class="craft-station-img"><img src="https://sunflower-land.com/game-assets/buildings/workbench.png" alt="Workbench" style="width:82px;height:82px;" onerror="this.outerHTML='<span style=&quot;font-size:48px;&quot;>⚒️</span>';" /></div>
@@ -4028,10 +4038,16 @@ function renderBumpkinAvatar() {
   let tokenUri = '32_1_5_13_20_22_23';
   try { tokenUri = getBumpkinAnimUrls().tokenUri || tokenUri; } catch (e) {}
   const avatarInner = `<img src="${bumpkinPortraitUrl(tokenUri, 200)}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span style=&quot;font-size:48px;&quot;>🦖</span>';">`;
+  // Level shield in the TOP-LEFT corner of the profile (current Ancião level).
+  let shieldHtml = '';
+  try {
+    const lv = (typeof anciaoLevel === 'function') ? anciaoLevel() : 0;
+    if (lv >= 1) shieldHtml = `<img src="${anciaoShieldImg(lv)}" title="Nível ${lv}" style="position:absolute;top:-10px;left:-10px;width:46px;height:46px;image-rendering:pixelated;z-index:3;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));" onerror="this.style.display='none'">`;
+  } catch (e) {}
   return `
     <div class="cfg-avatar-box">
       <div class="cfg-avatar-title">👤 ${(typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en') ? 'Profile' : 'Perfil'}</div>
-      <div class="cfg-avatar-circle">${avatarInner}</div>
+      <div class="cfg-avatar-circle" style="position:relative;overflow:visible;">${shieldHtml}${avatarInner}</div>
       ${farmId ? `<div class="cfg-avatar-name">Farm #${farmId}</div>` : ''}
     </div>
   `;
@@ -12537,9 +12553,137 @@ function setupHomeMap() {
 }
 window.addEventListener('load', () => setTimeout(setupHomeMap, 300));
 // The Elder NPC: future level/rewards screen (give him what he asks to unlock game features).
-function anciaoClick() {
-  if (typeof showToast === 'function') showToast('🧙 Ancião — subir de nível em breve!', 'info');
+const LEVEL_SHIELD_IMG = [null,
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAmVJREFUWIXFl01oE0EYhp+pwVMv6R5EMFqCtRS8FCooQqlQexOhVqT0pkjuHiSpgWIJUhB6D4oXD7WgWNBLY6HUi4JSLwWpSiCkIB6SzUWxIWU8bHd287N/k9q+EDYz3zfzPvvtz8wKNCWMceluy8qa0JqnG2N56obVt/NKGyR0cpuxcZ7Y1UsANN59gMqWFkhgUqczBrj46C5T56zhL79JPs4+ccZEAPEMehmTvOLkJBNWvFh24sX1SCBtnVGMeTZhHW8XtEFUQ8s4kbKO5bw2iHCbRzWWQ6NW/Ot7LRBZWROizTyCcauigNgQQhjjstU8jHFucKnJPLs9HR7EBREDYOQm9XycQgWuZattxqdnZyi9ds4iN7jEg4dp1f78Yw+eP1YQ6tLYCfvziakV3uT6mDAGOJ4yQQEAi0XB26Lr7ZpIweXrPE33cue+t7mfVMWGRhGFGQAWvsBW0nkQYl6DAV7M9XIrU9Uyd0tdkg7q8RuYWZfw53dkwyjyrUBxZaepnd2ehrkFAK1KdJJvBTrJfbcfhHwrwK8SnDijNXG8tqn+13zygitQ+dk0WVSZu4ZvPBBA9Fgp8dqmBbLcT3Y+05aXnc/Acr/KM3eNQPNQALL+F3PvJADm6iRSSqRs2o0xcvYYUko+fW9grk6GMrblfw/YatQxG+EnjSJVgXtJSXrYFSnnEdUSolpy+sY2EEJ4/i4MxGBsw9cwPWx52Yq2GPWFeyIUdIjFSG859gAJNKbDckw3G5J9kCjGtG5IVOdRbsncOrJNaTcgB7otDwvy3z9MAkEO69MsEOSwPk79QHSMbf0DFsuFzT4YqdAAAAAASUVORK5CYII=',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAqBJREFUWIXFl09oE0EUxr9JcvRg3IMIhobQKgUpVFpQCqWFWI8eFEIRL5bQuyAktrQIwQYK3ovioSI2oCjYS7VQ6kWhpb0IUltCQgoltMnmoGLCLs/DdGc3yW72T9L2g2Ez82be95vdCTPD4FFMipKxTqVV5ilPO8Z0+S5v23/vGcRx5yZj6RoCt24CAJQv34DSD08gtp3MZgwAN57Fce8KH/7uF+H7kxf6GBcglkErY0RG9T6REI9nC3o8u+YKpKnRjTFejfHnw8+eQUTFk3Fokj8LC55BmNHcrTH1DvP4z6+eQKi0yliTuQvjRrkB0SAYk6LUaG5nnLr61hRgemfcGYgRgklRwsQR1RSVlosqsfghseAQL32LxPoWqWtJJcRyhFiOUjNzZKaNXYVSM3OiH2I5MV7kix/SclGlmqISJo6ISVHyafTPswzpbcN0QpPA0B28/HQf+Q8FMfOppwnT2Q90+3H7weO6t0O9w7yMvRFt6W3upSlgmu1YS7PnEEuWTWObeypWXs8DgCWUJvFJTOSzjABIrhHw90/L5O2q5RvIftyvq0/vjAOz6bo24+wHuv1Y6SSAmbSV3rgetE+ixTsDUMwDF7uamp2YBytb4nfFMwAAlA4Q9B9APn+d1zNhTJF+FtncUzHYo6VJArFc3XC5KoHht2X6losQAJiPdzHOyCjdXFewsgW5KkGuSnbp7QGo9g+yeolXMmEQUX2cSJSNXQXIhB0Za3K2CJUaZMV5UjcSb+BRhJDoN0QKC2DlPFg5r7eNrIMxZlkGewLAyHpLw0Q/99LkbjO60PyPMJOAdrAZeduOLUBsjWGyHaOdA8kxiBtjNB5IRONZHsmMOrNDaTsgHT2WOwU58YuJLchpXc1sQU7rctoKxIuxpv9ZLdow9nJONQAAAABJRU5ErkJggg==',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAApFJREFUWIXFV01oE0EU/ibJ0UvcgwiGQoiGghQKEZVCaSHWoweFWKQXS+hdKSQaWizRBorei+KhRdqDomAvaqHUi4rFXgSJltAlhRLaJD2o2JDleZjsZPOzfxNNPxh2572Z933zZpd5wyAJpkTJ2KfiKpOK0wkxnbrKbTsvpIU4HtxCrJyF79JFAED13Qeg+FVKiO2gdisGgAsP4rh2hk9//p3w8c7j+hwXQkydZsQIDtfHBAPcn8vX/bk1V0JajG6I8XSEP2++lRYiOlLEgQn+zM9LC2FGcrfE1DvI/d/eSwmh4ipjLeQuiJvhRogugjElSs3kVsTp8FJbcgBIZUedCTGKYEqUML5PlapGKwWNWHyPmH+At74FYn0L1LOsEWLblJ6aJTN8/lGl9NQsIbYtmj5fxIvv0UpBo0pVI4zvE1Oi5NHVP8oxZDYNywlMAANX8OT1Dagv80iHl3D3XsJ09ZGQF5fHJhsyRL2DvI08E7bMJufS4TONCGB5+hhiyVKLfWNLw5vFOdG3EgbjlrSBx9QDILlGwO9flsE7hWUGcq92xHsqO4rUdVWkuHnVelb0D9EpLDPQDVhmAAUVONEjFdh/8EW8H0gLAIDiLvzeXdw+n62lPYGNLQ33pzOAYSsiIS8wNgkszuHhp7CYXj5UwPDTNLztFjAPH5KaSTbYUzPJFptuLx8qotnBNgNU+YOy72SDLRLygohM57iBs4+wWgGG1sGYdf1y7rQPGFqXE3ArSEj0Gzz5ebCSClZS67aaCLPmhDzRz7l0uDuMjjv7I4RoB4eR3HFsIsSWGG2OY3RSkNSEuCFGc0EijEdZkhlxZEVpJ0L+aVnuVMh/v5jYCunW1cxWSLcup1ZCZIh1/AXcusdQPIMLBAAAAABJRU5ErkJggg==',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAoVJREFUWIXFl09oE0EUxr+X7rGHxj0VDJXQKgUpVFpQCsVCtEcPCkG8GULvHiTRUlGC9eS9VDz00gpaPORUC0UvCi31UhBtCQkpSGiT7UWxYZfnYbKbTbJ/J5o+WJad9958v5eZycwQJI3UBNu/ubpJUv10I8znb4u2w3fSIIGDO4TVy1BuXAMA6B8+A9U9KRDfIKeKAeDq8zTuXBTpb38wvjxabuaEAHF1ugkjPtOMiceEv1Bu+gtboUA6GsMI4/VN8b6/IQ1ifUgJx+bEu7wkDUJ28bDCPDot/N8+SYFwdZOoQzyEcLuFATEhiNQEt4v7CecurToCzH+/GwzEDkFqgpE65rpucL5iMKWPmKJT4hlbYRpb4aE1g5EsMpJFzi0sspNt7+tiDjXikCxa+VZ/6SPOVwyu6wYjdcykJlgx6V8WCPmC7d81NgdM3cKrTD9SD8tW5Y+fZhyrdzJrqEanQRv3AAAvvgJ78eZCUNySAWDtST+S2Zqrn4iImdk1wIwzh8TBIl6J2S0Gfv8CJKoPap4AhfeHrr6dAwO5hUXf6rsC6IV5A1RKgMvPPzHc19I2MdyH7X2dzSUaPdm1HnkAAKj+xPyzrG+Yae2x2qnqGe+5CgCAIhEMzK6DyHnjNBfBzoGByREF0dl14GTXVzgwANf/QFMGRccAtIErTeebCx3xQYUDAwAA9Do0XXRsjmkLSBdmzYEHcUZm3OYpL4FqJVCt1JKgnarQjEExwRpDQ0SYHFGA6x99BTPjQsu0cJvRuaFAVVnQATYjue3YBcRXGA7bMbo5kDRAwgij/UBiNZ7lkcxuZ3Yo7Qbknx7Lg4L894uJL0ivrma+IL26nHqByAib9hcKe8JEM+4+WgAAAABJRU5ErkJggg==',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAphJREFUWIXFl01oE0EYht9pcuwl3YMIhkBILQUpFCIohVIh2qOgQgjixRB6F5TELi2WYAsF70Xx0B7ag4KHXFoLpV4UDPVSkGgICSlIaPNzUTTs8nnY7G/2P5q+sGx2vpnvfTKTzXzD4FOMS5D2mZr7zFeeQYzp0l2p7eStbxDXnfuMuSsI3rwOABDefwSax75AHDuZfWMAuPY8g3uXpeFvvhE+PX2pjvEAYhm0Mkb0htonGpbilboarxx4Aulr9GKM17ek+8M93yDKgy/j8IJ0r2/4BmFac6/GNDkrxb9+8AVCzX3G+sw9GBvlBUSGYIxLkNHczjg/sW1qLosvpZxBtBCMSxDSZ9QVRCo0RGKZU2KhGema2iQ2tUmRHZGQrFJ+aZXs9Pm7QPmlVUKySkhWlfFKvswpFRoidQWRkD4jxiUoKJO/qDAUKpp/1/ACMHMbr7KjSD/RTKEHKUs1OQu2dx8AsPYFOI6qL0LQajAA7CyPIplrmcaKZRG7W+u6Nr6UApDq66ssiYlsAXIHBPz6aRqLxwKIP8vqgLC13oNwrxG7YOXdietE8VgA8w8eO/5IPQEMQ7ZLgEYNuBBRHvlSClheM+26qFkOAAh1jpTPHRsL5xlo/tAlM4ovpcCv5Czj7T+cbXr7GQDARiTGUOcI7d07WCT1VS2WRfDj+hT8Sg6h+QlHY1mOM0Dd32iLF01j8VgARAQiXXXm2twVAABA6EpJ5w7BmHkJUSyLuDoeBOYOXZvrAB5FCdlpTaS+AdaqgbVq+hE9COPl1jw7LXnJ8rYZjUWM+UylQLvYjPxtxxYgjsYw2Y4xSEHSA/FiDGNBojSeZ0mm1bkVpYOA/NOy3C3Ifz+YOIIM62jmCDKsw6kdiB9jWX8BNgbGE46rnAYAAAAASUVORK5CYII=',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAo1JREFUWIXFl01oE0EYht9JcvQS9yCCoRCipSCFQgSlUCrE9uhBIRTxYgm9C0KioUFJbUDovSgeKtIe/AN7UQulXhQM7UWQaggJKUho83NRNOzyeVj3J8nu7OxE2xeWzc73zbzPfJthZhkkxZQE2Z+pscGkxhnEmE5d0dv2nkuDCCf3GStnEbp0AQCgvvsAND5LgXgmOc0YAM7fT+HqGb37s6+Ej7cfWn18gLgG3YwRvWjlRCN6vFyz4uVNXyB9jX6M8XhKv994Kw1iPkgZR+b0e21ZGoTZzf0a08iEHv/yXgqEGhuM9Zn7MO6VHxADgjElQb3mPOP88KqjuaHs7ow3iB2CKQnC7AF1VI3W6xqx1D6x8Lh+ja4QG12hoTWNkKxQfn6RePr0TaX8/CIhWSEkK2Z/c7zUPq3XNeqoGmH2gJiSoIBBvlRmKOzYphKZA8Yv49Hra6i+rCE/vIo7d9Pc2cdjQUxfv2VWiUYm9GvqqZlT2NG9DIV4A67ljiGZaTrGiiUNb548AABPMPOVOIgLkNkk4OcP7uAAsJArdD1nd2c8+wgBlF/tucbisSDiPTO3V0VUAYEcYfX+B0TErQDqVeDEkBRMuL1t/m5z8rwr0PiOcHsb2XuZruZiScNCrtD3/gF05bZ+K9zh+RUAwALujIaR0yrwMjbkWQHq/EJLO4nw9AswZq3feCwIIgKRdTIrljScOx0CJreEzCFSAQCA2kFLFZuRX5kVuBklpMdskdoyWLMK1qxabZNbYIy5XiKzT4/pXob8bUbHxVaECS2wGcltxy4gnsZw2I4xyIHkL4gfY/QeSMzGozyS2XVkh9JBQP7psVwU5L9/mHiCHNanmSfIYX2c8kBkjA39AaQzxnxNMTYfAAAAAElFTkSuQmCC',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAoxJREFUWIXFl09oE0EUxr+JOfZg3IOIhkqghoIUKhSUQqkQvSoohODNEHr3IKmNLWKwhYL3onioh1ZQ6CEXa6HUi4KlXgoSLUtCKiW0yeagYsIuz8N2J7tJNrM7qe2DZXfmvXnfb/bfvGGQNKbEyN6myhqTytOLMF24Y/btvpMG8RzcJqxcRvDGNQCA/uETUNmWAhEGdZoxAFx9lsLdS+bwt98Jnx+9aI7xAeLqdBNG5HozJhI2/Wqp6VfXfYG0dfoRxqub5vn+qjQIb0gJhyfMc2lBGoTZxf0K0+CY6f/2UQqEKmuMtYn7EG41PyAWBGNKjFrF3YSf3v7ZUbjVHq+c7w5ih2BKjJA8oIZuUK5sEEvtEwuNmsfQIrGhRepfNig7PUte7MsPnbLTs4R4gY/n+VL7lCsb1NANQvKAmBKjoEX9XGXIqba/a3gCGL2Fl+k+JB+WgKinyTuMP6rBMbDVewCAua/AdqT5IQTdBgPA8kwf4pPVtv7NHQPvX88DAKaepIUg/N3oYF0BJtcJ+PMbAJDJJ4CZOe7L5BPIRpeE4iLrCqCu7DramXyCXx+FuBDAzbLRpY633no0dtDeAMpF4Gy/DCNCtS1+XZMGAIDKHkKn9qCdvmK231zEFDlqEWzuGBgZOEwVLzh8Wl0Bwy95ABYIALYZad2C44VmXF0RpQYABEQB1PgLzTjnKVmotgWtrngWh+eXUG9A08VJ/Qhbxu/AgwghPWzzlBbAqkWwatE5YnwDjDHHMTIQBMY3PAmmh00ty3wtRnTG2xfBoT0sRnLLsQuIUBgdlmP0UpAcgvgRRmtBwjtPsiSz24kVpb2AHGlZ7hXkv29MhCDHtTUTghzX5rQbiIywZf8AjWHES2p/XrkAAAAASUVORK5CYII=',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAo5JREFUWIXFl09oE0EUxr/J5ugl7kkwFEI0FKRQWFEplAqxHj0ohCC9WELvSiHR0GKJNlD0XhQPLdIeFAV7UQulXlQs9iJItISEFEpok3hQMWGX52HczZrszv6Jph8MuztvZr7fmx2YGQafYnKczN9UW2e+xunFmI5f5nW7T32DuG7cZSyfQvDCOQCA+votUPvkC8SxkVXGAHD2bgpXTvLuT74Q3t180O7jAcQ2aGeMyPl2m0iYx4uVdry44Qmkq9KLMR6N8+e1V75BjA9fxuEp/qws+gZhZnOvxjQ4yuOf3/gCodo6Y13mHow75QVEh2BMjlOnucg4F1uxNNeVLSSdQcwQTI4TJg+opWq0VtWIpfaJhUZ4GVoiNrREA6saIVGi3Mw8ifThq0q5mXlCokRIlIz+xnipfVqratRSNcLkATE5TgGd/H6RIb9tSiU8BYxcwsMXV1F+VkEutoJbt9PC7JWohIsT08Ys0eAoL+OPjTb5be6lKygacHX2CBKZumVsa0fDy+UFAHAEM36JhQK2EQCZDQJ+/hAO3quEM1B8vmsbU6ISFIfM3Ug4A/2QGKBaNl6zhSTuzOaFzfV1kS0kEfr20SgiCX8BAKC2h5C0hxtnCn8tNqtFqEQlYGIaWF7AvfcxAECjKYPhu+3wjr+ABXiT7FymK5ady9jWN5oyGk3ZMT/HGaDWLzSCx7rqlagEIrLs40XuFqHaAsY2wZj4/LK1o+H0iSAwtukd4HqEkB42RSqLYPUyWL29EHUIu+LGPD3MvXR524yODrjKyoB2sRn5245tQByNYbEdo5cDyR8QL8boPJAYlYd5JDPr0A6lvYD802O5W5D/fjFxBOnX1cwRpF+XUxGIH2NdvwFHv8sQ8Je7xAAAAABJRU5ErkJggg==',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAodJREFUWIXFl09oE0EUxr+X5Ogl7kEEQyBES0EKhQhKoVSIzVFQIRTxYgm9C0JiQ4sSbUDwXhQPFWkPWgV7qRZKvShY7EWQagkJKZTQJulBRcMuz8O6kzXZvxNtPxh2d97MfL+ZWZg3BEmRkmTzN9dXSGqcXoz5xGW9bvu5NIjnxl3GymmELpwDAKhv3gH1T1Igro2sZgwAZ+9lcOWU3v3ZF8b7Ww/bfXyA2AbtjBE7324Ti+jxUrUdL636Aumq9GOMx6P68/praRDxIWUcmdCf1VlpEDKb+zXm/mE9/vmtFAjXV4i6zH0Yd8oPiAFBpCS509zJuNA3b2luKL855g5ihiAlyRjf45aq8VJNY8rsMoWH9DIwxzQwx9EFjZEuc2Fqhp304avKhakZRrrMSJdFfzFeZpeXahq3VI0xvsekJDlgkD8oEYobpqlEJoChi3j06ioqL6oo9M1j8nbWcfaJeBCpazfFKnH/sF5Gn4o2xQ3dy1DIacCF6SNI5xqWsfUtDctP7gOAK5jYEgsFbCMAcqsM/PjuOHivclyB0stt21giHkTCZeZe5LgCZuU3x3B3utizYaccVwC1CnAs+leVFYTVPxDe/yje96UBAKC+g3BwB83lS5jkdg6yvqXhzMmQJUD+Tg7h1CIAoPlLAeGbPAAFrHcpEQ+CmS1jhrEXuf4D3PqJpnYc4dQiiJzTB7EqI2uezOFpCwBAbaGpepuRX4kVuBFjZAdNkeosqFEBNSrtupE1EJFt8TL77KDuZcjfYXQ02jmepQS0h8NI7ji2AXE1hsVxjF4Skj8gfozRmZCIysNMycw6tKS0F5B/mpZ7BfnvFxNXkIO6mrmCHNTl1AlExtjQb2z9vx9+TXp9AAAAAElFTkSuQmCC',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAlxJREFUWIXNl81rE0EYxp/X7D+w7lFDJaQWQQqFFJSAthD14qGiUDzowRJ60oMgpJoUbEPbk3cRPPRShSoechAt+HFRUCpIQfwgVFqR0Kb04qVkeT1MszvZ3Ul2JzHxgWGzM+/s85vZnbwzBE2RlWH5nqsrpPWcdoz58EVRt/lEGyR0sM/YOg7jzEkAQO3lO6C6pgXSMihoxABwYi6LS0dF9+VvjPe3H7h9IoAoG1XGSIy6MYm4aC9vuO3lV5FAfJVRjPHwrLhee6EN4txoGccnxXXjvjYIyeZRjfnYKdH+5a0WCFdXiHzmEYy9igJShyCyMuw19xrPXj/fYJT/etlnXhxYCoQCgMKfG40gMgRZGcbENu/VbC5VbKbsFpOZFmVwkYvT8yzrw/caF6fnGePrTvHGBMWTmWbKbnGpYvNezWZMbDNZGTbqlPfKhFJZ+neNT2J27Bfu3M0pR6ajhU/AWsJdCIYqMKx5cWDJifv4w8ZwfhMAwI/6AACpZAy4cgsAUPjt739AYxAdlXIGCs8OAVgAgI6/BllNZyDoa+8qACo/ewzQBTUHeH0a+ZkpX3V+Zgp4fMT9LcncXYW5uxrcJ0DKj5A/XwUz++pTyRiYWSy5fgMYXwcRgZmRSsaw8/xCQ3w9jsx0oM//8wpuJhi5IbeBzDSISFmG+w2Y556K6R550zSOBhed5+aGhJfjEyYZOVnwYF+oUdHO/upRZUUpGemlYwVIS2MEpGO0syHZB4liDO+GxKns5ZZMVs82pe2AdHRbHhbknx9MWoJ062jWEqRbh9NmIDrGdf0F3ryqXqu4GY4AAAAASUVORK5CYII='];
+
+// ═══ ANCIÃO — SISTEMA DE NÍVEIS ═══
+// Cada nível tem seu próprio item "escudo" (id 133 + nível; lv1 = 134). Seu nível = o escudo
+// mais alto que você possui. Subir de nível chama a ação lvN_expr, que queima o custo e minta o escudo.
+const ANCIAO_MAX_SHOWN = 10;
+// Custo por nível (adicione mais conforme definir a tabela). Nível sem entrada = ainda não disponível.
+const ANCIAO_LEVELS = {
+  1: { cost: { '102': 10, '101': 10, '132': 3 } },   // 10 Pedra + 10 Madeira + 3 Graveto
+};
+function anciaoShieldId(level) { return 133 + level; }                 // lv1 -> item 134
+function anciaoLevelAction(level) { return 'lv' + level + '_expr'; }   // lv1 -> lv1_expr
+function anciaoShieldImg(level) {
+  if (level >= 1 && LEVEL_SHIELD_IMG[level]) return LEVEL_SHIELD_IMG[level];
+  return (typeof sflItemImageUrl === 'function') ? sflItemImageUrl(anciaoShieldId(level)) : '';
 }
+function _anciaoBalances() {
+  if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) return window._sflLastSession?.data?.playerEconomy?.balances || {};
+  return (typeof offlineBalances === 'function') ? offlineBalances() : {};
+}
+// Nível atual = maior N cujo escudo você possui (em ordem).
+function anciaoLevel() {
+  const bal = _anciaoBalances();
+  let lv = 0;
+  for (let n = 1; n <= 200; n++) { if ((Number(bal[String(anciaoShieldId(n))]) || 0) >= 1) lv = n; else break; }
+  return lv;
+}
+function anciaoClick() {
+  const cur = anciaoLevel();
+  const next = cur + 1;
+  const def = ANCIAO_LEVELS[next];
+  const bal = _anciaoBalances();
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const old = document.getElementById('anciao-modal'); if (old) old.remove();
+  const m = document.createElement('div');
+  m.id = 'anciao-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:3600;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px);';
+  m.onclick = (e) => { if (e.target === m) m.remove(); };
+  // LEFT: player's material inventory (LDOE style)
+  const invItems = [];
+  for (let id = 101; id <= 133; id++) {
+    if ([109, 110, 119, 122, 123, 126, 127, 128, 129, 130, 131, 133].indexOf(id) >= 0) continue;
+    const q = Number(bal[String(id)]) || 0;
+    if (q > 0) invItems.push({ id, q });
+  }
+  const invSlots = invItems.map(it => {
+    const info = (typeof SFL_ITEMS_INFO !== 'undefined' && SFL_ITEMS_INFO[it.id]) || { emoji: '📦', name: '?' };
+    const nm = (t('item.name.' + it.id, {}) !== ('item.name.' + it.id)) ? t('item.name.' + it.id) : info.name;
+    return `<div class="ldoe-slot ldoe-slot-item" title="${nm}"><img src="${sflItemImageUrl(it.id)}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span style=&quot;font-size:26px;&quot;>${info.emoji}</span>'"><div class="ldoe-slot-qty">${it.q}</div></div>`;
+  }).join('');
+  let invPad = ''; for (let i = invItems.length; i < Math.max(9, Math.ceil((invItems.length || 1) / 3) * 3); i++) invPad += '<div class="ldoe-slot ldoe-slot-empty"></div>';
+  const leftHtml = `<div class="anciao-inv"><div class="ldoe-section-title">🎒 <span>${isEN ? 'Backpack' : 'Inventário'}</span></div><div class="anciao-inv-grid">${invSlots}${invPad}</div></div>`;
+  // RIGHT: goal shield + requirements + unlocks + deliver
+  let rightHtml;
+  if (!def) {
+    rightHtml = `<div class="anciao-goal" style="align-items:center;justify-content:center;text-align:center;font-family:'Pixelify Sans',monospace;font-size:18px;color:#3a2410;">${isEN ? 'You reached the highest level for now. More coming soon! 🛡️' : 'Você chegou no nível mais alto por enquanto. Em breve mais! 🛡️'}</div>`;
+  } else {
+    let canDeliver = true;
+    const rows = Object.entries(def.cost).map(([id, qty]) => {
+      const have = Number(bal[id]) || 0; const ok = have >= qty; if (!ok) canDeliver = false;
+      const info = (typeof SFL_ITEMS_INFO !== 'undefined' && SFL_ITEMS_INFO[id]) || { emoji: '📦', name: 'item' };
+      const nm = (t('item.name.' + id, {}) !== ('item.name.' + id)) ? t('item.name.' + id) : info.name;
+      return `<div style="display:flex;align-items:center;gap:10px;padding:7px 12px;background:rgba(0,0,0,.10);border:2px solid ${ok ? '#4a7c3a' : '#b3564a'};border-radius:9px;margin-bottom:7px;"><div class="ldoe-slot" style="width:46px;min-height:46px;flex:none;"><img src="${sflItemImageUrl(parseInt(id))}" style="width:34px;height:34px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span style=&quot;font-size:26px;&quot;>${info.emoji}</span>'"></div><div style="flex:1;font-family:'Pixelify Sans',monospace;font-size:16px;color:#3a2410;">${nm}</div><div style="font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:19px;font-weight:700;color:${ok ? '#1b5e20' : '#b3261e'};">${have}/${qty}</div></div>`;
+    }).join('');
+    const unlocks = Array.isArray(def.unlocks) ? def.unlocks : [];
+    const unlockHtml = unlocks.length
+      ? unlocks.map(u => `<div class="anciao-unlock"><div class="anciao-unlock-ic"><img src="${u.img}" style="width:40px;height:40px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span style=&quot;font-size:30px;&quot;>${u.emoji || '🎁'}</span>'"></div><div class="anciao-unlock-lb">${(isEN && u.en) ? u.en : u.label}</div></div>`).join('')
+      : `<div style="font-family:'Pixelify Sans',monospace;font-size:13px;color:#8a6a44;opacity:.85;padding:4px 2px;">${isEN ? '🔒 Rewards coming soon' : '🔒 Desbloqueios em breve'}</div>`;
+    rightHtml = `<div class="anciao-goal">
+      <div style="text-align:center;">
+        <img src="${anciaoShieldImg(next)}" style="width:74px;height:74px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35));" onerror="this.style.display='none'">
+        <div style="font-family:'Pixelify Sans',monospace;font-size:20px;font-weight:700;color:#3a2410;margin-top:2px;">${isEN ? 'Reach Level' : 'Alcançar Nível'} ${next}</div>
+      </div>
+      <div class="ldoe-section-title" style="margin-top:6px;">📦 <span>${isEN ? 'Deliver' : 'Entregar'}</span></div>
+      ${rows}
+      <div class="ldoe-section-title" style="margin-top:8px;">🔓 <span>${isEN ? 'Unlocks' : 'Desbloqueia'}</span></div>
+      <div class="anciao-unlocks">${unlockHtml}</div>
+      <button onclick="deliverAnciaoLevel(${next})" ${canDeliver ? '' : 'disabled'} style="width:100%;margin-top:12px;padding:14px;font-family:'Pixelify Sans',monospace;font-size:19px;font-weight:700;letter-spacing:1px;border:2px solid ${canDeliver ? '#4a7c3a' : '#9a8874'};border-radius:9px;background:${canDeliver ? '#63c74d' : '#c2b09a'};color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.35);cursor:${canDeliver ? 'pointer' : 'not-allowed'};">${isEN ? 'DELIVER' : 'ENTREGAR'}</button>
+    </div>`;
+  }
+  m.innerHTML = `
+    <div class="wb-shell anciao-shell" style="background:var(--sfl-panel-bg);border-style:solid;border-width:6px;border-image-source:var(--sfl-light-border);border-image-slice:20%;border-image-repeat:stretch;border-radius:13px;width:100%;max-width:840px;height:calc(var(--apph) * 0.86);max-height:calc(var(--apph) * 0.86);display:flex;flex-direction:column;image-rendering:pixelated;position:relative;">
+      <button class="panel-close-x" onclick="document.getElementById('anciao-modal').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:42px;height:42px;image-rendering:pixelated;" onerror="this.outerHTML='✕'"></button>
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 16px 10px;border-bottom:2px solid #b3824f;">
+        <img src="${anciaoShieldImg(Math.max(1, cur))}" style="width:46px;height:46px;object-fit:contain;image-rendering:pixelated;${cur < 1 ? 'opacity:.35;' : ''}" onerror="this.style.display='none'">
+        <div><div style="font-family:'Pixelify Sans',monospace;font-size:20px;font-weight:700;color:#8a5a2b;">🧙 ${isEN ? 'Elder' : 'Ancião'}</div><div style="font-family:'Pixelify Sans',monospace;font-size:16px;color:#3a2410;">${isEN ? 'Your level' : 'Seu nível'}: <b>${cur}</b></div></div>
+      </div>
+      <div class="anciao-split">${leftHtml}${rightHtml}</div>
+    </div>`;
+  document.body.appendChild(m);
+}
+async function deliverAnciaoLevel(level) {
+  const def = ANCIAO_LEVELS[level]; if (!def) return;
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
+    const bal = window._sflLastSession?.data?.playerEconomy?.balances || {};
+    for (const [id, qty] of Object.entries(def.cost)) { if ((Number(bal[id]) || 0) < qty) { showToast(isEN ? 'Not enough materials' : 'Materiais insuficientes', 'error'); return; } }
+    showToast(isEN ? 'Delivering…' : 'Entregando…', 'success');
+    const res = await sflExecuteAction(anciaoLevelAction(level), def.cost);
+    if (!res || !res.ok) { console.error('LEVEL FAIL ->', anciaoLevelAction(level), def.cost, res && res.error); const tr = translateSflError(res && res.error); showToast(tr.msg, tr.severity); return; }
+    try { await syncFromSFL(true); } catch (e) {}
+  } else {
+    const bal = offlineBalances();
+    for (const [id, qty] of Object.entries(def.cost)) { if ((Number(bal[id]) || 0) < qty) { showToast(isEN ? 'Not enough materials' : 'Materiais insuficientes', 'error'); return; } }
+    for (const [id, qty] of Object.entries(def.cost)) bal[id] = (Number(bal[id]) || 0) - qty;
+    bal[String(anciaoShieldId(level))] = (Number(bal[String(anciaoShieldId(level))]) || 0) + 1;
+  }
+  showToast('🛡️ ' + (isEN ? 'Level ' : 'Nível ') + level + '!', 'success');
+  const md = document.getElementById('anciao-modal'); if (md) md.remove();
+  try { if (typeof updateHUD === 'function') updateHUD(); } catch (e) {}
+  try { updateAnciaoShields(); } catch (e) {}
+  anciaoClick();
+}
+// Refresh the shield shown on the island Elder + the profile badge.
+function updateAnciaoShields() {
+  const lv = anciaoLevel();
+  const el = document.getElementById('home-elder-shield');
+  if (el) { if (lv >= 1) { el.src = anciaoShieldImg(lv); el.style.display = ''; } else { el.style.display = 'none'; } }
+}
+window.anciaoClick = anciaoClick;
+window.deliverAnciaoLevel = deliverAnciaoLevel;
 // Lobby base: the player's own bumpkin stands on the island, looping its idle animation.
 function setupHomeChar() {
   const el = document.getElementById('home-char');
@@ -12588,6 +12732,7 @@ function setupHomeElder() {
   const el = document.getElementById('home-elder');
   if (!el) return;
   animateHomeSprite(el, 'https://animations.sunflower-land.com/animate/0_v1_0_1_180_13_182_22_183_0_0_0_181_0_0_0_0_177/idle_walking', 2.1);
+  try { updateAnciaoShields(); } catch (e) {}
 }
 function homeCharClick() {
   if (typeof showToast === 'function') showToast('🧑‍🌾 Em breve!', 'info');
