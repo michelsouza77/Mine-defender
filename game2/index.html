@@ -570,11 +570,13 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .ldoe-input-filled{border-style:solid;border-color:#7eff7e;background:rgba(0,80,0,.2);}
 .ldoe-input-output{border-style:solid;border-color:var(--gold-light);background:rgba(80,60,0,.3);}
 .ldoe-input-need{position:absolute;bottom:-2px;right:-2px;background:rgba(0,0,0,.85);color:var(--gold-light);font-family:system-ui,sans-serif;font-weight:700;font-size:10px;padding:1px 4px;border-radius:4px;border:1px solid var(--gold-dim);}
-@media (pointer:coarse) and (max-width:768px){.ldoe-split{flex-direction:row;min-height:calc(var(--apph) - 60px);}
+@media (pointer:coarse) and (max-width:768px){.ldoe-split{flex-direction:row;height:100%;min-height:0;}
 .ldoe-inv-grid{grid-template-columns:repeat(3,1fr);padding:6px;gap:3px;}
 .ldoe-craft-grid{grid-template-columns:1fr;padding:6px;gap:6px;}
 .ldoe-section-title{font-size:11px;padding:8px 10px;}
 .ldoe-input-box{width:36px;height:36px;}
+.ldoe-input-area{flex-shrink:0;}
+.ldoe-right{min-height:0;}
 }
 #right-panel{width:var(--appw);min-width:var(--appw);background:transparent;display:flex;flex-direction:column;overflow:hidden;position:fixed;top:56px;right:0;bottom:0;transition:transform .4s cubic-bezier(.25,.46,.45,.94);z-index:140;padding:10px;box-sizing:border-box;}
 #right-panel.closed{transform:translateX(var(--appw));}
@@ -666,7 +668,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .battle-card.deck-card:hover{border-color:var(--gold-light);transform:translateY(-6px);box-shadow:0 12px 24px rgba(0,0,0,.8),0 0 20px rgba(200,150,12,.3);}
 .level-select-btn{width:100%;padding:14px 24px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:filter .15s;text-transform:uppercase;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;text-shadow:1px 1px 0 #3a6b2a;}
 .level-select-btn:hover{filter:brightness(1.1);}
-.level-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;padding:16px;background-color:#e9b98a;image-rendering:pixelated;border:3px solid #2d2840;border-radius:6px;}
+.level-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:16px 0;padding:20px;background-color:#e9b98a;image-rendering:pixelated;border:3px solid #2d2840;border-radius:6px;}
 .level-card{aspect-ratio:1;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:filter .15s;position:relative;overflow:hidden;}
 .level-card:hover{filter:brightness(1.1);}
 .level-card.locked{opacity:.4;cursor:default;border-style:dashed;}
@@ -679,7 +681,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 50%{box-shadow:0 0 18px rgba(232,184,48,0.6);}
 }
 /* Level modal SFL window */
-.level-modal-box{position:relative;width:90%;max-width:480px;max-height:calc(var(--apph) * 0.8);display:flex;flex-direction:column;background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:10px;}
+.level-modal-box{position:relative;width:94%;max-width:780px;max-height:calc(var(--apph) * 0.9);display:flex;flex-direction:column;background-color:#c98a64;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:14px;}
 .level-tabs{display:flex;gap:6px;padding:0 8px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
 .level-tab{display:flex;align-items:center;gap:6px;padding:7px 14px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#3a2410;white-space:nowrap;}
 .level-tab.active{z-index:7;position:relative;margin-bottom:-5px;padding-bottom:10px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/tab_border_middle.png") 20%;border-image-repeat:stretch;border-radius:13px 13px 0 0;border-bottom:none;}
@@ -700,7 +702,18 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .lvprev-drops{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%;}
 .lvprev-play{width:100%;padding:10px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;margin-top:4px;}
 .lvprev-play:hover{filter:brightness(1.1);}
-.level-number{font-family:'Pixelify Sans',monospace;font-size:22px;font-weight:700;color:var(--gold-light);margin-bottom:4px;}
+/* Baús na tela de recompensas: hover (PC) ou toque (celular) mostra o conteúdo. */
+.rw-chest{position:relative;cursor:pointer;}
+.rw-chest-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);min-width:230px;max-width:300px;background:linear-gradient(145deg,#2a1808,#1a0e04);border:2px solid var(--gold);border-radius:8px;padding:11px 13px;display:none;z-index:60;box-shadow:0 6px 18px rgba(0,0,0,.6);}
+.rw-chest:hover .rw-chest-tip,.rw-chest.open .rw-chest-tip{display:block;}
+.rw-chest-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:var(--gold);}
+.rw-tip-title{font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;color:var(--gold-light);text-align:center;margin-bottom:8px;letter-spacing:.5px;}
+.rw-tip-row{display:flex;align-items:center;gap:8px;padding:3px 0;}
+.rw-tip-row img{width:26px;height:26px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
+.rw-tip-name{flex:1;font-family:'Pixelify Sans',monospace;font-size:13px;color:#f2e4c4;white-space:nowrap;}
+.rw-tip-qty{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:15px;color:#fff;}
+.rw-tip-pct{font-family:system-ui,sans-serif;font-size:12px;font-weight:700;min-width:38px;text-align:right;}
+.level-number{font-family:'Pixelify Sans',monospace;font-size:34px;font-weight:700;color:#fff;margin-bottom:6px;text-shadow:2px 2px 0 #3a1e0c,-2px 2px 0 #3a1e0c,2px -2px 0 #3a1e0c,-2px -2px 0 #3a1e0c,0 3px 5px rgba(0,0,0,.55);}
 .level-difficulty{font-size:8px;color:var(--parch-dark);text-align:center;line-height:1.2;}
 .level-reward{position:absolute;bottom:4px;right:4px;font-size:10px;color:var(--amber-light);}
 .battle-log{width:100%;max-width:600px;background:rgba(0,0,0,.5);border:1px solid var(--gold-dim);border-radius:4px;padding:8px 12px;height:60px;overflow-y:auto;}
@@ -809,7 +822,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 }
 #level-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2500;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 #level-modal.open{display:flex;}
-.level-modal-box{width:90%;max-width:600px;max-height:calc(var(--apph) * 0.8);overflow-y:auto;}
+.level-modal-box{width:94%;max-width:840px;max-height:calc(var(--apph) * 0.9);overflow-y:auto;}
 .modal-header{padding:16px;border-bottom:1px solid var(--gold-dim);position:relative;margin-bottom:0;}
 .ornament{text-align:center;color:var(--gold-dim);font-size:14px;letter-spacing:4px;margin:4px 0;opacity:.6;}
 @keyframes float{0%,100%{transform:translateY(0);}
@@ -10761,39 +10774,66 @@ function showHuntLevelPreview(n) {
   const { isEN, diff, cost } = huntLevelInfo(n);
   const tbl = CHEST_DROP_TABLE[n] || CHEST_DROP_TABLE[1];
   const tile = (img, fb, qty, chance, chanceColor) => `
-    <div class="drop-tile">
-      <div class="drop-tile-img-wrap"><img src="${img}" style="width:34px;height:34px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<div class=&quot;drop-tile-fallback&quot;>${fb}</div>'"></div>
-      ${qty ? `<div class="drop-tile-qty" style="color:var(--parch-light);">${qty}</div>` : ''}
-      ${chance ? `<div class="drop-tile-chance" style="color:${chanceColor};">${chance}</div>` : ''}
+    <div class="drop-tile" style="padding:10px 6px;">
+      <div class="drop-tile-img-wrap"><img src="${img}" style="width:58px;height:58px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<div class=&quot;drop-tile-fallback&quot; style=&quot;font-size:38px;&quot;>${fb}</div>'"></div>
+      ${qty ? `<div class="drop-tile-qty" style="color:#fff;font-size:18px;text-shadow:1.5px 1.5px 0 #2d1810,-1.5px 1.5px 0 #2d1810,1.5px -1.5px 0 #2d1810,-1.5px -1.5px 0 #2d1810;">${qty}</div>` : ''}
+      ${chance ? `<div class="drop-tile-chance" style="color:${chanceColor};font-size:16px;font-weight:800;text-shadow:1px 1px 0 #2d1810,-1px 1px 0 #2d1810,1px -1px 0 #2d1810,-1px -1px 0 #2d1810;">${chance}</div>` : ''}
     </div>`;
-  // Icons only — just WHICH items can be found on this map (no amounts, no odds).
-  let tiles = '';
-  tiles += tile('https://sunflower-land.com/game-assets/resources/wood.png', '🪵', '', '', '');
-  tiles += tile('https://sunflower-land.com/game-assets/resources/stone.png', '🪨', '', '', '');
-  tiles += tile(LOOT_ITEMS.iron.img, '⚙️', '', '', '');
-  tiles += tile(LOOT_ITEMS.gold.img, '🥇', '', '', '');
-  if ((EXP_DECOR[n] || []).some(d => d.pick === 'mushroom')) tiles += tile(LOOT_ITEMS.mushroom.img, '🍄', '', '', '');
-  [1, 2, 3].forEach(lvl => {
-    if (tbl['c' + lvl] > 0) tiles += tile(EXP_CHEST_IMG[lvl], EXP_CHEST_FB[lvl], '', '', '');
+  const chanceColorOf = (p) => p >= 60 ? '#63c74d' : (p >= 25 ? '#f0c040' : '#e05a4a');
+  // 1) Itens que você pega DIRETO no mapa (normais): % + faixa de quantidade por mapa.
+  let mapTiles = '';
+  EXP_MAP_DROP_KEYS.forEach(key => {
+    const ch = rewardChance(key, n);
+    if (ch <= 0) return;
+    const d = LOOT_ITEMS[key];
+    mapTiles += tile(d.img, d.fb, mapItemQtyRange(key, n), ch + '%', chanceColorOf(ch));
+  });
+  // 2) Baús que podem aparecer no mapa — hover (PC) ou toque (celular) mostra o conteúdo.
+  let chestTiles = '';
+  [1, 2, 3].forEach(tier => {
+    const appear = tbl['c' + tier] || 0;
+    if (appear <= 0) return;
+    const rows = (CHEST_CONTENTS[tier] || []).map(c => {
+      const d = LOOT_ITEMS[c.key];
+      const qtyStr = '×' + c.min + '-' + c.max;
+      return `<div class="rw-tip-row"><img src="${d.img}" onerror="this.outerHTML='${d.fb}'"><span class="rw-tip-name">${isEN ? d.en : d.pt}</span><span class="rw-tip-qty">${qtyStr}</span><span class="rw-tip-pct" style="color:${chanceColorOf(c.pct)};">${c.pct}%</span></div>`;
+    }).join('');
+    const cname = CHEST_NAMES[tier] ? (isEN ? CHEST_NAMES[tier].en : CHEST_NAMES[tier].pt) : '';
+    chestTiles += `<div class="drop-tile rw-chest" style="padding:10px 6px;" onclick="event.stopPropagation(); rwToggleChest(this);">
+        <div class="drop-tile-img-wrap"><img src="${EXP_CHEST_IMG[tier]}" style="width:58px;height:58px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<div class=&quot;drop-tile-fallback&quot; style=&quot;font-size:38px;&quot;>${EXP_CHEST_FB[tier]}</div>'"></div>
+        <div class="drop-tile-chance" style="color:${chanceColorOf(appear)};font-size:16px;">${appear}%</div>
+        <div class="rw-chest-tip"><div class="rw-tip-title">${cname}</div>${rows}</div>
+      </div>`;
   });
   modal = document.createElement('div');
   modal.id = 'level-preview';
   modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3650;display:flex;align-items:center;justify-content:center;padding:18px;';
-  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  modal.onclick = (e) => {
+    if (e.target === modal) { modal.remove(); return; }
+    if (!e.target.closest('.rw-chest')) modal.querySelectorAll('.rw-chest.open').forEach(c => c.classList.remove('open'));
+  };
   modal.innerHTML = `
-    <div class="lvprev-box">
-      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:36px;height:36px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
-      <div class="lvprev-num">${isEN ? `Hunt · Level ${n}` : `Caçada · Nível ${n}`}</div>
-      <div class="lvprev-theme">${(EXP_THEMES[n] ? (isEN ? EXP_THEMES[n].nameEN : EXP_THEMES[n].name) : '')}</div>
-      <div class="lvprev-diff">${isEN ? 'Difficulty' : 'Dificuldade'}: <b>${diff}</b></div>
+    <div class="lvprev-box" style="max-width:660px;width:100%;padding:24px 26px 22px;gap:12px;">
+      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:40px;height:40px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
+      <div class="lvprev-num" style="font-size:24px;">${isEN ? `Hunt · Level ${n}` : `Caçada · Nível ${n}`}</div>
+      <div class="lvprev-theme" style="font-size:18px;">${(EXP_THEMES[n] ? (isEN ? EXP_THEMES[n].nameEN : EXP_THEMES[n].name) : '')}</div>
+      <div class="lvprev-diff" style="font-size:16px;">${isEN ? 'Difficulty' : 'Dificuldade'}: <b>${diff}</b></div>
       <div class="lvprev-info">
-        <div class="lvprev-row"><span>${isEN ? 'Energy needed' : 'Energia necessária'}:</span> <b>${cost} ⚡</b></div>
+        <div class="lvprev-row" style="font-size:15px;"><span>${isEN ? 'Energy needed' : 'Energia necessária'}:</span> <b>${cost} ⚡</b></div>
       </div>
-      <div class="lvprev-drops-label">${isEN ? 'POSSIBLE REWARDS' : 'RECOMPENSAS POSSÍVEIS'}</div>
-      <div class="drop-tiles-grid lvprev-drops">${tiles}</div>
+      <div class="lvprev-drops-label" style="font-size:14px;">${isEN ? 'POSSIBLE REWARDS' : 'RECOMPENSAS POSSÍVEIS'}</div>
+      <div class="drop-tiles-grid lvprev-drops">${mapTiles}</div>
+      ${chestTiles ? `<div class="lvprev-drops-label" style="font-size:14px;">${isEN ? 'CHESTS (hover / tap)' : 'BAÚS (passe o mouse / toque)'}</div>
+      <div class="drop-tiles-grid lvprev-drops">${chestTiles}</div>` : ''}
       <button class="lvprev-play" onclick="huntPlay(${n})">${isEN ? 'EXPLORE' : 'EXPLORAR'}</button>
     </div>`;
   document.body.appendChild(modal);
+}
+// Toque num baú (celular): fecha os outros e alterna este.
+function rwToggleChest(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.rw-chest.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
 }
 // ⚡ Energy charge on hunt entry (same server-side model as the Arena):
 // SFL actions explorar_lv1..explorar_lv10 exist in the minigame editor, each
@@ -10878,12 +10918,12 @@ function showDefenseLevelPreview(lvl, beaten) {
     `;
   }
   modal.innerHTML = `
-    <div class="lvprev-box">
-      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:36px;height:36px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
-      <div class="lvprev-num">${t('preview.defense_level', { n: lvl.n })} ${beaten ? '✓' : ''}</div>
-      <div class="lvprev-diff">${t(lvl.diff)}</div>
+    <div class="lvprev-box" style="max-width:660px;width:100%;padding:24px 26px 22px;gap:12px;">
+      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:40px;height:40px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
+      <div class="lvprev-num" style="font-size:24px;">${t('preview.defense_level', { n: lvl.n })} ${beaten ? '✓' : ''}</div>
+      <div class="lvprev-diff" style="font-size:16px;">${t(lvl.diff)}</div>
       <div class="lvprev-info">
-        <div class="lvprev-row"><span>${t('preview.cost')}:</span> <b>${lvl.cost} ⚡</b></div>
+        <div class="lvprev-row" style="font-size:15px;"><span>${t('preview.cost')}:</span> <b>${lvl.cost} ⚡</b></div>
       </div>
       ${dropsHtml}
       <button class="lvprev-play" onclick="document.getElementById('level-preview').remove(); selectDefenseLevel(${lvl.n});">${t('preview.play')}</button>
@@ -10919,12 +10959,12 @@ function showLevelPreview(lvl, beaten) {
     `;
   }
   modal.innerHTML = `
-    <div class="lvprev-box">
-      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:36px;height:36px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:24px;height:24px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
-      <div class="lvprev-num">${t('preview.arena_level', { n: lvl.n })} ${beaten ? '✓' : ''}</div>
-      <div class="lvprev-diff">${t(lvl.diff)}</div>
+    <div class="lvprev-box" style="max-width:660px;width:100%;padding:24px 26px 22px;gap:12px;">
+      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:40px;height:40px;" onclick="document.getElementById('level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
+      <div class="lvprev-num" style="font-size:24px;">${t('preview.arena_level', { n: lvl.n })} ${beaten ? '✓' : ''}</div>
+      <div class="lvprev-diff" style="font-size:16px;">${t(lvl.diff)}</div>
       <div class="lvprev-info">
-        <div class="lvprev-row"><span>${t('preview.cost')}:</span> <b>${lvl.cost} ⚡</b></div>
+        <div class="lvprev-row" style="font-size:15px;"><span>${t('preview.cost')}:</span> <b>${lvl.cost} ⚡</b></div>
       </div>
       ${dropsHtml}
       <button class="lvprev-play" onclick="document.getElementById('level-preview').remove(); selectLevel(${lvl.n});">${t('preview.play')}</button>
@@ -11091,7 +11131,7 @@ function renderDropTileGrid(drop, opts) {
     : String(drop.amount);
   const qtyColor = received
     ? (wasReceived ? '#7eff7e' : 'var(--gold-dim)')
-    : 'var(--parch-light)';
+    : '#fff';
   // Encode name/desc safely for the hold-tooltip handler
   const safeName = itemName.replace(/'/g, '&#39;').replace(/"/g, '&quot;');
   const safeDesc = itemDesc.replace(/'/g, '&#39;').replace(/"/g, '&quot;');
@@ -11107,11 +11147,11 @@ function renderDropTileGrid(drop, opts) {
       <div class="drop-tile-img-wrap">
         <img src="${imgUrl}" 
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-             style="width:40px;height:40px;object-fit:contain;image-rendering:pixelated;" />
-        <div class="drop-tile-fallback" style="display:none;">${info.emoji}</div>
+             style="width:58px;height:58px;object-fit:contain;image-rendering:pixelated;" />
+        <div class="drop-tile-fallback" style="display:none;font-size:38px;">${info.emoji}</div>
       </div>
-      <div class="drop-tile-qty" style="color:${qtyColor};">${qtyText}</div>
-      ${showChance ? `<div class="drop-tile-chance" style="color:${chanceColor};">${drop.chance}%</div>` : ''}
+      <div class="drop-tile-qty" style="color:${qtyColor};font-size:18px;text-shadow:1.5px 1.5px 0 #2d1810,-1.5px 1.5px 0 #2d1810,1.5px -1.5px 0 #2d1810,-1.5px -1.5px 0 #2d1810;">${qtyText}</div>
+      ${showChance ? `<div class="drop-tile-chance" style="color:${chanceColor};font-size:16px;font-weight:800;text-shadow:1px 1px 0 #2d1810,-1px 1px 0 #2d1810,1px -1px 0 #2d1810,-1px -1px 0 #2d1810;">${drop.chance}%</div>` : ''}
     </div>
   `;
 }
@@ -11875,15 +11915,66 @@ const CHEST_DROP_TABLE = {
   9:  { c1: 22, c2: 45, c3: 30 },
   10: { c1: 15, c2: 48, c3: 40 },
 };
+// ── Chance de cada recompensa aparecer numa partida. base = MAPA 1.
+// grow = quanto sobe por mapa (de leve, pra não desequilibrar). cap = teto máximo.
+// gate = só aparece se o mapa tiver ferro/cogumelo. Itens com 0% somem da tela de recompensas.
+const EXP_REWARD_BASE = {
+  wood:     { base: 100, grow: 0,   cap: 100 },
+  stone:    { base: 100, grow: 0,   cap: 100 },
+  stick:    { base: 100, grow: 0,   cap: 100 },
+  coins:    { base: 100, grow: 0,   cap: 100 },
+  iron:     { base: 70,  grow: 3,   cap: 95,  gate: 'iron' },
+  scrab:    { base: 10,  grow: 2,   cap: 30,  gate: 'iron' },     // só sai quebrando ferro
+  bone:     { base: 40,  grow: 2,   cap: 60 },
+  mushroom: { base: 25,  grow: 2,   cap: 45,  gate: 'mushroom' },
+  portion:  { base: 12,  grow: 2,   cap: 35 },
+  coin:     { base: 3,   grow: 1,   cap: 15 },                    // DinoCoin (raro)
+  egg:      { base: 1,   grow: 0.3, cap: 4  },
+};
+// Ordem em que aparecem na tela de recompensas possíveis.
+const EXP_REWARD_ORDER = ['wood','stone','stick','coins','iron','scrab','bone','mushroom','portion','coin','egg'];
+function mapHasIron(level) { const r = EXP_RES_TABLE[level] || EXP_RES_TABLE[1]; return !!(r && r.iron && r.iron[1] > 0); }
+function mapHasMushroom(level) { return (EXP_DECOR[level] || []).some(d => d.pick === 'mushroom'); }
+function rewardChance(key, level) {
+  const c = EXP_REWARD_BASE[key]; if (!c) return 0;
+  if (c.gate === 'iron' && !mapHasIron(level)) return 0;
+  if (c.gate === 'mushroom' && !mapHasMushroom(level)) return 0;
+  return Math.min(c.cap, Math.round(c.base + c.grow * ((level || 1) - 1)));
+}
+function mapRewards(level) {
+  return EXP_REWARD_ORDER.map(k => ({ key: k, ch: rewardChance(k, level) })).filter(r => r.ch > 0);
+}
+// Itens que você pega DIRETO no mapa (não vêm do baú) → aparecem normais na tela.
+// Coins / DinoCoin / Poção só vêm do baú, então só aparecem no hover do baú.
+const EXP_MAP_DROP_KEYS = ['wood', 'stone', 'iron', 'scrab', 'stick', 'mushroom', 'bone', 'egg'];
+const CHEST_NAMES = {
+  1: { pt: 'Baú Comum', en: 'Common Chest' },
+  2: { pt: 'Baú Raro', en: 'Rare Chest' },
+  3: { pt: 'Baú Épico', en: 'Epic Chest' },
+};
+// Faixa de quantidade (mín–máx) que o item pode render POR MAPA (só os do mapa; os de chance/inimigo ficam em branco).
+function mapItemQtyRange(key, level) {
+  const r = EXP_RES_TABLE[level] || EXP_RES_TABLE[1];
+  if (key === 'wood' && r.tree) return (r.tree[0] * WOOD_PER_TREE) + '-' + (r.tree[1] * WOOD_PER_TREE);
+  if (key === 'stone' && r.rock) return (r.rock[0] * STONE_PER_ROCK) + '-' + (r.rock[1] * STONE_PER_ROCK);
+  if (key === 'iron' && r.iron) return (r.iron[0] * IRON_PER_ROCK) + '-' + (r.iron[1] * IRON_PER_ROCK);
+  if (key === 'stick') return '6-12';
+  return '1-1';   // itens de chance (sucata/osso/ovo/cogumelo) dropam 1 por vez
+}
 // Loot item catalog (placeholder loot until Michel defines the real drop table).
 const LOOT_ITEMS = {
-  wood:  { img: 'https://sunflower-land.com/game-assets/resources/wood.png', fb: '🪵', pt: 'Madeira', en: 'Wood' },
-  stone: { img: 'https://sunflower-land.com/game-assets/resources/stone.png', fb: '🪨', pt: 'Pedra', en: 'Stone' },
-  iron:  { img: 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/resources/iron_ore.png', fb: '⚙️', pt: 'Ferro', en: 'Iron' },
+  wood:  { img: sflItemImageUrl(101), fb: '🪵', pt: 'Madeira', en: 'Wood' },
+  stone: { img: sflItemImageUrl(102), fb: '🪨', pt: 'Pedra', en: 'Stone' },
+  iron:  { img: sflItemImageUrl(111), fb: '⚙️', pt: 'Ferro', en: 'Iron' },
   gold:  { img: 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/resources/gold_ore.png', fb: '🥇', pt: 'Ouro', en: 'Gold' },
-  coin:  { img: 'https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/1.png', fb: '🪙', pt: 'DinoCoin', en: 'DinoCoin' },
-  mushroom: { img: 'https://sunflower-land.com/game-assets/resources/wild_mushroom.png', fb: '🍄', pt: 'Cogumelo', en: 'Mushroom' },
+  coin:  { img: sflItemImageUrl(1), fb: '🪙', pt: 'DinoCoin', en: 'DinoCoin' },
+  mushroom: { img: sflItemImageUrl(124), fb: '🍄', pt: 'Cogumelo', en: 'Mushroom' },
   stick: { img: sflItemImageUrl(132), fb: '🌿', pt: 'Graveto', en: 'Stick' },
+  scrab:   { img: sflItemImageUrl(103), fb: '⚙️', pt: 'Sucata', en: 'Scrab' },
+  egg:     { img: sflItemImageUrl(113), fb: '🥚', pt: 'Ovo', en: 'Egg' },
+  bone:    { img: sflItemImageUrl(108), fb: '🦴', pt: 'Osso', en: 'Bone' },
+  portion: { img: sflItemImageUrl(125), fb: '❤️', pt: 'Poção 5%', en: 'Portion 5%' },
+  coins:   { img: sflItemImageUrl(122), fb: '🟡', pt: 'Coins', en: 'Coins' },
 };
 function _lootRnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
 function lootItem(key, qty) {
@@ -11891,11 +11982,39 @@ function lootItem(key, qty) {
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
   return { key, img: d.img, fb: d.fb, name: isEN ? d.en : d.pt, qty };
 }
-// Placeholder loot per chest tier.
-function makeChestLoot(level) {
-  if (level === 3) return [lootItem('coin', _lootRnd(100, 300)), lootItem('gold', _lootRnd(1, 3)), lootItem('iron', _lootRnd(2, 4)), lootItem('stone', _lootRnd(3, 6))];
-  if (level === 2) return [lootItem('coin', _lootRnd(20, 60)), lootItem('iron', _lootRnd(1, 2)), lootItem('wood', _lootRnd(3, 5)), lootItem('stone', _lootRnd(2, 4))];
-  return [lootItem('wood', _lootRnd(2, 4)), lootItem('stone', _lootRnd(1, 3))];
+// ── Conteúdo de cada baú (tier 1 comum, 2 raro, 3 épico). É a fonte da verdade:
+// o baú é gerado a partir DAQUI e a tela de recompensas mostra exatamente isto.
+// pct = chance do item no baú; min/max = quantidade. Coins = confiável; DinoCoin = raro.
+const CHEST_CONTENTS = {
+  1: [
+    { key: 'coins',   pct: 100, min: 3,  max: 10  },
+    { key: 'wood',    pct: 100, min: 2,  max: 4   },
+    { key: 'stone',   pct: 100, min: 1,  max: 3   },
+    { key: 'coin',    pct: 2,   min: 5,  max: 20  },
+  ],
+  2: [
+    { key: 'coins',   pct: 100, min: 8,  max: 20  },
+    { key: 'iron',    pct: 100, min: 1,  max: 2   },
+    { key: 'wood',    pct: 100, min: 3,  max: 5   },
+    { key: 'stone',   pct: 100, min: 2,  max: 4   },
+    { key: 'portion', pct: 12,  min: 1,  max: 1   },
+    { key: 'coin',    pct: 3,   min: 10, max: 40  },
+  ],
+  3: [
+    { key: 'coins',   pct: 100, min: 20, max: 60  },
+    { key: 'iron',    pct: 100, min: 2,  max: 4   },
+    { key: 'stone',   pct: 100, min: 3,  max: 6   },
+    { key: 'portion', pct: 30,  min: 1,  max: 1   },
+    { key: 'coin',    pct: 6,   min: 50, max: 150 },
+  ],
+};
+function makeChestLoot(tier) {
+  const list = CHEST_CONTENTS[tier] || CHEST_CONTENTS[1];
+  const out = [];
+  for (const c of list) {
+    if (Math.random() * 100 < c.pct) out.push(lootItem(c.key, _lootRnd(c.min, c.max)));
+  }
+  return out;
 }
 const CHEST_SLOTS = 7;   // candidate chest spots per run; each rolls the table (may be empty)
 const EXP_INV_MAX = 10;  // backpack holds at most 10 item stacks
@@ -12310,6 +12429,8 @@ function generateGroundLoot() {
     const n = 6 + Math.floor(Math.random() * 7);   // 6–12
     for (let i = 0; i < n; i++) kinds.push(k);
   }
+  // Very rare wild EGG on the map (small chance so it doesn't unbalance the economy).
+  if (Math.random() < rewardChance('egg', EXPLORE.level || 1) / 100) kinds.push('egg');
   for (const k of kinds) {
     let x, y, ok = false, tries = 0;
     while (!ok && tries < 50) {
@@ -12425,9 +12546,13 @@ function burnOnePick() {
 // SFL "machado" (axe) item id + the action that mints wood and burns the axe.
 const EXP_AXE_ITEM_ID = 130;
 const EXP_AXE_ACTION = 'burn_axe';          // burns 1 axe — called only when an axe breaks (every 5th tree)
-const EXP_DEPOSIT_ACTION = 'deposit_wood';  // on SAFE exit: mints the loot collected this run
-// SFL item ids per loot type (fill each once the deposit action can mint it). coin = DinoCoin = 1.
-const EXP_LOOT_ITEM_IDS = { wood: null, stone: null, iron: null, gold: null, coin: null };
+const EXP_DEPOSIT_ACTION = 'deposit_exploracao';  // on SAFE exit: ONE action mints ALL the loot collected this run
+// SFL item ids per loot type — the deposit action mints each of these by amount. coin = DinoCoin = 1.
+// gold = null → sem item de Ouro no painel ainda, então não é depositado.
+const EXP_LOOT_ITEM_IDS = {
+  wood: 101, stone: 102, iron: 111, coin: 1, mushroom: 124, stick: 132,
+  scrab: 103, egg: 113, bone: 108, portion: 125, coins: 122, gold: null,
+};
 const EXP_TEST_AXES = 15;   // axes handed out when playing offline (for testing)
 function getAxeBalance() {
   if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
@@ -12457,15 +12582,47 @@ function burnOneAxe() {
 function depositRunGains() {
   const inv = EXPLORE.inv || {};
   const amounts = {};
-  for (const key in inv) {
+  let totalCollected = 0;
+  // A ação minta TODOS os itens configurados, então precisa receber o valor de cada um
+  // (0 pros que não foram coletados nesta caçada), senão o servidor rejeita.
+  for (const key in EXP_LOOT_ITEM_IDS) {
     const id = EXP_LOOT_ITEM_IDS[key];
-    const qty = inv[key] && inv[key].qty;
-    if (id != null && qty > 0) amounts[String(id)] = (amounts[String(id)] || 0) + qty;
+    if (id == null) continue;   // gold ainda não tem item no painel
+    const qty = (inv[key] && inv[key].qty) || 0;
+    amounts[String(id)] = (amounts[String(id)] || 0) + qty;
+    totalCollected += qty;
   }
-  if (!Object.keys(amounts).length || typeof sflExecuteAction !== 'function') return;
+  if (totalCollected <= 0 || typeof sflExecuteAction !== 'function') return;
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const totalStacks = Object.values(amounts).filter(v => v > 0).length;
   sflExecuteAction(EXP_DEPOSIT_ACTION, amounts).then(res => {
-    if (!res || !res.ok) console.warn(EXP_DEPOSIT_ACTION + ' failed:', res && res.error);
+    if (res && res.ok) {
+      if (typeof showToast === 'function') showToast(isEN ? `📦 Loot deposited (${totalStacks})!` : `📦 Loot depositado (${totalStacks} itens)!`, 'success');
+    } else {
+      const err = String((res && res.error) || 'erro desconhecido');
+      console.error('DEPOSIT FAIL →', EXP_DEPOSIT_ACTION, 'amounts:', JSON.stringify(amounts), 'error:', err);
+      showDepositError(err, amounts);
+    }
   });
+}
+// Janela persistente com o erro do depósito (fica até fechar; tem botão de copiar).
+function showDepositError(err, amounts) {
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const full = 'Ação: ' + EXP_DEPOSIT_ACTION + '\nItens enviados: ' + JSON.stringify(amounts) + '\nErro: ' + err;
+  const old = document.getElementById('deposit-err-modal'); if (old) old.remove();
+  const m = document.createElement('div');
+  m.id = 'deposit-err-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  m.innerHTML = `
+    <div style="background:linear-gradient(145deg,#2a1808,#1a0e04);border:3px solid var(--gold);border-radius:8px;padding:20px;max-width:560px;width:100%;max-height:calc(var(--apph) * 0.9);overflow-y:auto;box-shadow:0 0 24px rgba(240,160,32,.5);">
+      <div style="font-family:'Pixelify Sans',monospace;font-size:19px;color:#ff8080;font-weight:700;margin-bottom:12px;text-align:center;">⚠️ ${isEN ? "Couldn't deposit loot" : 'Não deu pra depositar o loot'}</div>
+      <div style="font-family:monospace;font-size:13px;color:#f2e4c4;background:rgba(0,0,0,.4);border:1px solid var(--gold-dim);border-radius:6px;padding:12px;white-space:pre-wrap;word-break:break-word;line-height:1.5;">${full.replace(/</g, '&lt;')}</div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button onclick="navigator.clipboard&&navigator.clipboard.writeText(this.parentNode.previousElementSibling.textContent);this.textContent='${isEN ? 'Copied!' : 'Copiado!'}';" style="flex:1;padding:12px;font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;border:2px solid var(--gold);border-radius:8px;background:var(--gold);color:#2a1808;cursor:pointer;">📋 ${isEN ? 'Copy' : 'Copiar'}</button>
+        <button onclick="document.getElementById('deposit-err-modal').remove();" style="flex:1;padding:12px;font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;border:2px solid var(--gold-dim);border-radius:8px;background:transparent;color:#f2e4c4;cursor:pointer;">${isEN ? 'Close' : 'Fechar'}</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
 }
 
 // SFL character spritesheet: frames are 96x64. In the "idle_walking" sheet,
@@ -12640,7 +12797,7 @@ function anciaoClick() {
       ${rows}
       <div class="ldoe-section-title" style="margin-top:8px;">🔓 <span>${isEN ? 'Unlocks' : 'Desbloqueia'}</span></div>
       <div class="anciao-unlocks">${unlockHtml}</div>
-      <button onclick="deliverAnciaoLevel(${next})" ${canDeliver ? '' : 'disabled'} style="width:100%;margin-top:12px;padding:14px;font-family:'Pixelify Sans',monospace;font-size:19px;font-weight:700;letter-spacing:1px;border:2px solid ${canDeliver ? '#4a7c3a' : '#9a8874'};border-radius:9px;background:${canDeliver ? '#63c74d' : '#c2b09a'};color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.35);cursor:${canDeliver ? 'pointer' : 'not-allowed'};">${isEN ? 'DELIVER' : 'ENTREGAR'}</button>
+      <button onclick="showToast('🛡️ ${isEN ? 'Leveling coming soon!' : 'Subir de nível em breve!'}', 'info')" style="width:100%;margin-top:12px;padding:14px;font-family:'Pixelify Sans',monospace;font-size:19px;font-weight:700;letter-spacing:1px;border:2px solid #9a8874;border-radius:9px;background:#c2b09a;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.35);cursor:pointer;">${isEN ? 'SOON' : 'EM BREVE'}</button>
     </div>`;
   }
   m.innerHTML = `
@@ -13189,6 +13346,12 @@ function attackNearestEnemy() {
 function killEnemy(e) {
   e.dead = true; e.hp = 0; e.attacking = false;
   playSfx('gobdie', 0.5, enemyVoiceRate(e));   // goblin death yelp (deep for giants, squeaky for small ones)
+  // Chance to drop a Bone (Osso) into the backpack.
+  if (Math.random() < 0.40 && !invFullFor('bone')) {
+    addToInv(lootItem('bone', 1));
+    if (typeof e.x === 'number' && typeof e.y === 'number' && typeof floatDrop === 'function') floatDrop(e.x, e.y - 10, 1, LOOT_ITEMS.bone.img);
+    if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
+  }
   if (e.hpBar) e.hpBar.style.display = 'none';   // no HP bar over the death animation
   if (e._atkTimer) { clearInterval(e._atkTimer); e._atkTimer = null; }
   const el = e.el;
@@ -13986,6 +14149,11 @@ function breakRock(rock) {
   const dropQty = rock.type === 'iron' ? IRON_PER_ROCK : rock.type === 'gold' ? GOLD_PER_ROCK : STONE_PER_ROCK;
   addToInv(lootItem(dropKey, dropQty));   // banked to SFL only on a safe exit
   floatDrop(rock.x, rock.y - 20, dropQty, LOOT_ITEMS[dropKey].img);
+  // Chance de SUCATA (Scrab) ao quebrar ferro — sem ferro, sem sucata.
+  if (rock.type === 'iron' && !invFullFor('scrab') && Math.random() < rewardChance('scrab', EXPLORE.level || 1) / 100) {
+    addToInv(lootItem('scrab', 1));
+    floatDrop(rock.x + 8, rock.y - 30, 1, LOOT_ITEMS.scrab.img);
+  }
   if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
   if (typeof renderChestLootPanel === 'function' && EXPLORE.openChest) renderChestLootPanel();
   // Last hit → the rock vanishes completely (no leftover pebble, no collision).
