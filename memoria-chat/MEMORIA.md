@@ -147,21 +147,143 @@ Funciona porque baú aberto vira `opened:true` e inimigo morto vira `dead:true`,
 sai da lista** — então total = `length` e restante = os não-marcados.
 Função `updateExploreCounts()`, chamada no spawn, em `killEnemy()` e ao abrir o baú.
 
-### Velocidade dos inimigos — regra de ouro (03/09/2026)
-**Nenhum inimigo pode ser mais rápido que o jogador, em nenhum nível.**
+### Velocidade dos inimigos (03/09/2026)
 Jogador = **50 px/s** (`EXPLORE.speed`, linha do `speed: 50, zoom: 3`).
-Inimigo = `type.speed × ENEMY_SPEED_K` (K = 6.5). **Teto adotado: speed 6.9 = 44,85 px/s (~90%)**,
-pra sempre dar pra escapar correndo. Antes o mais rápido era 39 px/s.
+Inimigo = `type.speed × ENEMY_SPEED_K` (K = 6.5).
 
-O **tipo 3 virou a PRAGA**: o mais rápido do jogo (6.9 → 44,9 px/s), mas **dano baixo (7)** e
-**bem pequeno (0.7)** — pra ser chato de perseguir, não letal. HP 110 pra morrer rápido.
-**Estreia no nível 2**: o peso dele em `MAP_SPAWN[1].enemies` foi zerado (era 2).
+**Regra: todos abaixo de 50 px/s — com UMA exceção proposital.**
+O **tipo 3 é a PRAGA**: `speed 8.6` = **55,9 px/s (112% do jogador)**, ou seja **ele te alcança**.
+Dela não se foge, tem que matar — por isso tem **dano baixo (7)**, é **bem pequena (0.7)** e
+morre rápido (HP 110). **Estreia no nível 2**: o peso em `MAP_SPAWN[1].enemies` foi zerado (era 2).
 Presença: 16,7% dos monstros no nv2, ~18% nos nv3–5, caindo até 3% no nv10.
 
-Velocidades atuais em px/s: t1 33,8 · t2 27,3 · **t3 44,9** · t4 20,2 · t5 31,2 · t6 22,1 ·
+Velocidades em px/s: t1 33,8 · t2 27,3 · **t3 55,9 (praga)** · t4 20,2 · t5 31,2 · t6 22,1 ·
 t7 41,6 · t8 17,6 · t9 33,8 · t10 24,7. Os grandões (4, 6, 8, 10) seguem lentos de propósito.
+O mais rápido depois da praga é o t7 com 41,6.
 
-> ⚠️ Ao mexer em `ENEMY_TYPES`, conferir sempre `speed × 6.5 < 50`.
+> ⚠️ Ao mexer em `ENEMY_TYPES`: só o tipo 3 pode passar de 50 px/s. Os outros ficam abaixo,
+> senão o jogador perde a opção de fugir de qualquer coisa.
+
+### Padrão visual SFL — telas convertidas (03/09/2026)
+O jogo tinha dois visuais convivendo: o **antigo** (`linear-gradient(145deg,#2a1808,#1a0e04)` +
+`3px solid var(--gold)` — caixa escura com borda dourada) e o **SFL** (`.lvprev-box`: fundo
+`#e4a672` + `border-image` do `light_border.png`).
+
+Convertidas para o padrão SFL: **nível bloqueado** (`showLockedLevelPreview` — as recompensas dele
+agora usam o mesmo `renderDropTileGrid` das telas destravadas, nos dois modos; a Arena antes
+mostrava só texto solto "130 🪙"), **seletor de idioma** (primeira tela do jogo) e o **modal de
+confirmação** (`showConfirmModal`).
+
+**Tela de confirmação antiga REMOVIDA** (a pedido do Michel): Arena e Defesa mostravam a tela nova
+de recompensas e, ao clicar em jogar, abriam uma segunda tela antiga (seu deck × deck inimigo +
+Voltar/Batalhar). Agora a batalha começa direto pelo botão da tela nova. Foram apagadas
+`showDefensePreview`, `closeDefensePreview`, `confirmDefenseBattle` e `showBattlePreview` (~200
+linhas). A validação de deck vazio que vivia dentro delas foi preservada em `selectLevel`, e o
+fechamento do `#level-modal` foi movido pros dois pontos de entrada. `closeBattlePreview()` ficou.
+
+Ainda no estilo antigo, **de propósito**: `showDepositError` (janela técnica de erro),
+`showSflDebug` e `showLeaderboardInternal` — estas duas **não são chamadas por ninguém** (código
+morto; se o ranking voltar a ser usado, precisa ser redesenhado).
+
+### Botão de saída + trilha no chão (03/09/2026)
+Botão **🚪** no HUD da Caçada (`#exp-exit-btn`, canto inferior direito, acima da mochila).
+Ao clicar, desenha **setinhas no chão** dos pés do jogador até a saída, com um círculo marcando o
+ponto exato onde a saída dispara. Some sozinho em 9s; clicar de novo apaga antes.
+
+**A trilha ACOMPANHA o jogador**: `updateExitPath()` é chamada a cada quadro pelo `exploreLoop`
+(logo depois do `drawMinimap()`) enquanto `EXPLORE._exitPathOn` estiver ligada. Ela redesenha a
+partir da posição atual, as setas vão sumindo conforme você se aproxima, e o alvo **troca de borda
+sozinho** se outra ficar mais perto. Os elementos são **reaproveitados** (só muda left/top/transform):
+recriar o DOM a cada quadro faria a animação escalonada reiniciar e piscar.
+
+Visual (versão final, depois de 2 rodadas de ajuste com o Michel):
+- Setinhas de **8×7px**, verdes (`#8fe06a`), **sem sombra nenhuma** (sombra dava impressão de
+  estarem flutuando em vez de pintadas no chão).
+- **Coladas**: `EXP_EXIT_STEP = 14px`, começando no i=0 (bem no pé do personagem).
+- **Andam em direção à saída** em vez de piscar: `@keyframes expExitFlow` faz
+  `translateY(0 → -14px)`, linear, **sem `animation-delay`** (todas em sincronia).
+
+> ⚠️ O `-14px` do keyframe **tem que ser igual a `EXP_EXIT_STEP`**. Como cada seta avança
+> exatamente o espaço até a próxima, ao reiniciar o ciclo ela cai no lugar da seguinte e o fluxo
+> fica contínuo, sem emenda. Se mudar um e não o outro, a trilha passa a "pular".
+
+Como são até 90 setas, `updateExitPath()` **não faz nada se o jogador não andou** e a saída é a
+mesma (compara `_exitPathKey/_exitPathX/_exitPathY`) — parado, custo zero.
+
+O botão fica no **canto superior direito** (`top:12px; right:12px`) escrito só **"Sair"** / "Exit".
+
+Como funciona: a saída é **qualquer borda do mapa** (você sai ao chegar a `EXP_EXIT_MARGIN` = 90px
+dela, mapa 1200×1200), então o caminho mais curto é sempre a **perpendicular até a borda mais
+próxima** — `nearestExitPoint()` compara as 4 distâncias e devolve a menor. Não existe labirinto,
+então não precisa de pathfinding.
+
+Detalhes que importam:
+- A camada `#exp-exit-path` fica logo depois do `#exp-ground` e **sem z-index**, então passa por
+  baixo de árvores, pedras, baús, inimigos e do jogador — parece pintado no chão.
+- Mede a partir dos **pés** (`EXPLORE.y + EXP_PLAYER_FEET`), igual ao resto do código.
+- A seta é um triângulo CSS apontando pra cima, então a rotação é `atan2(dy,dx) + 90°`.
+- Cada seta tem `animation-delay` escalonado (0.09s) — dá o efeito de correrem em direção à saída.
+- Limpa sozinha ao sair (`exitExploreFlow`) e ao começar uma caçada nova.
+
+Funções: `nearestExitPoint()`, `showExitPath()`, `clearExitPath()`, `toggleExitPath()`.
+
+### Power ups + mochila de perna (04/09/2026)
+
+**Slot de uso rápido na Caçada.** Botão redondo no HUD (`#exp-pouch-btn`, direita, acima da mochila).
+Estado vazio = tracejado com "+". Clicar nele **usa** o item que estiver dentro (gasta 1), no mesmo
+modelo do machado/picareta. Clicar vazio abre a mochila avisando pra escolher.
+
+**Como se equipa:** abre a mochila e **toca no item**. Só os power ups ficam clicáveis (contorno
+dourado, `.exp-bp-powerup`) e o que está no slot fica marcado em verde (`.equipped`).
+
+Registro em **`EXP_POWERUPS`** (perto do `addToInv`). Hoje só a poção:
+`portion: { heal: 25 }` — `heal` é **% da vida máxima** curada por uso.
+> ⚠️ O item se chama "Poção 5% HP" porque **na batalha de cartas** ele dá +5% de HP máximo. Na
+> Caçada é cura na hora, e 5% seriam 5 de vida (nada, contra inimigos que batem 6–180). Por isso
+> ficou 25%. É só um número, muda à vontade.
+
+Pra adicionar um power up novo: criar o item no painel do SFL → registrar em `LOOT_ITEMS` (pra
+poder cair/entrar na mochila) → acrescentar a chave em `EXP_POWERUPS` com o efeito → e o id na
+categoria Power Ups do mercado. A espada, quando virar consumível, entra por aqui.
+
+A mochila **continua com a cara de sempre**: sem itens ela aparece igual, só com os slots vazios
+(nada de mensagem no lugar dela), e o power up não recebe destaque nenhum — só o que ESTÁ no slot
+ganha um contorno verde. Foi pedido explícito do Michel depois da 1ª versão, que punha contorno
+dourado em todo power up e trocava a mochila vazia por um aviso.
+
+> 🔜 **PLANEJADO:** clicar na mochila vai abrir o **perfil do personagem**, e é ali que se vai
+> equipar as coisas NO PERSONAGEM (não nas cartas). A mochila de perna é o primeiro slot desse
+> sistema. Quando isso for feito, o painel atual da mochila vira parte dessa tela.
+
+Detalhes de comportamento:
+- Usar com **vida cheia não gasta** o item (`applyPowerUp` devolve false → não consome).
+- Quando o **estoque acaba, o slot esvazia sozinho**.
+- O slot **começa vazio a cada caçada** (resetado junto com o resto em `openExplore`).
+- `renderPouch()` é chamada de dentro do `renderBackpackGrid()` — um lugar só, então o número do
+  slot nunca dessincroniza do que há na mochila (havia 11 pontos que chamam o render da mochila).
+
+**Aba Power Ups no mercado.** O mercado (`showMarketplace`) **já montava as abas a partir do array
+`categories`**, então bastou acrescentar a categoria — a aba nasceu sozinha. Ela lista Poção,
+Cristal, Totem Beta e Totem Dino, e clicar leva pro marketplace do SFL, igual às outras abas
+(o mercado **não vende dentro do jogo**, só encaminha). Categoria aceita um campo `hint` novo pra
+ter legenda própria em vez do subtítulo padrão.
+
+### Proporção dos baús — corrigido (04/09/2026)
+Os sprites de baú são **mais altos que largos** (basic 16×21, wooden/luxury 16×20, abertos 16×20),
+mas o baú **fechado** era desenhado numa caixa **quadrada** (`w × w`). Com `background-size:contain`
+o sprite encolhia pra 80% da largura, e ao abrir — onde a altura JÁ era corrigida — ele **crescia
+de repente**. Agora a proporção certa é aplicada desde o começo, via `EXP_CHEST_RATIO` (fechado,
+por tier) e `EXP_CHEST_OPEN_RATIO` (aberto). Ao abrir o tier 1 a altura muda só de 21 pra 20.
+
+### ⚠️ Baú do meio: sprite verde destoa (aguardando decisão do Michel)
+`rare_chest.png` e `luxury_chest.png` do SFL são **byte a byte idênticos** (mesmo MD5) — por isso o
+tier 2 usa `wooden_chest.png`. Só que ele é **verde**: some no fundo de grama e é o único fora da
+família de moldura dourada dos outros dois. O `red_chest.png` seria o encaixe perfeito (mesmo
+desenho do luxury, em vermelho).
+
+**O que trava a troca:** o sprite de baú ABERTO do tier 2 que o Michel forneceu
+(`adicional/wooden_chest aberto.png`) é verde, combinando com o fechado atual. Trocar só o fechado
+deixaria fechado-vermelho + aberto-verde. Pra usar o `red_chest` é preciso a arte do vermelho aberto.
 
 ### Minimapa
 - Centrado nos pés reais; círculo vermelho = alcance de visão dos inimigos; bolinha de inimigo cresce

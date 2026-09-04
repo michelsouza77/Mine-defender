@@ -1229,6 +1229,35 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .exp-cloud{position:absolute;image-rendering:pixelated;will-change:transform;}
 @keyframes cloudSway{from{transform:translateX(-3px);}to{transform:translateX(3px);}}
 /* Backpack button + panel */
+/* ── Caminho até a saída (botão 🚪): setas desenhadas NO CHÃO apontando pra borda mais próxima.
+   A camada fica logo depois do #exp-ground e sem z-index, então passa por baixo de árvores,
+   pedras, baús, inimigos e do jogador — parece pintado no chão mesmo. ── */
+#exp-exit-path{position:absolute;inset:0;pointer-events:none;}
+.exp-exit-step{position:absolute;width:0;height:0;}
+/* Setinhas miúdas, chapadas (sem sombra) e coladas uma na outra, ANDANDO em direção à saída.
+   Como a seta aponta pra cima e o pai é girado pro rumo da saída, translateY negativo = andar pra frente.
+   ⚠️ O -14px do keyframe TEM que ser igual a EXP_EXIT_STEP: cada seta avança exatamente o espaço
+   até a próxima, então quando o ciclo reinicia ela caiu no lugar da seguinte e o fluxo fica contínuo
+   (sem piscar e sem emenda). Mudou um, muda o outro. */
+.exp-exit-step i{position:absolute;left:-4px;top:-4px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid #8fe06a;animation:expExitFlow .85s linear infinite;}
+.exp-exit-goal{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:2px solid #8fe06a;animation:expExitGoal 1.2s ease-in-out infinite;}
+@keyframes expExitFlow{from{transform:translateY(0);}to{transform:translateY(-14px);}}
+@keyframes expExitGoal{0%,100%{transform:scale(.9);opacity:.55;}50%{transform:scale(1.05);opacity:.95;}}
+#exp-exit-btn{position:absolute;top:12px;right:12px;z-index:4010;padding:8px 16px;background:rgba(45,40,64,.45);border:2px solid rgba(255,255,255,.55);border-radius:8px;cursor:pointer;font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;letter-spacing:1px;color:#fff;line-height:1;}
+#exp-exit-btn:active{transform:scale(.94);}
+#exp-exit-btn.on{background:rgba(99,199,77,.5);border-color:#8fe06a;}
+/* Mochila de perna: slot de uso rápido. Clique = usa o item que estiver dentro. */
+#exp-pouch-btn{position:absolute;bottom:184px;right:28px;z-index:4010;width:60px;height:60px;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
+#exp-pouch-btn img{width:62%;height:62%;object-fit:contain;image-rendering:pixelated;pointer-events:none;}
+#exp-pouch-btn:active{transform:scale(.92);}
+#exp-pouch-btn.empty{border-style:dashed;border-color:rgba(255,255,255,.35);background:rgba(45,40,64,.22);}
+#exp-pouch-btn.empty::after{content:'+';font-family:'Pixelify Sans',monospace;font-size:26px;font-weight:700;color:rgba(255,255,255,.5);line-height:1;}
+#exp-pouch-qty{position:absolute;right:-2px;bottom:-2px;min-width:20px;padding:0 4px;background:#2d2840;border:2px solid #fff;border-radius:10px;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#fff;line-height:16px;text-align:center;pointer-events:none;}
+#exp-pouch-btn.empty #exp-pouch-qty{display:none;}
+/* Power up na mochila: clicável, mas com a MESMA cara dos outros itens — só o que já está
+   no slot da mochila de perna recebe a marca verde, pra você saber qual é. */
+.exp-bp-powerup{cursor:pointer;}
+.exp-bp-powerup.equipped{outline:2px solid #63c74d;outline-offset:-2px;}
 #exp-backpack-btn{position:absolute;bottom:112px;right:28px;z-index:4010;width:60px;height:60px;background:rgba(45,40,64,.35);border:3px solid rgba(255,255,255,.4);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;}
 #exp-backpack-btn img{width:60%;height:60%;object-fit:contain;image-rendering:pixelated;}
 /* Explore reward screen */
@@ -1996,6 +2025,17 @@ var I18N = {
   'bigcard.flip_hint': 'CLIQUE PARA VIRAR',
   'map.house.label': '🏠 Casa', 'map.elder.label': '🧙 Ancião',
   'map.you': 'Você',
+  'explore.exit_btn': 'Sair',
+  'explore.backpack': 'Mochila',
+  'explore.backpack_empty': 'Mochila vazia.<br>Colete recursos pelo mapa!',
+  'explore.pouch': 'Mochila de perna — item de uso rápido',
+  'powerup.pick_hint': '🎒 Abra a mochila e toque num power up pra pôr no slot',
+  'powerup.tap_to_equip': 'Tocar para pôr na mochila de perna',
+  'powerup.equipped': '✅ {name} na mochila de perna',
+  'powerup.empty': 'Acabou esse item',
+  'powerup.hp_full': '❤️ Sua vida já está cheia',
+  'market.cat.powerups': '⚡ Power Ups',
+  'market.powerups.hint': 'Itens que dão bônus. A poção você equipa na mochila de perna durante a Caçada.',
   'toast.char_soon': '🧑‍🌾 Em breve!',
   'toast.workbench_soon': '⚒️ Bancada — em breve!',
   'deck.picker.empty': 'Você ainda não tem cartas. Abra ovos primeiro na aba Ovos!',
@@ -2547,6 +2587,17 @@ var I18N = {
   'bigcard.flip_hint': 'CLICK TO FLIP',
   'map.house.label': '🏠 House', 'map.elder.label': '🧙 Elder',
   'map.you': 'You',
+  'explore.exit_btn': 'Exit',
+  'explore.backpack': 'Backpack',
+  'explore.backpack_empty': 'Backpack empty.<br>Gather resources around the map!',
+  'explore.pouch': 'Leg pouch — quick use item',
+  'powerup.pick_hint': '🎒 Open the backpack and tap a power up to slot it',
+  'powerup.tap_to_equip': 'Tap to put it in the leg pouch',
+  'powerup.equipped': '✅ {name} in the leg pouch',
+  'powerup.empty': 'You ran out of that item',
+  'powerup.hp_full': '❤️ Your health is already full',
+  'market.cat.powerups': '⚡ Power Ups',
+  'market.powerups.hint': 'Items that grant bonuses. The potion goes in your leg pouch during the Hunt.',
   'toast.char_soon': '🧑‍🌾 Coming soon!',
   'toast.workbench_soon': '⚒️ Workbench — coming soon!',
   'deck.picker.empty': 'You have no cards yet. Open eggs in the Eggs tab first!',
@@ -3906,6 +3957,19 @@ function showMarketplace() {
     items: cardItems
   }] : []),
   {
+    // Power ups = itens que se equipam e dão bônus. A poção (125) é a que vai no slot da
+    // mochila de perna na Caçada; os outros são equipamento de carta na batalha.
+    // Pra listar um power up novo aqui, basta acrescentar o id na lista.
+    title: t('market.cat.powerups'),
+    hint: t('market.powerups.hint'),
+    items: [
+    { id: 125, emoji: '❤️', name: I18N_LANG === 'en' ? 'Portion 5%hp' : 'Poção 5% HP', sflName: 'Portion 5%hp' },
+    { id: 106, emoji: '💎', name: I18N_LANG === 'en' ? 'Crystal' : 'Cristal', sflName: 'Crystal' },
+    { id: 127, emoji: '🗿', name: I18N_LANG === 'en' ? 'Beta Totem' : 'Totem Beta', sflName: 'Totem beta' },
+    { id: 128, emoji: '🦴', name: I18N_LANG === 'en' ? 'Dino Totem' : 'Totem Dino', sflName: 'Totem dino' },
+    ]
+  },
+  {
     title: t('market.cat.resources'),
     items: [
     { id: 101, emoji: '🌳', name: I18N_LANG === 'en' ? 'Wood' : 'Madeira', sflName: 'Wood' },
@@ -3940,7 +4004,7 @@ function showMarketplace() {
     `;
   }).join('');
   return `<div class="mkt-page" id="mkt-page-${ci}" style="display:${ci === 0 ? 'block' : 'none'};">
-    <p class="season-welcome">${t('market.subtitle')}</p>
+    <p class="season-welcome">${cat.hint || t('market.subtitle')}</p>
     <div class="mkt-grid">${itemsHtml}</div>
   </div>`;
   }).join('');
@@ -8153,11 +8217,11 @@ function showConfirmModal(message, onConfirm, onCancel) {
   modal.id = 'confirm-modal';
   modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);';
   modal.innerHTML = `
-  <div style="background:linear-gradient(145deg,#2a1808,#1a0e04);border:3px solid var(--gold);border-radius:8px;padding:22px 20px;max-width:340px;width:100%;box-shadow:0 0 24px rgba(240,160,32,0.4);text-align:center;">
-    <div style="font-family:'Pixelify Sans',monospace;color:var(--parchment);font-size:15px;line-height:1.5;margin-bottom:20px;">${message}</div>
-    <div style="display:flex;gap:10px;justify-content:center;">
-    <button id="confirm-modal-yes" style="flex:1;background:linear-gradient(180deg,var(--green-light),var(--green-mid));border:2px solid var(--green-trim);color:#fff;padding:10px;border-radius:6px;font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;">${t('confirm.yes') || 'Sim'}</button>
-    <button id="confirm-modal-no" style="flex:1;background:linear-gradient(180deg,#6a4a2a,#3a2410);border:2px solid var(--gold-dim);color:var(--parch-dark);padding:10px;border-radius:6px;font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;">${t('confirm.no') || 'Não'}</button>
+  <div class="lvprev-box" style="max-width:380px;width:100%;padding:22px 20px;gap:16px;text-align:center;">
+    <div style="font-family:'Pixelify Sans',monospace;color:#2d1810;font-size:15px;line-height:1.5;">${message}</div>
+    <div style="display:flex;gap:10px;justify-content:center;width:100%;">
+    <button id="confirm-modal-yes" class="lvprev-play" style="flex:1;">${t('confirm.yes') || 'Sim'}</button>
+    <button id="confirm-modal-no" class="lvprev-play" style="flex:1;background-color:#b96f50;">${t('confirm.no') || 'Não'}</button>
     </div>
   </div>
   `;
@@ -8299,9 +8363,9 @@ function showLanguageSelectorThenTutorial() {
   modal.id = 'lang-select-overlay';
   modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:5000;display:flex;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(6px);';
   modal.innerHTML = `
-  <div style="background:linear-gradient(145deg,#2a1808,#1a0e04);border:3px solid var(--gold);border-radius:4px;padding:22px;max-width:380px;width:100%;box-shadow:0 0 32px rgba(240,160,32,0.6);">
-    <h2 style="font-family:'Pixelify Sans',monospace;color:var(--gold-light);text-align:center;font-size:18px;letter-spacing:1.5px;margin:0 0 18px;">🌐</h2>
-    <div style="display:flex;flex-direction:column;gap:10px;">
+  <div class="lvprev-box" style="max-width:380px;width:100%;padding:22px;gap:16px;">
+    <div style="font-size:34px;line-height:1;">🌐</div>
+    <div style="display:flex;flex-direction:column;gap:10px;width:100%;">
     <button onclick="selectLanguageAndStart('pt')" class="profile-menu-btn" style="font-size:14px;padding:14px;">
       <span style="font-size:24px;">🇧🇷</span>
       <span style="flex:1;text-align:left;">Português (Brasil)</span>
@@ -11080,52 +11144,37 @@ function showLockedLevelPreview(lvl, mode) {
   const levelLabel = isDefense
     ? t('preview.defense_level', { n: lvl.n })
     : t('preview.arena_level', { n: lvl.n });
-  
-  // Build rewards section
-  let rewardsHtml = '';
-  if (isDefense && lvl.drops) {
-    const dropPreviewHtml = lvl.drops.map(drop => 
-      renderDropTileGrid(drop, { showChance: true })
-    ).join('');
-    rewardsHtml = `
-      <div style="margin:10px 0;padding:12px;background:rgba(0,0,0,.4);border:1px solid var(--gold-dim);border-radius:4px;">
-        <div style="font-family:'Pixelify Sans',monospace;font-size:12px;color:var(--gold-dim);text-align:center;margin-bottom:10px;letter-spacing:1px;">${t('preview.drops_label')}</div>
-        <div class="drop-tiles-grid">${dropPreviewHtml}</div>
-      </div>
-    `;
+
+  // Recompensas no MESMO componente de tile das telas destravadas (renderDropTileGrid),
+  // pros dois modos: a Defesa lista os drops do nível, a Arena mostra DinoCoin + Cash Coin.
+  const rewardDrops = [];
+  if (isDefense && lvl.drops && lvl.drops.length) {
+    lvl.drops.forEach(d => rewardDrops.push(d));
   } else if (!isDefense) {
+    if (lvl.reward) rewardDrops.push({ itemId: 1, amount: lvl.reward, chance: 100 });
+    if (lvl.cashCoin) rewardDrops.push({ itemId: 129, amount: lvl.cashCoin, chance: 100 });
+  }
+  let rewardsHtml = '';
+  if (rewardDrops.length) {
+    const tiles = rewardDrops.map(drop => renderDropTileGrid(drop, { showChance: true })).join('');
     rewardsHtml = `
-      <div style="margin:10px 0;padding:14px;background:rgba(0,0,0,.4);border:1px solid var(--gold-dim);border-radius:4px;text-align:center;">
-        <div style="font-family:'Pixelify Sans',monospace;font-size:12px;color:var(--gold-dim);margin-bottom:8px;letter-spacing:1px;">${t('preview.rewards')}</div>
-        <div style="display:flex;justify-content:center;gap:16px;align-items:center;">
-          <div style="font-size:20px;color:#ffd060;font-weight:700;font-family:'Pixelify Sans',monospace;">${lvl.reward} 🪙</div>
-          ${lvl.cashCoin ? `<div style="font-size:20px;color:#7eff7e;font-weight:700;font-family:'Pixelify Sans',monospace;">${lvl.cashCoin} 💵</div>` : ''}
-        </div>
-      </div>
+      <div class="lvprev-drops-label" style="font-size:14px;">${isDefense ? t('preview.drops_label') : t('preview.rewards')}</div>
+      <div class="drop-tiles-grid lvprev-drops">${tiles}</div>
     `;
   }
-  
+
   modal.innerHTML = `
-    <div style="background:linear-gradient(145deg,#2a1808,#1a0e04);border:3px solid var(--gold);border-radius:4px;padding:18px;max-width:440px;width:100%;max-height:calc(var(--apph) * 0.92);overflow-y:auto;">
-      <div style="text-align:center;margin-bottom:6px;">
-        <div style="font-size:48px;line-height:1;">🔒</div>
-      </div>
-      <h2 style="font-family:'Pixelify Sans',monospace;color:var(--gold-light);text-align:center;font-size:18px;margin:6px 0;letter-spacing:1.5px;">${levelLabel}</h2>
-      <div style="text-align:center;color:var(--gold-dim);font-size:13px;margin-bottom:10px;">${t('preview.locked_hint')}</div>
-      <div style="display:flex;justify-content:space-around;gap:8px;margin-bottom:8px;padding:10px;background:rgba(0,0,0,0.4);border:1px solid var(--gold-dim);border-radius:4px;">
-        <div style="text-align:center;">
-          <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.cost')}</div>
-          <div style="font-size:18px;color:#ffd060;font-weight:700;">⚡ ${lvl.cost}</div>
-        </div>
-        <div style="text-align:center;border-left:1px solid var(--gold-dim);padding-left:14px;">
-          <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.difficulty')}</div>
-          <div style="font-size:14px;color:#d09040;font-weight:700;">${t(lvl.diff)}</div>
-        </div>
+    <div class="lvprev-box" style="max-width:660px;width:100%;padding:24px 26px 22px;gap:12px;">
+      <button class="panel-close-x" style="position:absolute;top:2px;right:2px;width:40px;height:40px;" onclick="document.getElementById('locked-level-preview').remove()"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
+      <div style="font-size:42px;line-height:1;">🔒</div>
+      <div class="lvprev-num" style="font-size:24px;">${levelLabel}</div>
+      <div class="lvprev-diff" style="font-size:15px;">${t('preview.locked_hint')}</div>
+      <div class="lvprev-info">
+        <div class="lvprev-row" style="font-size:15px;"><span>${t('preview.cost')}:</span> <b>${lvl.cost} ⚡</b></div>
+        <div class="lvprev-row" style="font-size:15px;"><span>${t('preview.difficulty')}:</span> <b>${t(lvl.diff)}</b></div>
       </div>
       ${rewardsHtml}
-      <button onclick="document.getElementById('locked-level-preview').remove()" style="width:100%;padding:12px;margin-top:6px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1px;border:2px solid var(--gold-dim);border-radius:4px;background:linear-gradient(145deg,#3a2a1a,#2a1a08);color:var(--gold-light);cursor:pointer;">
-        ${t('preview.btn.back')}
-      </button>
+      <button class="lvprev-play" style="background-color:#b96f50;" onclick="document.getElementById('locked-level-preview').remove()">${t('preview.btn.back')}</button>
     </div>
   `;
   document.body.appendChild(modal);
@@ -11188,7 +11237,10 @@ async function startDefenseLevel(levelNum) {
   showToast(t('toast.no_dino_found'), 'error');
   return;
   }
-  showDefensePreview(lvl, playerDeckBattle, enemyDeck);
+  // Sem tela de confirmação: vai direto pra batalha (o fechamento do seletor de nível
+  // era feito lá dentro, então continua aqui).
+  document.getElementById('level-modal').classList.remove('open');
+  await runDefenseBattle(lvl, playerDeckBattle, enemyDeck);
 }
 // Render a drop tile in the inventory grid style.
 // `drop` = { itemId, amount, chance }
@@ -11312,106 +11364,9 @@ function pickRandomDinoByRarity(rarityKey) {
   if (candidates.length === 0) return null;
   return candidates[Math.floor(Math.random() * candidates.length)];
 }
-function showDefensePreview(lvl, playerDeck, enemyDeck) {
-  const myPower = deckPower(playerDeck);
-  const enemyPower = deckPower(enemyDeck);
-  const ratio = myPower / Math.max(1, enemyPower);
-  let difficulty, diffColor, diffEmoji;
-  if (ratio >= 1.3) {
-  difficulty = 'FÁCIL'; diffColor = '#50a050'; diffEmoji = '🟢';
-  } else if (ratio >= 0.7) {
-  difficulty = 'MÉDIO'; diffColor = '#d0a020'; diffEmoji = '🟡';
-  } else {
-  difficulty = 'DIFÍCIL'; diffColor = '#c04040'; diffEmoji = '🔴';
-  }
-  const rarityToColor = (rarity) => {
-  if (rarity.includes('TITÃ'))      return '#ff80b0';
-  if (rarity.includes('ANCESTRAL')) return '#ff6b6b';
-  if (rarity.includes('MÍTICO'))    return '#ffd700';
-  if (rarity.includes('LENDÁRIO'))  return '#c04040';
-  if (rarity.includes('ÉPICO'))     return '#9040c0';
-  if (rarity.includes('RARO'))      return '#4080d0';
-  if (rarity.includes('INCOMUM'))   return '#50a050';
-  return '#8a7050';
-  };
-  const renderMiniCard = (card) => {
-  const src = card.dino.img || `https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/${card.dino.id}.png`;
-  const color = rarityToColor(card.dino.rarity);
-  return `
-    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-    <div style="width:50px;height:50px;border:2px solid ${color};border-radius:4px;overflow:hidden;background:#1a0e04;box-shadow:0 0 6px ${color}88;display:flex;align-items:center;justify-content:center;position:relative;">
-      <img src="${src}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <span style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:24px;">🦕</span>
-    </div>
-    <div style="font-size:8px;color:#ffd76e;text-align:center;max-width:55px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${card.dino.name}</div>
-    </div>
-  `;
-  };
-  let modal = document.getElementById('battle-preview-modal');
-  if (!modal) {
-  modal = document.createElement('div');
-  modal.id = 'battle-preview-modal';
-  modal.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:3500; display:flex; align-items:center; justify-content:center; padding:10px; backdrop-filter:blur(4px);';
-  document.body.appendChild(modal);
-  }
-  const dropPreviewHtml = (lvl.drops || []).map(drop => 
-    renderDropTileGrid(drop, { showChance: true })
-  ).join('');
-  modal.innerHTML = `
-  <div style="background:linear-gradient(145deg, #2a1808, #1a0e04);border:3px solid var(--gold);border-radius:4px;padding:18px;max-width:480px;width:100%;max-height:calc(var(--apph) * 0.92);overflow-y:auto;box-shadow:0 0 24px rgba(240,160,32,0.4);">
-    <h2 style="font-family:'Pixelify Sans',monospace;color:var(--gold-light);text-align:center;font-size:20px;margin:0 0 10px;letter-spacing:2px;">${t('preview.defense_level', { n: lvl.n })}</h2>
-    <div style="display:flex;justify-content:space-around;gap:8px;margin-bottom:14px;padding:10px;background:rgba(0,0,0,0.4);border:1px solid var(--gold-dim);border-radius:4px;">
-    <div style="text-align:center;">
-      <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.cost')}</div>
-      <div style="font-size:16px;color:#ffd060;font-weight:700;">⚡ ${lvl.cost}</div>
-    </div>
-    <div style="text-align:center;border-left:1px solid var(--gold-dim);border-right:1px solid var(--gold-dim);padding:0 12px;">
-      <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.rewards')}</div>
-      <div style="font-size:14px;color:#7eff7e;font-weight:700;">${t('preview.drops_count', { n: (lvl.drops || []).length })}</div>
-    </div>
-    <div style="text-align:center;">
-      <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.difficulty')}</div>
-      <div style="font-size:14px;color:${diffColor};font-weight:700;">${diffEmoji} ${difficulty}</div>
-    </div>
-    </div>
-    <!-- Drops preview -->
-    <div style="margin-bottom:12px;padding:10px 8px;background:rgba(0,0,0,.3);border:1px solid var(--gold-dim);border-radius:4px;">
-    <div style="font-family:'Pixelify Sans',monospace;font-size:11px;color:var(--gold-dim);text-align:center;margin-bottom:8px;letter-spacing:1px;">${t('preview.drops_label')}</div>
-    <div class="drop-tiles-grid">
-      ${dropPreviewHtml}
-    </div>
-    </div>
-    <div style="margin-bottom:12px;">
-    <div style="font-family:'Pixelify Sans',monospace;font-size:12px;color:#e08080;text-align:center;margin-bottom:6px;letter-spacing:1px;">${t('preview.invaders')}</div>
-    <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;">
-      ${enemyDeck.map(renderMiniCard).join('')}
-    </div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px;">
-    <button onclick="closeBattlePreview()" style="flex:1;padding:12px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1px;border:2px solid #806020;border-radius:4px;background:linear-gradient(145deg, #3a2a1a, #2a1a08);color:#c0a070;cursor:pointer;">
-      ${t('preview.btn.back')}
-    </button>
-    <button onclick="confirmDefenseBattle()" style="flex:2;padding:12px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1px;border:2px solid var(--gold-light);border-radius:4px;background:linear-gradient(145deg, var(--gold), var(--gold-light));color:var(--wood-dark);cursor:pointer;box-shadow:0 0 12px rgba(240,160,32,0.5);">
-      ${t('preview.btn.defend')}
-    </button>
-    </div>
-  </div>
-  `;
-  modal.style.display = 'flex';
-  document.getElementById('level-modal').classList.remove('open');
-  window._defensePreview = { lvl, playerDeck, enemyDeck };
-}
-function closeDefensePreview() {
-  closeBattlePreview();   // re-use Arena's closer
-  window._defensePreview = null;
-}
-async function confirmDefenseBattle() {
-  const data = window._defensePreview;
-  if (!data) return;
-  closeBattlePreview();
-  window._defensePreview = null;
-  await runDefenseBattle(data.lvl, data.playerDeck, data.enemyDeck);
-}
+// (removidas) showDefensePreview / closeDefensePreview / confirmDefenseBattle e showBattlePreview:
+// eram a tela de confirmacao antiga (deck x deck) que aparecia depois da tela nova de recompensas.
+// A batalha agora comeca direto pelo botao da tela nova. closeBattlePreview() ficou (id ainda listado em 4537).
 async function runDefenseBattle(lvl, playerDeck, enemyDeck) {
   const balancesBefore = SFL_CONNECTED
   ? { ...(window._sflLastSession?.data?.playerEconomy?.balances || {}) }
@@ -11464,109 +11419,24 @@ selectLevel = async function(level) {
   showToast(t('toast.energy_need', { n: lvl.cost }), 'error');
   return;
   }
-  showBattlePreview(level);
+  // A tela de confirmação antiga (deck × deck) foi removida: a batalha começa direto
+  // pelo botão da tela nova de recompensas. A validação de deck vazio que vivia lá continua aqui.
+  const playerDeckBattle = buildPlayerBattleDeck();
+  if (playerDeckBattle.length === 0) {
+    let hasAnyOwnedCard = false;
+    if (typeof ownedCards !== 'undefined') {
+      for (const bucket in ownedCards) {
+        if (ownedCards[bucket] && ownedCards[bucket].length > 0) { hasAnyOwnedCard = true; break; }
+      }
+    }
+    showToast(t(hasAnyOwnedCard ? 'toast.need_cards' : 'toast.need_cards_no_cards'), 'error');
+    return;
+  }
+  document.getElementById('level-modal').classList.remove('open');
+  openBattle(level);
 };
 function deckPower(deck) {
   return deck.reduce((sum, c) => sum + c.dino.ataque + c.dino.vidaTotal/10 + c.dino.defesa, 0);
-}
-function showBattlePreview(level) {
-  const lvl = LEVELS.find(l => l.n === level);
-  if (!lvl) return;
-  const playerDeckBattle = buildPlayerBattleDeck();
-  if (playerDeckBattle.length === 0) {
-  let hasAnyOwnedCard = false;
-  if (typeof ownedCards !== 'undefined') {
-    for (const bucket in ownedCards) {
-      if (ownedCards[bucket] && ownedCards[bucket].length > 0) { hasAnyOwnedCard = true; break; }
-    }
-  }
-  showToast(t(hasAnyOwnedCard ? 'toast.need_cards' : 'toast.need_cards_no_cards'), 'error');
-  return;
-  }
-  const enemyDeck = buildEnemyDeck(level);
-  const myPower = deckPower(playerDeckBattle);
-  const enemyPower = deckPower(enemyDeck);
-  const ratio = myPower / Math.max(1, enemyPower);
-  let difficulty, diffColor, diffEmoji;
-  if (ratio >= 1.3) {
-  difficulty = 'FÁCIL'; diffColor = '#50a050'; diffEmoji = '🟢';
-  } else if (ratio >= 0.7) {
-  difficulty = 'MÉDIO'; diffColor = '#d0a020'; diffEmoji = '🟡';
-  } else {
-  difficulty = 'DIFÍCIL'; diffColor = '#c04040'; diffEmoji = '🔴';
-  }
-  const rarityToColor = (rarity) => {
-  if (rarity.includes('TITÃ'))      return '#ff80b0';
-  if (rarity.includes('ANCESTRAL')) return '#ff6b6b';
-  if (rarity.includes('MÍTICO'))    return '#ffd700';
-  if (rarity.includes('LENDÁRIO'))  return '#c04040';
-  if (rarity.includes('ÉPICO'))     return '#9040c0';
-  if (rarity.includes('RARO'))      return '#4080d0';
-  if (rarity.includes('INCOMUM'))   return '#50a050';
-  return '#8a7050';
-  };
-  const renderMiniCard = (card) => {
-  const src = card.dino.img || `https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/${card.dino.id}.png`;
-  const color = rarityToColor(card.dino.rarity);
-  return `
-    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-    <div style="width:50px;height:50px;border:2px solid ${color};border-radius:4px;overflow:hidden;background:#1a0e04;box-shadow:0 0 6px ${color}88;display:flex;align-items:center;justify-content:center;position:relative;">
-      <img src="${src}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <span style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:24px;">🦕</span>
-    </div>
-    <div style="font-size:8px;color:#ffd76e;text-align:center;max-width:55px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${card.dino.name}</div>
-    </div>
-  `;
-  };
-  let modal = document.getElementById('battle-preview-modal');
-  if (!modal) {
-  modal = document.createElement('div');
-  modal.id = 'battle-preview-modal';
-  modal.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:3500; display:flex; align-items:center; justify-content:center; padding:10px; backdrop-filter:blur(4px);';
-  document.body.appendChild(modal);
-  }
-  modal.innerHTML = `
-  <div style="background:linear-gradient(145deg, #2a1808, #1a0e04);border:3px solid var(--gold);border-radius:4px;padding:18px;max-width:480px;width:100%;max-height:calc(var(--apph) * 0.92);overflow-y:auto;box-shadow:0 0 24px rgba(240,160,32,0.4);">
-    <h2 style="font-family:'Pixelify Sans',monospace;color:var(--gold-light);text-align:center;font-size:20px;margin:0 0 10px;letter-spacing:2px;">${t('battle.level', { n: level })}</h2>
-    <div style="display:flex;justify-content:space-around;gap:8px;margin-bottom:14px;padding:10px;background:rgba(0,0,0,0.4);border:1px solid var(--gold-dim);border-radius:4px;">
-    <div style="text-align:center;">
-      <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.cost')}</div>
-      <div style="font-size:16px;color:#ffd060;font-weight:700;">⚡ ${lvl.cost}</div>
-    </div>
-    <div style="text-align:center;border-left:1px solid var(--gold-dim);border-right:1px solid var(--gold-dim);padding:0 12px;">
-      <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.reward')}</div>
-      <div style="font-size:15px;color:#ffd060;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;">
-      <span style="display:inline-flex;align-items:center;gap:3px;">
-        <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/1.png"
-         style="width:16px;height:16px;image-rendering:pixelated;"
-         onerror="this.outerHTML='🪙';" />${lvl.reward}
-      </span>
-      ${lvl.cashCoin ? `<span style="display:inline-flex;align-items:center;gap:3px;"><img src="${sflItemImageUrl(129)}" style="width:16px;height:16px;image-rendering:pixelated;" onerror="this.outerHTML='💵';" />${lvl.cashCoin}</span>` : ''}
-      </div>
-    </div>
-    <div style="text-align:center;">
-      <div style="font-size:11px;color:var(--gold-dim);margin-bottom:2px;">${t('preview.difficulty')}</div>
-      <div style="font-size:14px;color:${diffColor};font-weight:700;">${diffEmoji} ${difficulty}</div>
-    </div>
-    </div>
-    <div style="margin-bottom:14px;">
-    <div style="font-family:'Pixelify Sans',monospace;font-size:12px;color:#e08080;text-align:center;margin-bottom:6px;letter-spacing:1px;">${t('preview.enemies')}</div>
-    <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;">
-      ${enemyDeck.map(renderMiniCard).join('')}
-    </div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px;">
-    <button onclick="closeBattlePreview()" style="flex:1;padding:12px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1px;border:2px solid #806020;border-radius:4px;background:linear-gradient(145deg, #3a2a1a, #2a1a08);color:#c0a070;cursor:pointer;">
-      ${t('preview.btn.back')}
-    </button>
-    <button onclick="closeBattlePreview(); openBattle(${level});" style="flex:2;padding:12px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;letter-spacing:1px;border:2px solid var(--gold-light);border-radius:4px;background:linear-gradient(145deg, var(--gold), var(--gold-light));color:var(--wood-dark);cursor:pointer;box-shadow:0 0 12px rgba(240,160,32,0.5);">
-      ${t('preview.btn.battle')}
-    </button>
-    </div>
-  </div>
-  `;
-  modal.style.display = 'flex';
-  document.getElementById('level-modal').classList.remove('open');
 }
 function closeBattlePreview() {
   const modal = document.getElementById('battle-preview-modal');
@@ -11982,6 +11852,7 @@ const EXPLORE = {
   border: 100,            // cloud border thickness (px) — under here = exit
   resources: [],
   chests: [], chestsOpened: { 1: 0, 2: 0, 3: 0 },
+  pouch: null,             // item no slot da mochila de perna (chave do LOOT_ITEMS)
   wood: 0, stone: 0, exiting: false,
   axeCount: 0, axeUsed: 0, pickCount: 0, pickUsed: 0, toolMode: null,  // axe/pickaxe durability + which tool the button shows
 };
@@ -11999,6 +11870,11 @@ const EXP_CHEST_OPEN_IMG = {
 const EXP_CHEST_NAME = { 1: 'Baú Básico', 2: 'Baú Raro', 3: 'Baú de Luxo' };
 const EXP_CHEST_NAME_EN = { 1: 'Basic Chest', 2: 'Rare Chest', 3: 'Luxury Chest' };
 const EXP_CHEST_FB = { 1: '📦', 2: '🧰', 3: '💰' };
+// Proporção REAL de cada sprite (altura ÷ largura). Os baús são mais altos que largos:
+// basic 16×21, wooden/luxury 16×20, e todos os abertos 16×20. Sem isso a caixa fica quadrada,
+// o `background-size:contain` encolhe o baú pra 80% da largura, e ele "cresce" ao ser aberto.
+const EXP_CHEST_RATIO = { 1: 21 / 16, 2: 20 / 16, 3: 20 / 16 };
+const EXP_CHEST_OPEN_RATIO = 20 / 16;   // os três sprites abertos são 16×20
 // Drop chance (%) of each chest tier per Hunt level (Michel's table). c1=comum, c2=raro, c3=épico.
 const CHEST_DROP_TABLE = {
   1:  { c1: 60, c2: 8,  c3: 0  },
@@ -12145,13 +12021,14 @@ const GOB_ANIM = { idle: [0, 8], walk: [9, 16] };      // inclusive frame ranges
 const GOB_ANIM_FPS = 9;
 const GOB_SPEED = 22;
 // Enemy types 1–10 (index 0 = type 1). Each maps to EXP_ENEMY_TOKENS by index.
-// ⚠️ REGRA DE OURO: nenhum inimigo pode ser mais rápido que o jogador, em nenhum nível.
-// Jogador = 50 px/s (EXPLORE.speed). px/s do inimigo = speed × ENEMY_SPEED_K (6.5).
-// Teto adotado: speed 6.9 → 44,85 px/s (~90% do jogador), então sempre dá pra escapar correndo.
+// ⚠️ REGRA: jogador = 50 px/s (EXPLORE.speed). px/s do inimigo = speed × ENEMY_SPEED_K (6.5).
+// Todos os inimigos ficam ABAIXO de 50 (dá pra fugir correndo) — com UMA exceção proposital:
+// a PRAGA (tipo 3) é mais rápida que o jogador, então dela não se foge, tem que matar.
+// Por isso ela tem dano baixo e pouca vida. Não criar outros inimigos acima de 50.
 const ENEMY_TYPES = [
   { hp: 60,   dmg: 6,   speed: 5.2, size: 0.8 },  // 1 small & nimble        33.8 px/s
   { hp: 90,   dmg: 10,  speed: 4.2, size: 1.0 },  // 2 standard              27.3 px/s
-  { hp: 110,  dmg: 7,   speed: 6.9, size: 0.7 },  // 3 PRAGA: o mais rápido do jogo, dano baixo, bem pequeno — nasce a partir do nível 2 (44.9 px/s)
+  { hp: 110,  dmg: 7,   speed: 8.6, size: 0.7 },  // 3 PRAGA: te ALCANÇA (55.9 px/s = 112% do jogador), dano baixo, bem pequena — nasce a partir do nível 2
   { hp: 220,  dmg: 24,  speed: 3.1, size: 1.5 },  // 4 slow giant            20.2 px/s
   { hp: 340,  dmg: 34,  speed: 4.8, size: 1.2 },  // 5 balanced              31.2 px/s
   { hp: 500,  dmg: 48,  speed: 3.4, size: 1.8 },  // 6 huge & tanky          22.1 px/s
@@ -13158,7 +13035,7 @@ function generateExploreChests() {
     el.style.top = y + 'px';
     el.style.zIndex = Math.round(y);   // depth-sorted with the player
     el.style.width = w + 'px';
-    el.style.height = w + 'px';
+    el.style.height = Math.round(w * (EXP_CHEST_RATIO[level] || 1.25)) + 'px';   // respeita a proporção do sprite
     el.style.fontSize = w + 'px';
     el.style.lineHeight = w + 'px';
     el.style.textAlign = 'center';
@@ -13635,6 +13512,8 @@ function openExplore(level) {
   EXPLORE.sheetCols = 0; EXPLORE.animFrame = 0; EXPLORE.animAcc = 0;
   EXPLORE.wood = 0; EXPLORE.stone = 0; EXPLORE.exiting = false; EXPLORE.dead = false;
   if (EXPLORE._deathTimer) { clearTimeout(EXPLORE._deathTimer); EXPLORE._deathTimer = null; }
+  clearExitPath();   // trilha da saída não sobrevive de uma caçada pra outra
+  EXPLORE.pouch = null; renderPouch();   // slot da mochila de perna começa vazio a cada caçada
   if (EXPLORE._toolTimer) { clearInterval(EXPLORE._toolTimer); EXPLORE._toolTimer = null; } EXPLORE.toolAnimActive = false;
   { const cb = document.getElementById('explore-char'); if (cb) cb.classList.remove('exp-dead'); }
   document.querySelectorAll('.exp-hurt-flash, #explore-death').forEach(el => el.remove());
@@ -13991,6 +13870,7 @@ function exploreLoop(t) {
     if (hb) hb.classList.toggle('ready', ready);
   }
   drawMinimap();
+  updateExitPath();   // trilha da saída acompanha o jogador (não faz nada se estiver desligada)
   // Advance the sprite animation: cycle idle frames (0..8) or walking frames (9..16).
   EXPLORE.moving = isMoving;
   if (EXPLORE.sheetCols && !EXPLORE.toolAnimActive) {
@@ -14010,8 +13890,92 @@ function exploreLoop(t) {
   EXPLORE.raf = requestAnimationFrame(exploreLoop);
 }
 
+// ══ Caminho até a saída ══════════════════════════════════════════════════════
+// A saída é QUALQUER borda do mapa: você sai ao chegar a EXP_EXIT_MARGIN px dela.
+// Então o caminho mais curto é sempre a perpendicular até a borda mais próxima.
+const EXP_EXIT_PATH_MS = 9000;   // quanto tempo as setas ficam na tela
+const EXP_EXIT_STEP = 14;        // distância entre uma seta e outra — TEM que bater com o translateY
+                                 // do @keyframes expExitFlow, senão o fluxo perde a emenda.
+const EXP_EXIT_MAX = 90;         // teto de setas (mapa 1200px / 14 ≈ 80 no pior caso)
+// Borda mais próxima dos PÉS do jogador + o ponto onde a saída dispara.
+function nearestExitPoint() {
+  const M = EXPLORE.mapSize, EM = EXP_EXIT_MARGIN;
+  const x = EXPLORE.x, y = EXPLORE.y + EXP_PLAYER_FEET;
+  const opts = [
+    { d: x - EM,       px: EM - 14,     py: y },   // esquerda
+    { d: (M - EM) - x, px: M - EM + 14, py: y },   // direita
+    { d: y - EM,       px: x, py: EM - 14 },       // cima
+    { d: (M - EM) - y, px: x, py: M - EM + 14 },   // baixo
+  ];
+  return opts.reduce((a, b) => (b.d < a.d ? b : a));
+}
+function clearExitPath() {
+  EXPLORE._exitPathOn = false;
+  EXPLORE._exitPathKey = null;   // zera o cache, senão o próximo showExitPath acha que já desenhou
+  const layer = document.getElementById('exp-exit-path');
+  if (layer) layer.innerHTML = '';
+  const btn = document.getElementById('exp-exit-btn');
+  if (btn) btn.classList.remove('on');
+  if (EXPLORE._exitPathTimer) { clearTimeout(EXPLORE._exitPathTimer); EXPLORE._exitPathTimer = null; }
+}
+// Redesenha a trilha a partir da posição ATUAL dos pés. Chamada a cada quadro pelo
+// exploreLoop enquanto a trilha estiver ligada, então ela acompanha o jogador andando
+// (e troca de borda sozinha se você passar a estar mais perto de outra).
+// Os elementos são REAPROVEITADOS — só mexe em left/top/transform, não recria o DOM,
+// senão a animação escalonada reiniciaria toda hora e piscaria.
+function updateExitPath() {
+  if (!EXPLORE._exitPathOn) return;
+  const layer = document.getElementById('exp-exit-path');
+  if (!layer) return;
+  if (EXPLORE.exiting || EXPLORE.dead) { clearExitPath(); return; }
+  const goal = nearestExitPoint();
+  const sx = EXPLORE.x, sy = EXPLORE.y + EXP_PLAYER_FEET;
+  // Parado e mesma saída? Não há o que redesenhar — evita mexer em ~80 nós todo quadro à toa.
+  const gk = goal.px + ':' + goal.py;
+  if (EXPLORE._exitPathKey === gk && Math.abs(EXPLORE._exitPathX - sx) < 1 && Math.abs(EXPLORE._exitPathY - sy) < 1) return;
+  EXPLORE._exitPathKey = gk; EXPLORE._exitPathX = sx; EXPLORE._exitPathY = sy;
+  const dx = goal.px - sx, dy = goal.py - sy;
+  const dist = Math.hypot(dx, dy) || 1;
+  // A seta é um triângulo apontando pra CIMA (-y = -90°), então gira ângulo + 90°.
+  const rot = (Math.atan2(dy, dx) * 180 / Math.PI + 90).toFixed(1);
+  const n = Math.max(1, Math.min(EXP_EXIT_MAX, Math.floor((dist * 0.94) / EXP_EXIT_STEP)));
+  const steps = layer.getElementsByClassName('exp-exit-step');   // coleção viva
+  while (steps.length > n) layer.removeChild(steps[steps.length - 1]);
+  while (steps.length < n) {
+    const s = document.createElement('div');
+    s.className = 'exp-exit-step';
+    s.appendChild(document.createElement('i'));   // sem delay: todas em sincronia = fluxo contínuo
+    layer.appendChild(s);
+  }
+  for (let i = 0; i < n; i++) {
+    const tt = (i * EXP_EXIT_STEP) / dist;   // i=0 fica no pé do personagem
+    const s = steps[i];
+    s.style.left = (sx + dx * tt).toFixed(1) + 'px';
+    s.style.top = (sy + dy * tt).toFixed(1) + 'px';
+    s.style.transform = 'rotate(' + rot + 'deg)';
+  }
+  let goalEl = layer.querySelector('.exp-exit-goal');
+  if (!goalEl) { goalEl = document.createElement('div'); goalEl.className = 'exp-exit-goal'; layer.appendChild(goalEl); }
+  goalEl.style.left = goal.px.toFixed(1) + 'px';
+  goalEl.style.top = goal.py.toFixed(1) + 'px';
+}
+function showExitPath() {
+  if (EXPLORE.exiting || EXPLORE.dead) return;
+  clearExitPath();
+  EXPLORE._exitPathOn = true;
+  const btn = document.getElementById('exp-exit-btn');
+  if (btn) btn.classList.add('on');
+  updateExitPath();
+  EXPLORE._exitPathTimer = setTimeout(clearExitPath, EXP_EXIT_PATH_MS);
+}
+// Botão 🚪: mostra o caminho; clicar de novo apaga antes da hora.
+function toggleExitPath() {
+  if (EXPLORE._exitPathOn) { clearExitPath(); return; }
+  showExitPath();
+}
 // Reaching the border exits immediately: loading screen, then the reward screen.
 function exitExploreFlow() {
+  clearExitPath();
   if (EXPLORE.exiting) return;
   EXPLORE.exiting = true;
   stopAmbience();
@@ -14466,6 +14430,87 @@ function addToInv(it) {
   if (!EXPLORE.inv[it.key]) EXPLORE.inv[it.key] = { key: it.key, img: it.img, fb: it.fb, name: it.name, qty: 0 };
   EXPLORE.inv[it.key].qty += it.qty;
 }
+// Tira n unidades da mochila; some da lista quando zera.
+function takeFromInv(key, n) {
+  const it = EXPLORE.inv && EXPLORE.inv[key];
+  if (!it || it.qty < n) return false;
+  it.qty -= n;
+  if (it.qty <= 0) delete EXPLORE.inv[key];
+  return true;
+}
+// ══ POWER UPS / MOCHILA DE PERNA ═══════════════════════════════════════════════
+// Slot de USO RÁPIDO: você põe um item consumível ali e clica pra usar (gasta 1),
+// no mesmo modelo do machado e da picareta, que já gastam uso.
+// Pra adicionar um power up novo: crie o item no painel do SFL, registre-o em
+// LOOT_ITEMS (pra ele poder cair/entrar na mochila) e adicione a chave aqui com o efeito.
+// ⚠️ 'heal' é % da VIDA MÁXIMA recuperada por uso — é só um número, ajuste à vontade.
+const EXP_POWERUPS = {
+  portion: { heal: 25 },
+};
+function isPowerUp(key) { return !!EXP_POWERUPS[key]; }
+// Aplica o efeito. Devolve false quando não fez nada (aí o item NÃO é gasto).
+function applyPowerUp(key) {
+  const def = EXP_POWERUPS[key];
+  if (!def) return false;
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  if (def.heal) {
+    const max = EXPLORE.hpMax || 100;
+    if (EXPLORE.hp >= max) { showToast(t('powerup.hp_full'), 'info'); return false; }
+    const gain = Math.round(max * def.heal / 100);
+    EXPLORE.hp = Math.min(max, EXPLORE.hp + gain);
+    updateExploreHP();
+    const d = LOOT_ITEMS[key];
+    if (typeof floatDrop === 'function' && d) floatDrop(EXPLORE.x, EXPLORE.y - 10, gain, d.img);
+    return true;
+  }
+  return false;
+}
+// Põe o item no slot (chamado ao tocar num power up dentro da mochila).
+function equipPouch(key) {
+  if (!isPowerUp(key) || !EXPLORE.inv || !EXPLORE.inv[key]) return;
+  EXPLORE.pouch = key;
+  renderPouch();
+  renderBackpackGrid();
+  const d = LOOT_ITEMS[key];
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  showToast(t('powerup.equipped', { name: d ? (isEN ? d.en : d.pt) : '' }), 'success');
+}
+// Clique no slot = usar o item.
+function usePouchItem() {
+  if (EXPLORE.dead || EXPLORE.exiting) return;
+  const key = EXPLORE.pouch;
+  if (!key) {   // vazio: manda o jogador escolher na mochila
+    showToast(t('powerup.pick_hint'), 'info');
+    if (!document.getElementById('exp-backpack-panel').classList.contains('open')) toggleBackpack();
+    return;
+  }
+  const it = EXPLORE.inv && EXPLORE.inv[key];
+  if (!it || it.qty <= 0) { EXPLORE.pouch = null; renderPouch(); showToast(t('powerup.empty'), 'error'); return; }
+  if (!applyPowerUp(key)) return;          // sem efeito → não gasta
+  takeFromInv(key, 1);
+  if (!EXPLORE.inv[key]) EXPLORE.pouch = null;   // acabou o estoque, slot esvazia
+  renderPouch();
+  renderBackpackGrid();
+}
+// Desenha o slot: ícone + quantidade, ou o estado vazio (tracejado com +).
+function renderPouch() {
+  const btn = document.getElementById('exp-pouch-btn');
+  if (!btn) return;
+  const img = document.getElementById('exp-pouch-img');
+  const qty = document.getElementById('exp-pouch-qty');
+  const key = EXPLORE.pouch;
+  const it = key && EXPLORE.inv ? EXPLORE.inv[key] : null;
+  if (!it || it.qty <= 0) {
+    EXPLORE.pouch = null;
+    btn.classList.add('empty');
+    if (img) { img.style.display = 'none'; img.removeAttribute('src'); }
+    if (qty) qty.textContent = '';
+    return;
+  }
+  btn.classList.remove('empty');
+  if (img) { img.style.display = ''; img.src = it.img; }
+  if (qty) qty.textContent = it.qty;
+}
 function invKeyCount() { return Object.keys(EXPLORE.inv || {}).length; }
 function invFullFor(key) { return !EXPLORE.inv[key] && invKeyCount() >= EXP_INV_MAX; }
 let _lootLastTap = { id: '', t: 0 };
@@ -14538,7 +14583,7 @@ function openChestLootPanel(c) {
       c.el.style.backgroundSize = 'contain';
       c.el.style.backgroundRepeat = 'no-repeat';
       c.el.style.backgroundPosition = 'center bottom';
-      c.el.style.height = Math.round((parseFloat(c.el.style.width) || 16) * 20 / 16) + 'px';   // open art is taller (open lid)
+      c.el.style.height = Math.round((parseFloat(c.el.style.width) || 16) * EXP_CHEST_OPEN_RATIO) + 'px';   // arte aberta é 16×20
     }
   }
   playSfx('chest', 0.5);
@@ -14647,23 +14692,33 @@ function toggleBackpack() {
   else { renderBackpackGrid(); panel.classList.add('open'); }
 }
 function renderBackpackGrid() {
+  renderPouch();   // um lugar só: o slot sempre acompanha o que há na mochila
   const grid = document.getElementById('exp-bp-grid');
   if (!grid) return;
   const items = [];
   if (EXPLORE.wood > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/wood.png', fb: '🪵', qty: EXPLORE.wood });
   if (EXPLORE.stone > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/stone.png', fb: '🪨', qty: EXPLORE.stone });
-  Object.values(EXPLORE.inv || {}).forEach(it => items.push({ img: it.img, fb: it.fb, qty: it.qty }));
-  if (!items.length) { grid.innerHTML = '<div class="exp-bp-empty">Mochila vazia.<br>Colete recursos pelo mapa!</div>'; return; }
-  grid.innerHTML = items.map(it => `
-    <div class="ldoe-slot ldoe-slot-item">
+  Object.values(EXPLORE.inv || {}).forEach(it => items.push({ img: it.img, fb: it.fb, qty: it.qty, key: it.key }));
+  // Sem itens = a mochila aparece do mesmo jeito, só com os slots vazios (nada de aviso no lugar dela).
+  // Power up = tocável: o toque manda o item pro slot da mochila de perna. Só o que ESTÁ no slot
+  // ganha marca visual — o resto fica igual a qualquer outro item, sem poluir a mochila.
+  grid.innerHTML = items.map(it => {
+    const pw = it.key && isPowerUp(it.key);
+    const on = pw && EXPLORE.pouch === it.key;
+    return `
+    <div class="ldoe-slot ldoe-slot-item${pw ? ' exp-bp-powerup' : ''}${on ? ' equipped' : ''}"${pw ? ` onclick="equipPouch('${it.key}')" title="${t('powerup.tap_to_equip')}"` : ''}>
       <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
       <div class="ldoe-slot-qty">${it.qty}</div>
-    </div>`).join('') + _padSlots(items.length, 8);
+    </div>`;
+  }).join('') + _padSlots(items.length, 8);
 }
 
 window.openExplore = openExplore;
 window.closeExplore = closeExplore;
 window.toggleBackpack = toggleBackpack;
+window.toggleExitPath = toggleExitPath;
+window.usePouchItem = usePouchItem;
+window.equipPouch = equipPouch;
 // ═══ EXPLORE MODE end ═══
 </script>
 <!-- ═══ EXPLORE MODE (walk around with your bumpkin) ═══ -->
@@ -14673,6 +14728,8 @@ window.toggleBackpack = toggleBackpack;
     <div id="explore-world">
       <!-- Square grass map -->
       <div id="exp-ground"></div>
+      <!-- Trilha até a saída (botão 🚪) — no chão, por baixo de tudo -->
+      <div id="exp-exit-path"></div>
       <!-- Border clouds INSIDE the world (they sit on the map edges, move with the map) -->
       <div id="exp-clouds"></div>
       <!-- Resources (trees/stones) populated by JS -->
@@ -14686,6 +14743,10 @@ window.toggleBackpack = toggleBackpack;
       </div>
     </div>
     <!-- HUD (anchored to the camera box corners) -->
+    <button id="exp-pouch-btn" class="empty" onclick="usePouchItem()" data-i18n="explore.pouch" data-i18n-attr="title" title="Mochila de perna">
+      <img id="exp-pouch-img" alt="" style="display:none" onerror="this.style.visibility='hidden'">
+      <span id="exp-pouch-qty"></span>
+    </button>
     <button id="exp-backpack-btn" onclick="toggleBackpack()" title="Mochila"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sack.png" alt="Mochila" onerror="this.outerHTML='🎒'"></button>
     <button id="exp-hand-btn" onclick="expActionButton()" title="Ação">
       <img id="exp-hand-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/hand_wave.png" alt="Ação" onerror="this.style.visibility='hidden'">
@@ -14694,6 +14755,7 @@ window.toggleBackpack = toggleBackpack;
       <img id="exp-sword-icon" src="https://sunflower-land.com/game-assets/icons/sword.png" alt="Espada" style="display:none" onerror="this.style.visibility='hidden'">
       <span id="exp-axe-badge">0</span>
     </button>
+    <button id="exp-exit-btn" onclick="toggleExitPath()" data-i18n="explore.exit_btn">Sair</button>
     <canvas id="exp-minimap" width="180" height="180"></canvas>
     <div id="exp-hp"><div id="exp-hp-fill"></div><span id="exp-hp-txt">100</span></div>
     <div id="exp-debug" style="position:absolute;top:40px;left:50%;transform:translateX(-50%);z-index:4010;background:rgba(0,0,0,.55);color:#fff;font-family:'Pixelify Sans',monospace;font-size:12px;padding:3px 9px;border-radius:8px;">🎁 –</div>
@@ -14704,9 +14766,9 @@ window.toggleBackpack = toggleBackpack;
   </div>
   <div id="exp-backpack-panel">
     <div class="exp-bp-window">
-      <div class="exp-bp-title">Mochila</div>
+      <div class="exp-bp-title" data-i18n="explore.backpack">Mochila</div>
       <div class="exp-bp-grid" id="exp-bp-grid"></div>
-      <button class="exp-bp-close" onclick="toggleBackpack()">Fechar</button>
+      <button class="exp-bp-close" onclick="toggleBackpack()" data-i18n="btn.close">Fechar</button>
     </div>
   </div>
 </div>
