@@ -1455,31 +1455,31 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <div class="panel-content active" id="tab-inventory">
 <div class="sfl-info-box">
 <div class="sfl-info-title"><span class="sfl-info-icon" id="coll-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🦕'"></span><span id="coll-info-title" data-i18n="section.collection.short">Minha Coleção</span></div>
-<div class="sfl-info-desc" id="coll-info-desc"><span id="total-cards-count">0/99</span> cartas • Clique numa carta para ver os stats</div>
+<div class="sfl-info-desc" id="coll-info-desc"><span id="total-cards-count">0/99</span> <span data-i18n="collection.subtitle.tail">cartas • Clique numa carta para ver os stats</span></div>
 </div>
 <!-- COMUNS -->
-<div class="rarity-label">COMUNS · <span id="count-comum">0/28</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.common">COMUNS</span> · <span id="count-comum">0/28</span></div>
 <div class="inv-grid" id="grid-comum"></div>
 <!-- INCOMUNS -->
-<div class="rarity-label">INCOMUNS · <span id="count-incomum">0/22</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.uncommon">INCOMUNS</span> · <span id="count-incomum">0/22</span></div>
 <div class="inv-grid" id="grid-incomum"></div>
 <!-- RAROS -->
-<div class="rarity-label">RAROS · <span id="count-raro">0/18</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.rare">RAROS</span> · <span id="count-raro">0/18</span></div>
 <div class="inv-grid" id="grid-raro"></div>
 <!-- ÉPICOS -->
-<div class="rarity-label">ÉPICOS · <span id="count-epico">0/14</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.epic">ÉPICOS</span> · <span id="count-epico">0/14</span></div>
 <div class="inv-grid" id="grid-epico"></div>
 <!-- LENDÁRIOS -->
-<div class="rarity-label">LENDÁRIOS · <span id="count-lendario">0/10</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.legendary">LENDÁRIOS</span> · <span id="count-lendario">0/10</span></div>
 <div class="inv-grid" id="grid-lendario"></div>
 <!-- MÍTICOS -->
-<div class="rarity-label">MÍTICOS · <span id="count-mitico">0/4</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.mythic">MÍTICOS</span> · <span id="count-mitico">0/4</span></div>
 <div class="inv-grid" id="grid-mitico"></div>
 <!-- ANCESTRAIS -->
-<div class="rarity-label">ANCESTRAIS · <span id="count-ancestral">0/2</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.ancestral">ANCESTRAIS</span> · <span id="count-ancestral">0/2</span></div>
 <div class="inv-grid" id="grid-ancestral"></div>
 <!-- TITÃ -->
-<div class="rarity-label">TITÃ · <span id="count-tita">0/1</span></div>
+<div class="rarity-label"><span data-i18n="rarity.plural.titan">TITÃ</span> · <span id="count-tita">0/1</span></div>
 <div class="inv-grid" id="grid-tita"></div>
 </div>
 <!-- EGGS -->
@@ -1634,15 +1634,15 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <div id="base-world">
 <div id="base-island">
 <!-- Elder's House: future level/rewards screen -->
-<button class="hb-build" style="left:51%;top:42%;" onclick="homeCharClick()"><img src="https://sunflower-land.com/game-assets/buildings/manor.png" style="width:120px;" onerror="this.outerHTML='🏠'"><span class="hb-lb">🏠 Casa</span></button>
+<button class="hb-build" style="left:51%;top:42%;" onclick="homeCharClick()"><img src="https://sunflower-land.com/game-assets/buildings/manor.png" style="width:120px;" onerror="this.outerHTML='🏠'"><span class="hb-lb" data-i18n="map.house.label">🏠 Casa</span></button>
 <!-- Your bumpkin, idling by the house (name on top; click = coming soon) -->
 <div id="home-char" style="left:67%;top:57%;" onclick="homeCharClick()"><div class="hb-lb" id="home-char-name" style="position:absolute;left:50%;top:46px;transform:translate(-50%,-100%);white-space:nowrap;"></div></div>
 <!-- The ELDER (level NPC): wise bumpkin standing on the road by the top stones -->
-<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><img id="home-elder-shield" style="position:absolute;left:50%;top:44px;transform:translate(-50%,-100%);width:26px;height:26px;image-rendering:pixelated;display:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4));" alt=""><div class="hb-lb" style="position:absolute;left:50%;top:74px;transform:translate(-50%,-100%);white-space:nowrap;">🧙 Ancião</div></div>
+<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><img id="home-elder-shield" style="position:absolute;left:50%;top:44px;transform:translate(-50%,-100%);width:26px;height:26px;image-rendering:pixelated;display:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4));" alt=""><div class="hb-lb" data-i18n="map.elder.label" style="position:absolute;left:50%;top:74px;transform:translate(-50%,-100%);white-space:nowrap;">🧙 Ancião</div></div>
 <!-- WORKBENCH (blacksmith bench with anvil): bottom-right corner of the island -->
 <button class="craft-station hb-station" id="craft-station-ferraria" style="left:84%;top:74%;" onclick="openWorkbench('ferraria')" title="Workbench">
 <div class="craft-station-img"><img src="https://sunflower-land.com/game-assets/buildings/workbench.png" alt="Workbench" style="width:82px;height:82px;" onerror="this.outerHTML='<span style=&quot;font-size:48px;&quot;>⚒️</span>';" /></div>
-<div class="craft-station-label">Workbench</div>
+<div class="craft-station-label" data-i18n="map.workbench.label">Bancada</div>
 <div class="craft-station-status" id="status-ferraria" data-i18n="map.workbench.empty">— vazia —</div>
 </button>
 <!-- Constructions (same ids the workbench/lock logic already uses) -->
@@ -1786,7 +1786,7 @@ Defender Sunflower Land
 </div>
 </div>
 </div>
-<div class="big-card-hint">CLIQUE PARA VIRAR</div>
+<div class="big-card-hint" data-i18n="bigcard.flip_hint">CLIQUE PARA VIRAR</div>
 </div>
 </div>
 <!-- ═══ LEVEL SELECTION MODAL ═══ -->
@@ -1988,6 +1988,50 @@ var I18N = {
   'leaderboard.title': '🏆 CLASSIFICAÇÃO','season.title':'Temporada Beta','season.shop_name':'Megastore Dino','rewards.intro':'Complete missões diárias e ganhe tokens de temporada!','rewards.daily_badge':'Missão Diária','rewards.resets':'Reseta em 24h','rewards.mission1.title':'Fabrique Ferro','rewards.mission1.req':'Sucata','rewards.mission1.result':'Ferro','rewards.reward':'Recompensa','rewards.claim':'Resgatar','rewards.claimed':'✓ Resgatado hoje','rewards.claim_toast':'Recompensa resgatada! +50 tokens','rewards.progress':'Progresso','rewards.ready':'Pronto!','rewards.locked':'Bloqueado','rewards.claimed_short':'✓','rewards.back':'Voltar','season.item.have':'Você tem','season.item.your_balance':'Você tem','season.item.left':'Disponível','season.item.no_desc':'Item da temporada.','season.item.no_funds':'Saldo insuficiente','season.item.sold_out':'Esgotado',
   'item.desc.128':'Totem que revive uma carta uma vez por batalha.','item.desc.118':'Ovo lendário com chance de dinos raros.','item.desc.114':'Ovo comum para chocar dinossauros.','item.desc.106':'Cristal da sorte: +ataque no primeiro golpe.',
   'item.desc.125':'Poção que dá +5% de HP máximo.','item.desc.127':'Totem Beta: concede um slot extra de equipamento.','season.tab.shop':'Loja de Temporada','season.tab.rewards':'Missões','season.rewards.body':'Complete missões da temporada e ganhe recompensas exclusivas. Em breve!','season.timer':'58d 8h','season.welcome':'Bem-vindo à loja da temporada! Junte Cash Coin vencendo batalhas e troque por itens raros antes que a temporada acabe!','season.earn.title':'Como ganhar Cash Coin','season.earn.body':'O Cash Coin é o token da Temporada Beta. Você ganha vencendo batalhas de Defesa e Arena, e também coletando recompensas nas bancadas. Quanto mais você joga, mais acumula!','season.trades.title':'Trocar por Cash Coin','season.dinocoin.title':'Exclusivo DinoCoin','season.stock':'Estoque','season.more':'Mais trocas em breve...','season.trade_btn':'TROCAR','season.sold_out':'Limite atingido!','season.confirm_trade':'Confirmar esta troca?','season.trade_success':'🎉 Troca realizada!',
+  // ── Rótulos que antes estavam fixos no HTML (não trocavam de idioma) ──
+  'collection.subtitle.tail': 'cartas • Clique numa carta para ver os stats',
+  'rarity.plural.common': 'COMUNS', 'rarity.plural.uncommon': 'INCOMUNS', 'rarity.plural.rare': 'RAROS',
+  'rarity.plural.epic': 'ÉPICOS', 'rarity.plural.legendary': 'LENDÁRIOS', 'rarity.plural.mythic': 'MÍTICOS',
+  'rarity.plural.ancestral': 'ANCESTRAIS', 'rarity.plural.titan': 'TITÃ',
+  'bigcard.flip_hint': 'CLIQUE PARA VIRAR',
+  'map.house.label': '🏠 Casa', 'map.elder.label': '🧙 Ancião',
+  'map.you': 'Você',
+  'toast.char_soon': '🧑‍🌾 Em breve!',
+  'toast.workbench_soon': '⚒️ Bancada — em breve!',
+  'deck.picker.empty': 'Você ainda não tem cartas. Abra ovos primeiro na aba Ovos!',
+  'deposit.err.action': 'Ação', 'deposit.err.items': 'Itens enviados', 'deposit.err.error': 'Erro',
+  // ── Nomes de item que faltavam (apareciam em português no modo inglês) ──
+  'item.name.122': 'Coins', 'item.name.130': 'Machado', 'item.name.131': 'Picareta',
+  'item.name.132': 'Graveto', 'item.name.133': 'Bancada de Ferramentas',
+  // ── Descrições de item que faltavam ──
+  'item.desc.100': 'Necessária para batalhar. Recarrega com o tempo.',
+  'item.desc.101': 'Recurso básico de construção.',
+  'item.desc.102': 'Recurso básico de construção.',
+  'item.desc.103': 'Metal reciclável. Útil em receitas avançadas.',
+  'item.desc.104': 'Combustível para gerar energia no Gerador.',
+  'item.desc.105': 'Madeira processada na Serraria.',
+  'item.desc.107': 'Matéria-prima para fabricar Vidro.',
+  'item.desc.108': 'Recurso raro dropado em batalhas de Defesa.',
+  'item.desc.109': 'Bancada que transforma Madeira em Tábua e Graveto.',
+  'item.desc.110': 'Bancada para fundir Lingote, Carvão e Vidro.',
+  'item.desc.111': 'Matéria-prima para fundir Lingote.',
+  'item.desc.112': 'Metal refinado. Componente de bancadas e itens.',
+  'item.desc.113': 'Ovo selvagem. Choque na Chocadeira para descobrir a raridade.',
+  'item.desc.115': 'Toque para abrir e ganhar uma carta Incomum.',
+  'item.desc.116': 'Toque para abrir e ganhar uma carta Rara.',
+  'item.desc.117': 'Toque para abrir e ganhar uma carta Épica.',
+  'item.desc.119': 'Bancada que choca ovos selvagens.',
+  'item.desc.120': 'Fabricado a partir de Areia. Usado em bancadas avançadas.',
+  'item.desc.121': 'Recurso raro dropado em batalhas de Defesa.',
+  'item.desc.122': 'Moeda secundária. Usada para construir bancadas.',
+  'item.desc.123': 'Bancada para fabricar poções de cura.',
+  'item.desc.124': 'Ingrediente para poções. Drop raro em Defesa.',
+  'item.desc.126': 'Bancada que produz Energia a partir de Carvão.',
+  'item.desc.129': 'Token da Temporada Beta. Troque por itens raros na loja SFL.',
+  'item.desc.130': 'Corta árvores no modo Explorar. Quebra após 5 árvores.',
+  'item.desc.131': 'Minera pedra, ferro e ouro no modo Explorar. Some após 1 uso.',
+  'item.desc.132': 'Achado no chão do mapa ou feito na Serraria. Usado para forjar ferramentas.',
+  'item.desc.133': 'Bancada que forja o Machado e a Picareta a partir de Graveto e Pedra.',
   'leaderboard.coming_soon': 'Em Breve',
   'leaderboard.subtitle': 'TOP CAÇADORES POR CASH COIN','leaderboard.loading':'Carregando ranking...',
   'leaderboard.row.placeholder': '— em breve —',
@@ -2021,7 +2065,8 @@ var I18N = {
   'profile.back': '‹ VOLTAR',
   'profile.lang.pt_full': 'Português (Brasil)',
   'profile.lang.en_full': 'English',
-  'craft.station.workbench': 'SAWBENCH',
+  'craft.station.workbench': 'SERRARIA',
+  'craft.station.ferraria': 'BANCADA',
   'craft.station.bonfire': 'FOGUEIRA',
   'craft.level': 'NÍVEL',
   'craft.slots': 'slots',
@@ -2072,7 +2117,7 @@ var I18N = {
   'item.name.106': 'Cristal',
   'item.name.107': 'Areia',
   'item.name.108': 'Osso',
-  'item.name.109': 'Sawbench',
+  'item.name.109': 'Serraria',
   'item.name.110': 'Fogueira',
   'item.name.111': 'Minério de Ferro',
   'item.name.112': 'Lingote','item.name.113':'Ovo','item.name.114':'Ovo Comum','item.name.115':'Ovo Incomum','item.name.116':'Ovo Raro','item.name.117':'Ovo Épico','item.name.118':'Ovo Lendário','item.name.119':'Chocadeira','item.name.120':'Vidro','item.name.121':'Pena','item.name.123':'Mesa de Poções','item.name.124':'Cogumelo','item.name.125':'Poção 5% HP','item.name.126':'Gerador de Carvão',
@@ -2494,6 +2539,51 @@ var I18N = {
   'leaderboard.title': '🏆 LEADERBOARD','season.title':'Beta Season','season.shop_name':'Dino Megastore','rewards.intro':'Complete daily missions and earn season tokens!','rewards.daily_badge':'Daily Mission','rewards.resets':'Resets in 24h','rewards.mission1.title':'Craft Iron','rewards.mission1.req':'Scrap','rewards.mission1.result':'Iron','rewards.reward':'Reward','rewards.claim':'Claim','rewards.claimed':'✓ Claimed today','rewards.claim_toast':'Reward claimed! +50 tokens','rewards.progress':'Progress','rewards.ready':'Ready!','rewards.locked':'Locked','rewards.claimed_short':'✓','rewards.back':'Back','season.item.have':'You have','season.item.your_balance':'You have','season.item.left':'Available','season.item.no_desc':'Season item.','season.item.no_funds':'Not enough balance','season.item.sold_out':'Sold out',
   'item.desc.128':'Totem that revives a card once per battle.','item.desc.118':'Legendary egg with a chance of rare dinos.','item.desc.114':'Common egg to hatch dinosaurs.','item.desc.106':'Lucky crystal: +attack on first hit.',
   'item.desc.125':'Potion granting +5% max HP.','item.desc.127':'Beta Totem: grants an extra equipment slot.','season.tab.shop':'Season Shop','season.tab.rewards':'Missions','season.rewards.body':'Complete season missions and earn exclusive rewards. Coming soon!','season.timer':'58d 8h','season.welcome':'Welcome to the season shop! Gather Cash Coin by winning battles and trade for rare items before the season ends!','season.earn.title':'How to earn Cash Coin','season.earn.body':'Cash Coin is the Beta Season token. Earn it by winning Defense and Arena battles, and by collecting rewards at the workstations. The more you play, the more you accumulate!','season.trades.title':'Trade for Cash Coin','season.dinocoin.title':'DinoCoin Exclusive','season.stock':'Stock','season.more':'More trades coming soon...','season.trade_btn':'TRADE','season.sold_out':'Limit reached!','season.confirm_trade':'Confirm this trade?','season.trade_success':'🎉 Trade complete!',
+  // ── Labels that used to be hardcoded in the HTML (never switched language) ──
+  'collection.subtitle.tail': 'cards • Click a card to see its stats',
+  'rarity.plural.common': 'COMMON', 'rarity.plural.uncommon': 'UNCOMMON', 'rarity.plural.rare': 'RARE',
+  'rarity.plural.epic': 'EPIC', 'rarity.plural.legendary': 'LEGENDARY', 'rarity.plural.mythic': 'MYTHIC',
+  'rarity.plural.ancestral': 'ANCESTRAL', 'rarity.plural.titan': 'TITAN',
+  'bigcard.flip_hint': 'CLICK TO FLIP',
+  'map.house.label': '🏠 House', 'map.elder.label': '🧙 Elder',
+  'map.you': 'You',
+  'toast.char_soon': '🧑‍🌾 Coming soon!',
+  'toast.workbench_soon': '⚒️ Workbench — coming soon!',
+  'deck.picker.empty': 'You have no cards yet. Open eggs in the Eggs tab first!',
+  'deposit.err.action': 'Action', 'deposit.err.items': 'Items sent', 'deposit.err.error': 'Error',
+  // ── Item names that were missing (showed up in Portuguese in English mode) ──
+  'item.name.122': 'Coins', 'item.name.130': 'Axe', 'item.name.131': 'Pickaxe',
+  'item.name.132': 'Stick', 'item.name.133': 'Workbench',
+  // ── Item descriptions that were missing ──
+  'item.desc.100': 'Needed to battle. Recharges over time.',
+  'item.desc.101': 'Basic building resource.',
+  'item.desc.102': 'Basic building resource.',
+  'item.desc.103': 'Recyclable metal. Useful in advanced recipes.',
+  'item.desc.104': 'Fuel used to generate energy at the Generator.',
+  'item.desc.105': 'Wood processed at the Sawbench.',
+  'item.desc.107': 'Raw material for crafting Glass.',
+  'item.desc.108': 'Rare resource dropped in Defense battles.',
+  'item.desc.109': 'Workstation that turns Wood into Planks and Sticks.',
+  'item.desc.110': 'Workstation for smelting Ingot, Coal and Glass.',
+  'item.desc.111': 'Raw material for smelting Ingot.',
+  'item.desc.112': 'Refined metal. Component of workstations and items.',
+  'item.desc.113': 'Wild egg. Hatch it at the Brooder to reveal its rarity.',
+  'item.desc.115': 'Tap to open and get an Uncommon card.',
+  'item.desc.116': 'Tap to open and get a Rare card.',
+  'item.desc.117': 'Tap to open and get an Epic card.',
+  'item.desc.119': 'Workstation that hatches wild eggs.',
+  'item.desc.120': 'Crafted from Sand. Used in advanced workstations.',
+  'item.desc.121': 'Rare resource dropped in Defense battles.',
+  'item.desc.122': 'Secondary currency. Used to build workstations.',
+  'item.desc.123': 'Workstation for crafting healing potions.',
+  'item.desc.124': 'Potion ingredient. Rare drop in Defense.',
+  'item.desc.126': 'Workstation that produces Energy from Coal.',
+  'item.desc.129': 'Beta Season token. Trade it for rare items in the SFL shop.',
+  'item.desc.130': 'Chops trees in Explore mode. Breaks after 5 trees.',
+  'item.desc.131': 'Mines stone, iron and gold in Explore mode. Gone after 1 use.',
+  'item.desc.132': 'Found on the map floor or made at the Sawbench. Used to forge tools.',
+  'item.desc.133': 'Workstation that forges the Axe and the Pickaxe from Sticks and Stone.',
+  'section.guide.short': 'Hunter Guide',
   'leaderboard.coming_soon': 'Coming Soon',
   'leaderboard.subtitle': 'TOP HUNTERS BY CASH COIN','leaderboard.loading':'Loading ranking...',
   'leaderboard.row.placeholder': '— coming soon —',
@@ -2528,6 +2618,7 @@ var I18N = {
   'profile.lang.pt_full': 'Português (Brasil)',
   'profile.lang.en_full': 'English',
   'craft.station.workbench': 'SAWBENCH',
+  'craft.station.ferraria': 'WORKBENCH',
   'craft.station.bonfire': 'BONFIRE',
   'craft.level': 'LEVEL',
   'craft.slots': 'slots',
@@ -2838,7 +2929,7 @@ var I18N = {
   'guide.equip.title':'Equipment','guide.equip.body':'Equip your cards with items to strengthen them in battle. Each slot accepts one equipment type. Examples: <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/106.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Crystal boosts the first attack, <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/125.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Potion increases HP, and the <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/127.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Totems give special bonuses like an extra slot or reviving the card.',
   'guide.cashcoin.title':'<img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Cash Coin & Ranking','guide.cashcoin.body':'Cash Coin is the Beta Season token. Earn it in Defense and Arena battles, and trade it for rare items at the SFL shop. The more Cash Coin you accumulate, the higher you climb on the hunters Ranking.',
   'battle.title.arena': 'Battle Arena',
-  'mode.defense.short':'Defesa','mode.arena.short':'Arena','mode.hunt.short':'Caçada','battle.mode.defense.desc':'Defenda a Sunflower Land e ganhe recursos + Cash Coin','battle.mode.arena.desc':'Enfrente outros jogadores e ganhe DinoCoins','battle.title.hunt':'Modo Caçada','battle.mode.hunt.desc':'Explore a ilha com seu personagem e cace dinossauros!','battle.btn.hunt':'Explorar Ilha','battle.title.defense': 'Sunflower Land Defense',
+  'mode.defense.short':'Defense','mode.arena.short':'Arena','mode.hunt.short':'Hunt','battle.mode.defense.desc':'Defend Sunflower Land and earn resources + Cash Coin','battle.mode.arena.desc':'Face other players and earn DinoCoins','battle.title.hunt':'Hunt Mode','battle.mode.hunt.desc':'Explore the island with your character and hunt dinosaurs!','battle.btn.hunt':'Explore Island','battle.title.defense': 'Sunflower Land Defense',
   'battle.mode.arena.sub': 'vs players · 🪙 DinoCoins',
   'battle.mode.defense.sub': 'sunflower land · 📦 items',
   'battle.deck.hint': 'Click a slot to choose a card',
@@ -4798,6 +4889,7 @@ var CRAFT_STATIONS = {
   ferraria: {   // internal key kept as 'ferraria'; shown to the player as "Workbench"
   id: 'ferraria',
   name: 'Workbench',
+  nameKey: 'craft.station.ferraria',
   emoji: '⚒️',
   structureItemId: 133,     // Workbench structure item (buildings/workbench.png)
   buildAction: 'craft_workbench',   // TODO(SFL): criar a regra que queima 5×112 + 20×102 + 10×105
@@ -8020,7 +8112,11 @@ function buildItemsGrid() {
     const openBadge = isOpenable
       ? `<div class="item-open-badge">✨ ${t('open.egg')}</div>`
       : '';
-    const itemDescRaw = (SFL_ITEMS_INFO[id] && SFL_ITEMS_INFO[id].desc) || '';
+    // Descrição traduzida (item.desc.<id>); cai no texto fixo do SFL_ITEMS_INFO só se a chave não existir.
+    const descKeyItem = 'item.desc.' + id;
+    const itemDescRaw = (t(descKeyItem, {}) !== descKeyItem)
+      ? t(descKeyItem)
+      : ((SFL_ITEMS_INFO[id] && SFL_ITEMS_INFO[id].desc) || '');
     const safeName = itemName.replace(/'/g, '&#39;').replace(/"/g, '&quot;');
     const safeDesc = itemDescRaw.replace(/'/g, '&#39;').replace(/"/g, '&quot;');
     html += `
@@ -11824,7 +11920,7 @@ function openDeckPicker(slotIndex) {
   });
   });
   if (allCards.length === 0) {
-  grid.innerHTML = '<div class="deck-picker-empty">Você ainda não tem cartas. Abra ovos primeiro na aba Ovos!</div>';
+  grid.innerHTML = '<div class="deck-picker-empty">' + t('deck.picker.empty') + '</div>';
   } else {
   allCards.forEach(({ card, rarity }) => {
     const div = document.createElement('div');
@@ -11899,8 +11995,9 @@ const EXP_CHEST_OPEN_IMG = {
   2: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAABM2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWRvUoDQRSFv1lFxUIjiFhYbCUKilm1cMskigiCMVok6bI/rBKyu8yOP3kIS7stbOx9AitLwULxCXwDxSqFzK6wRcDgaeabM5dzZ+6AUa7sVveMEvRCJRv7VbPZapuTL0wwRqaOm8SVev1QcxiFPkP6fkfo9XVdZw2f/6lpN5YKGACbnp+4IMpA90rFCkQKzDvdjB80y9NGDcQTMBPk/KbZyflDs2y22iC+dH2QsTGV5eS8pFn517ovtSjuy/PgTJmWbdtmxYsc3zzpJ8rvJeZB6EYyjmRH+R6Q3y/TXF6oJ7Zi2fbO6j/fPVL6H3L6PM7mKxaeC6+QeyEvf1EYW6P3RUa6CEf3MD4ovO0buFuD2dvCW7agtAGP6Q/Axk/9h9vI6QAAAatJREFUOI2lkztOw0AQhj9bizdEGEMgJEEI0djQpEiBRBGgRELKEWiQOAAFp6CmQxyCVNQ5Ah1uAooE4anIBOKQB0Viex2egl+yPJ6d/9ud1VjLFTf6dikJwM15m0BetYMqc0mEcTZvAOCWXxBqUTZvhJDtQysGqBw1Y+ZAYnTnw0kTgFN6HK+d0r/ZZa96H+YPzr0YQMsVN/rXlRoASacWWxyX4wB0/R4Ab+03AJrVeQBy6wvoQQAg5KCjhEyQkAkAWp5Pm8GjKvQwIiEFLb+FkALNN5Bm1HOPfniK2B1EH4KurzOGwciGAOhSQ0qD5leArq9/MH2Wi0EBris1LOfx20JVlvNIcPHf43+hsIXGRervAGdnKZqwkzpu2sQuJTl7uABga8bBLb9g33mwm4Hh8Hl0Bi2o5kLGDOlyfxO5Fp2skDHhpI7q+WQOdHgdTN7KwSUwSTavrH11B4Fun7rY3jNuOcp51Q72ncetOfEzIJXUmJu24KoRy68uWnT8HpfxfwktO2ufAcsf0L+UAKaA+n8Aqtwf6tPD95QKUE014GoYL46Y1fxCAHwHG0CDgSjTroEAAAAASUVORK5CYII=',
   3: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAapJREFUOI3Nks8rg3Ecx1/PNlIzmaHIj3qmlaXs5OSygx2Ig39ATi4cyCZFKcrhEQcuS5KTFC5jKQcOLpym1tRqSw52kKxRaovH4Xm++8FDi4v35fvt+3m/358f34+EjtTNsFq7HQFgtU3BCFN3fgDSox6aOg8lAGnD3aOOx66k1M2wCrCw4zUUCyyMnAHQ1Hkobbh7VAvAa0BW0bNfRxuZnx4zFC+uBBFVvgZkdetIr0DJJDSG+RGyJgCyWHTZG5WVb9pVj2G2A+CvcWosf40TJZPAZjJDFXlhAWbt0GPPOU0DYPqx4TLwTwyUTAJbRbpska0ijRj8nysQf8Vzrvb3BvtDMgBd1Y8AdB/LxGeXSPlcHDjsjO9e4lqe43ogCUD0xQHA5XlRCy0TrQB4o768+4HDzt57IZuICS5iBsViscbWlydmNk+4PYrTatU2b3567IuJBcjvN/iIxJKsrStMTvhLel1bV4jEtBYK/PrCEAVC4VNCYahr7yh5X1wJfj/EYgz29+Fxy4bkSCxJKHxa8iY1N7h6Ddll4s+LJAEUV3H/EL/4SfCZ+wH2/oPy0YjSEwAAAABJRU5ErkJggg==',
 };
-const EXP_CHEST_NAME = { 1: 'Baú Comum', 2: 'Baú Raro', 3: 'Baú de Luxo' };
-const EXP_CHEST_NAME_EN = { 1: 'Common Chest', 2: 'Rare Chest', 3: 'Luxury Chest' };
+// Nomes OFICIAIS do SFL (src/lib/i18n/dictionaries/en.json + pt-BR.json: chestRewardsList.treasureChest.tabTitle1-3).
+const EXP_CHEST_NAME = { 1: 'Baú Básico', 2: 'Baú Raro', 3: 'Baú de Luxo' };
+const EXP_CHEST_NAME_EN = { 1: 'Basic Chest', 2: 'Rare Chest', 3: 'Luxury Chest' };
 const EXP_CHEST_FB = { 1: '📦', 2: '🧰', 3: '💰' };
 // Drop chance (%) of each chest tier per Hunt level (Michel's table). c1=comum, c2=raro, c3=épico.
 const CHEST_DROP_TABLE = {
@@ -11932,7 +12029,7 @@ const EXP_REWARD_BASE = {
   egg:      { base: 1,   grow: 0.3, cap: 4  },
 };
 // Ordem em que aparecem na tela de recompensas possíveis.
-const EXP_REWARD_ORDER = ['wood','stone','stick','coins','iron','scrab','bone','mushroom','portion','coin','egg'];
+const EXP_REWARD_ORDER = ['wood','stone','stick','coins','iron','scrab','bone','mushroom','portion','coin','cash','egg'];
 function mapHasIron(level) { const r = EXP_RES_TABLE[level] || EXP_RES_TABLE[1]; return !!(r && r.iron && r.iron[1] > 0); }
 function mapHasMushroom(level) { return (EXP_DECOR[level] || []).some(d => d.pick === 'mushroom'); }
 function rewardChance(key, level) {
@@ -11947,10 +12044,12 @@ function mapRewards(level) {
 // Itens que você pega DIRETO no mapa (não vêm do baú) → aparecem normais na tela.
 // Coins / DinoCoin / Poção só vêm do baú, então só aparecem no hover do baú.
 const EXP_MAP_DROP_KEYS = ['wood', 'stone', 'iron', 'scrab', 'stick', 'mushroom', 'bone', 'egg'];
+// Deriva de EXP_CHEST_NAME (definido acima) — antes eram duas listas soltas e o baú 3 tinha
+// dois nomes diferentes dependendo da tela. Agora existe UMA fonte de verdade.
 const CHEST_NAMES = {
-  1: { pt: 'Baú Comum', en: 'Common Chest' },
-  2: { pt: 'Baú Raro', en: 'Rare Chest' },
-  3: { pt: 'Baú Épico', en: 'Epic Chest' },
+  1: { pt: EXP_CHEST_NAME[1], en: EXP_CHEST_NAME_EN[1] },
+  2: { pt: EXP_CHEST_NAME[2], en: EXP_CHEST_NAME_EN[2] },
+  3: { pt: EXP_CHEST_NAME[3], en: EXP_CHEST_NAME_EN[3] },
 };
 // Faixa de quantidade (mín–máx) que o item pode render POR MAPA (só os do mapa; os de chance/inimigo ficam em branco).
 function mapItemQtyRange(key, level) {
@@ -11968,6 +12067,7 @@ const LOOT_ITEMS = {
   iron:  { img: sflItemImageUrl(111), fb: '⚙️', pt: 'Ferro', en: 'Iron' },
   gold:  { img: 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/resources/gold_ore.png', fb: '🥇', pt: 'Ouro', en: 'Gold' },
   coin:  { img: sflItemImageUrl(1), fb: '🪙', pt: 'DinoCoin', en: 'DinoCoin' },
+  cash:  { img: sflItemImageUrl(129), fb: '💵', pt: 'Cash Coin', en: 'Cash Coin' },
   mushroom: { img: sflItemImageUrl(124), fb: '🍄', pt: 'Cogumelo', en: 'Mushroom' },
   stick: { img: sflItemImageUrl(132), fb: '🌿', pt: 'Graveto', en: 'Stick' },
   scrab:   { img: sflItemImageUrl(103), fb: '⚙️', pt: 'Sucata', en: 'Scrab' },
@@ -11990,7 +12090,8 @@ const CHEST_CONTENTS = {
     { key: 'coins',   pct: 100, min: 3,  max: 10  },
     { key: 'wood',    pct: 100, min: 2,  max: 4   },
     { key: 'stone',   pct: 100, min: 1,  max: 3   },
-    { key: 'coin',    pct: 2,   min: 5,  max: 20  },
+    { key: 'coin',    pct: 4,   min: 1,  max: 2   },
+    { key: 'cash',    pct: 8,   min: 2,  max: 3   },
   ],
   2: [
     { key: 'coins',   pct: 100, min: 8,  max: 20  },
@@ -11998,14 +12099,16 @@ const CHEST_CONTENTS = {
     { key: 'wood',    pct: 100, min: 3,  max: 5   },
     { key: 'stone',   pct: 100, min: 2,  max: 4   },
     { key: 'portion', pct: 12,  min: 1,  max: 1   },
-    { key: 'coin',    pct: 3,   min: 10, max: 40  },
+    { key: 'coin',    pct: 6,   min: 2,  max: 5   },
+    { key: 'cash',    pct: 12,  min: 3,  max: 8   },
   ],
   3: [
     { key: 'coins',   pct: 100, min: 20, max: 60  },
     { key: 'iron',    pct: 100, min: 2,  max: 4   },
     { key: 'stone',   pct: 100, min: 3,  max: 6   },
     { key: 'portion', pct: 30,  min: 1,  max: 1   },
-    { key: 'coin',    pct: 6,   min: 50, max: 150 },
+    { key: 'coin',    pct: 12,  min: 5,  max: 10  },
+    { key: 'cash',    pct: 24,  min: 8,  max: 15  },
   ],
 };
 function makeChestLoot(tier) {
@@ -12042,22 +12145,25 @@ const GOB_ANIM = { idle: [0, 8], walk: [9, 16] };      // inclusive frame ranges
 const GOB_ANIM_FPS = 9;
 const GOB_SPEED = 22;
 // Enemy types 1–10 (index 0 = type 1). Each maps to EXP_ENEMY_TOKENS by index.
+// ⚠️ REGRA DE OURO: nenhum inimigo pode ser mais rápido que o jogador, em nenhum nível.
+// Jogador = 50 px/s (EXPLORE.speed). px/s do inimigo = speed × ENEMY_SPEED_K (6.5).
+// Teto adotado: speed 6.9 → 44,85 px/s (~90% do jogador), então sempre dá pra escapar correndo.
 const ENEMY_TYPES = [
-  { hp: 60,   dmg: 6,   speed: 4.8, size: 0.8 },  // 1 small & nimble
-  { hp: 90,   dmg: 10,  speed: 3.8, size: 1.0 },  // 2 standard
-  { hp: 140,  dmg: 15,  speed: 5.6, size: 0.9 },  // 3 small but fast
-  { hp: 220,  dmg: 24,  speed: 2.9, size: 1.5 },  // 4 slow giant
-  { hp: 340,  dmg: 34,  speed: 4.3, size: 1.2 },  // 5 balanced
-  { hp: 500,  dmg: 48,  speed: 3.2, size: 1.8 },  // 6 huge & tanky
-  { hp: 760,  dmg: 68,  speed: 6.0, size: 1.1 },  // 7 fast assassin
-  { hp: 1100, dmg: 95,  speed: 2.5, size: 2.3 },  // 8 colossus
-  { hp: 1600, dmg: 130, speed: 4.7, size: 1.6 },  // 9 big & aggressive
-  { hp: 2300, dmg: 180, speed: 3.5, size: 2.8 },  // 10 boss
+  { hp: 60,   dmg: 6,   speed: 5.2, size: 0.8 },  // 1 small & nimble        33.8 px/s
+  { hp: 90,   dmg: 10,  speed: 4.2, size: 1.0 },  // 2 standard              27.3 px/s
+  { hp: 110,  dmg: 7,   speed: 6.9, size: 0.7 },  // 3 PRAGA: o mais rápido do jogo, dano baixo, bem pequeno — nasce a partir do nível 2 (44.9 px/s)
+  { hp: 220,  dmg: 24,  speed: 3.1, size: 1.5 },  // 4 slow giant            20.2 px/s
+  { hp: 340,  dmg: 34,  speed: 4.8, size: 1.2 },  // 5 balanced              31.2 px/s
+  { hp: 500,  dmg: 48,  speed: 3.4, size: 1.8 },  // 6 huge & tanky          22.1 px/s
+  { hp: 760,  dmg: 68,  speed: 6.4, size: 1.1 },  // 7 fast assassin         41.6 px/s
+  { hp: 1100, dmg: 95,  speed: 2.7, size: 2.3 },  // 8 colossus              17.6 px/s
+  { hp: 1600, dmg: 130, speed: 5.2, size: 1.6 },  // 9 big & aggressive      33.8 px/s
+  { hp: 2300, dmg: 180, speed: 3.8, size: 2.8 },  // 10 boss                 24.7 px/s
 ];
 const ENEMY_SPEED_K = 6.5;   // speed value → px/s
 // Per hunt level: resource-node count (dropMin..dropMax) + how many of each enemy type spawn.
 const MAP_SPAWN = {
-  1:  { dropMin: 20, dropMax: 28, enemies: [18, 8, 2, 0, 0, 0, 0, 0, 0, 0] },
+  1:  { dropMin: 20, dropMax: 28, enemies: [18, 8, 0, 0, 0, 0, 0, 0, 0, 0] },   // sem a PRAGA (tipo 3): ela só estreia no nível 2
   2:  { dropMin: 20, dropMax: 28, enemies: [15, 8, 5, 2, 0, 0, 0, 0, 0, 0] },
   3:  { dropMin: 21, dropMax: 29, enemies: [12, 8, 6, 5, 3, 0, 0, 0, 0, 0] },
   4:  { dropMin: 21, dropMax: 29, enemies: [8, 8, 7, 6, 5, 3, 0, 0, 0, 0] },
@@ -12549,9 +12655,12 @@ const EXP_AXE_ACTION = 'burn_axe';          // burns 1 axe — called only when 
 const EXP_DEPOSIT_ACTION = 'deposit_exploracao';  // on SAFE exit: ONE action mints ALL the loot collected this run
 // SFL item ids per loot type — the deposit action mints each of these by amount. coin = DinoCoin = 1.
 // gold = null → sem item de Ouro no painel ainda, então não é depositado.
+// ⚠️ cash (129) foi adicionado à caçada: a ação 'deposit_exploracao' no painel do SFL precisa
+// aceitar/mintar o item 129 também. Se os depósitos começarem a falhar (a janela de erro mostra
+// os itens enviados), basta trocar 129 por null aqui que o Cash Coin volta a não ser creditado.
 const EXP_LOOT_ITEM_IDS = {
   wood: 101, stone: 102, iron: 111, coin: 1, mushroom: 124, stick: 132,
-  scrab: 103, egg: 113, bone: 108, portion: 125, coins: 122, gold: null,
+  scrab: 103, egg: 113, bone: 108, portion: 125, coins: 122, cash: 129, gold: null,
 };
 const EXP_TEST_AXES = 15;   // axes handed out when playing offline (for testing)
 function getAxeBalance() {
@@ -12608,7 +12717,7 @@ function depositRunGains() {
 // Janela persistente com o erro do depósito (fica até fechar; tem botão de copiar).
 function showDepositError(err, amounts) {
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
-  const full = 'Ação: ' + EXP_DEPOSIT_ACTION + '\nItens enviados: ' + JSON.stringify(amounts) + '\nErro: ' + err;
+  const full = t('deposit.err.action') + ': ' + EXP_DEPOSIT_ACTION + '\n' + t('deposit.err.items') + ': ' + JSON.stringify(amounts) + '\n' + t('deposit.err.error') + ': ' + err;
   const old = document.getElementById('deposit-err-modal'); if (old) old.remove();
   const m = document.createElement('div');
   m.id = 'deposit-err-modal';
@@ -12852,13 +12961,17 @@ function setupHomeChar() {
   // player name above the head (SFL username when available, else the farm number)
   const nameEl = document.getElementById('home-char-name');
   if (nameEl) {
-    let label = 'Você';
+    let label = t('map.you');
+    let isDefault = true;   // só o rótulo padrão precisa acompanhar a troca de idioma
     try {
       const s = window._sflLastSession;
       const uname = s?.data?.username || s?.data?.farm?.username || s?.data?.player?.username;
-      if (uname) label = uname;
-      else if (window.firebaseUid && String(window.firebaseUid).startsWith('sfl_')) label = 'Farm #' + String(window.firebaseUid).replace('sfl_', '');
+      if (uname) { label = uname; isDefault = false; }
+      else if (window.firebaseUid && String(window.firebaseUid).startsWith('sfl_')) { label = 'Farm #' + String(window.firebaseUid).replace('sfl_', ''); isDefault = false; }
     } catch (e) {}
+    // marca/desmarca pro applyI18n() retraduzir quando o idioma mudar (nome do SFL não se traduz)
+    if (isDefault) nameEl.setAttribute('data-i18n', 'map.you');
+    else nameEl.removeAttribute('data-i18n');
     nameEl.textContent = label;
   }
   setupHomeElder();
@@ -12892,10 +13005,10 @@ function setupHomeElder() {
   try { updateAnciaoShields(); } catch (e) {}
 }
 function homeCharClick() {
-  if (typeof showToast === 'function') showToast('🧑‍🌾 Em breve!', 'info');
+  if (typeof showToast === 'function') showToast(t('toast.char_soon'), 'info');
 }
 function ferrariaClick() {
-  if (typeof showToast === 'function') showToast('⚒️ Workbench — em breve!', 'info');
+  if (typeof showToast === 'function') showToast(t('toast.workbench_soon'), 'info');
 }
 window.addEventListener('load', () => {
   setTimeout(setupHomeChar, 700);    // first paint (default skin if the SFL session isn't in yet)
@@ -13063,9 +13176,20 @@ function generateExploreChests() {
     layer.appendChild(el);
     EXPLORE.chests.push({ el, x, y, level, opened: false, loot: makeChestLoot(level) });
   }
-  // Temporary on-screen count so we can confirm chests actually spawn.
+  updateExploreCounts();
+}
+// Contador do topo da tela: mostra QUANTO AINDA RESTA / o total do mapa.
+// Ex.: abriu 1 de 7 baús → "🎁 6/7"; matou 2 de 28 monstros → "👹 26/28".
+// Baú aberto vira opened:true e inimigo morto vira dead:true (nenhum dos dois sai da lista),
+// então o total é o tamanho da lista e o restante é o que ainda não foi marcado.
+function updateExploreCounts() {
   const dbg = document.getElementById('exp-debug');
-  if (dbg) dbg.textContent = '🎁 ' + EXPLORE.chests.length;
+  if (!dbg) return;
+  const chests = (EXPLORE && EXPLORE.chests) || [];
+  const enemies = (EXPLORE && EXPLORE.enemies) || [];
+  const chestsLeft = chests.filter(c => !c.opened).length;
+  const enemiesLeft = enemies.filter(e => !e.dead).length;
+  dbg.textContent = '🎁 ' + chestsLeft + '/' + chests.length + '  👹 ' + enemiesLeft + '/' + enemies.length;
 }
 
 // Spawn a few wandering goblins (visual for now — no combat yet).
@@ -13095,8 +13219,7 @@ function generateExploreEnemies() {
     }
     spawnEnemy(x, y, ti, type, layer);
   }
-  const dbg = document.getElementById('exp-debug');
-  if (dbg) dbg.textContent = '🎁 ' + (EXPLORE.chests ? EXPLORE.chests.length : 0) + '  👹 ' + EXPLORE.enemies.length;
+  updateExploreCounts();
 }
 // Create one enemy of a given type at (x,y). Sprite/HP/damage/speed/size come from the type.
 function spawnEnemy(x, y, ti, type, layer) {
@@ -13345,6 +13468,7 @@ function attackNearestEnemy() {
 // Enemy dies: fade out and remove.
 function killEnemy(e) {
   e.dead = true; e.hp = 0; e.attacking = false;
+  updateExploreCounts();   // 👹 restantes/total
   playSfx('gobdie', 0.5, enemyVoiceRate(e));   // goblin death yelp (deep for giants, squeaky for small ones)
   // Chance to drop a Bone (Osso) into the backpack.
   if (Math.random() < 0.40 && !invFullFor('bone')) {
@@ -14406,6 +14530,7 @@ function openChestLootPanel(c) {
   // First open → swap to the OPEN chest art (lid up), and keep it that way.
   if (!c.opened) {
     c.opened = true;
+    updateExploreCounts();   // 🎁 restantes/total
     if (c.el) {
       c.el._open = true;
       c.el.textContent = '';
