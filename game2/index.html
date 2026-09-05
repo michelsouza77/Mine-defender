@@ -97,7 +97,7 @@ body { background-color:#06131c; image-rendering:pixelated; color: var(--parchme
 @keyframes homeIslandFloat{from{transform:translate(-50%,-52%);}to{transform:translate(-50%,-48%);}}
 /* Island home (step 1) */
 #island-home{position:fixed;inset:0;z-index:2500;display:none;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse 92% 82% at 50% 46%,#57a8dd 0%,#3f86bf 42%,#2e6499 74%,#234d79 100%);}
-#ih-island{position:relative;width:min(calc(var(--appw) * 0.92),760px);height:min(calc(var(--apph) * 0.82),640px);background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:52px 52px;background-repeat:repeat;image-rendering:pixelated;border-radius:46% 54% 50% 50%/52% 48% 52% 48%;box-shadow:0 0 0 13px #e3c079,0 0 0 19px #c39f57,0 24px 48px rgba(0,0,0,.45);}
+#ih-island{position:relative;width:min(calc(var(--appw) * 0.92),760px);height:min(calc(var(--apph) * 0.82),640px);background-image:url("https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/ui/3x3_bg.png");background-size:52px 52px;background-repeat:repeat;image-rendering:pixelated;border-radius:46% 54% 50% 50%/52% 48% 52% 48%;box-shadow:0 0 0 13px #e3c079,0 0 0 19px #c39f57,0 24px 48px rgba(0,0,0,.45);}
 #ih-title{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;color:#3a2410;background:rgba(255,255,255,.4);padding:4px 14px;border-radius:10px;white-space:nowrap;}
 .ih-station{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:8px 12px;cursor:pointer;font-family:'Pixelify Sans',monospace;box-sizing:border-box;transition:transform .1s,filter .1s;}
 .ih-station:hover{filter:brightness(1.08);transform:translate(-50%,-50%) scale(1.06);}
@@ -463,7 +463,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .guide-table{width:100%;border-collapse:collapse;font-size:9px;margin-top:6px;}
 .guide-table th{font-family:'Pixelify Sans',monospace;color:#3a2410;font-weight:700;text-align:left;padding:4px 6px;border-bottom:2px solid #2d2840;}
 .guide-table td{padding:4px 6px;color:#4a2e14;font-weight:600;border-bottom:1px solid rgba(45,40,64,.2);}
-#battle-panel{flex:1;background-color:#5a6b3a;background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:96px 96px;background-repeat:repeat;image-rendering:pixelated;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+#battle-panel{flex:1;background-color:#5a6b3a;background-image:url("https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/ui/3x3_bg.png");background-size:96px 96px;background-repeat:repeat;image-rendering:pixelated;display:flex;flex-direction:column;position:relative;overflow:hidden;}
 .craft-map{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px 16px 60px;display:flex;flex-direction:column;gap:18px;position:relative;}
 .craft-map::-webkit-scrollbar{width:6px;}
 .craft-map::-webkit-scrollbar-thumb{background:rgba(200,150,12,.3);border-radius:4px;}
@@ -1132,7 +1132,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 /* The world is larger than the screen; we move it to follow the character (camera) */
 #explore-world{position:absolute;top:0;left:0;will-change:transform;image-rendering:pixelated;}
 /* Grass farm zone */
-#exp-ground{position:absolute;left:0;top:0;background-color:#63a14a;background-image:url("https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/ui/3x3_bg.png");background-size:48px 48px;background-repeat:repeat;image-rendering:pixelated;}
+#exp-ground{position:absolute;left:0;top:0;background-color:#63a14a;background-image:url("https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/ui/3x3_bg.png");background-size:48px 48px;background-repeat:repeat;image-rendering:pixelated;}
 #exp-resource-layer{position:absolute;inset:0;}
 /* A harvestable resource (tree/stone) */
 .exp-res{position:absolute;image-rendering:pixelated;transform:translate(-50%,-100%);z-index:3;}
@@ -1205,10 +1205,10 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .exp-loot-all{margin:8px;padding:9px;background-color:#63c74d;color:#fff;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;letter-spacing:1px;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;cursor:pointer;text-shadow:1px 1px 0 #3a6b2a;box-sizing:border-box;}
 .exp-loot-hint{padding:8px 12px;font-size:11px;color:#6b4a28;text-align:center;font-family:'Pixelify Sans',monospace;}
 /* SFL-styled slots + titles inside the chest loot panel */
-#exp-loot-panel .ldoe-section-title{color:#3a2410;background:transparent;border-bottom:none;font-family:'Pixelify Sans',monospace;padding:8px 10px 4px;}
-#exp-loot-panel .ldoe-slot,#exp-loot-panel .ldoe-slot-item{background:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;min-height:48px;}
-#exp-loot-panel .ldoe-slot-empty{opacity:.55;}
-#exp-loot-panel .ldoe-slot-qty{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:14px;color:#fff;text-shadow:1px 1px 0 #2d2840;bottom:2px;right:5px;}
+#exp-loot-panel .ldoe-section-title,#charloadout-modal .ldoe-section-title{color:#3a2410;background:transparent;border-bottom:none;font-family:'Pixelify Sans',monospace;padding:8px 10px 4px;}
+#exp-loot-panel .ldoe-slot,#exp-loot-panel .ldoe-slot-item,#charloadout-modal .ldoe-slot,#charloadout-modal .ldoe-slot-item{background:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;min-height:48px;}
+#exp-loot-panel .ldoe-slot-empty,#charloadout-modal .ldoe-slot-empty{opacity:.55;}
+#exp-loot-panel .ldoe-slot-qty,#charloadout-modal .ldoe-slot-qty{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:14px;color:#fff;text-shadow:1px 1px 0 #2d2840;bottom:2px;right:5px;}
 /* Reward screen tiles → SFL slots */
 #explore-rewards .drop-tile{background:#b96f50;image-rendering:pixelated;border:none;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;box-sizing:border-box;padding:6px 4px;}
 #explore-rewards .drop-tile-qty{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:15px;color:#fff;text-shadow:1px 1px 0 #2d2840;}
@@ -1254,6 +1254,37 @@ to{transform:scale(1) rotate(0);opacity:1;}
 #exp-pouch-btn.empty::after{content:'+';font-family:'Pixelify Sans',monospace;font-size:26px;font-weight:700;color:rgba(255,255,255,.5);line-height:1;}
 #exp-pouch-qty{position:absolute;right:-2px;bottom:-2px;min-width:20px;padding:0 4px;background:#2d2840;border:2px solid #fff;border-radius:10px;font-family:'Pixelify Sans',monospace;font-size:12px;font-weight:700;color:#fff;line-height:16px;text-align:center;pointer-events:none;}
 #exp-pouch-btn.empty #exp-pouch-qty{display:none;}
+/* Slots 2 e 3 da mochila de perna — reservados, ainda bloqueados */
+.exp-pouch-locked{position:absolute;right:28px;z-index:4010;width:60px;height:60px;background:rgba(45,40,64,.22);border:3px dashed rgba(255,255,255,.28);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;opacity:.75;padding:0;}
+#exp-pouch-btn-2{bottom:250px;}
+#exp-pouch-btn-3{bottom:316px;}
+/* ── Tela do personagem: usa EXATAMENTE o painel do baú do modo explorar ──
+   (por isso o #charloadout-modal entra junto nos seletores de #exp-loot-panel abaixo) */
+#charloadout-modal{position:fixed;inset:0;z-index:3600;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.85);padding:14px;backdrop-filter:blur(3px);}
+#charloadout-modal .exp-loot-modal{max-width:640px;}
+.charrig{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 4px 2px;}
+.charcol{display:flex;flex-direction:column;gap:6px;}
+/* o bumpkin: animateHomeSprite define largura/altura sozinho, então aqui é só centralizar */
+.charmid{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.charslot{position:relative;width:46px;height:46px;flex:none;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:8px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;}
+.charslot.locked{opacity:.45;}
+.charslot.locked::after{content:'🔒';position:absolute;right:-2px;bottom:-2px;font-size:12px;}
+.charpouches{display:flex;gap:6px;justify-content:center;padding:4px 0 8px;}
+.charslot.pouch{width:52px;height:52px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;font-size:24px;color:#6b4a28;}
+.charslot.pouch.filled{background-color:#e9b98a;}
+.charslot img{width:30px;height:30px;object-fit:contain;image-rendering:pixelated;pointer-events:none;}
+/* Mochila do modo explorar: grade à esquerda, personagem à direita */
+.exp-bp-cols{display:flex;gap:10px;align-items:flex-start;min-height:0;flex-wrap:wrap;}
+.exp-bp-side{flex:1 1 210px;min-width:0;display:flex;flex-direction:column;}
+.exp-bp-charcol{flex:0 0 auto;align-items:center;justify-content:center;margin:0 auto;}
+.exp-bp-charcol .charmid{flex:0 0 auto;}
+.exp-bp-charcol .charslot{width:40px;height:40px;font-size:17px;}
+.exp-bp-charcol .charslot.pouch{width:46px;height:46px;font-size:21px;}
+.exp-bp-charcol .charslot img{width:26px;height:26px;}
+.charslot.pouch-drop.over{outline:3px dashed #63c74d;outline-offset:-3px;}
+.charbtns{display:flex;gap:6px;margin:0 8px 8px;}
+.charbtns .exp-loot-all{flex:1;margin:0;font-size:11px;padding:9px 4px;}
+.loadout-drop.over{outline:3px dashed #63c74d;outline-offset:-3px;}
 /* Power up na mochila: clicável, mas com a MESMA cara dos outros itens — só o que já está
    no slot da mochila de perna recebe a marca verde, pra você saber qual é. */
 .exp-bp-powerup{cursor:pointer;}
@@ -1273,7 +1304,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .exp-rw-btn:hover{filter:brightness(1.1);}
 #exp-backpack-panel{display:none;position:fixed;inset:0;z-index:4020;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:20px;}
 #exp-backpack-panel.open{display:flex;}
-.exp-bp-window{max-width:360px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:16px;box-sizing:border-box;}
+.exp-bp-window{max-width:620px;width:100%;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;padding:16px;box-sizing:border-box;}
 .exp-bp-title{font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;letter-spacing:1px;color:#3a2410;text-align:center;margin-bottom:12px;}
 .exp-bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;min-height:70px;}
 .exp-bp-slot{aspect-ratio:1;background-color:#b96f50;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png") 20%;border-image-repeat:stretch;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
@@ -1420,14 +1451,14 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Disc buttons in a VERTICAL column: Settings, Season, Mailbox -->
 <div class="hud-disc-col" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
 <button class="hud-disc" id="profile-btn" onclick="showProfileMenu()" title="Perfil">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" alt="Config" onerror="this.outerHTML='⚙️';">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/settings_disc.png" alt="Config" onerror="this.outerHTML='⚙️';">
 </button>
 <button class="hud-disc" id="season-btn" onclick="showSeasonInfo()" title="Temporada">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chapter_icon_3.webp" class="hud-disc-fg" alt="Temporada" onerror="this.outerHTML='📗';">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chapter_icon_3.webp" class="hud-disc-fg" alt="Temporada" onerror="this.outerHTML='📗';">
 </button>
 <button class="hud-disc" id="mailbox-btn" onclick="showMailbox()" title="Mensagens">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/letter_disc.png" alt="Mensagens" onerror="this.outerHTML='📩';">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/letter_disc.png" alt="Mensagens" onerror="this.outerHTML='📩';">
 <span class="hud-mailbox-badge" id="mailbox-badge" style="display:none;"></span>
 </button>
 </div>
@@ -1439,20 +1470,20 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Bottom corners: P2P market bottom-LEFT, battle bottom-RIGHT (same height) -->
 <div class="hud-corner-discs">
 <button class="hud-disc" id="marketplace-btn" onclick="showMarketplace()" title="Mercado SFL">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/trade_disc.png" alt="Loja" onerror="this.outerHTML='🛒';">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/trade_disc.png" alt="Loja" onerror="this.outerHTML='🛒';">
 </button>
 </div>
 <div class="hud-corner-discs-right">
 <button class="hud-disc hud-disc-battle" id="battle-btn" onclick="toggleRightPanel()" title="Batalha">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
 <img src="https://sunflower-land.com/game-assets/icons/sword.png" class="hud-disc-fg" alt="Batalha" onerror="this.outerHTML='⚔️';">
 </button>
 </div>
 <!-- Menu button below energy (top-left) -->
 <div class="hud-menu-disc">
 <button class="hud-disc" id="menu-disc-btn" onclick="toggleLeftPanel()" title="Menu">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" class="hud-disc-fg" alt="Menu" onerror="this.outerHTML='🎒';">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/empty_disc.png" class="hud-disc-bg" alt="">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chest.png" class="hud-disc-fg" alt="Menu" onerror="this.outerHTML='🎒';">
 </button>
 </div>
 <!-- ═══ MAIN ═══ -->
@@ -1465,25 +1496,25 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Tab buttons -->
 <div class="tab-nav">
 <button class="tab-btn active" onclick="switchTab('inventory')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🎴';"></span><span data-i18n="menu.collection">Coleção</span>
+<span class="tab-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/codex.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🎴';"></span><span data-i18n="menu.collection">Coleção</span>
 </button>
 <button class="tab-btn" onclick="switchTab('eggs')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/pet_egg.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🥚';"></span><span data-i18n="menu.eggs">Ovos</span>
+<span class="tab-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/pet_egg.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🥚';"></span><span data-i18n="menu.eggs">Ovos</span>
 </button>
 <button class="tab-btn" onclick="switchTab('items')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦';"></span><span data-i18n="menu.items">Itens</span>
+<span class="tab-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chest.png" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦';"></span><span data-i18n="menu.items">Itens</span>
 </button>
 <button class="tab-btn" onclick="switchTab('fusion')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/gem.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚗️';"></span><span data-i18n="menu.fusion">Fusão</span>
+<span class="tab-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/gem.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚗️';"></span><span data-i18n="menu.fusion">Fusão</span>
 </button>
 <button class="tab-btn" onclick="switchTab('guide')">
-<span class="tab-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📜';"></span><span data-i18n="menu.guide">Guia</span>
+<span class="tab-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/world_book.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📜';"></span><span data-i18n="menu.guide">Guia</span>
 </button>
 </div>
 <!-- INVENTORY -->
 <div class="panel-content active" id="tab-inventory">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon" id="coll-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🦕'"></span><span id="coll-info-title" data-i18n="section.collection.short">Minha Coleção</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon" id="coll-info-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/codex.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🦕'"></span><span id="coll-info-title" data-i18n="section.collection.short">Minha Coleção</span></div>
 <div class="sfl-info-desc" id="coll-info-desc"><span id="total-cards-count">0/99</span> <span data-i18n="collection.subtitle.tail">cartas • Clique numa carta para ver os stats</span></div>
 </div>
 <!-- COMUNS -->
@@ -1563,7 +1594,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- ITEMS -->
 <div class="panel-content" id="tab-items">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon" id="items-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦'"></span><span id="items-info-title" data-i18n="section.items.short">Materiais & Recursos</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon" id="items-info-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chest.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📦'"></span><span id="items-info-title" data-i18n="section.items.short">Materiais & Recursos</span></div>
 <div class="sfl-info-desc" id="items-info-desc" data-i18n="items.subtitle">Itens coletados em batalhas de defesa e fabricação</div>
 </div>
 <div id="items-grid"></div>
@@ -1571,7 +1602,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- FUSION -->
 <div class="panel-content" id="tab-fusion">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚡'"></span><span data-i18n="section.fusion.short">Altar de Fusão</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/lightning.png" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='⚡'"></span><span data-i18n="section.fusion.short">Altar de Fusão</span></div>
 <div class="sfl-info-desc" data-i18n="fusion.subtitle.full">Queime 3 cartas iguais para evoluir à próxima raridade</div>
 </div>
 <div class="fusion-area">
@@ -1618,11 +1649,11 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- GUIDE -->
 <div class="panel-content" id="tab-guide">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📖'"></span><span data-i18n="section.guide.short">Guia do Caçador</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/world_book.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='📖'"></span><span data-i18n="section.guide.short">Guia do Caçador</span></div>
 <div class="sfl-info-desc" data-i18n="guide.intro.body">Colecione cartas, monte seu deck e batalhe! Suba de nível para desbloquear novas áreas.</div>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.intro.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🦕'">Bem-vindo</h3>
+<h3 data-i18n="guide.intro.title" data-i18n-html="1"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🦕'">Bem-vindo</h3>
 <p data-i18n="guide.intro.body">Colecione cartas de dinossauros, monte seu deck e batalhe! Suba de nível com o Ancião para desbloquear novas áreas e recursos.</p>
 </div>
 <div class="guide-section">
@@ -1634,11 +1665,11 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <p data-i18n="guide.battle.body" data-i18n-html="1">Cada carta acumula energia por turno e ataca ao encher a barra. O <strong>escudo</strong> reduz o dano até quebrar. O <strong>ataque especial</strong> causa dano extra, 1× por batalha.</p>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.elder.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🧙'">Ancião da Tribo</h3>
+<h3 data-i18n="guide.elder.title" data-i18n-html="1"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🧙'">Ancião da Tribo</h3>
 <p data-i18n="guide.elder.body">Entregue recursos ao Ancião para subir de Nível de Caçador. Cada nível desbloqueia uma nova parte do jogo: bancadas, mercado, modos e mais.</p>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.craft.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🔨'">Bancadas</h3>
+<h3 data-i18n="guide.craft.title" data-i18n-html="1"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='🔨'">Bancadas</h3>
 <p data-i18n="guide.craft.body" data-i18n-html="1">No mapa você fabrica e processa recursos: gerar energia, fundir metais, chocar ovos e criar poções. Cada bancada é desbloqueada com o Ancião.</p>
 </div>
 <div class="guide-section">
@@ -1650,7 +1681,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <p data-i18n="guide.cashcoin.body" data-i18n-html="1">Acumule <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;" onerror="this.outerHTML='💵'"> Cash Coin nas batalhas e troque por itens raros. Quanto mais você tem, mais alto fica no Ranking.</p>
 </div>
 <div class="guide-section">
-<h3 data-i18n="guide.fusion.title" data-i18n-html="1"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='⚡'">Fusão & Raridades</h3>
+<h3 data-i18n="guide.fusion.title" data-i18n-html="1"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;" onerror="this.outerHTML='⚡'">Fusão & Raridades</h3>
 <p data-i18n="guide.fusion.body" data-i18n-html="1">Funda 3 cartas iguais para evoluir à próxima raridade. São 8 raridades: Comum → Incomum → Raro → Épico → Lendário → Mítico → Ancestral → TITÃ.</p>
 </div>
 </div>
@@ -1734,7 +1765,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <span data-i18n="mode.hunt.short">Caçada</span>
 </button>
 <button class="battle-mode-tab active" id="mode-tab-defense" onclick="switchBattleMode('defense', this)">
-<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sfl.webp" class="bmt-icon" onerror="this.outerHTML='🌻'">
+<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/sfl.webp" class="bmt-icon" onerror="this.outerHTML='🌻'">
 <span data-i18n="mode.defense.short">Defesa</span>
 </button>
 <button class="battle-mode-tab" id="mode-tab-arena" onclick="switchBattleMode('arena', this)">
@@ -1744,7 +1775,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 </div>
 <div class="battle-body">
 <div class="sfl-info-box">
-<div class="sfl-info-title"><span class="sfl-info-icon" id="battle-info-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sfl.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🌻'"></span><span id="battle-mode-title" data-i18n="battle.title.defense">Defesa da Sunflower Land</span></div>
+<div class="sfl-info-title"><span class="sfl-info-icon" id="battle-info-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/sfl.webp" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='🌻'"></span><span id="battle-mode-title" data-i18n="battle.title.defense">Defesa da Sunflower Land</span></div>
 <div class="sfl-info-desc" id="battle-mode-desc" data-i18n="battle.mode.defense.desc">Defenda a Sunflower Land e ganhe recursos + Cash Coin</div>
 </div>
 <div class="battle-arena">
@@ -1771,7 +1802,7 @@ Defender Sunflower Land
 <div class="deck-picker-box" onclick="event.stopPropagation()">
 <button class="panel-close-x" style="position:absolute;top:-4px;right:0;z-index:40;width:42px;height:42px;" onclick="document.getElementById('deck-picker').classList.remove('open')"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:26px;height:26px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
 <div class="deck-picker-tabs">
-<button class="deck-picker-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='🦕'"><span data-i18n="deck.picker.title.short">Escolher Carta</span></button>
+<button class="deck-picker-tab active"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='🦕'"><span data-i18n="deck.picker.title.short">Escolher Carta</span></button>
 </div>
 <div class="deck-picker-content">
 <div class="deck-picker-grid" id="deck-picker-grid"></div>
@@ -2034,6 +2065,29 @@ var I18N = {
   'powerup.equipped': '✅ {name} na mochila de perna',
   'powerup.empty': 'Acabou esse item',
   'powerup.hp_full': '❤️ Sua vida já está cheia',
+  'loadout.title': 'Personagem',
+  'loadout.char': 'Personagem',
+  'loadout.add_items_title': 'Colocar itens',
+  'loadout.sub': 'Escolha o que levar na próxima caçada',
+  'loadout.add_items': '🎒 Colocar itens',
+  'loadout.send_all': '📦 Tirar tudo da mochila',
+  'loadout.sent_all': '📦 Mochila esvaziada — nada saiu do seu inventário',
+  'loadout.already_empty': 'A mochila já está vazia',
+  'loadout.dragtip': 'Arraste de um lado pro outro (ou toque pra mover 1)',
+  'charslot.head': 'Cabeça', 'charslot.chest': 'Peito', 'charslot.weapon': 'Arma',
+  'charslot.shield': 'Escudo', 'charslot.ring': 'Anel', 'charslot.boots': 'Botas',
+  'charslot.pouch': 'Mochila de perna',
+  'charslot.pouch_hint': 'Ponha um power up na bolsa primeiro',
+  'charslot.only_powerup': 'Só power up entra na mochila de perna',
+  'charslot.soon': '🔒 Equipamento de personagem em breve',
+  'btn.back': 'Voltar',
+  'loadout.owned': 'NA SUA CONTA',
+  'loadout.bag': 'VAI LEVAR',
+  'loadout.nothing': 'Você ainda não tem itens que possa levar.',
+  'loadout.warn': '⚠️ Pôr na mochila não tira nada do inventário. Os itens só saem quando você ENTRA no mapa — e voltam quando você sai vivo. Morreu, perdeu.',
+  'loadout.full': 'A bolsa só cabe {n} tipos de item',
+  'loadout.not_ready': '⚠️ A ação de retirada ainda não existe no painel do SFL — por enquanto nada é levado de verdade.',
+  'loadout.burn_failed': '❌ Não deu pra retirar os itens da sua conta — entrando sem eles',
   'market.cat.powerups': '⚡ Power Ups',
   'market.powerups.hint': 'Itens que dão bônus. A poção você equipa na mochila de perna durante a Caçada.',
   'toast.char_soon': '🧑‍🌾 Em breve!',
@@ -2068,10 +2122,14 @@ var I18N = {
   'item.desc.124': 'Ingrediente para poções. Drop raro em Defesa.',
   'item.desc.126': 'Bancada que produz Energia a partir de Carvão.',
   'item.desc.129': 'Token da Temporada Beta. Troque por itens raros na loja SFL.',
-  'item.desc.130': 'Corta árvores no modo Explorar. Quebra após 5 árvores.',
+  'item.desc.130': 'Corta árvores no modo Explorar. Gasta 1 por árvore.',
   'item.desc.131': 'Minera pedra, ferro e ouro no modo Explorar. Some após 1 uso.',
   'item.desc.132': 'Achado no chão do mapa ou feito na Serraria. Usado para forjar ferramentas.',
   'item.desc.133': 'Bancada que forja o Machado e a Picareta a partir de Graveto e Pedra.',
+  'rewards.mission2.title': 'Cace 30 inimigos',
+  'rewards.mission2.req': '',
+  'rewards.mission2.result': 'Inimigos',
+  'rewards.claim_failed': '❌ A ação "{action}" falhou. Confira no painel do SFL.',
   'leaderboard.coming_soon': 'Em Breve',
   'leaderboard.subtitle': 'TOP CAÇADORES POR CASH COIN','leaderboard.loading':'Carregando ranking...',
   'leaderboard.row.placeholder': '— em breve —',
@@ -2402,19 +2460,19 @@ var I18N = {
   'guide.items.use.crystal': 'Item raro',
   'guide.items.use.sand': 'Material comum',
   'guide.items.use.bone': 'Material orgânico',
-  'guide.craft.title': '<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bancadas (Crafting)',
+  'guide.craft.title': '<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chest.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bancadas (Crafting)',
   'guide.craft.bonfire': '<strong>Fogueira</strong> — gera energia (3 madeira → 1⚡ a cada 5min) e carvão (5 madeira → 1 carvão a cada 2min).',
   'guide.craft.workbench': '<strong>Workbench</strong> — fabrica itens refinados (3 madeira → 1 tábua a cada 1min).',
   'guide.craft.tip': 'Construa as bancadas no mapa central com pedra, madeira e sucata.',
   'guide.rarities.title': '🏆 Raridades das Cartas',
   'guide.rarities.col_rarity': 'Raridade',
   'guide.rarities.col_total': 'Total',
-  'guide.fusion.title': '<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Fusão de Cartas',
+  'guide.fusion.title': '<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/lightning.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Fusão de Cartas',
   'guide.fusion.body': 'Funda 3 cartas iguais para evoluir à próxima raridade. São 8 raridades: Comum → Incomum → Raro → Épico → Lendário → Mítico → Ancestral → TITÃ.',
-  'guide.intro.title':'<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bem-vindo','guide.intro.body':'Colecione cartas de dinossauros, monte seu deck e batalhe! Suba de nível com o Ancião para desbloquear novas áreas e recursos.',
+  'guide.intro.title':'<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/codex.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Bem-vindo','guide.intro.body':'Colecione cartas de dinossauros, monte seu deck e batalhe! Suba de nível com o Ancião para desbloquear novas áreas e recursos.',
   'guide.modes.body':'<strong>Arena</strong> — enfrente inimigos por <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/1.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> DinoCoins e <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cash Coin.<br><strong>Defesa</strong> — defenda a Sunflower Land por recursos e <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cash Coin.<br><strong>Caçada</strong> — em breve!',
   'guide.battle.body':'Cada carta acumula energia por turno e ataca ao encher a barra. O <strong>escudo</strong> reduz o dano até quebrar. O <strong>ataque especial</strong> causa dano extra, 1× por batalha.',
-  'guide.craft.body':'No mapa você fabrica e processa recursos: gerar energia, fundir metais, chocar ovos e criar poções. Cada bancada é desbloqueada com o Ancião.','guide.elder.title':'<img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Ancião da Tribo','guide.elder.body':'O Ancião guia sua jornada como caçador. Entregue recursos a ele para subir de Nível de Caçador e desbloquear novas áreas, bancadas e modos de jogo. Cada nível abre uma parte nova do jogo.',
+  'guide.craft.body':'No mapa você fabrica e processa recursos: gerar energia, fundir metais, chocar ovos e criar poções. Cada bancada é desbloqueada com o Ancião.','guide.elder.title':'<img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/world_book.webp" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Ancião da Tribo','guide.elder.body':'O Ancião guia sua jornada como caçador. Entregue recursos a ele para subir de Nível de Caçador e desbloquear novas áreas, bancadas e modos de jogo. Cada nível abre uma parte nova do jogo.',
   'guide.equip.title':'<img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/106.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Equipamentos',
   'guide.equip.body':'Equipe suas cartas com itens para fortalecê-las em batalha. Cada slot aceita um tipo de equipamento. Exemplos: <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/106.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cristal aumenta o primeiro ataque, <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/125.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Poção aumenta o HP, e os <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/127.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Totens dão bônus especiais como slot extra ou reviver a carta.',
   'guide.cashcoin.title':'<img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:18px;height:18px;image-rendering:pixelated;object-fit:contain;vertical-align:-3px;margin-right:6px;display:inline-block;">Cash Coin & Ranking','guide.cashcoin.body':'O <img src="https://production-minigame-editor-assets.s3.us-east-1.amazonaws.com/minigames/dinohunt/items/129.png" style="width:16px;height:16px;vertical-align:-3px;image-rendering:pixelated;display:inline-block;"> Cash Coin é o token da Temporada Beta. Ganhe nas batalhas de Defesa e Arena, e troque por itens raros na loja do SFL. Quanto mais Cash Coin você acumula, mais alto fica no Ranking dos caçadores.',
@@ -2596,6 +2654,29 @@ var I18N = {
   'powerup.equipped': '✅ {name} in the leg pouch',
   'powerup.empty': 'You ran out of that item',
   'powerup.hp_full': '❤️ Your health is already full',
+  'loadout.title': 'Character',
+  'loadout.char': 'Character',
+  'loadout.add_items_title': 'Add items',
+  'loadout.sub': 'Pick what to take on your next hunt',
+  'loadout.add_items': '🎒 Add items',
+  'loadout.send_all': '📦 Empty the backpack',
+  'loadout.sent_all': '📦 Backpack emptied — nothing left your inventory',
+  'loadout.already_empty': 'The backpack is already empty',
+  'loadout.dragtip': 'Drag from one side to the other (or tap to move 1)',
+  'charslot.head': 'Head', 'charslot.chest': 'Chest', 'charslot.weapon': 'Weapon',
+  'charslot.shield': 'Shield', 'charslot.ring': 'Ring', 'charslot.boots': 'Boots',
+  'charslot.pouch': 'Leg pouch',
+  'charslot.pouch_hint': 'Put a power up in the bag first',
+  'charslot.only_powerup': 'Only power ups go in the leg pouch',
+  'charslot.soon': '🔒 Character gear coming soon',
+  'btn.back': 'Back',
+  'loadout.owned': 'IN YOUR ACCOUNT',
+  'loadout.bag': 'TAKING ALONG',
+  'loadout.nothing': 'You have no items you can take yet.',
+  'loadout.warn': '⚠️ Putting things in the backpack takes nothing from your inventory. Items only leave when you ENTER the map — and come back when you exit alive. Die and they are gone.',
+  'loadout.full': 'The bag only holds {n} item types',
+  'loadout.not_ready': '⚠️ The withdraw action does not exist in the SFL panel yet — nothing is actually taken for now.',
+  'loadout.burn_failed': '❌ Could not withdraw the items from your account — entering without them',
   'market.cat.powerups': '⚡ Power Ups',
   'market.powerups.hint': 'Items that grant bonuses. The potion goes in your leg pouch during the Hunt.',
   'toast.char_soon': '🧑‍🌾 Coming soon!',
@@ -2630,11 +2711,15 @@ var I18N = {
   'item.desc.124': 'Potion ingredient. Rare drop in Defense.',
   'item.desc.126': 'Workstation that produces Energy from Coal.',
   'item.desc.129': 'Beta Season token. Trade it for rare items in the SFL shop.',
-  'item.desc.130': 'Chops trees in Explore mode. Breaks after 5 trees.',
+  'item.desc.130': 'Chops trees in Explore mode. Uses 1 per tree.',
   'item.desc.131': 'Mines stone, iron and gold in Explore mode. Gone after 1 use.',
   'item.desc.132': 'Found on the map floor or made at the Sawbench. Used to forge tools.',
   'item.desc.133': 'Workstation that forges the Axe and the Pickaxe from Sticks and Stone.',
   'section.guide.short': 'Hunter Guide',
+  'rewards.mission2.title': 'Hunt 30 enemies',
+  'rewards.mission2.req': '',
+  'rewards.mission2.result': 'Enemies',
+  'rewards.claim_failed': '❌ Action "{action}" failed. Check it in the SFL panel.',
   'leaderboard.coming_soon': 'Coming Soon',
   'leaderboard.subtitle': 'TOP HUNTERS BY CASH COIN','leaderboard.loading':'Loading ranking...',
   'leaderboard.row.placeholder': '— coming soon —',
@@ -3119,7 +3204,7 @@ var SFL_ITEMS_INFO = {
   127: { emoji: '🗿', name: 'Totem Beta', sflName: 'Totem beta', desc: 'Equipamento (slot Totem). +1 slot universal de equipamento. Exclusivo da Temporada Beta.' },
   128: { emoji: '🦴', name: 'Totem Dino', sflName: 'Totem dino', desc: 'Equipamento (slot Totem). Revive a carta com 50% HP uma vez por batalha.' },
   129: { emoji: '💵', name: 'Cash Coin', sflName: 'Cash coin', desc: 'Token da Temporada Beta. Troque por itens raros na loja SFL.' },
-  130: { emoji: '🪓', name: 'Machado', sflName: 'Axe', desc: 'Corta árvores no modo Explorar. Quebra após 5 árvores.' },
+  130: { emoji: '🪓', name: 'Machado', sflName: 'Axe', desc: 'Corta árvores no modo Explorar. Gasta 1 por árvore.' },
   131: { emoji: '⛏️', name: 'Picareta', sflName: 'Pickaxe', desc: 'Minera pedra, ferro e ouro no modo Explorar. Some após 1 uso.' },
   132: { emoji: '🌿', name: 'Graveto', sflName: 'Stick', desc: 'Achado no chão do mapa ou feito na Serraria. Usado para forjar ferramentas.' },
   133: { emoji: '⚒️', name: 'Workbench', sflName: 'Workbench', desc: 'Bancada que forja o Machado e a Picareta a partir de Graveto e Pedra.' },
@@ -3127,7 +3212,7 @@ var SFL_ITEMS_INFO = {
 var ITEM_IMG_VERSION = '4';
 // UI icons from the SFL asset pack (hosted on GitHub raw).
 // Used to replace emojis in the interface with real game sprites.
-var UI_ICON_BASE = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/';
+var UI_ICON_BASE = 'https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/';
 function uiIcon(filename) { return UI_ICON_BASE + filename; }
 // Returns an <img> tag for a UI icon, with an emoji fallback if it fails to load.
 function uiIconImg(filename, emojiFallback, size) {
@@ -3359,8 +3444,11 @@ function showSeasonInfo() {
 
   const renderTrade = (tr) => {
     const nm = t(tr.nameKey, {}) !== tr.nameKey ? t(tr.nameKey) : tr.fallback;
+    // "Disponível" tem que considerar o que o jogador JÁ TEM, não só o que comprou aqui.
+    // Sem isso, quem já possui 1 de um item de limite 1 continuava vendo "1 disponível".
     const used = redeemed[tr.id] || 0;
-    const remaining = tr.max - used;
+    const owned = Number(bal[String(tr.id)] || 0);
+    const remaining = Math.max(0, tr.max - Math.max(used, owned));
     const balance = tr.currency === 'cash' ? myCash : myDinoCoin;
     const coinImg = tr.currency === 'cash' ? cashImg : dinoCoinImg;
     const canAfford = balance >= tr.cost;
@@ -3370,7 +3458,7 @@ function showSeasonInfo() {
     // SFL shop-style grid card: lightning top-left, item image, price pill bottom
     return `
     <div class="season-shop-card ${enabled ? '' : 'disabled'}" onclick="showSeasonItemInfo(${tr.id})" title="${nm}">
-      ${tr.boost ? '<img class="season-card-bolt" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/lightning.png" onerror="this.outerHTML=\'⚡\'">' : ''}
+      ${tr.boost ? '<img class="season-card-bolt" src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/lightning.png" onerror="this.outerHTML=\'⚡\'">' : ''}
       ${soldOut ? '<div class="season-card-check">✓</div>' : ''}
       <div class="season-card-img">
         <img src="${sflItemImageUrl(tr.id)}" style="width:80%;height:80%;object-fit:contain;image-rendering:pixelated;" onerror="this.style.display='none';" />
@@ -3386,8 +3474,8 @@ function showSeasonInfo() {
   <div class="season-window">
     <button class="panel-close-x season-close" onclick="document.getElementById('season-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="season-tabs">
-      <button class="season-tab active" onclick="switchSeasonTab('shop',this)"><img class="season-tab-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/shop.png" onerror="this.outerHTML='🏪'">${t('season.tab.shop')}<span class="season-tab-timer"><img src="https://sunflower-land.com/game-assets/icons/stopwatch.png" style="width:12px;height:12px;image-rendering:pixelated;vertical-align:-1px;margin-right:2px;" onerror="this.outerHTML='⏳'">${t('season.timer')}</span></button>
-      <button class="season-tab" onclick="switchSeasonTab('rewards',this)"><img class="season-tab-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/gift.png" onerror="this.outerHTML='🎁'">${t('season.tab.rewards')}</button>
+      <button class="season-tab active" onclick="switchSeasonTab('shop',this)"><img class="season-tab-icon" src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/shop.png" onerror="this.outerHTML='🏪'">${t('season.tab.shop')}<span class="season-tab-timer"><img src="https://sunflower-land.com/game-assets/icons/stopwatch.png" style="width:12px;height:12px;image-rendering:pixelated;vertical-align:-1px;margin-right:2px;" onerror="this.outerHTML='⏳'">${t('season.timer')}</span></button>
+      <button class="season-tab" onclick="switchSeasonTab('rewards',this)"><img class="season-tab-icon" src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/gift.png" onerror="this.outerHTML='🎁'">${t('season.tab.rewards')}</button>
     </div>
     <div class="season-body">
       <div class="season-scroll" id="season-page-shop">
@@ -3425,32 +3513,74 @@ function switchSeasonTab(page, btn) {
 // 1 mission per day with progress (e.g. craft iron 10x). Reward: season token (Cash Coin 129).
 // The crafting count must be incremented by SFL (call addDailyMissionProgress() when the
 // player crafts iron from scrap). Resets after 24h.
-const DAILY_MISSION = {
-  goal: 10,          // craft iron 10 times
-  reward: 50,        // season tokens
-  reqId: 103,        // Scrap (Sucata)
-  resultId: 112,     // Iron (Ferro)
-};
-function getDailyMissionState() {
+// ══ MISSÕES DIÁRIAS ═══════════════════════════════════════════════════════════
+// Pra criar uma missão nova: acrescente aqui e crie a ação de resgate no painel do SFL.
+//   goal   = quanto precisa fazer      reward = tokens de temporada
+//   action = ação do SFL que entrega a recompensa (tem que existir no painel!)
+//   reqId/resultId = ícones mostrados na tela (resultId também é o ícone do resumo)
+const MISSIONS = [
+  { id: 'iron10', goal: 10, reward: 50, action: 'claim_daily_mission1',
+    reqId: 103, resultId: 112, titleKey: 'rewards.mission1.title',
+    reqKey: 'rewards.mission1.req', resultKey: 'rewards.mission1.result' },
+  { id: 'kill30', goal: 30, reward: 50, action: 'claim_daily_mission2',
+    reqId: null, resultId: null, titleKey: 'rewards.mission2.title',
+    reqKey: 'rewards.mission2.req', resultKey: 'rewards.mission2.result',
+    // Ícone é o próprio goblin do mapa. É uma folha de 4 quadros de 27×35, então mostramos
+    // só o primeiro. URL literal de propósito: SFL_RAW só é declarado bem mais abaixo no arquivo.
+    iconUrl: 'https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/public/world/big_goblin.png',
+    iconFrames: 4, iconW: 27, iconH: 35 },
+];
+// Ícone da missão: folha de sprite (recorta o 1º quadro) ou a imagem do item.
+function missionIcon(M, h) {
+  if (M.iconUrl) {
+    const w = Math.round(h * M.iconW / M.iconH);
+    return `<div style="width:${w}px;height:${h}px;background-image:url('${M.iconUrl}');`
+      + `background-size:${M.iconFrames * 100}% 100%;background-position:0 0;background-repeat:no-repeat;`
+      + `image-rendering:pixelated;"></div>`;
+  }
+  return `<img src="${sflItemImageUrl(M.resultId)}" style="width:${h}px;height:${h}px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
+}
+const DAILY_MISSION = MISSIONS[0];   // compatibilidade com o código antigo
+function missionById(id) { return MISSIONS.find(m => m.id === id) || MISSIONS[0]; }
+// Estado: { date, m: { <id>: { p: progresso, c: resgatada } } }
+// Zera sozinho quando vira o dia. Aceita o formato antigo (uma missão só).
+function getMissionsState() {
+  const today = new Date().toISOString().slice(0, 10);
   try {
     const saved = JSON.parse(localStorage.getItem('dinohunt_daily_mission') || '{}');
-    const today = new Date().toISOString().slice(0, 10);
-    if (saved.date !== today) {
-      return { date: today, progress: 0, claimed: false };
-    }
-    return { date: today, progress: saved.progress || 0, claimed: !!saved.claimed };
-  } catch (e) { return { date: new Date().toISOString().slice(0,10), progress: 0, claimed: false }; }
+    if (saved.date !== today) return { date: today, m: {} };
+    if (saved.m && typeof saved.m === 'object') return { date: today, m: saved.m };
+    // formato antigo: { date, progress, claimed } era sempre a missão do ferro
+    return { date: today, m: { iron10: { p: saved.progress || 0, c: !!saved.claimed } } };
+  } catch (e) { return { date: today, m: {} }; }
 }
-function saveDailyMissionState(s) {
-  try { localStorage.setItem('dinohunt_daily_mission', JSON.stringify(s)); } catch(e) {}
+function saveMissionsState(s) {
+  try { localStorage.setItem('dinohunt_daily_mission', JSON.stringify(s)); } catch (e) {}
+  saveMissionsToFirebase(s);   // pra valer no celular E no PC
 }
-// Call this from SFL whenever the player crafts iron from scrap
-function addDailyMissionProgress(n = 1) {
-  const st = getDailyMissionState();
-  if (st.claimed) return;
-  st.progress = Math.min(DAILY_MISSION.goal, (st.progress || 0) + n);
-  saveDailyMissionState(st);
+function missionProgress(id) { const st = getMissionsState(); return (st.m[id] && st.m[id].p) || 0; }
+function missionClaimed(id) { const st = getMissionsState(); return !!(st.m[id] && st.m[id].c); }
+// Soma progresso numa missão. Chamada dos lugares onde a ação acontece.
+function addMissionProgress(id, n = 1) {
+  const def = missionById(id);
+  const st = getMissionsState();
+  const cur = st.m[id] || { p: 0, c: false };
+  if (cur.c) return;                       // já resgatada hoje
+  if (cur.p >= def.goal) return;           // já completa, não precisa gravar de novo
+  cur.p = Math.min(def.goal, (cur.p || 0) + n);
+  st.m[id] = cur;
+  saveMissionsState(st);
   refreshRewardsPage();
+}
+// Mantida com o nome antigo: é chamada quando o jogador fabrica ferro.
+function addDailyMissionProgress(n = 1) { addMissionProgress('iron10', n); }
+// ── Missões seguem o jogador entre aparelhos (mesmo mecanismo do correio/deck) ──
+function saveMissionsToFirebase(state) {
+  try {
+    if (!window.firebaseDb || !window.firebaseUid) return;
+    setDoc(doc(window.firebaseDb, 'missions', window.firebaseUid),
+      { state, updatedAt: Date.now() }, { merge: true }).catch(() => {});
+  } catch (e) {}
 }
 function refreshRewardsPage() {
   const page = document.getElementById('season-page-rewards');
@@ -3463,93 +3593,100 @@ function refreshRewardsPage() {
 }
 // SCREEN 1: simple summary (what to do + reward) → click to open detail
 function renderMissionSummary() {
-  const st = getDailyMissionState();
+  return MISSIONS.map(renderOneMissionSummary).join('');
+}
+function renderOneMissionSummary(M) {
+  const st = { progress: missionProgress(M.id), claimed: missionClaimed(M.id) };
   const tokenImg = `<img src="${sflItemImageUrl(129)}" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:-4px;" onerror="this.outerHTML='💵';">`;
-  const resultImg = `<img src="${sflItemImageUrl(DAILY_MISSION.resultId)}" style="width:34px;height:34px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
+  const resultImg = missionIcon(M, 34);
   const done = st.claimed;
-  const ready = st.progress >= DAILY_MISSION.goal && !st.claimed;
+  const ready = st.progress >= M.goal && !st.claimed;
   let statusBadge = '';
   if (done) statusBadge = `<span class="mission-status done">${t('rewards.claimed_short')}</span>`;
   else if (ready) statusBadge = `<span class="mission-status ready">${t('rewards.ready')}</span>`;
-  else statusBadge = `<span class="mission-status">${st.progress}/${DAILY_MISSION.goal}</span>`;
+  else statusBadge = `<span class="mission-status">${st.progress}/${M.goal}</span>`;
   return `
-    <div class="mission-summary" onclick="openMissionDetail()">
+    <div class="mission-summary" onclick="openMissionDetail('${M.id}')">
       <div class="mission-sum-icon">${resultImg}</div>
       <div class="mission-sum-mid">
-        <div class="mission-sum-title">${t('rewards.mission1.title')}</div>
-        <div class="mission-sum-reward">${t('rewards.reward')}: ${tokenImg} ${DAILY_MISSION.reward}</div>
+        <div class="mission-sum-title">${t(M.titleKey)}</div>
+        <div class="mission-sum-reward">${t('rewards.reward')}: ${tokenImg} ${M.reward}</div>
       </div>
       <div class="mission-sum-right">${statusBadge}<span class="mission-sum-arrow">›</span></div>
     </div>
   `;
 }
 // SCREEN 2: detail (progress bar + claim)
-function openMissionDetail() {
+let _openMissionId = 'iron10';
+function openMissionDetail(id) {
+  if (id) _openMissionId = id;
   const page = document.getElementById('season-page-rewards');
   if (!page) return;
   const intro = page.querySelector('.season-welcome');
   page.innerHTML = '';
   if (intro) page.appendChild(intro);
-  page.insertAdjacentHTML('beforeend', renderMissionDetail());
+  page.insertAdjacentHTML('beforeend', renderMissionDetail(missionById(_openMissionId)));
 }
 function backToMissionSummary() {
   refreshRewardsPage();
 }
-function renderMissionDetail() {
-  const st = getDailyMissionState();
+function renderMissionDetail(M) {
+  const st = { progress: missionProgress(M.id), claimed: missionClaimed(M.id) };
   const tokenImg = `<img src="${sflItemImageUrl(129)}" style="width:30px;height:30px;image-rendering:pixelated;vertical-align:-7px;" onerror="this.outerHTML='💵';">`;
-  const reqImg = `<img src="${sflItemImageUrl(DAILY_MISSION.reqId)}" style="width:48px;height:48px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
-  const resultImg = `<img src="${sflItemImageUrl(DAILY_MISSION.resultId)}" style="width:48px;height:48px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';">`;
-  const pct = Math.round((st.progress / DAILY_MISSION.goal) * 100);
-  const ready = st.progress >= DAILY_MISSION.goal && !st.claimed;
-  const claimed = st.claimed;
+  const resultImg = missionIcon(M, 48);
+  // Missão sem "matéria-prima" (ex.: matar inimigos) mostra só o resultado, sem a seta.
+  const flow = M.reqId
+    ? `<div class="mission-item"><img src="${sflItemImageUrl(M.reqId)}" style="width:48px;height:48px;image-rendering:pixelated;object-fit:contain;" onerror="this.style.display='none';"><span>${t(M.reqKey)}</span></div>
+       <span class="mission-arrow">→</span>
+       <div class="mission-item">${resultImg}<span>${t(M.resultKey)}</span></div>`
+    : `<div class="mission-item">${resultImg}<span>${t(M.resultKey)}</span></div>`;
+  const pct = Math.round((st.progress / M.goal) * 100);
+  const ready = st.progress >= M.goal && !st.claimed;
   let btn;
-  if (claimed) btn = `<button class="mission-claim done" disabled>${t('rewards.claimed')}</button>`;
-  else if (ready) btn = `<button class="mission-claim" onclick="claimDailyMission()">${t('rewards.claim')}</button>`;
-  else btn = `<button class="mission-claim off" disabled>${t('rewards.locked')} (${st.progress}/${DAILY_MISSION.goal})</button>`;
+  if (st.claimed) btn = `<button class="mission-claim done" disabled>${t('rewards.claimed')}</button>`;
+  else if (ready) btn = `<button class="mission-claim" onclick="claimMission('${M.id}')">${t('rewards.claim')}</button>`;
+  else btn = `<button class="mission-claim off" disabled>${t('rewards.locked')} (${st.progress}/${M.goal})</button>`;
   return `
     <div class="mission-card">
       <div class="mission-head">
         <button class="mission-back" onclick="backToMissionSummary()">‹ ${t('rewards.back')}</button>
         <span class="mission-timer">${t('rewards.resets')}</span>
       </div>
-      <div class="mission-title">${t('rewards.mission1.title')}</div>
-      <div class="mission-flow">
-        <div class="mission-item">${reqImg}<span>${t('rewards.mission1.req')}</span></div>
-        <span class="mission-arrow">→</span>
-        <div class="mission-item">${resultImg}<span>${t('rewards.mission1.result')}</span></div>
-      </div>
-      <div class="mission-progress-label">${t('rewards.progress')}: ${st.progress}/${DAILY_MISSION.goal}</div>
+      <div class="mission-title">${t(M.titleKey)}</div>
+      <div class="mission-flow">${flow}</div>
+      <div class="mission-progress-label">${t('rewards.progress')}: ${st.progress}/${M.goal}</div>
       <div class="mission-bar-bg"><div class="mission-bar-fill" style="width:${pct}%;"></div></div>
       <div class="mission-reward-row">
         <span class="mission-reward-label">${t('rewards.reward')}:</span>
-        <span class="mission-reward-val">${tokenImg} ${DAILY_MISSION.reward}</span>
+        <span class="mission-reward-val">${tokenImg} ${M.reward}</span>
       </div>
       ${btn}
     </div>
   `;
 }
-async function claimDailyMission() {
-  const st = getDailyMissionState();
-  if (st.claimed || st.progress < DAILY_MISSION.goal) return;
+async function claimMission(id) {
+  const M = missionById(id);
+  const st = getMissionsState();
+  const cur = st.m[M.id] || { p: 0, c: false };
+  if (cur.c || cur.p < M.goal) return;
   if (typeof SFL_CONNECTED !== 'undefined' && !SFL_CONNECTED) {
     if (typeof showToast === 'function') showToast(t('toast.offline_action'), 'error');
     return;
   }
   if (typeof showToast === 'function') showToast(t('mail.collecting'), 'success');
-  // Fire the SFL reward action so the player receives the season tokens
-  const res = await sflExecuteAction('claim_daily_mission1');
+  const res = await sflExecuteAction(M.action);
   if (!res || !res.ok) {
-    console.error('Claim daily mission failed:', res && res.error);
-    if (typeof showToast === 'function') showToast('❌ Ação "Claim_daily_mission1" falhou. Verifique no SFL.', 'error');
+    console.error('Claim mission failed:', M.action, res && res.error);
+    if (typeof showToast === 'function') showToast(t('rewards.claim_failed', { action: M.action }), 'error');
     return;
   }
-  st.claimed = true;
-  saveDailyMissionState(st);
+  cur.c = true; st.m[M.id] = cur;
+  saveMissionsState(st);
   if (typeof syncFromSFL === 'function') await syncFromSFL(true);
   if (typeof showToast === 'function') showToast(t('rewards.claim_toast'));
-  openMissionDetail();
+  openMissionDetail(M.id);
 }
+function claimDailyMission() { return claimMission('iron10'); }   // nome antigo, ainda usado
 
 // Show item info overlay inside the season shop (description + have/need + buy)
 function showSeasonItemInfo(itemId) {
@@ -3561,8 +3698,9 @@ function showSeasonItemInfo(itemId) {
   const desc = t(descKey, {}) !== descKey ? t(descKey) : t('season.item.no_desc');
   const redeemed = getSeasonRedeemed();
   const used = redeemed[tr.id] || 0;
-  const remaining = tr.max - used;
   const bal = (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED && window._sflLastSession?.data?.playerEconomy?.balances) || {};
+  // mesmo cálculo do card: quem já tem o item não vê "disponível"
+  const remaining = Math.max(0, tr.max - Math.max(used, Number(bal[String(tr.id)] || 0)));
   const myCash = Number(bal['129'] || bal['Cash coin'] || 0);
   const myDino = Number(bal['1'] || 0);
   const balance = tr.currency === 'cash' ? myCash : myDino;
@@ -3666,7 +3804,7 @@ function showMailbox() {
   <div class="mail-window">
     <button class="panel-close-x mail-close" onclick="document.getElementById('mailbox-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="mail-tabs">
-      <button class="mail-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/letter_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='📬'">${t('mail.title')}</button>
+      <button class="mail-tab active"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/letter_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='📬'">${t('mail.title')}</button>
     </div>
     <div class="mail-body">
       <div class="mail-scroll">
@@ -4147,7 +4285,7 @@ function showProfileMenu() {
   <div class="cfg-window">
     <button class="panel-close-x cfg-close" onclick="document.getElementById('profile-menu-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="cfg-tabs">
-      <button class="cfg-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/settings_disc.png" style="width:26px;height:26px;image-rendering:pixelated;" onerror="this.outerHTML='⚙️'">${(typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en') ? 'Settings' : 'Configurações'}</button>
+      <button class="cfg-tab active"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/settings_disc.png" style="width:26px;height:26px;image-rendering:pixelated;" onerror="this.outerHTML='⚙️'">${(typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en') ? 'Settings' : 'Configurações'}</button>
     </div>
     <div class="cfg-body">
       ${renderBumpkinAvatar()}
@@ -4165,7 +4303,7 @@ function showProfileMenu() {
         <span class="cfg-btn-label">${t('profile.refresh')}</span>
       </button>
       <button onclick="showLanguageMenu()" class="cfg-btn">
-        <span class="cfg-btn-icon"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chapter_icon_2.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;" onerror="this.outerHTML='🌐'"></span>
+        <span class="cfg-btn-icon"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chapter_icon_2.webp" style="width:20px;height:20px;image-rendering:pixelated;object-fit:contain;" onerror="this.outerHTML='🌐'"></span>
         <span class="cfg-btn-label">${t('profile.language')}</span>
         <span class="cfg-btn-arrow">›</span>
       </button>
@@ -4291,7 +4429,7 @@ function showLanguageMenu() {
   <div class="cfg-window">
     <button class="panel-close-x cfg-close" onclick="showProfileMenu()" title="Voltar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="cfg-tabs">
-      <button class="cfg-tab active"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/chapter_icon_2.webp" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='🌐'">${t('profile.lang.title')}</button>
+      <button class="cfg-tab active"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/chapter_icon_2.webp" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='🌐'">${t('profile.lang.title')}</button>
     </div>
     <div class="cfg-body">
       <div class="cfg-btn-list">
@@ -9234,6 +9372,26 @@ async function syncFromFirebase() {
     }
   }
   if (typeof refreshMailbox === 'function') refreshMailbox();
+  // Missões: o progresso vem do servidor, então continua de onde parou em qualquer aparelho.
+  // Só aproveita se for do MESMO dia — senão o estado de ontem voltaria do nada.
+  try {
+    const misSnap = await getDoc(doc(window.firebaseDb, 'missions', uid));
+    if (misSnap.exists()) {
+      const data = misSnap.data();
+      const today = new Date().toISOString().slice(0, 10);
+      if (data.state && data.state.date === today && data.state.m) {
+        const local = getMissionsState();
+        // Fica sempre com o MAIOR progresso entre aparelho e servidor.
+        const merged = { date: today, m: Object.assign({}, data.state.m) };
+        for (const k in local.m) {
+          const a = local.m[k] || { p: 0, c: false }, b = merged.m[k] || { p: 0, c: false };
+          merged.m[k] = { p: Math.max(a.p || 0, b.p || 0), c: !!(a.c || b.c) };
+        }
+        try { localStorage.setItem('dinohunt_daily_mission', JSON.stringify(merged)); } catch (e) {}
+      }
+    }
+  } catch (e) {}
+  if (typeof refreshRewardsPage === 'function') refreshRewardsPage();
   const equipSnap = await getDoc(doc(window.firebaseDb, 'equipped', uid));
   if (equipSnap.exists()) {
     const data = equipSnap.data();
@@ -10880,7 +11038,7 @@ function switchBattleMode(mode, btn) {
   if (iconEl) {
     const iconUrl = mode === 'arena'
       ? 'https://sunflower-land.com/game-assets/icons/sword.png'
-      : 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sfl.webp';
+      : 'https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/sfl.webp';
     const fb = mode === 'arena' ? '⚔️' : '🌻';
     iconEl.innerHTML = `<img src="${iconUrl}" style="width:22px;height:22px;image-rendering:pixelated;object-fit:contain;vertical-align:middle;" onerror="this.outerHTML='${fb}'">`;
   }
@@ -11001,6 +11159,18 @@ function rwToggleChest(el) {
 const HUNT_ENERGY_SFL_READY = true;
 async function huntPlay(n) {
   const { isEN, cost } = huntLevelInfo(n);
+  // Queima o que você escolheu levar ANTES de cobrar a energia: se a queima falhar,
+  // você não perde energia por uma entrada que não aconteceu.
+  const carry = loadLoadout();
+  if (loadoutTotal(carry) > 0) {
+    if (!(await burnLoadout(carry))) return;
+    // A mochila ESVAZIA ao entrar: o conteúdo já foi queimado e passa a viver dentro
+    // da caçada. Morreu, perdeu; saiu vivo, o depósito da saída devolve.
+    EXPLORE._carryIn = carry;   // consumido pelo openExplore ao montar a mochila
+    saveLoadout({});
+  } else {
+    EXPLORE._carryIn = null;
+  }
   if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
     if (HUNT_ENERGY_SFL_READY) {
       const bal = Number(window._sflLastSession?.data?.playerEconomy?.balances?.['100']) || 0;
@@ -11858,7 +12028,7 @@ const EXPLORE = {
 };
 const EXP_TREE = 'https://sunflower-land.com/game-assets/resources/tree.png';
 // 3 chest tiers (SFL official chest art) — level 1/2/3.
-const SFL_RAW = 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/';
+const SFL_RAW = 'https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/public/world/';
 const EXP_CHEST_IMG = { 1: SFL_RAW + 'basic_chest.png', 2: SFL_RAW + 'wooden_chest.png', 3: SFL_RAW + 'luxury_chest.png' };  // L2 = green (rare_chest was identical to luxury)
 // Open-chest art (from Michel's "adicional" folder, embedded so it works anywhere). 16×20 each.
 const EXP_CHEST_OPEN_IMG = {
@@ -11941,9 +12111,11 @@ const LOOT_ITEMS = {
   wood:  { img: sflItemImageUrl(101), fb: '🪵', pt: 'Madeira', en: 'Wood' },
   stone: { img: sflItemImageUrl(102), fb: '🪨', pt: 'Pedra', en: 'Stone' },
   iron:  { img: sflItemImageUrl(111), fb: '⚙️', pt: 'Ferro', en: 'Iron' },
-  gold:  { img: 'https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/resources/gold_ore.png', fb: '🥇', pt: 'Ouro', en: 'Gold' },
+  gold:  { img: 'https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/resources/gold_ore.png', fb: '🥇', pt: 'Ouro', en: 'Gold' },
   coin:  { img: sflItemImageUrl(1), fb: '🪙', pt: 'DinoCoin', en: 'DinoCoin' },
   cash:  { img: sflItemImageUrl(129), fb: '💵', pt: 'Cash Coin', en: 'Cash Coin' },
+  axe:   { img: sflItemImageUrl(130), fb: '🪓', pt: 'Machado', en: 'Axe' },
+  pick:  { img: sflItemImageUrl(131), fb: '⛏️', pt: 'Picareta', en: 'Pickaxe' },
   mushroom: { img: sflItemImageUrl(124), fb: '🍄', pt: 'Cogumelo', en: 'Mushroom' },
   stick: { img: sflItemImageUrl(132), fb: '🌿', pt: 'Graveto', en: 'Stick' },
   scrab:   { img: sflItemImageUrl(103), fb: '⚙️', pt: 'Sucata', en: 'Scrab' },
@@ -11996,7 +12168,8 @@ function makeChestLoot(tier) {
   return out;
 }
 const CHEST_SLOTS = 7;   // candidate chest spots per run; each rolls the table (may be empty)
-const EXP_INV_MAX = 10;  // backpack holds at most 10 item stacks
+const EXP_BAG_SLOTS = 8;   // ⬅ PADRÃO DE ESPAÇOS: vale pra mochila do mapa, a da ilha e o baú
+const EXP_INV_MAX = EXP_BAG_SLOTS;   // a mochila da caçada segura no máximo esta quantidade de pilhas
 // Enemy goblins (SFL big_goblin spritesheet: 4 frames of 27x35).
 // Enemies are dressed SFL bumpkins (same animation system as the player).
 // To change/add an enemy: dress a bumpkin in the game, open your profile, copy the number
@@ -12498,7 +12671,7 @@ const IRON_PER_ROCK = 1;                // iron granted when an iron rock breaks
 const GOLD_PER_ROCK = 1;                // gold granted when a gold rock breaks
 const EXP_PICK_DURABILITY = 1;          // 1 pickaxe = 1 rock (no more charges)
 const EXP_PICK_ITEM_ID = 131;           // pickaxe item (created in the editor; stone-pickaxe sprite)
-const EXP_PICK_ACTION = 'burn_pickaxe'; // burns 1 pickaxe when it breaks (every 5th rock)
+// (removida) EXP_PICK_ACTION / burn_pickaxe: a picareta é queimada na ENTRADA junto com o resto da mochila.
 const EXP_TEST_PICKS = 15;              // pickaxes handed out while offline (for testing)
 // Rock strike-sheet display (scale 2 → rock ≈28px). The rock's base sits at native (40.5,31).
 const ROCK_FW = 224, ROCK_FH = 96, ROCK_BG_W = 1344;
@@ -12513,23 +12686,95 @@ function getPickBalance() {
 }
 function remainingMines() { return EXPLORE.pickCount * EXP_PICK_DURABILITY - EXPLORE.pickUsed; }
 function hasPick() { return EXPLORE.pickCount > 0 && remainingMines() > 0; }
-// Break a rock: track durability, burn 1 pickaxe only when the current one breaks (5th rock).
+// Quebra uma pedra: consome a picareta ao esgotar a durabilidade (hoje EXP_PICK_DURABILITY = 1).
 function usePickCharge() {
   if (EXPLORE.pickCount <= 0) return false;
   EXPLORE.pickUsed++;
-  if (EXPLORE.pickUsed >= EXP_PICK_DURABILITY) { EXPLORE.pickUsed = 0; EXPLORE.pickCount--; burnOnePick(); }
+  if (EXPLORE.pickUsed >= EXP_PICK_DURABILITY) {
+    EXPLORE.pickUsed = 0; EXPLORE.pickCount--;
+    // Já foi queimada na ENTRADA: aqui é só tirar da mochila pra não voltar no depósito
+    // da saída. NÃO existe mais queima avulsa (a ação burn_pickaxe foi removida do painel) —
+    // queimar de novo tiraria uma picareta a mais da conta.
+    takeFromInv('pick', 1); try { renderBackpackGrid(); } catch (e) {}
+  }
   return true;
-}
-function burnOnePick() {
-  if (typeof sflExecuteAction !== 'function' || EXP_PICK_ITEM_ID == null) return;
-  sflExecuteAction(EXP_PICK_ACTION, { [String(EXP_PICK_ITEM_ID)]: 1 }).then(res => {
-    if (!res || !res.ok) console.warn(EXP_PICK_ACTION + ' failed:', res && res.error);
-  });
 }
 // SFL "machado" (axe) item id + the action that mints wood and burns the axe.
 const EXP_AXE_ITEM_ID = 130;
-const EXP_AXE_ACTION = 'burn_axe';          // burns 1 axe — called only when an axe breaks (every 5th tree)
+// (removida) EXP_AXE_ACTION / burn_axe: o machado é queimado na ENTRADA junto com o resto da mochila.
 const EXP_DEPOSIT_ACTION = 'deposit_exploracao';  // on SAFE exit: ONE action mints ALL the loot collected this run
+// ══ LEVAR ITENS DE CASA PRO MAPA ══════════════════════════════════════════════
+// Modelo SIMÉTRICO ao depósito: QUEIMA na entrada, MINTA na saída.
+//   • Não duplica: o depósito CRIA item, então tudo que ele cria precisa ter sido
+//     destruído antes. Queimar na entrada é o que fecha essa conta.
+//   • Morrer custa o que você levou, e sobreviver devolve o que não usou —
+//     tudo isso sai de graça, sem nenhum controle extra, porque o que volta é
+//     simplesmente "o que ficou na mochila".
+// ⚠️ Precisa de UMA ação nova no painel do SFL, espelho da de depósito: mesma
+//    lista de itens, recebendo a quantidade de cada um, só que QUEIMANDO.
+//    Enquanto ela não existir, deixe EXP_WITHDRAW_SFL_READY = false: dá pra montar
+//    a bolsa e testar tudo offline, e nada é levado de verdade pro mapa online.
+const EXP_WITHDRAW_ACTION = 'retirada_exploracao';
+const EXP_WITHDRAW_SFL_READY = true;    // ação 'retirada_exploracao' criada no painel em 04/09/2026
+const EXP_LOADOUT_MAX = EXP_BAG_SLOTS;  // mesma quantidade de espaços das outras mochilas
+// ── A MOCHILA é só uma SELEÇÃO ───────────────────────────────────────────────
+// Pôr item na mochila não muda NADA no SFL: ele continua no seu inventário.
+// A conta só se move em dois momentos, e é isso que impede a duplicação:
+//   • ENTRAR no mapa  → QUEIMA tudo que está na mochila (aí sim sai do inventário)
+//   • SAIR vivo       → MINTA tudo que sobrou na caçada (volta pro inventário)
+//   • MORRER          → não minta nada; perdeu
+// Formato: { chave: quantidade }
+function loadLoadout() {
+  try {
+    const o = JSON.parse(localStorage.getItem('dinohunt_loadout') || '{}');
+    const out = {};
+    for (const k in (o || {})) {
+      const v = o[k];
+      const q = (v && typeof v === 'object') ? Number(v.q) : Number(v);   // aceita o formato antigo {q,off}
+      if (q > 0) out[k] = q;
+    }
+    return out;
+  } catch (e) { return {}; }
+}
+function saveLoadout(l) { try { localStorage.setItem('dinohunt_loadout', JSON.stringify(l || {})); } catch (e) {} }
+function bagQty(l, k) { return (l && Number(l[k])) || 0; }
+// Ao sair vivo, o saque é mintado pro inventário E fica JÁ SELECIONADO na mochila,
+// pra você poder entrar de novo levando as mesmas coisas sem ter que remontar tudo.
+// É só seleção: se não entrar no mapa, nada acontece com esses itens.
+function bagPreselectRunLoot(inv) {
+  const l = {};
+  let n = 0;
+  for (const k in (inv || {})) {
+    const q = Number(inv[k].qty) || 0;
+    if (q > 0 && LOOT_ITEMS[k] && EXP_LOOT_ITEM_IDS[k] != null && n < EXP_LOADOUT_MAX) { l[k] = q; n++; }
+  }
+  saveLoadout(l);
+  const pick = loadPouchPick();
+  if (pick && !l[pick]) savePouchPick('');
+}
+// Só dá pra levar item que o depósito conhece — senão ele não voltaria na saída.
+function loadoutKeys() {
+  return Object.keys(EXP_LOOT_ITEM_IDS).filter(k => EXP_LOOT_ITEM_IDS[k] != null && LOOT_ITEMS[k]);
+}
+function loadoutTotal(l) { return Object.keys(l || {}).reduce((a, k) => a + bagQty(l, k), 0); }
+// Queima na entrada: tudo que está na mochila sai do inventário agora.
+async function burnLoadout(l) {
+  if (!loadoutTotal(l)) return true;                   // mochila vazia
+  if (typeof SFL_CONNECTED === 'undefined' || !SFL_CONNECTED) return true;   // offline: só teste local
+  if (!EXP_WITHDRAW_SFL_READY) return true;            // ação ainda não existe no painel
+  // A ação espelha a de depósito: manda TODOS os itens configurados, 0 pros que não vão.
+  const amounts = {};
+  for (const k of loadoutKeys()) amounts[String(EXP_LOOT_ITEM_IDS[k])] = bagQty(l, k);
+  const res = await sflExecuteAction(EXP_WITHDRAW_ACTION, amounts);
+  if (!res || !res.ok) {
+    // Falhou = NÃO pode entrar levando, senão o depósito da saída criaria item do nada.
+    showToast(t('loadout.burn_failed'), 'error');
+    console.error('WITHDRAW FAIL →', EXP_WITHDRAW_ACTION, JSON.stringify(amounts), res && res.error);
+    return false;
+  }
+  try { syncFromSFL(true); } catch (e) {}
+  return true;
+}
 // SFL item ids per loot type — the deposit action mints each of these by amount. coin = DinoCoin = 1.
 // gold = null → sem item de Ouro no painel ainda, então não é depositado.
 // ⚠️ cash (129) foi adicionado à caçada: a ação 'deposit_exploracao' no painel do SFL precisa
@@ -12539,6 +12784,15 @@ const EXP_LOOT_ITEM_IDS = {
   wood: 101, stone: 102, iron: 111, coin: 1, mushroom: 124, stick: 132,
   scrab: 103, egg: 113, bone: 108, portion: 125, coins: 122, cash: 129, gold: null,
 };
+// ══ MACHADO E PICARETA SÃO ITENS DE MOCHILA ═══════════════════════════════════
+// Desde 05/09/2026 as ferramentas seguem exatamente a mesma regra de todo o resto:
+// você escolhe QUANTAS levar, elas são queimadas na ENTRADA, as que quebram somem da
+// mochila, e as que sobrarem voltam no depósito da SAÍDA.
+// O Michel adicionou 130 e 131 nas duas ações (retirada_exploracao / deposit_exploracao)
+// e REMOVEU as ações burn_axe / burn_pickaxe — por isso não existe mais queima avulsa:
+// queimar de novo na quebra tiraria uma ferramenta a mais da conta.
+EXP_LOOT_ITEM_IDS.axe = 130;
+EXP_LOOT_ITEM_IDS.pick = 131;
 const EXP_TEST_AXES = 15;   // axes handed out when playing offline (for testing)
 function getAxeBalance() {
   if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
@@ -12550,33 +12804,28 @@ function getAxeBalance() {
 // axeCount = whole axes owned; axeUsed = trees felled on the current axe (0..DURABILITY).
 function remainingChops() { return EXPLORE.axeCount * EXP_AXE_DURABILITY - EXPLORE.axeUsed; }
 function hasAxe() { return EXPLORE.axeCount > 0 && remainingChops() > 0; }
-// Called when a tree falls: track durability, and burn 1 axe only when the current axe breaks (5th tree).
+// Árvore derrubada: consome o machado ao esgotar a durabilidade (hoje EXP_AXE_DURABILITY = 1).
 function useAxeCharge() {
   if (EXPLORE.axeCount <= 0) return false;
   EXPLORE.axeUsed++;
-  if (EXPLORE.axeUsed >= EXP_AXE_DURABILITY) { EXPLORE.axeUsed = 0; EXPLORE.axeCount--; burnOneAxe(); }
+  if (EXPLORE.axeUsed >= EXP_AXE_DURABILITY) {
+    EXPLORE.axeUsed = 0; EXPLORE.axeCount--;
+    // Já foi queimado na ENTRADA: aqui é só tirar da mochila pra não voltar no depósito
+    // da saída. NÃO existe mais queima avulsa (a ação burn_axe foi removida do painel) —
+    // queimar de novo tiraria um machado a mais da conta.
+    takeFromInv('axe', 1); try { renderBackpackGrid(); } catch (e) {}
+  }
   return true;
 }
-// Burn 1 axe on SFL — only when an axe breaks (every 5th tree). Offline this is a no-op.
-function burnOneAxe() {
-  if (typeof sflExecuteAction !== 'function') return;
-  sflExecuteAction(EXP_AXE_ACTION, { [String(EXP_AXE_ITEM_ID)]: 1 }).then(res => {
-    if (!res || !res.ok) console.warn(EXP_AXE_ACTION + ' failed:', res && res.error);
-  });
-}
-// Safe exit only: mint the loot collected this run (built from the inventory). Death never calls this → lost.
-function depositRunGains() {
-  const inv = EXPLORE.inv || {};
-  const amounts = {};
-  let totalCollected = 0;
-  // A ação minta TODOS os itens configurados, então precisa receber o valor de cada um
-  // (0 pros que não foram coletados nesta caçada), senão o servidor rejeita.
+// Minta no SFL as quantidades informadas. Chamada quando o jogador MANDA a mochila
+// pro inventário (loadoutSendAll) — não mais automaticamente ao sair do mapa.
+// A ação minta TODOS os itens configurados, então `amounts` precisa trazer o valor de
+// cada um (0 pros que não vão), senão o servidor rejeita.
+function depositAmounts(amounts, totalCollected) {
   for (const key in EXP_LOOT_ITEM_IDS) {
     const id = EXP_LOOT_ITEM_IDS[key];
     if (id == null) continue;   // gold ainda não tem item no painel
-    const qty = (inv[key] && inv[key].qty) || 0;
-    amounts[String(id)] = (amounts[String(id)] || 0) + qty;
-    totalCollected += qty;
+    if (amounts[String(id)] == null) amounts[String(id)] = 0;
   }
   if (totalCollected <= 0 || typeof sflExecuteAction !== 'function') return;
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
@@ -12584,6 +12833,14 @@ function depositRunGains() {
   sflExecuteAction(EXP_DEPOSIT_ACTION, amounts).then(res => {
     if (res && res.ok) {
       if (typeof showToast === 'function') showToast(isEN ? `📦 Loot deposited (${totalStacks})!` : `📦 Loot depositado (${totalStacks} itens)!`, 'success');
+      // Sem isto o saldo novo só aparecia na próxima sincronização — o jogador saía do
+      // mapa e não via os itens no inventário, parecendo que o depósito não tinha funcionado.
+      (async () => {
+        try { await syncFromSFL(true); } catch (e) {}
+        ['updateHUD', 'buildItemsGrid', 'buildInventory', 'refreshAllPanels'].forEach(f => {
+          try { if (typeof window[f] === 'function') window[f](); } catch (e) {}
+        });
+      })();
     } else {
       const err = String((res && res.error) || 'erro desconhecido');
       console.error('DEPOSIT FAIL →', EXP_DEPOSIT_ACTION, 'amounts:', JSON.stringify(amounts), 'error:', err);
@@ -12881,8 +13138,234 @@ function setupHomeElder() {
   animateHomeSprite(el, 'https://animations.sunflower-land.com/animate/0_v1_0_1_180_13_182_22_183_0_0_0_181_0_0_0_0_177/idle_walking', 2.1);
   try { updateAnciaoShields(); } catch (e) {}
 }
+// Tela do personagem: monta a bolsa de viagem (o que você leva pro mapa).
+// Esquerda = o que você tem na conta SFL. Direita = o que vai levar.
+// 🔜 é aqui que no futuro entram os equipamentos DO PERSONAGEM.
 function homeCharClick() {
-  if (typeof showToast === 'function') showToast(t('toast.char_soon'), 'info');
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const bal = (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED)
+    ? (window._sflLastSession?.data?.playerEconomy?.balances || {}) : {};
+  const old = document.getElementById('charloadout-modal'); if (old) old.remove();
+  const m = document.createElement('div');
+  m.id = 'charloadout-modal';   // aparência vem do CSS (mesma do painel do baú)
+  m.onclick = (e) => { if (e.target === m) m.remove(); };
+  _charPage = 'char';
+  document.body.appendChild(m);
+  renderCharLoadout();
+}
+// Slots de equipamento DO PERSONAGEM. Ainda não existe item de personagem no jogo,
+// então eles aparecem vazios/bloqueados — a estrutura já fica pronta pro dia que existir.
+const EXP_CHAR_SCALE = 2.1;   // tamanho do bumpkin nas telas de personagem (ilha e mochila)
+const EXP_CHAR_SLOTS = [
+  { key: 'head',   emoji: '⛑️', side: 'left'  },
+  { key: 'chest',  emoji: '🎽', side: 'left'  },
+  { key: 'weapon', emoji: '⚔️', side: 'left'  },
+  { key: 'shield', emoji: '🛡️', side: 'right' },
+  { key: 'ring',   emoji: '💍', side: 'right' },
+  { key: 'boots',  emoji: '🥾', side: 'right' },
+];
+// Qual item já vai equipado na mochila de perna ao entrar no mapa (fica salvo entre partidas).
+function loadPouchPick() { try { return localStorage.getItem('dinohunt_pouch_pick') || ''; } catch (e) { return ''; } }
+function savePouchPick(k) { try { if (k) localStorage.setItem('dinohunt_pouch_pick', k); else localStorage.removeItem('dinohunt_pouch_pick'); } catch (e) {} }
+let _charPage = 'char';   // 'char' = personagem+equipamentos | 'items' = bolsa + inventário
+function charLoadoutPage(p) { _charPage = p; renderCharLoadout(); }
+// ── Coluna do personagem, COMPARTILHADA pela tela da ilha e pela mochila do mapa ──
+// (mesmos slots, mesmo bumpkin, mesmas 3 mochilas de perna)
+function charRigHtml(charId, pouchHtml) {
+  const slot = (s) => `<div class="charslot locked" onclick="showToast(t('charslot.soon'),'info')" title="${t('charslot.' + s.key)}"><span>${s.emoji}</span></div>`;
+  const left = EXP_CHAR_SLOTS.filter(s => s.side === 'left').map(slot).join('');
+  const right = EXP_CHAR_SLOTS.filter(s => s.side === 'right').map(slot).join('');
+  return `
+    <div class="charrig">
+      <div class="charcol">${left}</div>
+      <div class="charmid"><div id="${charId}"></div></div>
+      <div class="charcol">${right}</div>
+    </div>
+    <div class="charpouches">${pouchHtml}</div>`;
+}
+const CHAR_POUCH_LOCKED = () => `<div class="charslot pouch locked" onclick="showToast(t('charslot.soon'),'info')" title="${t('charslot.pouch')}"><span>+</span></div>`;
+// Mochila de perna DENTRO do mapa: mostra o que está equipado agora; aceita arrastar.
+function explorePouchHtml() {
+  const key = EXPLORE.pouch;
+  const it = key && EXPLORE.inv ? EXPLORE.inv[key] : null;
+  const p1 = (it && it.qty > 0)
+    ? `<div class="charslot pouch filled pouch-drop" onclick="equipPouch('')" title="${it.name}"><img src="${it.img}" onerror="this.outerHTML='<span>${it.fb}</span>'"></div>`
+    : `<div class="charslot pouch pouch-drop" title="${t('charslot.pouch')}"><span>+</span></div>`;
+  return p1 + CHAR_POUCH_LOCKED() + CHAR_POUCH_LOCKED();
+}
+// Solta um item arrastado em cima do slot da mochila de perna.
+function wirePouchDrop(scope, onDrop) {
+  if (!scope) return;
+  scope.querySelectorAll('.pouch-drop').forEach(z => {
+    z.addEventListener('dragover', e => { e.preventDefault(); z.classList.add('over'); });
+    z.addEventListener('dragleave', () => z.classList.remove('over'));
+    z.addEventListener('drop', e => {
+      e.preventDefault(); z.classList.remove('over');
+      const raw = e.dataTransfer.getData('text/plain') || '';
+      const key = raw.indexOf(':') >= 0 ? raw.split(':')[1] : raw;
+      if (key) onDrop(key);
+    });
+  });
+}
+function renderCharLoadout() {
+  const m = document.getElementById('charloadout-modal');
+  if (!m) return;
+  const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
+  const connected = (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED);
+  const bal = connected ? (window._sflLastSession?.data?.playerEconomy?.balances || {}) : {};
+  const l = loadLoadout();
+  const nameOf = (k) => { const d = LOOT_ITEMS[k]; return d ? (isEN ? d.en : d.pt) : k; };
+  const bagKeys = Object.keys(l).filter(k => bagQty(l, k) > 0);
+  const body = (_charPage === 'items')
+    ? charItemsPageHtml(connected, bal, l, bagKeys, nameOf)
+    : charEquipPageHtml(bagKeys, l, nameOf);
+  m.innerHTML = `
+    <div class="exp-loot-modal">
+      <div class="exp-loot-header">
+        <span>${_charPage === 'items' ? '🎒 ' + t('loadout.add_items_title') : '🧍 ' + t('loadout.title')}</span>
+        <button onclick="document.getElementById('charloadout-modal').remove()">✕</button>
+      </div>
+      ${body}
+    </div>`;
+  if (_charPage === 'char') {
+    // Bumpkin de verdade no meio (mesma animação idle da ilha). Ele mesmo se dimensiona.
+    try { const el = document.getElementById('charloadout-char'); if (el) animateHomeSprite(el, getBumpkinAnimUrls().sheet, EXP_CHAR_SCALE); } catch (e) {}
+    // Arrastar da mochila direto pro slot da mochila de perna
+    m.querySelectorAll('#char-bag-grid [data-key]').forEach(el => {
+      el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', 'bag:' + el.dataset.key); e.dataTransfer.effectAllowed = 'move'; });
+    });
+    wirePouchDrop(m, (key) => {
+      if (!isPowerUp(key)) { showToast(t('charslot.only_powerup'), 'error'); return; }
+      savePouchPick(key); renderCharLoadout();
+    });
+  } else {
+    wireLoadoutDrag();
+  }
+}
+// ── Página 1: ESQUERDA a mochila (igual ao painel do baú) + 2 botões embaixo,
+//              DIREITA o personagem com os slots em volta e as mochilas de perna ──
+function charEquipPageHtml(bagKeys, l, nameOf) {
+  // Mochila de perna: a 1ª funciona (clique cicla, arrastar também põe), as outras 2 bloqueadas.
+  const pick = loadPouchPick();
+  const d = pick && LOOT_ITEMS[pick] ? LOOT_ITEMS[pick] : null;
+  const inBag = pick && bagQty(l, pick) > 0;
+  const pouch1 = (d && inBag)
+    ? `<div class="charslot pouch filled pouch-drop" onclick="charPouchPick()" title="${nameOf(pick)}"><img src="${d.img}" onerror="this.outerHTML='<span>${d.fb}</span>'"></div>`
+    : `<div class="charslot pouch pouch-drop" onclick="charPouchPick()" title="${t('charslot.pouch')}"><span>+</span></div>`;
+  // Mochila = a bolsa de viagem, desenhada igual à do painel do baú. Arrastável pro slot.
+  const bagHtml = bagKeys.map(k => {
+    const dd = LOOT_ITEMS[k];
+    return `<div class="ldoe-slot ldoe-slot-item" draggable="true" data-key="${k}" title="${nameOf(k)}">
+      <img src="${dd.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;pointer-events:none;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${dd.fb}</span>'">
+      <div class="ldoe-slot-qty">${bagQty(l, k)}</div>
+    </div>`;
+  }).join('') + _padSlots(bagKeys.length, EXP_LOADOUT_MAX);
+  return `
+    <div class="exp-loot-cols">
+      <div class="exp-loot-col">
+        <div class="ldoe-section-title">🎒 <span>${t('explore.backpack')}</span></div>
+        <div class="ldoe-inv-grid" id="char-bag-grid">${bagHtml}</div>
+        <div class="charbtns">
+          <button class="exp-loot-all" onclick="charLoadoutPage('items')">${t('loadout.add_items')}</button>
+          <button class="exp-loot-all" style="background-color:#b96f50;" onclick="loadoutSendAll()">${t('loadout.send_all')}</button>
+        </div>
+      </div>
+      <div class="exp-loot-col">
+        <div class="ldoe-section-title">🧍 <span>${t('loadout.char')}</span></div>
+        ${charRigHtml('charloadout-char', pouch1 + CHAR_POUCH_LOCKED() + CHAR_POUCH_LOCKED())}
+      </div>
+    </div>
+    <div class="exp-loot-hint">${t('loadout.warn')}</div>`;
+}
+// ── Página 2: bolsa de viagem + inventário da conta, lado a lado (padrão LDOE) ──
+function charItemsPageHtml(connected, bal, l, bagKeys, nameOf) {
+  const cell = (k, qty, where) => {
+    const d = LOOT_ITEMS[k];
+    return `<div class="ldoe-slot ldoe-slot-item exp-loot-tappable" draggable="true" data-key="${k}" data-where="${where}" title="${nameOf(k)}">
+      <img src="${d.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;pointer-events:none;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${d.fb}</span>'">
+      <div class="ldoe-slot-qty">${qty}</div>
+    </div>`;
+  };
+  let ownedHtml = '', ownedCount = 0;
+  loadoutKeys().forEach(k => {
+    const have = connected ? Math.floor(Number(bal[String(EXP_LOOT_ITEM_IDS[k])]) || 0) : 99;
+    const left = have - bagQty(l, k);
+    if (have <= 0 || left <= 0) return;
+    ownedHtml += cell(k, left, 'owned'); ownedCount++;
+  });
+  const bagHtml = bagKeys.map(k => cell(k, bagQty(l, k), 'bag')).join('') + _padSlots(bagKeys.length, EXP_LOADOUT_MAX);
+  // Mesmíssima estrutura do painel do baú: mochila à esquerda, origem à direita.
+  return `
+    <div class="exp-loot-cols">
+      <div class="exp-loot-col">
+        <div class="ldoe-section-title">🎒 <span>${t('explore.backpack')} (${bagKeys.length}/${EXP_LOADOUT_MAX})</span></div>
+        <div class="ldoe-inv-grid loadout-drop" data-zone="bag">${bagHtml}</div>
+        <button class="exp-loot-all" onclick="charLoadoutPage('char')">${t('btn.back')}</button>
+      </div>
+      <div class="exp-loot-col">
+        <div class="ldoe-section-title">📦 <span>${t('loadout.owned')}</span></div>
+        <div class="ldoe-inv-grid loadout-drop" data-zone="owned">${ownedHtml || `<div style="font-family:'Pixelify Sans',monospace;font-size:12px;color:#6b4a28;grid-column:1/-1;">${t('loadout.nothing')}</div>`}</div>
+      </div>
+    </div>
+    <div class="exp-loot-hint">${t('loadout.dragtip')}</div>`;
+}
+// Arrastar entre as duas colunas (PC). No celular o toque simples continua movendo 1.
+function wireLoadoutDrag() {
+  const m = document.getElementById('charloadout-modal'); if (!m) return;
+  m.querySelectorAll('.ldoe-slot-item[data-key]').forEach(el => {
+    el.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', el.dataset.where + ':' + el.dataset.key);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    el.addEventListener('click', () => {
+      if (el.dataset.where === 'owned') loadoutAdd(el.dataset.key); else loadoutRemove(el.dataset.key);
+    });
+  });
+  m.querySelectorAll('.loadout-drop').forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('over');
+      const raw = e.dataTransfer.getData('text/plain') || '';
+      const [where, key] = raw.split(':');
+      if (!key) return;
+      if (zone.dataset.zone === 'bag' && where === 'owned') loadoutAdd(key);
+      else if (zone.dataset.zone === 'owned' && where === 'bag') loadoutRemove(key);
+    });
+  });
+}
+// Escolher qual item da bolsa já vai na mochila de perna.
+function charPouchPick() {
+  const l = loadLoadout();
+  const opts = Object.keys(l).filter(k => bagQty(l, k) > 0 && isPowerUp(k));
+  if (!opts.length) { showToast(t('charslot.pouch_hint'), 'info'); charLoadoutPage('items'); return; }
+  const cur = loadPouchPick();
+  const i = opts.indexOf(cur);
+  savePouchPick(i < 0 ? opts[0] : (i + 1 < opts.length ? opts[i + 1] : ''));   // cicla e volta pra vazio
+  renderCharLoadout();
+}
+// Tira tudo da mochila. Como a mochila é só seleção, isso NÃO mexe no SFL:
+// os itens nunca saíram do inventário — só deixam de estar marcados pra levar.
+function loadoutSendAll() {
+  const l = loadLoadout();
+  if (!loadoutTotal(l)) { showToast(t('loadout.already_empty'), 'info'); return; }
+  saveLoadout({}); savePouchPick('');
+  showToast(t('loadout.sent_all'), 'success');
+  renderCharLoadout();
+}
+function loadoutAdd(key) {
+  const l = loadLoadout();
+  const bagKeys = Object.keys(l).filter(k => bagQty(l, k) > 0);
+  if (!l[key] && bagKeys.length >= EXP_LOADOUT_MAX) { showToast(t('loadout.full', { n: EXP_LOADOUT_MAX }), 'error'); return; }
+  l[key] = bagQty(l, key) + 1;
+  saveLoadout(l); renderCharLoadout();
+}
+function loadoutRemove(key) {
+  const l = loadLoadout();
+  const q = bagQty(l, key) - 1;
+  if (q <= 0) { delete l[key]; if (loadPouchPick() === key) savePouchPick(''); }
+  else l[key] = q;
+  saveLoadout(l); renderCharLoadout();
 }
 function ferrariaClick() {
   if (typeof showToast === 'function') showToast(t('toast.workbench_soon'), 'info');
@@ -13026,7 +13509,10 @@ function generateExploreChests() {
       ok = true;
     }
     if (!ok) continue;
-    const w = level === 3 ? 18 : level === 2 ? 17 : 16;
+    // `h` = ALTURA desenhada (é o que se enxerga no chão). A largura sai da proporção do
+    // sprite — assim o baú mantém o tamanho de sempre e não estica nem encolhe ao abrir.
+    const h = level === 3 ? 18 : level === 2 ? 17 : 16;
+    const w = Math.round(h / (EXP_CHEST_RATIO[level] || 1.25));
     // Render as a div so we ALWAYS see the chest: emoji first, swapped for the
     // real art only if it loads (image failure no longer makes chests invisible).
     const el = document.createElement('div');
@@ -13035,8 +13521,8 @@ function generateExploreChests() {
     el.style.top = y + 'px';
     el.style.zIndex = Math.round(y);   // depth-sorted with the player
     el.style.width = w + 'px';
-    el.style.height = Math.round(w * (EXP_CHEST_RATIO[level] || 1.25)) + 'px';   // respeita a proporção do sprite
-    el.style.fontSize = w + 'px';
+    el.style.height = h + 'px';
+    el.style.fontSize = h + 'px';
     el.style.lineHeight = w + 'px';
     el.style.textAlign = 'center';
     el.textContent = EXP_CHEST_FB[level];
@@ -13346,6 +13832,7 @@ function attackNearestEnemy() {
 function killEnemy(e) {
   e.dead = true; e.hp = 0; e.attacking = false;
   updateExploreCounts();   // 👹 restantes/total
+  try { addMissionProgress('kill30', 1); } catch (err) {}   // missão diária: matar inimigos
   playSfx('gobdie', 0.5, enemyVoiceRate(e));   // goblin death yelp (deep for giants, squeaky for small ones)
   // Chance to drop a Bone (Osso) into the backpack.
   if (Math.random() < 0.40 && !invFullFor('bone')) {
@@ -13518,10 +14005,24 @@ function openExplore(level) {
   { const cb = document.getElementById('explore-char'); if (cb) cb.classList.remove('exp-dead'); }
   document.querySelectorAll('.exp-hurt-flash, #explore-death').forEach(el => el.remove());
   EXPLORE.inv = {}; EXPLORE.openChest = null;
+  // Itens trazidos de casa entram na mochila como qualquer outro: já foram queimados
+  // na entrada, então o depósito da saída apenas devolve o que sobrar. Morreu, perdeu.
+  if (EXPLORE._carryIn) {
+    for (const k in EXPLORE._carryIn) {
+      const q = Number(EXPLORE._carryIn[k]) || 0;
+      if (q > 0 && LOOT_ITEMS[k]) addToInv(lootItem(k, q));
+    }
+    EXPLORE._carryIn = null;
+    // Item escolhido na tela do personagem já entra equipado na mochila de perna.
+    const pick = loadPouchPick();
+    if (pick && EXPLORE.inv[pick] && isPowerUp(pick)) { EXPLORE.pouch = pick; renderPouch(); }
+  }
   EXPLORE.autoTarget = null; EXPLORE.openTimer = null; EXPLORE.paused = false; EXPLORE.chopWalk = null;
   EXPLORE.hp = 100; EXPLORE.hpMax = 100; updateExploreHP();
-  EXPLORE.axeCount = getAxeBalance(); EXPLORE.axeUsed = 0;
-  EXPLORE.pickCount = getPickBalance(); EXPLORE.pickUsed = 0; EXPLORE.toolMode = null;
+  // Você só tem as ferramentas que LEVOU na mochila.
+  EXPLORE.axeCount = (EXPLORE.inv.axe && EXPLORE.inv.axe.qty) || 0; EXPLORE.axeUsed = 0;
+  EXPLORE.pickCount = (EXPLORE.inv.pick && EXPLORE.inv.pick.qty) || 0; EXPLORE.pickUsed = 0;
+  EXPLORE.toolMode = null;
   startAmbience();
   // size the ground to the square map
   const ground = document.getElementById('exp-ground');
@@ -14136,7 +14637,7 @@ function fellTree(tree) {
   spawnFallFx(tree);    // falling-tree animation plays over it, then fades
   playSfx('treefall', 0.5);
   // Wood goes into the shared inventory so it shows everywhere (backpack, chest panel, exit rewards).
-  addToInv(lootItem('wood', WOOD_PER_TREE));   // banked to SFL only on a safe exit (see depositRunGains)
+  addToInv(lootItem('wood', WOOD_PER_TREE));   // só é creditado no SFL na saída viva (ver finishExplore)
   floatDrop(tree.x, tree.y - 30, WOOD_PER_TREE, 'https://sunflower-land.com/game-assets/resources/wood.png');
   if (typeof renderBackpackGrid === 'function') renderBackpackGrid();
   if (typeof renderChestLootPanel === 'function' && EXPLORE.openChest) renderChestLootPanel();
@@ -14467,6 +14968,7 @@ function applyPowerUp(key) {
 }
 // Põe o item no slot (chamado ao tocar num power up dentro da mochila).
 function equipPouch(key) {
+  if (!key) { EXPLORE.pouch = null; renderPouch(); renderBackpackGrid(); return; }   // clicar no slot cheio esvazia
   if (!isPowerUp(key) || !EXPLORE.inv || !EXPLORE.inv[key]) return;
   EXPLORE.pouch = key;
   renderPouch();
@@ -14583,7 +15085,8 @@ function openChestLootPanel(c) {
       c.el.style.backgroundSize = 'contain';
       c.el.style.backgroundRepeat = 'no-repeat';
       c.el.style.backgroundPosition = 'center bottom';
-      c.el.style.height = Math.round((parseFloat(c.el.style.width) || 16) * EXP_CHEST_OPEN_RATIO) + 'px';   // arte aberta é 16×20
+      // mantém a MESMA altura e só ajusta a largura pra proporção da arte aberta (16×20)
+      c.el.style.width = Math.round((parseFloat(c.el.style.height) || 16) / EXP_CHEST_OPEN_RATIO) + 'px';
     }
   }
   playSfx('chest', 0.5);
@@ -14636,7 +15139,7 @@ function renderChestLootPanel() {
   const ig = document.getElementById('exp-loot-inv-grid');
   if (cg) {
     const loot = c.loot || [];
-    cg.innerHTML = loot.map((it, i) => _lootSlot(it, `lootTap('chest',${i})`)).join('') + _padSlots(loot.length, Math.max(8, Math.ceil((loot.length || 1) / 4) * 4));
+    cg.innerHTML = loot.map((it, i) => _lootSlot(it, `lootTap('chest',${i})`)).join('') + _padSlots(loot.length, Math.max(EXP_BAG_SLOTS, Math.ceil((loot.length || 1) / 4) * 4));
   }
   if (ig) {
     const inv = Object.values(EXPLORE.inv || {});
@@ -14680,7 +15183,20 @@ function finishExplore() {
   if (modal) modal.remove();
   const ov = document.getElementById('explore-overlay');
   if (ov) ov.classList.remove('open');
-  depositRunGains();   // safe exit → bank the wood collected this run
+  // Saiu vivo: minta o que sobrou na caçada de volta pro inventário (fecha a conta da
+  // queima feita na entrada) e já deixa o mesmo conjunto SELECIONADO na mochila.
+  const inv = EXPLORE.inv || {};
+  const amounts = {};
+  let total = 0;
+  for (const key in EXP_LOOT_ITEM_IDS) {
+    const id = EXP_LOOT_ITEM_IDS[key];
+    if (id == null) continue;   // gold ainda não tem item no painel
+    const qty = (inv[key] && inv[key].qty) || 0;
+    amounts[String(id)] = (amounts[String(id)] || 0) + qty;
+    total += qty;
+  }
+  depositAmounts(amounts, total);
+  bagPreselectRunLoot(inv);
 }
 
 // Backpack
@@ -14706,11 +15222,34 @@ function renderBackpackGrid() {
     const pw = it.key && isPowerUp(it.key);
     const on = pw && EXPLORE.pouch === it.key;
     return `
-    <div class="ldoe-slot ldoe-slot-item${pw ? ' exp-bp-powerup' : ''}${on ? ' equipped' : ''}"${pw ? ` onclick="equipPouch('${it.key}')" title="${t('powerup.tap_to_equip')}"` : ''}>
-      <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
+    <div class="ldoe-slot ldoe-slot-item${pw ? ' exp-bp-powerup' : ''}${on ? ' equipped' : ''}"${pw ? ` draggable="true" data-key="${it.key}" onclick="equipPouch('${it.key}')" title="${t('powerup.tap_to_equip')}"` : ''}>
+      <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;pointer-events:none;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
       <div class="ldoe-slot-qty">${it.qty}</div>
     </div>`;
-  }).join('') + _padSlots(items.length, 8);
+  }).join('') + _padSlots(items.length, EXP_BAG_SLOTS);
+  // Coluna do personagem ao lado da mochila — igual à tela da ilha.
+  // ⚠️ Montada UMA VEZ: esta função é chamada de 11 lugares, e refazer o HTML toda vez
+  // reiniciaria a animação do bumpkin e deixaria um setInterval órfão a cada chamada.
+  // A cada render só as mochilas de perna são redesenhadas.
+  const col = document.getElementById('exp-bp-charcol');
+  if (col) {
+    if (!col._built) {
+      col.innerHTML = charRigHtml('exp-bp-char', '');
+      col._built = true;
+      try { animateHomeSprite(document.getElementById('exp-bp-char'), getBumpkinAnimUrls().sheet, EXP_CHAR_SCALE); } catch (e) {}
+    }
+    const pouches = col.querySelector('.charpouches');
+    if (pouches) {
+      pouches.innerHTML = explorePouchHtml();
+      wirePouchDrop(pouches, (key) => {
+        if (!isPowerUp(key)) { showToast(t('charslot.only_powerup'), 'error'); return; }
+        equipPouch(key);
+      });
+    }
+    grid.querySelectorAll('[data-key]').forEach(el => {
+      el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', 'inv:' + el.dataset.key); e.dataTransfer.effectAllowed = 'move'; });
+    });
+  }
 }
 
 window.openExplore = openExplore;
@@ -14719,6 +15258,12 @@ window.toggleBackpack = toggleBackpack;
 window.toggleExitPath = toggleExitPath;
 window.usePouchItem = usePouchItem;
 window.equipPouch = equipPouch;
+window.loadoutAdd = loadoutAdd;
+window.loadoutRemove = loadoutRemove;
+window.renderCharLoadout = renderCharLoadout;
+window.charLoadoutPage = charLoadoutPage;
+window.charPouchPick = charPouchPick;
+window.loadoutSendAll = loadoutSendAll;
 // ═══ EXPLORE MODE end ═══
 </script>
 <!-- ═══ EXPLORE MODE (walk around with your bumpkin) ═══ -->
@@ -14747,9 +15292,12 @@ window.equipPouch = equipPouch;
       <img id="exp-pouch-img" alt="" style="display:none" onerror="this.style.visibility='hidden'">
       <span id="exp-pouch-qty"></span>
     </button>
-    <button id="exp-backpack-btn" onclick="toggleBackpack()" title="Mochila"><img src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/src/assets/icons/sack.png" alt="Mochila" onerror="this.outerHTML='🎒'"></button>
+    <!-- Slots 2 e 3 da mochila de perna: bloqueados por enquanto -->
+    <button id="exp-pouch-btn-2" class="exp-pouch-locked" onclick="showToast(t('charslot.soon'),'info')" data-i18n="explore.pouch" data-i18n-attr="title" title="Mochila de perna">🔒</button>
+    <button id="exp-pouch-btn-3" class="exp-pouch-locked" onclick="showToast(t('charslot.soon'),'info')" data-i18n="explore.pouch" data-i18n-attr="title" title="Mochila de perna">🔒</button>
+    <button id="exp-backpack-btn" onclick="toggleBackpack()" title="Mochila"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/sack.png" alt="Mochila" onerror="this.outerHTML='🎒'"></button>
     <button id="exp-hand-btn" onclick="expActionButton()" title="Ação">
-      <img id="exp-hand-icon" src="https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/public/world/hand_wave.png" alt="Ação" onerror="this.style.visibility='hidden'">
+      <img id="exp-hand-icon" src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/public/world/hand_wave.png" alt="Ação" onerror="this.style.visibility='hidden'">
       <img id="exp-axe-icon" src="https://sunflower-land.com/game-assets/tools/axe.png" alt="Machado" style="display:none" onerror="this.style.visibility='hidden'">
       <img id="exp-pick-icon" src="https://sunflower-land.com/game-assets/tools/stone_pickaxe.png" alt="Picareta" style="display:none" onerror="this.style.visibility='hidden'">
       <img id="exp-sword-icon" src="https://sunflower-land.com/game-assets/icons/sword.png" alt="Espada" style="display:none" onerror="this.style.visibility='hidden'">
@@ -14767,7 +15315,10 @@ window.equipPouch = equipPouch;
   <div id="exp-backpack-panel">
     <div class="exp-bp-window">
       <div class="exp-bp-title" data-i18n="explore.backpack">Mochila</div>
-      <div class="exp-bp-grid" id="exp-bp-grid"></div>
+      <div class="exp-bp-cols">
+        <div class="exp-bp-side"><div class="exp-bp-grid" id="exp-bp-grid"></div></div>
+        <div class="exp-bp-side exp-bp-charcol" id="exp-bp-charcol"></div>
+      </div>
       <button class="exp-bp-close" onclick="toggleBackpack()" data-i18n="btn.close">Fechar</button>
     </div>
   </div>

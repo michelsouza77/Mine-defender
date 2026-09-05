@@ -32,6 +32,23 @@
   necklace, secondaryTool, coat, onesie, suit, wings, dress, beard, aura].
 - Corpo Goblin = 4; armadura goblin 320/321/322/323; Goblin Axe 324.
 
+### ⚠️ Assets do GitHub agora vêm pelo jsDelivr (04/09/2026)
+O `raw.githubusercontent.com` **não é um CDN** — ele tem limite de requisições por IP e, quando
+estoura, devolve erro. O sintoma é feio e confuso: **o chão do modo explorar fica sem textura** e
+**vários ícones somem**, enquanto tudo que vem do `sunflower-land.com/game-assets` continua normal
+(porque é outro servidor). O código está certo, é só o host recusando.
+
+As 44 URLs foram trocadas para o espelho do jsDelivr, que serve o MESMO arquivo do mesmo repo:
+`https://raw.githubusercontent.com/sunflower-land/sunflower-land/main/`
+→ `https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/`
+
+É CDN de verdade (sem limite) e ainda entrega de São Paulo/Rio, então carrega **mais rápido** no
+Brasil. Tentei antes usar o CDN oficial do SFL, mas esses arquivos **não existem lá** (404) —
+o jsDelivr foi a única saída que mantém os mesmos arquivos.
+
+> Se algum dia o `cdn.jsdelivr.net` for bloqueado no editor do SFL, o conserto é uma
+> busca-e-substitui só, voltando pro `raw.githubusercontent.com`.
+
 ### CDN de assets
 - `https://sunflower-land.com/game-assets/...` funciona no navegador do Michel (verificar sempre com
   `Invoke-WebRequest` antes de usar — alguns caminhos dão 404).
@@ -268,6 +285,12 @@ Cristal, Totem Beta e Totem Dino, e clicar leva pro marketplace do SFL, igual à
 (o mercado **não vende dentro do jogo**, só encaminha). Categoria aceita um campo `hint` novo pra
 ter legenda própria em vez do subtítulo padrão.
 
+### Depósito não atualizava o inventário (04/09/2026)
+`finishExplore()` chamava `depositRunGains()` e pronto — **nada re-sincronizava**. O jogador saía do
+mapa e não via os itens no inventário até alguma outra ação sincronizar, parecendo que o depósito
+tinha falhado. Agora, ao dar certo, o depósito faz `syncFromSFL(true)` e chama `updateHUD`,
+`buildItemsGrid`, `buildInventory` e `refreshAllPanels`.
+
 ### Proporção dos baús — corrigido (04/09/2026)
 Os sprites de baú são **mais altos que largos** (basic 16×21, wooden/luxury 16×20, abertos 16×20),
 mas o baú **fechado** era desenhado numa caixa **quadrada** (`w × w`). Com `background-size:contain`
@@ -284,6 +307,165 @@ desenho do luxury, em vermelho).
 **O que trava a troca:** o sprite de baú ABERTO do tier 2 que o Michel forneceu
 (`adicional/wooden_chest aberto.png`) é verde, combinando com o fechado atual. Trocar só o fechado
 deixaria fechado-vermelho + aberto-verde. Pra usar o `red_chest` é preciso a arte do vermelho aberto.
+
+### Levar itens de casa pro mapa — o problema da duplicação (04/09/2026)
+
+**Por que duplicaria:** a ação `deposit_exploracao` **não transfere, ela MINTA** (cria item do nada).
+Se o jogador pudesse carregar itens da própria conta pro mapa, o item continuaria na conta *e* seria
+fabricado de novo na saída — entrar e sair viraria uma máquina de imprimir item.
+
+**Como as ferramentas já escapavam disso:** o machado e a picareta **nunca são retirados da conta**.
+`getAxeBalance()`/`getPickBalance()` só **leem** o saldo, e `burn_axe`/`burn_pickaxe` queimam 1 no
+momento em que a ferramenta se gasta. Como ferramenta **não está em `EXP_LOOT_ITEM_IDS`**, ela nunca
+é depositada. Nada é criado → nada duplica.
+
+### A MOCHILA é só uma SELEÇÃO (modelo final — 04/09/2026)
+> Cheguei a implementar uma versão em que o saque ficava guardado na mochila até o jogador mandar
+> pro inventário (formato `{q, off}`). O Michel **descartou**: ficou complicado à toa e o saque
+> passava a morar no localStorage, fora da conta. Se aparecer algo de `off`/`bagOff` no código,
+> é resto dessa versão e pode sair.
+
+**Regra final, e é só isso:**
+- **Pôr item na mochila não muda NADA no SFL** — ele continua no inventário. É só marcar o que levar.
+- **ENTRAR no mapa → QUEIMA** tudo que está na mochila (`retirada_exploracao`), e a mochila esvazia.
+- **SAIR vivo → MINTA** tudo que sobrou na caçada (`deposit_exploracao`), no `finishExplore`.
+- **MORRER → não minta nada.** Perdeu o que levou e o que coletou.
+
+Formato: `{ chave: quantidade }` no localStorage `dinohunt_loadout` (o loader ainda aceita o
+formato antigo `{q, off}` e converte).
+
+Como o depósito CRIA item, tudo que ele cria tem que ter sido destruído antes — a queima na
+entrada é o que fecha essa conta. Não existe estoque fora da conta em lugar nenhum.
+
+Ao sair vivo, `bagPreselectRunLoot()` deixa o mesmo conjunto **já marcado** na mochila, pra dar
+pra entrar de novo levando as mesmas coisas sem remontar. É **só marcação**: se não entrar no
+mapa, nada acontece com esses itens (eles estão no inventário, normais).
+
+**Espaços padronizados:** `EXP_BAG_SLOTS = 8` manda em todas as mochilas — a do mapa
+(`EXP_INV_MAX`), a da ilha (`EXP_LOADOUT_MAX`) e o painel do baú. Antes eram três números
+diferentes (6 na ilha, 8 no mapa, 10 no baú). ⚠️ A capacidade da mochila da caçada caiu de 10 pra
+8 pilhas — foi de propósito, pra o número de espaços que aparece ser o número de verdade.
+
+### ✅ Machado e picareta são itens de mochila (05/09/2026)
+As ferramentas seguem **a mesma regra de todo o resto**: você escolhe quantas levar, são
+**queimadas na entrada** junto com a mochila, as que quebram somem, e as que sobram **voltam no
+depósito da saída**. Ids 130 e 131 entraram em `EXP_LOOT_ITEM_IDS`.
+
+O Michel adicionou 130/131 nas duas ações e **removeu `burn_axe` e `burn_pickaxe` do painel**.
+Por isso o modelo antigo foi **apagado do código**: `burnOneAxe`, `burnOnePick`, as constantes
+`EXP_AXE_ACTION`/`EXP_PICK_ACTION` e a flag `EXP_TOOLS_IN_BAG` não existem mais.
+`EXPLORE.axeCount`/`pickCount` agora saem do que está na mochila, não do saldo da conta.
+
+> ⚠️ **Não reintroduza queima avulsa na quebra.** A ferramenta já foi queimada na entrada;
+> queimar de novo tiraria uma a mais da conta. Ao quebrar, só se faz `takeFromInv` pra ela não
+> voltar no depósito. (`getAxeBalance`/`getPickBalance` continuam definidas mas não são mais
+> chamadas — a tela de levar itens lê o saldo direto por `EXP_LOOT_ITEM_IDS`.)
+
+**Durabilidade real: 1.** `EXP_AXE_DURABILITY` e `EXP_PICK_DURABILITY` são **1** — cada árvore
+gasta um machado e cada pedra gasta uma picareta. Vários comentários e a descrição do item diziam
+"quebra após 5 árvores"; era texto velho e foi corrigido. Se a intenção for 5, muda a constante.
+
+### ⚠️ Fabricação travada: ações que faltam no painel
+Estas estão marcadas `TODO(SFL)` no código e provavelmente **nunca foram criadas** — sem elas não
+dá pra construir a Bancada nem forjar ferramenta:
+
+| Ação | Pra quê | Queima | Produz |
+|---|---|---|---|
+| `craft_workbench` | Construir a Bancada | 5×112, 20×102, 10×105 | Bancada (133) |
+| `pickaxe_craft_workbench` | Forjar Picareta | 1×132, 3×102 | 1× Picareta (131) |
+| `stick_craft_sawbench` | Fazer Graveto na Serraria | 1×101 | 3× Graveto (132) |
+
+`axe_craft_workbench` é a única do grupo sem TODO, então talvez já exista. Repare na cadeia: o
+machado precisa de **Graveto**, que vem da Serraria — cuja ação também falta (mas Graveto também
+cai no chão do mapa).
+- `EXP_WITHDRAW_ACTION = 'retirada_exploracao'` queima o que você leva, ao entrar.
+- Na saída, o depósito de sempre devolve o que sobrou na mochila.
+- Vantagem: **não precisa separar "trazido" de "coletado"**. O que volta é simplesmente o que ficou
+  na mochila. Morrer custa o que levou, sobreviver devolve o que não usou — de graça, sem controle extra.
+- A alternativa (não queimar e depositar só o saldo líquido) obrigaria a queimar na morte, ao usar
+  **e ao fechar a aba** — e esse último é impossível garantir, então a duplicação voltaria por ali.
+
+✅ A ação **`retirada_exploracao` já foi criada** pelo Michel no painel (04/09/2026) e
+`EXP_WITHDRAW_SFL_READY` está **true**. Ela é o espelho exato da de depósito: mesma lista de itens,
+recebendo a quantidade de cada um (0 pros que não vão), só que **queimando** em vez de mintar.
+
+**Regra de segurança:** se a queima falhar, o jogador **entra sem os itens**. Deixar entrar com eles
+faria o depósito da saída criar item do nada. A queima roda **antes** da cobrança de energia, pra
+uma falha não custar energia.
+
+**Tela do personagem** (`homeCharClick`, o bumpkin parado na ilha — antes só dizia "em breve").
+> ⚠️ Ela usa **exatamente o mesmo painel do baú do modo explorar** — não é "parecido", é a mesma
+> marcação e as mesmas classes: `.exp-loot-modal` › `.exp-loot-header` › `.exp-loot-cols` ›
+> `.exp-loot-col` › `.ldoe-section-title` + `.ldoe-inv-grid` › `.exp-loot-hint`.
+> Vários estilos são **escopados em `#exp-loot-panel`**, então o `#charloadout-modal` foi
+> acrescentado a esses 4 seletores. Se mexer no painel do baú, confira as duas telas.
+
+São **duas páginas** no mesmo modal, controladas por `_charPage` / `charLoadoutPage()`:
+
+1. **Personagem** — coluna **esquerda: a mochila** (bolsa de viagem) com os dois botões lado a lado
+   embaixo (*Colocar itens* / *Mandar tudo pro inventário*); coluna **direita: o personagem**, com
+   o bumpkin animado no meio (`animateHomeSprite`, que **define largura/altura sozinho** — não force
+   tamanho no CSS ou ele desalinha), **6 slots de equipamento em volta** (`EXP_CHAR_SLOTS`) e as
+   **3 mochilas de perna** embaixo. Os 6 slots e as mochilas de perna 2 e 3 estão **bloqueados de
+   propósito** — ainda não existe item de equipamento de personagem; a estrutura já está pronta.
+2. **Itens** — mochila à esquerda e inventário da conta à direita, na mesma estrutura do baú, com
+   **arrastar e soltar** entre as colunas (`wireLoadoutDrag`) e **clique** movendo 1 (arrastar não
+   funciona no celular, então o clique é o caminho garantido).
+
+No HUD do mapa também existem **3 botões de mochila de perna** (o 1º funciona, o 2º e o 3º
+bloqueados), empilhados à direita em `bottom: 184 / 250 / 316px`.
+
+**A mochila DENTRO do mapa mostra o personagem também**, na mesma coluna da tela da ilha —
+`charRigHtml()` é compartilhada pelas duas. Escala do bumpkin: `EXP_CHAR_SCALE = 2.1`.
+
+> ⚠️ A coluna do personagem na mochila do mapa é montada **UMA VEZ** (`col._built`).
+> `renderBackpackGrid()` é chamada de **11 lugares**; refazer o HTML a cada chamada reiniciava a
+> animação do bumpkin e deixava um `setInterval` órfão por chamada. A cada render só as mochilas
+> de perna são redesenhadas.
+
+**Arrastar até o slot da mochila de perna** funciona nas duas telas (`.pouch-drop` + `wirePouchDrop`);
+clicar num slot cheio esvazia. Só power up é aceito.
+
+A **mochila de perna** na tela do personagem escolhe qual power up já entra equipado na caçada
+(`dinohunt_pouch_pick`, aplicado no `openExplore`); clicar cicla entre os power ups da bolsa e volta
+pro vazio. Limite `EXP_LOADOUT_MAX = 6` tipos. A bolsa fica no localStorage (`dinohunt_loadout`) e
+sobrevive entre partidas. Só aparecem itens que o depósito conhece (`EXP_LOOT_ITEM_IDS` com id
+!= null) — senão não teriam como voltar na saída.
+
+*Mandar tudo pro inventário* só **esvazia a bolsa** — nada precisa ser devolvido porque a retirada
+só acontece ao entrar no mapa.
+
+### Temporada: loja e missões (05/09/2026)
+
+**Loja — "disponível" ignorava o que o jogador já tem.** Era `remaining = tr.max - used`, e `used`
+vinha de `getSeasonRedeemed()` (localStorage), que só conta o que foi comprado **por aquela loja**.
+Quem já possuía 1 item de limite 1 continuava vendo "1 disponível". Agora:
+`remaining = max - Math.max(used, quantidade que o jogador tem)`, lendo o saldo real por id.
+Usei `Math.max` (e não só o saldo) pra não quebrar os consumíveis: quem comprou 3 ovos e abriu
+todos continua com o limite gasto. Corrigido nos DOIS lugares — o card e a tela de detalhe.
+
+**Missões viraram LISTA.** Antes era uma só, com o objeto `DAILY_MISSION` e campos fixos.
+Agora existe `MISSIONS = [...]`; pra criar outra, é acrescentar ali e criar a ação no painel.
+Estado: `{ date, m: { <id>: { p, c } } }`, com **migração** do formato antigo (`{date, progress,
+claimed}` → vira `iron10`). `DAILY_MISSION`, `addDailyMissionProgress()` e `claimDailyMission()`
+continuam existindo como apelidos, pro código antigo não quebrar.
+
+Missões de hoje:
+| id | o que é | meta | ação do SFL |
+|---|---|---|---|
+| `iron10` | Fabrique Ferro | 10 | `claim_daily_mission1` ✅ existe |
+| `kill30` | Cace 30 inimigos | 30 | `claim_daily_mission2` ⚠️ **precisa ser criada** |
+
+O progresso de `kill30` é somado em `killEnemy()`. Missão sem matéria-prima (`reqId: null`)
+desenha só o resultado, sem a seta.
+
+**⚠️ Por que o progresso não passava do celular pro PC:** estava **só em localStorage**
+(`dinohunt_daily_mission`), que é por aparelho. Agora salva também no Firebase em
+`missions/<uid>` (mesmo mecanismo já usado por correio/deck/equipamentos), e o
+`syncFromFirebase()` traz de volta. Duas proteções na volta:
+- só aproveita se for do **mesmo dia** (senão o estado de ontem ressuscitaria);
+- faz **merge pelo MAIOR progresso** entre aparelho e servidor, pra jogar nos dois não
+  fazer um sobrescrever o outro pra baixo.
 
 ### Minimapa
 - Centrado nos pés reais; círculo vermelho = alcance de visão dos inimigos; bolinha de inimigo cresce
