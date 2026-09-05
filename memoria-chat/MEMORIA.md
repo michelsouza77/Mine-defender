@@ -365,6 +365,25 @@ Por isso o modelo antigo foi **apagado do código**: `burnOneAxe`, `burnOnePick`
 gasta um machado e cada pedra gasta uma picareta. Vários comentários e a descrição do item diziam
 "quebra após 5 árvores"; era texto velho e foi corrigido. Se a intenção for 5, muda a constante.
 
+### ✅ Bancada liberada de fábrica — jogador novo estava travado (05/09/2026)
+**O sintoma:** quem começava não tinha a Bancada, e o tutorial parecia não existir.
+**A causa era uma só, em cadeia:** `isStationBuilt('ferraria')` só era verdadeiro se o jogador
+possuísse o item **133**, e o único jeito de obtê-lo era a ação `craft_workbench` — que **não
+existe no painel**. Ou seja, ninguém conseguia a Bancada. E como o tutorial tem um passo que
+**espera a construção** (`mustBuild`, perto da linha 8692), ele ficava parado ali pra sempre.
+
+**Correção:** a Bancada agora **vem liberada de fábrica** (`isStationBuilt` devolve `true` pra
+`ferraria`). Ela forja o machado e a picareta, que são o mínimo pra jogar a Caçada — não faz
+sentido exigir construção. Isso destrava o tutorial junto: com ela já disponível, o passo não bloqueia.
+
+Verificado num navegador limpo: seletor de idioma aparece → tutorial abre → **21 passos até o fim
+sem travar** → a Bancada abre direto na tela de uso (inventário + slots), não na de construir.
+
+> ℹ️ **O seletor de idioma e o tutorial SÓ aparecem uma vez**, controlados por
+> `dinohunt_tutorial_part1_done` no localStorage. Quem já jogou não vê de novo — não é bug.
+> Pra testar como jogador novo: janela anônima ou limpar os dados do site.
+> Em Configurações existe "Ver tutorial", que repete só o tutorial (não o seletor de idioma).
+
 ### ⚠️ Fabricação travada: ações que faltam no painel
 Estas estão marcadas `TODO(SFL)` no código e provavelmente **nunca foram criadas** — sem elas não
 dá pra construir a Bancada nem forjar ferramenta:
@@ -384,6 +403,36 @@ cai no chão do mapa).
   na mochila. Morrer custa o que levou, sobreviver devolve o que não usou — de graça, sem controle extra.
 - A alternativa (não queimar e depositar só o saldo líquido) obrigaria a queimar na morte, ao usar
   **e ao fechar a aba** — e esse último é impossível garantir, então a duplicação voltaria por ali.
+
+> ⚠️ **AS DUAS AÇÕES SE COMPORTAM DIFERENTE — não copie uma da outra:**
+> - **`deposit_exploracao` (mintar):** exige receber **TODOS** os itens configurados, e **aceita 0**.
+> - **`retirada_exploracao` (queimar):** exige **TODOS** os itens configurados **e cada um POSITIVO**.
+>   - mandar 0 → `fixed burn for <id> must be a positive integer`
+>   - omitir → `Missing or invalid burn amount for <id>`
+>   - Ou seja: **não existe "não queime este item"**. Queimar 0 não é possível.
+
+### O truque do ENCHIMENTO (solução do Michel, 05/09/2026)
+Como a retirada não aceita zero, nos itens que o jogador **não está levando** o jogo manda **1** —
+e esse 1 é **criado logo antes**, pelo depósito. **Mint 1 + queima 1 = saldo inalterado**, tudo
+dentro da entrada e invisível pro jogador. Esses itens **não entram no mapa**, então morrer não
+custa nada por causa deles.
+
+Duas regras que **não podem ser afrouxadas** (as duas quebraram no 1º teste e foram corrigidas):
+1. **O mint do enchimento é SEMPRE 1, mesmo se o jogador já tiver o item.** Se você "otimizar"
+   criando só o que falta, a queima come **1 unidade de verdade** de tudo que ele já tem, a cada
+   entrada — perda silenciosa.
+2. **Nunca levar mais do que o jogador tem** (`leva = min(quer, saldo)`). Se ele pedir 5 de algo
+   que não possui, levar 1 "criado" faria o depósito da saída **duplicar** esse item.
+
+Validado em 4 cenários (leva o que tem / jogador zerado / pede mais do que tem / mochila vazia):
+payload sempre sem zeros e com todos os itens, e o saldo fecha exatamente em `-(o que levou)`.
+
+> ⚠️ Risco residual conhecido: se o **mint do enchimento** der certo e a **queima** falhar logo em
+> seguida, o jogador fica com +1 dos itens de enchimento. É pequeno e limitado, mas se um dia
+> aparecer relato de item aparecendo do nada, é por aqui.
+
+Foi a **janela de erro detalhada** (`showActionError`, com a mensagem crua do servidor) que
+destravou o diagnóstico — o aviso genérico anterior escondia tudo. Vale manter.
 
 ✅ A ação **`retirada_exploracao` já foi criada** pelo Michel no painel (04/09/2026) e
 `EXP_WITHDRAW_SFL_READY` está **true**. Ela é o espelho exato da de depósito: mesma lista de itens,
@@ -466,6 +515,25 @@ desenha só o resultado, sem a seta.
 - só aproveita se for do **mesmo dia** (senão o estado de ontem ressuscitaria);
 - faz **merge pelo MAIOR progresso** entre aparelho e servidor, pra jogar nos dois não
   fazer um sobrescrever o outro pra baixo.
+
+**O documento das missões leva o número da FAZENDA, não o usuário do Firebase.** Dentro do
+iframe do SFL o jogo não enxerga o jwt, então cada aparelho ganhava um uid anônimo próprio —
+por isso o progresso do PC e do celular nunca se encontravam. `missionsDocId()` deriva o id da
+sessão (`sfl_<farmId>`, procurando o campo em vários lugares do `_sflLastSession`) e cai no
+`window.firebaseUid` só se não achar. **De propósito, só as missões usam isso**: mudar o
+`window.firebaseUid` global renomearia os documentos de deck/correio/equipamentos e o jogador
+perderia o que já está salvo lá.
+
+### ✅ Regras do Firestore — conferidas em 05/09/2026
+Faltavam `mail`, `equipped`, `rankings` e `missions` (havia um `leaderboard` que o código não
+usa), e isso dava `permission-denied` na hora de salvar. O Michel aplicou as regras corrigidas e
+**foram conferidas direto no projeto pelo MCP do Firebase**: as 7 coleções que o código usa
+(`players`, `inventories`, `decks`, `mail`, `equipped`, `rankings`, `missions`) estão liberadas.
+`missions` é a única com `allow read, write: if request.auth != null` sem amarrar ao uid —
+tem que ser assim, já que o documento é da fazenda e não do usuário.
+
+Projeto do Firebase: **`dinohunt-428a7`** (a conta também tem um `mine-defender` antigo, que o
+jogo **não** usa — o `firebaseConfig` do `index.html` aponta pro `dinohunt-428a7`).
 
 ### Minimapa
 - Centrado nos pés reais; círculo vermelho = alcance de visão dos inimigos; bolinha de inimigo cresce
@@ -590,6 +658,28 @@ Estado final validado no navegador: **683/683 chaves nos dois idiomas** e nada e
 - Diagnóstico do IDE "Não use conjuntos de regras vazios" (~linha 1400) é **pré-existente**, inofensivo.
 - 20–32 inimigos/mapa = muitos sheets de bumpkin carregados (performance a observar).
 - Sessão SFL: `window._sflLastSession`; jogador desconectado usa token padrão `32_1_5_13_20_22_23`.
+
+## 🔌 MCPs instalados nesta máquina (05/09/2026)
+
+Três servidores configurados no `.mcp.json` da raiz do repositório: **playwright**, **firebase** e
+**github**. Servem pra eu conseguir testar e conferir sozinho, em vez de pedir print pro Michel.
+
+| servidor | pra que serve |
+|---|---|
+| `playwright` | abrir o jogo de verdade num navegador, clicar, ler o console e tirar print |
+| `firebase` | ler/escrever regras do Firestore e dados do projeto `dinohunt-428a7` |
+| `github` | ler o repositório, commitar e abrir PR sem passar pelo GitHub Desktop |
+
+**Armadilhas do Windows que já custaram tempo:**
+- `npx` e `firebase` puros **não rodam no PowerShell** — a política é `RemoteSigned` e os atalhos
+  `.ps1` do npm não são assinados. Use sempre **`npx.cmd`** e **`firebase.cmd`**. Não precisa mexer
+  na política do sistema.
+- O firebase estava dando **timeout de 30s** porque o `.mcp.json` usava `npx -y
+  firebase-tools@latest`, que baixa o pacote inteiro toda vez que o servidor sobe. Resolvido com
+  `npm install -g firebase-tools` e apontando o comando direto pro `firebase`.
+- O MCP do github lê o token da variável de ambiente **`GITHUB_TOKEN`** (gravada com `setx`).
+  É um token clássico com escopo **`repo`** só. **Se um dia der "bad credentials", é a validade
+  que venceu** — gerar outro em github.com/settings/tokens e rodar o `setx` de novo.
 
 ## 📝 Como retomar no PC novo
 

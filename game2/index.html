@@ -261,9 +261,13 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .season-scroll{overflow-y:auto;padding:16px 14px 14px;box-sizing:border-box;}
 .season-title-balloon{display:inline-block;background-color:#c5cdd9;color:#2d2840;font-family:'Pixelify Sans',monospace;font-size:14px;font-weight:700;padding:5px 14px;border:2px solid #2d2840;border-radius:4px;margin-bottom:10px;}
 /* Season tabs (2 tabs, active connects to body like the menu) */
-.season-tabs{display:flex;gap:6px;padding:0 10px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
+/* Abas deslizam pro lado igual às do menu normal (.tab-nav). Sem isto, com 4 abas
+   elas se espremiam e a última ("Recursos") ficava inalcançável. */
+.season-tabs{display:flex;gap:6px;padding:0 10px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.season-tabs::-webkit-scrollbar{display:none;}
+.tab-nav::-webkit-scrollbar{display:none;}
 .season-tab-icon{width:18px;height:18px;image-rendering:pixelated;object-fit:contain;}
-.season-tab{display:flex;align-items:center;gap:8px;padding:12px 22px;font-family:'Pixelify Sans',monospace;font-size:17px;font-weight:700;color:#3a2410;cursor:pointer;background:transparent;border:none;opacity:0.7;white-space:nowrap;}
+.season-tab{display:flex;align-items:center;gap:8px;padding:12px 22px;font-family:'Pixelify Sans',monospace;font-size:17px;font-weight:700;color:#3a2410;cursor:pointer;background:transparent;border:none;opacity:0.7;white-space:nowrap;flex-shrink:0;}
 .season-tab.active{opacity:1;z-index:7;position:relative;margin-bottom:-5px;padding-bottom:10px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/tab_border_middle.png") 20%;border-image-repeat:stretch;border-radius:13px 13px 0 0;border-bottom:none;}
 .season-tab.active::after{content:"";position:absolute;left:2px;right:2px;bottom:-3px;height:6px;background:#e4a672;z-index:8;}
 .season-tab-timer{display:inline-block;background-color:#e8533f;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border:2px solid #2d2840;border-radius:3px;margin-left:4px;}
@@ -1284,7 +1288,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .charslot.pouch-drop.over{outline:3px dashed #63c74d;outline-offset:-3px;}
 .charbtns{display:flex;gap:6px;margin:0 8px 8px;}
 .charbtns .exp-loot-all{flex:1;margin:0;font-size:11px;padding:9px 4px;}
-.loadout-drop.over{outline:3px dashed #63c74d;outline-offset:-3px;}
+.loadout-drop.over,.ldoe-inv-grid.over{outline:3px dashed #63c74d;outline-offset:-3px;}
 /* Power up na mochila: clicável, mas com a MESMA cara dos outros itens — só o que já está
    no slot da mochila de perna recebe a marca verde, pra você saber qual é. */
 .exp-bp-powerup{cursor:pointer;}
@@ -2088,6 +2092,9 @@ var I18N = {
   'loadout.full': 'A bolsa só cabe {n} tipos de item',
   'loadout.not_ready': '⚠️ A ação de retirada ainda não existe no painel do SFL — por enquanto nada é levado de verdade.',
   'loadout.burn_failed': '❌ Não deu pra retirar os itens da sua conta — entrando sem eles',
+  'loadout.nothing_to_take': '⚠️ Você não tem mais esses itens no inventário — entrando sem eles',
+  'loadout.trimmed': '⚠️ Levando só o que você tem no inventário',
+  'loadout.debt': '⚠️ Um item ficou pendente — devolvemos na próxima entrada',
   'market.cat.powerups': '⚡ Power Ups',
   'market.powerups.hint': 'Itens que dão bônus. A poção você equipa na mochila de perna durante a Caçada.',
   'toast.char_soon': '🧑‍🌾 Em breve!',
@@ -2126,6 +2133,9 @@ var I18N = {
   'item.desc.131': 'Minera pedra, ferro e ouro no modo Explorar. Some após 1 uso.',
   'item.desc.132': 'Achado no chão do mapa ou feito na Serraria. Usado para forjar ferramentas.',
   'item.desc.133': 'Bancada que forja o Machado e a Picareta a partir de Graveto e Pedra.',
+  'mission.sync.rejected': 'O servidor recusou salvar o progresso ({erro}). Ele fica só neste aparelho.',
+  'mission.sync.offline': 'Sem conexão com o servidor — o progresso fica só neste aparelho.',
+  'mission.sync.local': 'Jogo aberto fora do Sunflower Land: cada aparelho conta separado. Abra pelo SFL pra sincronizar.',
   'rewards.mission2.title': 'Cace 30 inimigos',
   'rewards.mission2.req': '',
   'rewards.mission2.result': 'Inimigos',
@@ -2677,6 +2687,9 @@ var I18N = {
   'loadout.full': 'The bag only holds {n} item types',
   'loadout.not_ready': '⚠️ The withdraw action does not exist in the SFL panel yet — nothing is actually taken for now.',
   'loadout.burn_failed': '❌ Could not withdraw the items from your account — entering without them',
+  'loadout.nothing_to_take': '⚠️ You no longer have those items in your inventory — entering without them',
+  'loadout.trimmed': '⚠️ Taking only what you actually have',
+  'loadout.debt': '⚠️ An item is pending — it will be returned on your next run',
   'market.cat.powerups': '⚡ Power Ups',
   'market.powerups.hint': 'Items that grant bonuses. The potion goes in your leg pouch during the Hunt.',
   'toast.char_soon': '🧑‍🌾 Coming soon!',
@@ -2716,6 +2729,9 @@ var I18N = {
   'item.desc.132': 'Found on the map floor or made at the Sawbench. Used to forge tools.',
   'item.desc.133': 'Workstation that forges the Axe and the Pickaxe from Sticks and Stone.',
   'section.guide.short': 'Hunter Guide',
+  'mission.sync.rejected': 'The server refused to save your progress ({erro}). It stays on this device only.',
+  'mission.sync.offline': 'No server connection — progress stays on this device only.',
+  'mission.sync.local': 'Game opened outside Sunflower Land: each device counts separately. Open it through SFL to sync.',
   'rewards.mission2.title': 'Hunt 30 enemies',
   'rewards.mission2.req': '',
   'rewards.mission2.result': 'Enemies',
@@ -3507,6 +3523,8 @@ function switchSeasonTab(page, btn) {
   const rewards = document.getElementById('season-page-rewards');
   if (shop) shop.style.display = page === 'shop' ? '' : 'none';
   if (rewards) rewards.style.display = page === 'rewards' ? '' : 'none';
+  // Abriu as missões: busca o progresso mais novo do servidor antes de mostrar a barra.
+  if (page === 'rewards') { try { syncMissionsFromFirebase(); } catch (e) {} }
 }
 
 // ===== DAILY MISSION =====
@@ -3522,7 +3540,10 @@ const MISSIONS = [
   { id: 'iron10', goal: 10, reward: 50, action: 'claim_daily_mission1',
     reqId: 103, resultId: 112, titleKey: 'rewards.mission1.title',
     reqKey: 'rewards.mission1.req', resultKey: 'rewards.mission1.result' },
-  { id: 'kill30', goal: 30, reward: 50, action: 'claim_daily_mission2',
+  // mintId: a ação desta missão espera que o JOGO informe quanto entregar
+  // ("Missing or invalid mint amount for 129"). A da missão 1 tem a quantidade fixa no
+  // painel, por isso é chamada sem nada — não mexa nela.
+  { id: 'kill30', goal: 30, reward: 50, action: 'claim_daily_mission2', mintId: 129,
     reqId: null, resultId: null, titleKey: 'rewards.mission2.title',
     reqKey: 'rewards.mission2.req', resultKey: 'rewards.mission2.result',
     // Ícone é o próprio goblin do mapa. É uma folha de 4 quadros de 27×35, então mostramos
@@ -3575,12 +3596,65 @@ function addMissionProgress(id, n = 1) {
 // Mantida com o nome antigo: é chamada quando o jogador fabrica ferro.
 function addDailyMissionProgress(n = 1) { addMissionProgress('iron10', n); }
 // ── Missões seguem o jogador entre aparelhos (mesmo mecanismo do correio/deck) ──
+// Id do jogador para as MISSÕES. Prefere a fazenda do SFL, que é a mesma no PC e no
+// celular. O `window.firebaseUid` só vira 'sfl_<fazenda>' quando o token está na URL —
+// e dentro do Sunflower Land o jogo roda num quadro embutido, onde a URL é a dele, não a
+// do portal. Então a fazenda é procurada na SESSÃO, que existe de qualquer jeito.
+// ⚠️ De propósito NÃO altera o window.firebaseUid: deck, correio e equipamentos já estão
+//    salvos sob o id atual, e trocá-lo faria esses dados "sumirem".
+function missionsDocId() {
+  const s = window._sflLastSession;
+  const fid = s && (s.farmId || s.id
+    || (s.data && (s.data.farmId || s.data.id
+      || (s.data.farm && (s.data.farm.id || s.data.farm.farmId))
+      || (s.data.player && (s.data.player.farmId || s.data.player.id))))
+    || (s.farm && s.farm.id));
+  if (fid) return 'sfl_' + fid;
+  return window.firebaseUid || null;   // sem fazenda: cai no id do aparelho
+}
+function missionsIdEstavel() { return String(missionsDocId() || '').indexOf('sfl_') === 0; }
 function saveMissionsToFirebase(state) {
   try {
-    if (!window.firebaseDb || !window.firebaseUid) return;
-    setDoc(doc(window.firebaseDb, 'missions', window.firebaseUid),
-      { state, updatedAt: Date.now() }, { merge: true }).catch(() => {});
-  } catch (e) {}
+    if (!window.firebaseDb || !missionsDocId() || !window._fb) return;
+    // ⚠️ As funções do Firebase vivem em window._fb (o SDK é carregado num <script type="module">
+    // e só é exposto por ali). Sem esta linha, `setDoc` não existe, o try/catch engole o erro
+    // e a gravação some sem avisar — foi exatamente o que aconteceu com as missões.
+    const { doc, setDoc } = window._fb;
+    setDoc(doc(window.firebaseDb, 'missions', missionsDocId()),
+      { state, updatedAt: Date.now() }, { merge: true })
+      .then(() => { window._missionsSyncErro = null; })
+      .catch((e) => {
+        // NÃO engolir: se as regras do Firestore não liberarem a coleção 'missions',
+        // a gravação é recusada aqui e o progresso nunca sai do aparelho.
+        window._missionsSyncErro = String((e && e.code) || e);
+        console.error('missions save REJEITADA:', e);
+      });
+  } catch (e) { window._missionsSyncErro = String(e); console.warn('missions save failed:', e); }
+}
+// Puxa o progresso das missões do servidor e junta com o do aparelho.
+// Chamada ao entrar no jogo E ao abrir a aba de missões — sem a segunda, quem já estava
+// com o jogo aberto no celular continuava vendo o número velho.
+async function syncMissionsFromFirebase() {
+  try {
+    if (!window.firebaseDb || !missionsDocId() || !window._fb) return;
+    const { doc, getDoc } = window._fb;
+    const snap = await getDoc(doc(window.firebaseDb, 'missions', missionsDocId()));
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const today = new Date().toISOString().slice(0, 10);
+    // Só aproveita se for do MESMO dia — senão o estado de ontem voltaria do nada.
+    if (!data.state || data.state.date !== today || !data.state.m) return;
+    const local = getMissionsState();
+    // Fica sempre com o MAIOR progresso entre aparelho e servidor, pra jogar nos dois
+    // não fazer um sobrescrever o outro pra baixo.
+    const merged = { date: today, m: Object.assign({}, data.state.m) };
+    for (const k in local.m) {
+      const a = local.m[k] || { p: 0, c: false }, b = merged.m[k] || { p: 0, c: false };
+      merged.m[k] = { p: Math.max(a.p || 0, b.p || 0), c: !!(a.c || b.c) };
+    }
+    try { localStorage.setItem('dinohunt_daily_mission', JSON.stringify(merged)); } catch (e) {}
+  } catch (e) { console.warn('missions sync failed:', e); }
+  if (typeof refreshRewardsPage === 'function') refreshRewardsPage();
 }
 function refreshRewardsPage() {
   const page = document.getElementById('season-page-rewards');
@@ -3592,8 +3666,19 @@ function refreshRewardsPage() {
   page.insertAdjacentHTML('beforeend', renderMissionSummary());
 }
 // SCREEN 1: simple summary (what to do + reward) → click to open detail
+// Linha de estado: diz se o progresso está indo pro servidor ou ficando só neste aparelho.
+// Sem isso, "não sincroniza" é indistinguível de "sincroniza mas está errado".
+function missionSyncStatusHtml() {
+  const uid = window.firebaseUid || '';
+  let msg = null;
+  if (window._missionsSyncErro) msg = t('mission.sync.rejected', { erro: window._missionsSyncErro });
+  else if (!missionsDocId() || !window.firebaseDb) msg = t('mission.sync.offline');
+  else if (!missionsIdEstavel()) msg = t('mission.sync.local');
+  if (!msg) return '';
+  return `<div style="font-family:'Pixelify Sans',monospace;font-size:11px;color:#b3564a;background:rgba(0,0,0,.25);border:1px solid #b3564a;border-radius:6px;padding:8px 10px;margin-bottom:8px;line-height:1.5;">⚠️ ${msg}</div>`;
+}
 function renderMissionSummary() {
-  return MISSIONS.map(renderOneMissionSummary).join('');
+  return missionSyncStatusHtml() + MISSIONS.map(renderOneMissionSummary).join('');
 }
 function renderOneMissionSummary(M) {
   const st = { progress: missionProgress(M.id), claimed: missionClaimed(M.id) };
@@ -3674,10 +3759,16 @@ async function claimMission(id) {
     return;
   }
   if (typeof showToast === 'function') showToast(t('mail.collecting'), 'success');
-  const res = await sflExecuteAction(M.action);
+  // Só manda a quantidade se a missão declarar `mintId` — assim a recompensa e o que é
+  // enviado nunca ficam diferentes, e as missões de quantidade fixa continuam como estão.
+  const premio = M.mintId ? { [String(M.mintId)]: M.reward } : undefined;
+  const res = await sflExecuteAction(M.action, premio);
   if (!res || !res.ok) {
-    console.error('Claim mission failed:', M.action, res && res.error);
-    if (typeof showToast === 'function') showToast(t('rewards.claim_failed', { action: M.action }), 'error');
+    const err = String((res && res.error) || 'erro desconhecido');
+    console.error('Claim mission failed:', M.action, err);
+    // Mostra a mensagem CRUA do servidor: é ela que diz se a ação não existe, se o item
+    // não está cadastrado nela, ou se é outra coisa. O aviso genérico não ajudava em nada.
+    showActionError(M.action, premio || {}, err);
     return;
   }
   cur.c = true; st.m[M.id] = cur;
@@ -5289,10 +5380,12 @@ function isStationBuilt(stationKey) {
   if (!cfg) return false;
   // Ferraria is tracked by a local flag (built during the tutorial as a visual scene).
   if (stationKey === 'ferraria') {
-  // Built if you OWN the real Workbench item (133) on SFL, OR the tutorial marked it (offline).
-  const _bal = window._sflLastSession?.data?.playerEconomy?.balances || {};
-  if ((Number(_bal['133']) || 0) >= 1) return true;
-  try { return localStorage.getItem('dinohunt_ferraria_built') === 'true'; } catch (e) { return false; }
+  // A BANCADA VEM LIBERADA DE FÁBRICA. Ela forja o machado e a picareta, que são o mínimo
+  // pra jogar a Caçada — sem ela o jogador novo fica travado logo na entrada.
+  // Antes ela exigia possuir o item 133, e o único jeito de consegui-lo era a ação
+  // `craft_workbench`, que NÃO existe no painel do SFL: ninguém conseguia a Bancada, e o
+  // tutorial ficava parado no passo que espera a construção (ver `mustBuild`).
+  return true;
   }
   const balances = SFL_CONNECTED
   ? (window._sflLastSession?.data?.playerEconomy?.balances || {})
@@ -9372,26 +9465,7 @@ async function syncFromFirebase() {
     }
   }
   if (typeof refreshMailbox === 'function') refreshMailbox();
-  // Missões: o progresso vem do servidor, então continua de onde parou em qualquer aparelho.
-  // Só aproveita se for do MESMO dia — senão o estado de ontem voltaria do nada.
-  try {
-    const misSnap = await getDoc(doc(window.firebaseDb, 'missions', uid));
-    if (misSnap.exists()) {
-      const data = misSnap.data();
-      const today = new Date().toISOString().slice(0, 10);
-      if (data.state && data.state.date === today && data.state.m) {
-        const local = getMissionsState();
-        // Fica sempre com o MAIOR progresso entre aparelho e servidor.
-        const merged = { date: today, m: Object.assign({}, data.state.m) };
-        for (const k in local.m) {
-          const a = local.m[k] || { p: 0, c: false }, b = merged.m[k] || { p: 0, c: false };
-          merged.m[k] = { p: Math.max(a.p || 0, b.p || 0), c: !!(a.c || b.c) };
-        }
-        try { localStorage.setItem('dinohunt_daily_mission', JSON.stringify(merged)); } catch (e) {}
-      }
-    }
-  } catch (e) {}
-  if (typeof refreshRewardsPage === 'function') refreshRewardsPage();
+  await syncMissionsFromFirebase();
   const equipSnap = await getDoc(doc(window.firebaseDb, 'equipped', uid));
   if (equipSnap.exists()) {
     const data = equipSnap.data();
@@ -11166,7 +11240,9 @@ async function huntPlay(n) {
     if (!(await burnLoadout(carry))) return;
     // A mochila ESVAZIA ao entrar: o conteúdo já foi queimado e passa a viver dentro
     // da caçada. Morreu, perdeu; saiu vivo, o depósito da saída devolve.
-    EXPLORE._carryIn = carry;   // consumido pelo openExplore ao montar a mochila
+    // Usa o que REALMENTE foi queimado (`_real`): se algo foi cortado por falta de saldo,
+    // o jogador não pode entrar com mais do que saiu da conta — senão a saída criaria item.
+    EXPLORE._carryIn = carry._real || carry;
     saveLoadout({});
   } else {
     EXPLORE._carryIn = null;
@@ -12758,20 +12834,120 @@ function loadoutKeys() {
 }
 function loadoutTotal(l) { return Object.keys(l || {}).reduce((a, k) => a + bagQty(l, k), 0); }
 // Queima na entrada: tudo que está na mochila sai do inventário agora.
+// ══ CONFERENTE ════════════════════════════════════════════════════════════════
+// Fotografa o saldo ANTES da entrada e confere DEPOIS. Se sumiu algo que não devia
+// (uma devolução que falhou, uma chamada que caiu no meio), devolve na hora.
+// Trava de segurança: nunca devolve mais do que foi queimado como enchimento — assim
+// um erro de leitura de saldo não vira item criado do nada.
+function lerDivida() {
+  try { const d = JSON.parse(localStorage.getItem('dinohunt_divida') || '{}'); return d && typeof d === 'object' ? d : {}; }
+  catch (e) { return {}; }
+}
+function guardarDivida(d) {
+  try {
+    const total = Object.keys(d || {}).reduce((a, k) => a + (Number(d[k]) || 0), 0);
+    if (total > 0) localStorage.setItem('dinohunt_divida', JSON.stringify(d));
+    else localStorage.removeItem('dinohunt_divida');
+  } catch (e) {}
+}
+// Paga o que ficou devendo de uma tentativa anterior que falhou.
+async function pagarDivida() {
+  const d = lerDivida();
+  const total = Object.keys(d).reduce((a, k) => a + (Number(d[k]) || 0), 0);
+  if (!total) return;
+  const amounts = {};
+  for (const id of actionItemIds()) amounts[String(id)] = Number(d[String(id)]) || 0;
+  const res = await sflExecuteAction(EXP_DEPOSIT_ACTION, amounts);
+  if (res && res.ok) guardarDivida({});   // em silêncio: o jogador não precisa saber
+}
 async function burnLoadout(l) {
   if (!loadoutTotal(l)) return true;                   // mochila vazia
   if (typeof SFL_CONNECTED === 'undefined' || !SFL_CONNECTED) return true;   // offline: só teste local
   if (!EXP_WITHDRAW_SFL_READY) return true;            // ação ainda não existe no painel
-  // A ação espelha a de depósito: manda TODOS os itens configurados, 0 pros que não vão.
-  const amounts = {};
-  for (const k of loadoutKeys()) amounts[String(EXP_LOOT_ITEM_IDS[k])] = bagQty(l, k);
+  // Puxa o saldo mais novo antes de pedir a retirada. Sem isso, quem saía do mapa e voltava
+  // logo em seguida pedia pra queimar itens que o depósito da saída ainda estava creditando.
+  try { await syncFromSFL(true); } catch (e) {}
+  try { await pagarDivida(); } catch (e) {}   // quita pendência de uma entrada anterior
+  const bal = window._sflLastSession?.data?.playerEconomy?.balances || {};
+  // ⚠️ A ação de RETIRADA exige TODOS os itens cadastrados, cada um com valor POSITIVO.
+  //    Mandar 0 → "fixed burn for <id> must be a positive integer".
+  //    Omitir   → "Missing or invalid burn amount for <id>".
+  //    Ou seja: não existe "não queime este". (A de DEPÓSITO é o contrário: aceita 0.)
+  //
+  // Solução: nos itens que o jogador NÃO está levando, pede-se 1 só pra ação aceitar —
+  // e esse 1 é CRIADO logo antes, pelo depósito. Mint 1 + queima 1 = saldo inalterado,
+  // tudo dentro da entrada, sem o jogador ver. Esses itens NÃO entram no mapa (ver `_real`),
+  // então morrer não custa nada por causa deles.
+  const amounts = {};        // o que a retirada vai queimar
+  const encher = {};         // criado ANTES (o jogador tem 0) pra poder ser queimado
+  const devolver = {};       // devolvido DEPOIS (o jogador já tinha) — ver explicação abaixo
+  const levar = {};          // o que REALMENTE vai pro mapa
+  let cortou = false, total = 0, precisaEncher = 0, precisaDevolver = 0;
+  for (const idNum of actionItemIds()) {
+    const id = String(idNum);
+    const k = lootKeyOfId(idNum);                    // null = item que só existe no painel
+    const tem = Math.floor(Number(bal[id]) || 0);
+    const quer = k ? bagQty(l, k) : 0;
+    const leva = Math.max(0, Math.min(quer, tem));   // nunca leva mais do que tem
+    if (leva < quer) cortou = true;
+    if (k) levar[k] = leva;
+    total += leva;
+    if (leva > 0) {
+      amounts[id] = leva;    // queima o que vai mesmo; já cabe no saldo
+      encher[id] = 0; devolver[id] = 0;
+    } else {
+      // ENCHIMENTO: a ação exige este item positivo, mas o jogador não vai levá-lo.
+      // A ordem depende de ele já ter o item ou não — e isso NÃO é detalhe:
+      //  • tem 0  → CRIA 1 antes e queima → volta a 0.
+      //  • tem N  → queima 1 (vai pra N-1) e DEVOLVE 1 depois → volta a N.
+      // Por que não criar sempre: itens com limite (ex.: Totem Beta, máx. 1) recusam o
+      // mint com "Cannot own more than 1". Queimando primeiro, o mint de volta cabe.
+      // Por que não queimar sempre sem devolver: comeria 1 unidade de verdade por entrada.
+      amounts[id] = 1;
+      if (tem <= 0) { encher[id] = 1; devolver[id] = 0; precisaEncher += 1; }
+      else          { encher[id] = 0; devolver[id] = 1; precisaDevolver += 1; }
+    }
+  }
+  // Cria o que falta. O depósito exige TODOS os itens, então os demais vão com 0 mesmo.
+  if (precisaEncher > 0) {
+    const res0 = await sflExecuteAction(EXP_DEPOSIT_ACTION, encher);
+    if (!res0 || !res0.ok) {
+      const e0 = String((res0 && res0.error) || 'erro desconhecido');
+      console.error('TOPUP FAIL →', EXP_DEPOSIT_ACTION, JSON.stringify(encher), e0);
+      showActionError(EXP_DEPOSIT_ACTION, encher, e0);
+      return false;
+    }
+  }
   const res = await sflExecuteAction(EXP_WITHDRAW_ACTION, amounts);
   if (!res || !res.ok) {
     // Falhou = NÃO pode entrar levando, senão o depósito da saída criaria item do nada.
-    showToast(t('loadout.burn_failed'), 'error');
-    console.error('WITHDRAW FAIL →', EXP_WITHDRAW_ACTION, JSON.stringify(amounts), res && res.error);
+    const err = String((res && res.error) || 'erro desconhecido');
+    console.error('WITHDRAW FAIL →', EXP_WITHDRAW_ACTION, JSON.stringify(amounts), err);
+    showActionError(EXP_WITHDRAW_ACTION, amounts, err);   // mostra o motivo, não só "falhou"
     return false;
   }
+  // Devolve o que foi queimado só pra ação aceitar. Se isto falhar, o jogador PERDE
+  // 1 unidade desses itens — por isso o erro aparece na tela, não só no console.
+  if (precisaDevolver > 0) {
+    const res2 = await sflExecuteAction(EXP_DEPOSIT_ACTION, devolver);
+    if (!res2 || !res2.ok) {
+      const e2 = String((res2 && res2.error) || 'erro desconhecido');
+      console.error('GIVEBACK FAIL →', EXP_DEPOSIT_ACTION, JSON.stringify(devolver), e2);
+      showActionError(EXP_DEPOSIT_ACTION, devolver, e2);
+    }
+  }
+  // ⚠️ Aqui existia um "conferente" que comparava o saldo antes/depois e devolvia o que
+  // parecesse ter sumido. Foi REMOVIDO: o saldo lido logo depois das chamadas ainda não
+  // reflete a devolução, então ele enxergava falta em toda entrada e MINTAVA item do nada.
+  // A recuperação agora é só a precisa: quando uma chamada falha de verdade, a dívida é
+  // anotada (guardarDivida) e quitada na entrada seguinte (pagarDivida). Sem adivinhação.
+  if (cortou) showToast(t('loadout.trimmed'), 'info');
+  // Só o que o jogador PEDIU entra no mapa. Os itens de enchimento (o "1" mandado só pra
+  // ação aceitar) ficam de fora — eles foram criados e queimados na mesma entrada, saldo zero.
+  const real = {};
+  for (const k in levar) { if (levar[k] > 0) real[k] = levar[k]; }
+  l._real = real;
+  if (!total) showToast(t('loadout.nothing_to_take'), 'error');   // só enchimento: entra sem nada
   try { syncFromSFL(true); } catch (e) {}
   return true;
 }
@@ -12793,6 +12969,51 @@ const EXP_LOOT_ITEM_IDS = {
 // queimar de novo na quebra tiraria uma ferramenta a mais da conta.
 EXP_LOOT_ITEM_IDS.axe = 130;
 EXP_LOOT_ITEM_IDS.pick = 131;
+// ══ ITENS CADASTRADOS NAS AÇÕES DO PAINEL ═════════════════════════════════════
+// As duas ações exigem receber TODOS os itens que têm cadastrados. Se o painel tiver um
+// item que não é loot da caçada, ele PRECISA entrar nos envios mesmo assim, senão:
+//   depósito → "Missing or invalid mint amount for <id>"
+//   retirada → "Missing or invalid burn amount for <id>"
+// ⚠️ As DUAS ações têm que ter a MESMA lista. Se o depósito tiver um item que a retirada
+//    não tem, o enchimento cria e nunca queima de volta — e isso DUPLICA item.
+// Pra descobrir o que falta: o erro sempre nomeia o próximo id faltando. Acrescente aqui.
+// Itens que estão cadastrados nas ações mas NÃO são loot da caçada. O Michel colocou
+// nas ações "praticamente todos os recursos, fabricados, ovos, equipamentos, token e
+// ferramentas" — então a lista abaixo cobre essas categorias.
+// Descobertos pelo erro do servidor (a janela de erro nomeia o item que falta): 104, 106.
+const EXP_ACTION_EXTRA_IDS = [
+  104,  // Carvão            ← confirmado pelo erro
+  106,  // Cristal           ← confirmado pelo erro
+  105,  // Tábua
+  107,  // Areia
+  112,  // Lingote
+  120,  // Vidro
+  121,  // Pena
+  114,  // Ovo Comum
+  115,  // Ovo Incomum
+  116,  // Ovo Raro
+  117,  // Ovo Épico
+  118,  // Ovo Lendário
+  127,  // Totem Beta
+  128,  // Totem Dino
+];
+// ⚠️ NÃO inclui energia (100) nem as bancadas (109, 110, 119, 123, 126, 133) — se alguma
+//    delas estiver nas ações, o erro vai nomear e é só acrescentar aqui.
+// Todos os ids que os envios precisam conter, sem repetir.
+function actionItemIds() {
+  const ids = [];
+  for (const k in EXP_LOOT_ITEM_IDS) {
+    const id = EXP_LOOT_ITEM_IDS[k];
+    if (id != null && ids.indexOf(id) < 0) ids.push(id);
+  }
+  EXP_ACTION_EXTRA_IDS.forEach(id => { if (ids.indexOf(id) < 0) ids.push(id); });
+  return ids;
+}
+// id → chave do loot (só pros que são loot; os extras não têm chave)
+function lootKeyOfId(id) {
+  for (const k in EXP_LOOT_ITEM_IDS) if (EXP_LOOT_ITEM_IDS[k] === id) return k;
+  return null;
+}
 const EXP_TEST_AXES = 15;   // axes handed out when playing offline (for testing)
 function getAxeBalance() {
   if (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED) {
@@ -12822,9 +13043,9 @@ function useAxeCharge() {
 // A ação minta TODOS os itens configurados, então `amounts` precisa trazer o valor de
 // cada um (0 pros que não vão), senão o servidor rejeita.
 function depositAmounts(amounts, totalCollected) {
-  for (const key in EXP_LOOT_ITEM_IDS) {
-    const id = EXP_LOOT_ITEM_IDS[key];
-    if (id == null) continue;   // gold ainda não tem item no painel
+  // Precisa conter TODOS os itens cadastrados na ação — inclusive os que não são loot
+  // da caçada (EXP_ACTION_EXTRA_IDS), senão o servidor recusa o depósito inteiro.
+  for (const id of actionItemIds()) {
     if (amounts[String(id)] == null) amounts[String(id)] = 0;
   }
   if (totalCollected <= 0 || typeof sflExecuteAction !== 'function') return;
@@ -12848,17 +13069,56 @@ function depositAmounts(amounts, totalCollected) {
     }
   });
 }
-// Janela persistente com o erro do depósito (fica até fechar; tem botão de copiar).
-function showDepositError(err, amounts) {
+// Janela persistente com o erro (fica até fechar; tem botão de copiar).
+// Serve pro depósito E pra retirada — o importante é o jogador ver O MOTIVO que o
+// servidor deu, não só "falhou": é o que diz qual item a ação não conhece.
+function showDepositError(err, amounts) { showActionError(EXP_DEPOSIT_ACTION, amounts, err); }
+// Guarda os ids que o servidor já reclamou de faltar, pra ir montando a lista completa
+// sem precisar abrir o painel item por item.
+function registrarItemFaltando(id) {
+  try {
+    const s = JSON.parse(localStorage.getItem('dinohunt_ids_faltando') || '[]');
+    if (s.indexOf(id) < 0) { s.push(id); localStorage.setItem('dinohunt_ids_faltando', JSON.stringify(s)); }
+    return s;
+  } catch (e) { return [id]; }
+}
+function nomeDoItem(id) {
+  const k = 't' in window ? t('item.name.' + id) : null;
+  if (k && k !== 'item.name.' + id) return k;
+  const info = (typeof SFL_ITEMS_INFO !== 'undefined') && SFL_ITEMS_INFO[id];
+  return info ? info.name : ('item ' + id);
+}
+function showActionError(action, amounts, err) {
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
-  const full = t('deposit.err.action') + ': ' + EXP_DEPOSIT_ACTION + '\n' + t('deposit.err.items') + ': ' + JSON.stringify(amounts) + '\n' + t('deposit.err.error') + ': ' + err;
+  // O servidor cita o id que faltou: "Missing or invalid mint amount for 104"
+  // (nome próprio: mais abaixo já existe um `m` pro elemento do modal)
+  const citado = String(err).match(/for\s+(\d+)/);
+  let aviso = '';
+  if (citado) {
+    const id = citado[1];
+    const todos = registrarItemFaltando(id);
+    const lista = todos.map(i => i + ' (' + nomeDoItem(i) + ')').join(', ');
+    aviso = `
+      <div style="font-family:'Pixelify Sans',monospace;font-size:14px;color:#ffe08a;background:rgba(0,0,0,.45);border:2px solid #f0c040;border-radius:8px;padding:12px;margin-bottom:12px;line-height:1.6;">
+        <div style="font-size:16px;font-weight:700;margin-bottom:6px;">${isEN ? 'Item the action requires:' : 'Item que a ação exige:'}</div>
+        <div style="font-size:20px;color:#fff;">${id} — ${nomeDoItem(id).replace(/</g, '&lt;')}</div>
+        <div style="margin-top:10px;font-size:12px;color:#f2e4c4;">${isEN ? 'Found so far:' : 'Encontrados até agora:'}<br><b>${lista.replace(/</g, '&lt;')}</b></div>
+        <div style="margin-top:8px;font-size:12px;color:#c9b48a;">${isEN
+          ? 'Send this list to your dev, or remove these items from the action in the SFL panel.'
+          : 'Manda essa lista pra mim, ou tira esses itens da ação no painel do SFL.'}</div>
+      </div>`;
+  }
+  const full = t('deposit.err.action') + ': ' + action + '\n' + t('deposit.err.items') + ': ' + JSON.stringify(amounts) + '\n' + t('deposit.err.error') + ': ' + err;
   const old = document.getElementById('deposit-err-modal'); if (old) old.remove();
   const m = document.createElement('div');
   m.id = 'deposit-err-modal';
   m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
   m.innerHTML = `
     <div style="background:linear-gradient(145deg,#2a1808,#1a0e04);border:3px solid var(--gold);border-radius:8px;padding:20px;max-width:560px;width:100%;max-height:calc(var(--apph) * 0.9);overflow-y:auto;box-shadow:0 0 24px rgba(240,160,32,.5);">
-      <div style="font-family:'Pixelify Sans',monospace;font-size:19px;color:#ff8080;font-weight:700;margin-bottom:12px;text-align:center;">⚠️ ${isEN ? "Couldn't deposit loot" : 'Não deu pra depositar o loot'}</div>
+      <div style="font-family:'Pixelify Sans',monospace;font-size:19px;color:#ff8080;font-weight:700;margin-bottom:12px;text-align:center;">⚠️ ${action === EXP_DEPOSIT_ACTION ? (isEN ? "Couldn't deposit loot" : 'Não deu pra depositar o loot')
+        : (action === EXP_WITHDRAW_ACTION ? (isEN ? "Couldn't take the items" : 'Não deu pra retirar os itens')
+        : (isEN ? 'Action failed' : 'A ação falhou'))}</div>
+      ${aviso}
       <div style="font-family:monospace;font-size:13px;color:#f2e4c4;background:rgba(0,0,0,.4);border:1px solid var(--gold-dim);border-radius:6px;padding:12px;white-space:pre-wrap;word-break:break-word;line-height:1.5;">${full.replace(/</g, '&lt;')}</div>
       <div style="display:flex;gap:10px;margin-top:16px;">
         <button onclick="navigator.clipboard&&navigator.clipboard.writeText(this.parentNode.previousElementSibling.textContent);this.textContent='${isEN ? 'Copied!' : 'Copiado!'}';" style="flex:1;padding:12px;font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;border:2px solid var(--gold);border-radius:8px;background:var(--gold);color:#2a1808;cursor:pointer;">📋 ${isEN ? 'Copy' : 'Copiar'}</button>
@@ -15120,14 +15380,42 @@ function openChestLootPanel(c) {
   renderChestLootPanel();
 }
 // onclick = full lootTap(...) call string, or '' for a non-tappable slot.
-function _lootSlot(it, onclick) {
+function _lootSlot(it, onclick, arrasta) {
   const cls = onclick ? ' exp-loot-tappable' : '';
   const oc = onclick ? ` onclick="${onclick}"` : '';
+  const dg = arrasta ? ` draggable="true" data-drag="${arrasta}"` : '';
   return `
-    <div class="ldoe-slot ldoe-slot-item${cls}"${oc} title="${it.name}">
-      <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
+    <div class="ldoe-slot ldoe-slot-item${cls}"${oc}${dg} title="${it.name}">
+      <img src="${it.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;pointer-events:none;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${it.fb}</span>'">
       <div class="ldoe-slot-qty">${it.qty}</div>
     </div>`;
+}
+// Arrastar entre o baú e a mochila. O toque duplo continua funcionando (é o caminho
+// do celular, onde arrastar não existe).
+function wireChestDrag() {
+  const cg = document.getElementById('exp-loot-chest-grid');
+  const ig = document.getElementById('exp-loot-inv-grid');
+  if (!cg || !ig) return;
+  [cg, ig].forEach(g => {
+    g.querySelectorAll('[data-drag]').forEach(el => {
+      el.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', el.dataset.drag);
+        e.dataTransfer.effectAllowed = 'move';
+      });
+    });
+    g.addEventListener('dragover', e => { e.preventDefault(); g.classList.add('over'); });
+    g.addEventListener('dragleave', () => g.classList.remove('over'));
+    g.addEventListener('drop', e => {
+      e.preventDefault(); g.classList.remove('over');
+      const raw = e.dataTransfer.getData('text/plain') || '';
+      const sep = raw.indexOf(':');
+      if (sep < 0) return;
+      const lado = raw.slice(0, sep), o_que = raw.slice(sep + 1);
+      // soltar no lado oposto = mover; soltar no mesmo lado = não faz nada
+      if (g === ig && lado === 'chest') collectLootItem(Number(o_que));
+      else if (g === cg && lado === 'inv') returnLootItem(o_que);
+    });
+  });
 }
 function _padSlots(n, total) {
   let h = ''; for (let i = n; i < total; i++) h += '<div class="ldoe-slot ldoe-slot-empty"></div>';
@@ -15139,12 +15427,13 @@ function renderChestLootPanel() {
   const ig = document.getElementById('exp-loot-inv-grid');
   if (cg) {
     const loot = c.loot || [];
-    cg.innerHTML = loot.map((it, i) => _lootSlot(it, `lootTap('chest',${i})`)).join('') + _padSlots(loot.length, Math.max(EXP_BAG_SLOTS, Math.ceil((loot.length || 1) / 4) * 4));
+    cg.innerHTML = loot.map((it, i) => _lootSlot(it, `lootTap('chest',${i})`, 'chest:' + i)).join('') + _padSlots(loot.length, Math.max(EXP_BAG_SLOTS, Math.ceil((loot.length || 1) / 4) * 4));
   }
   if (ig) {
     const inv = Object.values(EXPLORE.inv || {});
-    ig.innerHTML = inv.map(it => _lootSlot(it, `lootTap('inv','${it.key}')`)).join('') + _padSlots(inv.length, EXP_INV_MAX);
+    ig.innerHTML = inv.map(it => _lootSlot(it, `lootTap('inv','${it.key}')`, 'inv:' + it.key)).join('') + _padSlots(inv.length, EXP_INV_MAX);
   }
+  wireChestDrag();
 }
 
 // Reward screen — same visual pattern as the battle/defense reward screens (lvprev-box).
@@ -15256,6 +15545,27 @@ window.openExplore = openExplore;
 window.closeExplore = closeExplore;
 window.toggleBackpack = toggleBackpack;
 window.toggleExitPath = toggleExitPath;
+// ── Ao tocar numa aba, ela vai pro canto ESQUERDO ──────────────────────────────
+// Assim sempre sobra o que vem depois aparecendo à direita, e o jogador percebe que
+// existem mais abas. Sem isso, quem clica na última nunca descobre as outras.
+// Só age quando as abas realmente não cabem (senão ficaria tremendo à toa).
+document.addEventListener('click', function (e) {
+  const tab = e.target && e.target.closest && e.target.closest('.season-tab, .tab-btn');
+  if (!tab) return;
+  const nav = tab.closest('.season-tabs, .tab-nav');
+  if (!nav || nav.scrollWidth <= nav.clientWidth + 2) return;
+  const navRect = nav.getBoundingClientRect();
+  // O jogo inteiro é escalado por transform, então converto a distância da tela
+  // de volta pra medida de layout — senão a rolagem erra o alvo.
+  const scale = (navRect.width / (nav.offsetWidth || navRect.width)) || 1;
+  const delta = (tab.getBoundingClientRect().left - navRect.left) / scale;
+  // Desconta o espaçamento interno do container, senão a aba encosta na borda e fica cortada.
+  const pad = parseFloat(getComputedStyle(nav).paddingLeft) || 0;
+  const alvo = Math.max(0, Math.min(nav.scrollWidth - nav.clientWidth, nav.scrollLeft + delta - pad));
+  try { nav.scrollTo({ left: alvo, behavior: 'smooth' }); } catch (err) {}
+  // Garante o resultado mesmo onde a animação suave não roda (alguns navegadores/webviews).
+  setTimeout(function () { if (Math.abs(nav.scrollLeft - alvo) > 2) nav.scrollLeft = alvo; }, 320);
+}, true);
 window.usePouchItem = usePouchItem;
 window.equipPouch = equipPouch;
 window.loadoutAdd = loadoutAdd;
