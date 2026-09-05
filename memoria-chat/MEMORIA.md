@@ -549,6 +549,30 @@ Teste automatizado contra o Firestore **real** (não simulado), fingindo estar d
 
 O documento de teste (`missions/sfl_999999`) foi limpo no fim.
 
+### ✅ Mochila: arrastar move tudo, teto 64, e os itens que sumiam (05/09/2026)
+
+**1. Faltavam itens na tela do personagem (os totens).** "NA SUA CONTA" só listava o que estava
+em `EXP_LOOT_ITEM_IDS` **e** em `LOOT_ITEMS` — ou seja, só o saque da caçada. Totens, ovos e
+fabricados estavam apenas em `EXP_ACTION_EXTRA_IDS`, então o jogador via o item no inventário
+mas não conseguia levar nem usar.
+**Agora todo id que está nas ações é levável**, porque as duas ações têm a mesma lista: o que
+pode ser queimado na entrada pode ser mintado na saída. As chaves são geradas como `it<id>`
+(ex.: `it127` = Totem Beta), com ícone e nome vindos do SFL/tradução. Foi de 17 pra 28 chaves.
+⚠️ **Levar um totem hoje não dá bônus nenhum** — os slots de equipamento continuam "em breve".
+Ele só deixou de ser invisível.
+
+**2. Arrastar movia 1 item por vez.** Agora `loadoutAdd(key, tudo)` e `loadoutRemove(key, tudo)`:
+o **arrastar** move a pilha inteira, o **toque** continua movendo 1 (importante no celular).
+Teto de `EXP_STACK_MAX = 64` por espaço, aplicado também no `bagPreselectRunLoot`.
+O teto é só da mochila de casa — a mochila DENTRO do mapa não tem teto de propósito, senão o
+jogador perderia saque ao minerar muito de um recurso só.
+
+**3. Não dava pra tirar o item da mochila de perna arrastando.** O slot era só alvo de soltura,
+nunca origem — só dava pra desequipar clicando até ciclar pro vazio. Agora o slot é
+`draggable` (`pouch:<chave>`) e a mochila aceita a soltura, nas **duas** telas (personagem e
+dentro do mapa). No mapa o `addEventListener` é ligado uma vez só (`grid._pouchDrop`), senão
+empilharia um handler a cada render.
+
 ### 🆕 Aba "Novidades" no correio (05/09/2026)
 Segunda aba dentro da janela do correio (a estrutura `.mail-tabs` já existia, com uma aba só e
 `cursor:default`; agora são duas, clicáveis, via `switchMailTab`). Mostra versão, data e o que

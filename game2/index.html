@@ -1290,7 +1290,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .charslot.pouch-drop.over{outline:3px dashed #63c74d;outline-offset:-3px;}
 .charbtns{display:flex;gap:6px;margin:0 8px 8px;}
 .charbtns .exp-loot-all{flex:1;margin:0;font-size:11px;padding:9px 4px;}
-.loadout-drop.over,.ldoe-inv-grid.over{outline:3px dashed #63c74d;outline-offset:-3px;}
+.loadout-drop.over,.ldoe-inv-grid.over,.exp-bp-grid.over{outline:3px dashed #63c74d;outline-offset:-3px;}
 /* Power up na mochila: clicável, mas com a MESMA cara dos outros itens — só o que já está
    no slot da mochila de perna recebe a marca verde, pra você saber qual é. */
 .exp-bp-powerup{cursor:pointer;}
@@ -2082,7 +2082,8 @@ var I18N = {
   'loadout.send_all': '📦 Tirar tudo da mochila',
   'loadout.sent_all': '📦 Mochila esvaziada — nada saiu do seu inventário',
   'loadout.already_empty': 'A mochila já está vazia',
-  'loadout.dragtip': 'Arraste de um lado pro outro (ou toque pra mover 1)',
+  'loadout.dragtip': 'Arraste pra mover tudo (ou toque pra mover 1)',
+  'loadout.stack_full': 'Cabem no máximo {n} por espaço',
   'charslot.head': 'Cabeça', 'charslot.chest': 'Peito', 'charslot.weapon': 'Arma',
   'charslot.shield': 'Escudo', 'charslot.ring': 'Anel', 'charslot.boots': 'Botas',
   'charslot.pouch': 'Mochila de perna',
@@ -2680,7 +2681,8 @@ var I18N = {
   'loadout.send_all': '📦 Empty the backpack',
   'loadout.sent_all': '📦 Backpack emptied — nothing left your inventory',
   'loadout.already_empty': 'The backpack is already empty',
-  'loadout.dragtip': 'Drag from one side to the other (or tap to move 1)',
+  'loadout.dragtip': 'Drag to move the whole stack (or tap to move 1)',
+  'loadout.stack_full': 'Each slot holds at most {n}',
   'charslot.head': 'Head', 'charslot.chest': 'Chest', 'charslot.weapon': 'Weapon',
   'charslot.shield': 'Shield', 'charslot.ring': 'Ring', 'charslot.boots': 'Boots',
   'charslot.pouch': 'Leg pouch',
@@ -4461,6 +4463,21 @@ function showProfileMenu() {
 // não existe mais número de versão solto pra esquecer de atualizar.
 // Escreva só o que o JOGADOR percebe, de forma impessoal. Detalhe técnico não entra.
 const CHANGELOG = [
+  {
+    v: 'v2.0.1', date: '2026-09-05',
+    pt: [
+      'Arrastar um item passa a mover a pilha inteira — o toque continua movendo 1.',
+      'Cada espaço da mochila comporta até 64 itens.',
+      'Dá pra tirar o item da mochila de perna arrastando ele de volta pra mochila.',
+      'Totens e outros itens que não apareciam na tela do personagem agora podem ser levados.',
+    ],
+    en: [
+      'Dragging an item now moves the whole stack — tapping still moves 1.',
+      'Each backpack slot holds up to 64 items.',
+      'You can take an item out of the leg pouch by dragging it back into the backpack.',
+      'Totems and other items missing from the character screen can now be carried.',
+    ],
+  },
   {
     v: 'v2.0.0', date: '2026-09-05',
     pt: [
@@ -12896,6 +12913,7 @@ const EXP_DEPOSIT_ACTION = 'deposit_exploracao';  // on SAFE exit: ONE action mi
 const EXP_WITHDRAW_ACTION = 'retirada_exploracao';
 const EXP_WITHDRAW_SFL_READY = true;    // ação 'retirada_exploracao' criada no painel em 04/09/2026
 const EXP_LOADOUT_MAX = EXP_BAG_SLOTS;  // mesma quantidade de espaços das outras mochilas
+const EXP_STACK_MAX = 64;               // teto de itens por espaço da mochila
 // ── A MOCHILA é só uma SELEÇÃO ───────────────────────────────────────────────
 // Pôr item na mochila não muda NADA no SFL: ele continua no seu inventário.
 // A conta só se move em dois momentos, e é isso que impede a duplicação:
@@ -12925,7 +12943,8 @@ function bagPreselectRunLoot(inv) {
   let n = 0;
   for (const k in (inv || {})) {
     const q = Number(inv[k].qty) || 0;
-    if (q > 0 && LOOT_ITEMS[k] && EXP_LOOT_ITEM_IDS[k] != null && n < EXP_LOADOUT_MAX) { l[k] = q; n++; }
+    // O espaço da mochila comporta no máximo EXP_STACK_MAX — o excedente fica no inventário.
+    if (q > 0 && LOOT_ITEMS[k] && EXP_LOOT_ITEM_IDS[k] != null && n < EXP_LOADOUT_MAX) { l[k] = Math.min(q, EXP_STACK_MAX); n++; }
   }
   saveLoadout(l);
   const pick = loadPouchPick();
@@ -13102,6 +13121,24 @@ const EXP_ACTION_EXTRA_IDS = [
 ];
 // ⚠️ NÃO inclui energia (100) nem as bancadas (109, 110, 119, 123, 126, 133) — se alguma
 //    delas estiver nas ações, o erro vai nomear e é só acrescentar aqui.
+
+// ── TUDO QUE ESTÁ NAS AÇÕES PODE SER LEVADO ──────────────────────────────────
+// As duas ações têm a MESMA lista de itens, então qualquer um deles pode ser queimado
+// na entrada e mintado na saída — inclusive o que não é saque de caçada (totens, ovos,
+// fabricados). Antes, "NA SUA CONTA" só listava o que estava em EXP_LOOT_ITEM_IDS **e**
+// em LOOT_ITEMS; os totens não estavam em nenhum dos dois e por isso sumiam da tela do
+// personagem, mesmo o jogador tendo os itens na conta.
+// Chave gerada: 'it<id>' (ex.: it127). Ícone e nome saem do próprio SFL/tradução.
+EXP_ACTION_EXTRA_IDS.forEach(id => {
+  const k = 'it' + id;
+  if (EXP_LOOT_ITEM_IDS[k] != null) return;
+  for (const j in EXP_LOOT_ITEM_IDS) if (EXP_LOOT_ITEM_IDS[j] === id) return;   // já é saque com chave própria
+  const info = (typeof SFL_ITEMS_INFO !== 'undefined' && SFL_ITEMS_INFO[id]) || {};
+  const nome = (lang) => (I18N[lang] && I18N[lang]['item.name.' + id]) || info.name || ('Item ' + id);
+  EXP_LOOT_ITEM_IDS[k] = id;
+  LOOT_ITEMS[k] = { img: sflItemImageUrl(id), fb: info.emoji || '📦', pt: nome('pt'), en: nome('en') };
+});
+
 // Todos os ids que os envios precisam conter, sem repetir.
 function actionItemIds() {
   const ids = [];
@@ -13552,7 +13589,7 @@ function explorePouchHtml() {
   const key = EXPLORE.pouch;
   const it = key && EXPLORE.inv ? EXPLORE.inv[key] : null;
   const p1 = (it && it.qty > 0)
-    ? `<div class="charslot pouch filled pouch-drop" onclick="equipPouch('')" title="${it.name}"><img src="${it.img}" onerror="this.outerHTML='<span>${it.fb}</span>'"></div>`
+    ? `<div class="charslot pouch filled pouch-drop" draggable="true" data-pouch="${key}" onclick="equipPouch('')" title="${it.name}"><img src="${it.img}" onerror="this.outerHTML='<span>${it.fb}</span>'"></div>`
     : `<div class="charslot pouch pouch-drop" title="${t('charslot.pouch')}"><span>+</span></div>`;
   return p1 + CHAR_POUCH_LOCKED() + CHAR_POUCH_LOCKED();
 }
@@ -13597,6 +13634,21 @@ function renderCharLoadout() {
     m.querySelectorAll('#char-bag-grid [data-key]').forEach(el => {
       el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', 'bag:' + el.dataset.key); e.dataTransfer.effectAllowed = 'move'; });
     });
+    // Caminho de VOLTA: arrastar o item da mochila de perna pra dentro da mochila
+    // tira ele do slot. Sem isso só dava pra desequipar clicando até ciclar pro vazio.
+    m.querySelectorAll('.charslot.pouch[data-pouch]').forEach(el => {
+      el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', 'pouch:' + el.dataset.pouch); e.dataTransfer.effectAllowed = 'move'; });
+    });
+    const bg = document.getElementById('char-bag-grid');
+    if (bg) {
+      bg.addEventListener('dragover', e => { e.preventDefault(); bg.classList.add('over'); });
+      bg.addEventListener('dragleave', () => bg.classList.remove('over'));
+      bg.addEventListener('drop', e => {
+        e.preventDefault(); bg.classList.remove('over');
+        const raw = e.dataTransfer.getData('text/plain') || '';
+        if (raw.indexOf('pouch:') === 0) { savePouchPick(''); renderCharLoadout(); }
+      });
+    }
     wirePouchDrop(m, (key) => {
       if (!isPowerUp(key)) { showToast(t('charslot.only_powerup'), 'error'); return; }
       savePouchPick(key); renderCharLoadout();
@@ -13613,7 +13665,7 @@ function charEquipPageHtml(bagKeys, l, nameOf) {
   const d = pick && LOOT_ITEMS[pick] ? LOOT_ITEMS[pick] : null;
   const inBag = pick && bagQty(l, pick) > 0;
   const pouch1 = (d && inBag)
-    ? `<div class="charslot pouch filled pouch-drop" onclick="charPouchPick()" title="${nameOf(pick)}"><img src="${d.img}" onerror="this.outerHTML='<span>${d.fb}</span>'"></div>`
+    ? `<div class="charslot pouch filled pouch-drop" draggable="true" data-pouch="${pick}" onclick="charPouchPick()" title="${nameOf(pick)}"><img src="${d.img}" onerror="this.outerHTML='<span>${d.fb}</span>'"></div>`
     : `<div class="charslot pouch pouch-drop" onclick="charPouchPick()" title="${t('charslot.pouch')}"><span>+</span></div>`;
   // Mochila = a bolsa de viagem, desenhada igual à do painel do baú. Arrastável pro slot.
   const bagHtml = bagKeys.map(k => {
@@ -13692,8 +13744,9 @@ function wireLoadoutDrag() {
       const raw = e.dataTransfer.getData('text/plain') || '';
       const [where, key] = raw.split(':');
       if (!key) return;
-      if (zone.dataset.zone === 'bag' && where === 'owned') loadoutAdd(key);
-      else if (zone.dataset.zone === 'owned' && where === 'bag') loadoutRemove(key);
+      // Arrastar move a PILHA INTEIRA (o toque simples continua movendo 1).
+      if (zone.dataset.zone === 'bag' && where === 'owned') loadoutAdd(key, true);
+      else if (zone.dataset.zone === 'owned' && where === 'bag') loadoutRemove(key, true);
     });
   });
 }
@@ -13716,16 +13769,34 @@ function loadoutSendAll() {
   showToast(t('loadout.sent_all'), 'success');
   renderCharLoadout();
 }
-function loadoutAdd(key) {
+// Quanto o jogador TEM na conta desta chave (sem contar o que já está na mochila).
+function loadoutHave(k) {
+  const connected = (typeof SFL_CONNECTED !== 'undefined' && SFL_CONNECTED);
+  if (!connected) return 99;
+  const bal = window._sflLastSession?.data?.playerEconomy?.balances || {};
+  return Math.floor(Number(bal[String(EXP_LOOT_ITEM_IDS[k])]) || 0);
+}
+// tudo=true → move a pilha inteira (é o que o ARRASTAR faz); senão move 1 (o toque).
+// O espaço da mochila comporta no máximo EXP_STACK_MAX.
+function loadoutAdd(key, tudo) {
   const l = loadLoadout();
   const bagKeys = Object.keys(l).filter(k => bagQty(l, k) > 0);
   if (!l[key] && bagKeys.length >= EXP_LOADOUT_MAX) { showToast(t('loadout.full', { n: EXP_LOADOUT_MAX }), 'error'); return; }
-  l[key] = bagQty(l, key) + 1;
+  const atual = bagQty(l, key);
+  const espaco = EXP_STACK_MAX - atual;
+  if (espaco <= 0) { showToast(t('loadout.stack_full', { n: EXP_STACK_MAX }), 'error'); return; }
+  const sobra = Math.max(0, loadoutHave(key) - atual);   // o que ainda resta na conta
+  const n = Math.min(tudo ? sobra : 1, espaco, sobra);
+  if (n <= 0) return;
+  l[key] = atual + n;
   saveLoadout(l); renderCharLoadout();
+  if (tudo && n < sobra) showToast(t('loadout.stack_full', { n: EXP_STACK_MAX }), 'info');
 }
-function loadoutRemove(key) {
+function loadoutRemove(key, tudo) {
   const l = loadLoadout();
-  const q = bagQty(l, key) - 1;
+  const atual = bagQty(l, key);
+  if (atual <= 0) return;
+  const q = tudo ? 0 : atual - 1;
   if (q <= 0) { delete l[key]; if (loadPouchPick() === key) savePouchPick(''); }
   else l[key] = q;
   saveLoadout(l); renderCharLoadout();
@@ -15637,9 +15708,25 @@ function renderBackpackGrid() {
         if (!isPowerUp(key)) { showToast(t('charslot.only_powerup'), 'error'); return; }
         equipPouch(key);
       });
+      // Caminho de VOLTA: arrastar o item do slot pra mochila desequipa.
+      pouches.querySelectorAll('.charslot.pouch[data-pouch]').forEach(el => {
+        el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', 'pouch:' + el.dataset.pouch); e.dataTransfer.effectAllowed = 'move'; });
+      });
     }
     grid.querySelectorAll('[data-key]').forEach(el => {
       el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', 'inv:' + el.dataset.key); e.dataTransfer.effectAllowed = 'move'; });
+    });
+  }
+  // A mochila do mapa recebe o que vier do slot da perna. Ligado UMA vez só: esta
+  // função é chamada a cada render e repetir addEventListener empilharia handlers.
+  if (!grid._pouchDrop) {
+    grid._pouchDrop = true;
+    grid.addEventListener('dragover', e => { e.preventDefault(); grid.classList.add('over'); });
+    grid.addEventListener('dragleave', () => grid.classList.remove('over'));
+    grid.addEventListener('drop', e => {
+      e.preventDefault(); grid.classList.remove('over');
+      const raw = e.dataTransfer.getData('text/plain') || '';
+      if (raw.indexOf('pouch:') === 0) equipPouch('');
     });
   }
 }
