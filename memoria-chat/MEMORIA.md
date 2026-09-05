@@ -535,6 +535,33 @@ tem que ser assim, já que o documento é da fazenda e não do usuário.
 Projeto do Firebase: **`dinohunt-428a7`** (a conta também tem um `mine-defender` antigo, que o
 jogo **não** usa — o `firebaseConfig` do `index.html` aponta pro `dinohunt-428a7`).
 
+### ✅ Sincronia PC × celular — TESTADA de verdade (05/09/2026)
+Teste automatizado contra o Firestore **real** (não simulado), fingindo estar dentro do SFL com
+`window._sflLastSession = { farmId: 999999 }`. Resultado:
+
+| o que foi testado | resultado |
+|---|---|
+| id do documento vem da fazenda | `sfl_999999` ✅ |
+| gravação no Firestore | sem `permission-denied` ✅ |
+| aparelho A com 27 mortes, B com 3 → fica com 27 | ✅ merge pelo maior |
+| missão coletada no A aparece coletada no B | ✅ |
+| estado de ontem no servidor não ressuscita | ✅ ignorado |
+
+O documento de teste (`missions/sfl_999999`) foi limpo no fim.
+
+### 🆕 Aba "Novidades" no correio (05/09/2026)
+Segunda aba dentro da janela do correio (a estrutura `.mail-tabs` já existia, com uma aba só e
+`cursor:default`; agora são duas, clicáveis, via `switchMailTab`). Mostra versão, data e o que
+mudou, em PT e EN, com selo verde "mais recente" no topo.
+
+**A versão do jogo agora SAI DAQUI.** `DINOHUNT_VERSION` e `DINOHUNT_BUILD` são derivados de
+`CHANGELOG[0]` — antes eram dois `const` soltos que ninguém lembrava de atualizar (estavam em
+`v1.9.1 · 2026-06-25`, meses atrasados, apesar do comentário mandando bumpar a cada mudança).
+**Pra lançar uma versão, acrescente um item no TOPO do `CHANGELOG` e pronto.**
+
+Regra do texto: só o que o **jogador percebe**, impessoal, sem detalhe técnico.
+A data é escrita em ISO (`2026-09-05`) e `changelogDate()` vira dd/mm/aaaa em PT e mm/dd/aaaa em EN.
+
 ### Minimapa
 - Centrado nos pés reais; círculo vermelho = alcance de visão dos inimigos; bolinha de inimigo cresce
   com o tamanho; ouro = bolinha maior brilhante; ferro laranja; **baús = quadrados**; atualização 33ms.
@@ -670,7 +697,18 @@ Três servidores configurados no `.mcp.json` da raiz do repositório: **playwrig
 | `firebase` | ler/escrever regras do Firestore e dados do projeto `dinohunt-428a7` |
 | `github` | ler o repositório, commitar e abrir PR sem passar pelo GitHub Desktop |
 
+**Como testar o jogo nesta máquina** (o método headless continua valendo e não depende do MCP):
+1. `& "C:\Program Files\nodejs\npx.cmd" -y http-server . -p 8123 -c-1` dentro de `game2/`
+   (servir por **localhost** importa: o Firebase só autoriza domínios conhecidos, e `file://` não é um).
+2. Copiar o `index.html` pra um `__test_x.html` com um `<script>` no fim que escreve o resultado
+   num `<pre>`, rodar o Edge headless com `--dump-dom` e extrair o marcador. **Apagar a cópia depois.**
+3. O Edge headless precisa de `--user-data-dir` apontando pra uma pasta temporária — sem isso o
+   `--dump-dom` sai **vazio**.
+
 **Armadilhas do Windows que já custaram tempo:**
+- O `npx` fica em `C:\Program Files\nodejs\npx.cmd`, **não** em `%APPDATA%\npm` (lá só tem o firebase).
+- O MCP do Playwright pede o Chrome, que **não** está instalado aqui. Configurado com
+  `--browser msedge`, que já existe na máquina.
 - `npx` e `firebase` puros **não rodam no PowerShell** — a política é `RemoteSigned` e os atalhos
   `.ps1` do npm não são assinados. Use sempre **`npx.cmd`** e **`firebase.cmd`**. Não precisa mexer
   na política do sistema.

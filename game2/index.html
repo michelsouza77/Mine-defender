@@ -300,7 +300,9 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .mail-close{position:absolute;top:-4px;right:0;z-index:40;width:42px;height:42px;}
 .mail-body{flex:1;display:flex;flex-direction:column;min-height:0;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png") 20%;border-image-repeat:stretch;border-radius:13px;overflow:hidden;padding:12px;}
 .mail-tabs{display:flex;gap:6px;padding:0 10px;margin-bottom:-3px;position:relative;z-index:6;align-items:flex-end;}
-.mail-tab{display:flex;align-items:center;gap:6px;padding:7px 14px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#3a2410;cursor:default;white-space:nowrap;}
+.mail-tab{display:flex;align-items:center;gap:6px;padding:7px 14px;font-family:'Pixelify Sans',monospace;font-size:13px;font-weight:700;color:#3a2410;cursor:pointer;white-space:nowrap;background:none;border:none;opacity:.65;}
+.mail-tab.active{opacity:1;}
+.mail-tab:not(.active):hover{opacity:.9;}
 .mail-tab.active{z-index:7;position:relative;margin-bottom:-5px;padding-bottom:10px;background-color:#e4a672;image-rendering:pixelated;border-style:solid;border-width:5.25px;border-image:url("https://sunflower-land.com/game-assets/ui/panel/tab_border_middle.png") 20%;border-image-repeat:stretch;border-radius:13px 13px 0 0;border-bottom:none;}
 .mail-tab.active::after{content:"";position:absolute;left:2px;right:2px;bottom:-3px;height:6px;background:#e4a672;z-index:8;}
 .mail-scroll{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px;}
@@ -2002,6 +2004,9 @@ var I18N = {
   'profile.explore':'Explorar 🌍','profile.ranking': 'Ranking',
   'profile.refresh': 'Atualizar Inventário SFL',
   'mail.title': 'Mensagens',
+  'mail.tab.updates': 'Novidades',
+  'mail.updates.empty': 'Nenhuma novidade ainda',
+  'mail.updates.latest': 'mais recente',
   'mail.empty': 'Caixa de entrada vazia',
   'mail.delete_one': 'Excluir mensagem',
   'mail.delete_all': 'Excluir todas as lidas',
@@ -2597,6 +2602,9 @@ var I18N = {
   'profile.explore':'Explore 🌍','profile.ranking': 'Ranking',
   'profile.refresh': 'Refresh SFL Inventory',
   'mail.title': 'Messages',
+  'mail.tab.updates': 'Updates',
+  'mail.updates.empty': 'No updates yet',
+  'mail.updates.latest': 'latest',
   'mail.empty': 'Inbox is empty',
   'mail.delete_one': 'Delete message',
   'mail.delete_all': 'Delete all read',
@@ -3869,7 +3877,42 @@ async function redeemSeasonTrade(itemId, action, cost, currency, max) {
   });
 }
 
-function showMailbox() {
+// Aba aberta no correio: 'mail' (mensagens) ou 'updates' (novidades).
+var MAIL_TAB = 'mail';
+
+function changelogDate(iso) {
+  const p = String(iso || '').split('-');
+  if (p.length !== 3) return iso || '';
+  return I18N_LANG === 'en' ? `${p[1]}/${p[2]}/${p[0]}` : `${p[2]}/${p[1]}/${p[0]}`;
+}
+
+function renderChangelog() {
+  const lista = (typeof CHANGELOG !== 'undefined' && CHANGELOG) || [];
+  if (!lista.length) {
+    return `<div style="padding:30px;text-align:center;color:var(--gold-dim);font-style:italic;">${t('mail.updates.empty')}</div>`;
+  }
+  return lista.map((c, i) => {
+    const itens = (I18N_LANG === 'en' ? c.en : c.pt) || c.pt || [];
+    const selo = i === 0
+      ? `<span style="margin-left:6px;padding:1px 6px;border-radius:8px;background:#63c74d;color:#fff;font-size:9px;text-shadow:1px 1px 0 #3a6b2a;">${t('mail.updates.latest')}</span>`
+      : '';
+    return `
+    <div class="mail-item">
+      <div class="mail-item-title">🦖 ${c.v} · ${changelogDate(c.date)}${selo}</div>
+      <ul class="mail-item-text" style="margin:0;padding-left:16px;">
+        ${itens.map(x => `<li style="margin-bottom:4px;">${x}</li>`).join('')}
+      </ul>
+    </div>`;
+  }).join('');
+}
+
+function switchMailTab(tab) {
+  MAIL_TAB = (tab === 'updates') ? 'updates' : 'mail';
+  showMailbox(MAIL_TAB);
+}
+
+function showMailbox(tab) {
+  if (tab === 'mail' || tab === 'updates') MAIL_TAB = tab;
   const state = loadMailState();
   let stateChanged = false;
   getActiveMail().forEach(m => {
@@ -3895,13 +3938,14 @@ function showMailbox() {
   <div class="mail-window">
     <button class="panel-close-x mail-close" onclick="document.getElementById('mailbox-modal').remove()" title="Fechar"><img src="https://sunflower-land.com/game-assets/icons/close.png" style="width:28px;height:28px;image-rendering:pixelated;" onerror="this.outerHTML='✕';"></button>
     <div class="mail-tabs">
-      <button class="mail-tab active"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/letter_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='📬'">${t('mail.title')}</button>
+      <button class="mail-tab${MAIL_TAB === 'mail' ? ' active' : ''}" onclick="switchMailTab('mail')"><img src="https://cdn.jsdelivr.net/gh/sunflower-land/sunflower-land@main/src/assets/icons/letter_disc.png" style="width:18px;height:18px;image-rendering:pixelated;" onerror="this.outerHTML='📬'">${t('mail.title')}</button>
+      <button class="mail-tab${MAIL_TAB === 'updates' ? ' active' : ''}" onclick="switchMailTab('updates')">🦖${t('mail.tab.updates')}</button>
     </div>
     <div class="mail-body">
       <div class="mail-scroll">
-        ${messagesHtml}
+        ${MAIL_TAB === 'updates' ? renderChangelog() : messagesHtml}
       </div>
-      <button class="mail-delete-all" onclick="deleteAllReadMail()">${t('mail.delete_all')}</button>
+      ${MAIL_TAB === 'updates' ? '' : `<button class="mail-delete-all" onclick="deleteAllReadMail()">${t('mail.delete_all')}</button>`}
     </div>
   </div>
   `;
@@ -4411,10 +4455,69 @@ function showProfileMenu() {
   document.body.appendChild(modal);
 }
 
+// ── NOVIDADES / CHANGELOG ──────────────────────────────────────────────
+// Aba "Novidades" do correio. É daqui que sai a VERSÃO mostrada no rodapé das
+// configurações, então basta acrescentar um item no TOPO a cada atualização —
+// não existe mais número de versão solto pra esquecer de atualizar.
+// Escreva só o que o JOGADOR percebe, de forma impessoal. Detalhe técnico não entra.
+const CHANGELOG = [
+  {
+    v: 'v2.0.0', date: '2026-09-05',
+    pt: [
+      'O progresso das missões agora soma no PC e no celular juntos.',
+      'A Bancada de Trabalho vem liberada desde o começo.',
+      'As abas do mercado voltaram a rolar para o lado.',
+      'Dá pra arrastar os itens dentro do painel do baú.',
+      'Corrigido o erro que impedia entrar no mapa levando itens da mochila.',
+    ],
+    en: [
+      'Mission progress now adds up across phone and PC together.',
+      'The Workbench is unlocked from the start.',
+      'Market tabs scroll sideways again.',
+      'Items can be dragged inside the chest panel.',
+      'Fixed the error that blocked entering the map with items in the backpack.',
+    ],
+  },
+  {
+    v: 'v1.9.3', date: '2026-09-04',
+    pt: [
+      'Leve itens de casa para a caçada usando a mochila.',
+      'Machado e picareta viraram itens de mochila: você escolhe quantos levar.',
+      'Nova tela do personagem, com os equipamentos e as mochilas de perna.',
+      'Slot de uso rápido: deixe uma poção à mão e use com um toque.',
+      'Nova aba Power Ups no mercado.',
+    ],
+    en: [
+      'Take items from home into the hunt using the backpack.',
+      'Axe and pickaxe are backpack items now: you choose how many to bring.',
+      'New character screen, with equipment and leg pouches.',
+      'Quick-use slot: keep a potion at hand and use it with one tap.',
+      'New Power Ups tab in the market.',
+    ],
+  },
+  {
+    v: 'v1.9.2', date: '2026-09-03',
+    pt: [
+      'O botão "Sair" desenha uma trilha no chão até a saída mais próxima.',
+      'O contador do mapa mostra quantos baús e monstros ainda faltam.',
+      'Novo inimigo mais rápido que o jogador, a partir do nível 2.',
+      'Cash Coin agora pode vir nos baús.',
+      'Tradução para o inglês completa.',
+    ],
+    en: [
+      'The "Exit" button draws a trail on the ground to the nearest exit.',
+      'The map counter shows how many chests and monsters are left.',
+      'New enemy that is faster than the player, from level 2 on.',
+      'Cash Coin can now drop from chests.',
+      'Full English translation.',
+    ],
+  },
+];
+
 // ── Version + bumpkin diagnostic footer (Settings) ──
-// DINOHUNT_VERSION: bump this on every change so Michel can confirm the live build.
-const DINOHUNT_VERSION = 'v1.9.1';
-const DINOHUNT_BUILD = '2026-06-25';
+// A versão vem do topo do CHANGELOG — não edite estes dois à mão.
+const DINOHUNT_VERSION = (CHANGELOG[0] && CHANGELOG[0].v) || 'v2.0.0';
+const DINOHUNT_BUILD = (CHANGELOG[0] && CHANGELOG[0].date) || '';
 function renderCfgFooter(){
   // (the old "character diagnostic" panel was removed — only the version footer remains)
   return `
