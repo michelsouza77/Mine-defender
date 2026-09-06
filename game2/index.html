@@ -2258,6 +2258,8 @@ var I18N = {
   'toast.collect_failed': '❌ Falha ao coletar: {err}',
   'toast.energy_collected': '⚡ +{n} energia coletada!',
   'toast.balance_unchanged': '⚠️ Servidor aceitou mas saldo não mudou. Verifique no SFL.',
+  'toast.energy_zero': '⚡ A recarga veio vazia desta vez — a próxima já começou',
+  'energy.upto': 'até',
   'toast.coins_insufficient': '💰 DinoCoins insuficientes! Precisa de {n} DinoCoins.',
   'toast.no_dino_rarity': 'Nenhum dino disponível nessa raridade ainda.',
   'toast.buy_failed': '❌ Compra falhou: {err}',
@@ -2859,6 +2861,8 @@ var I18N = {
   'toast.collect_failed': '❌ Collect failed: {err}',
   'toast.energy_collected': '⚡ +{n} energy collected!',
   'toast.balance_unchanged': '⚠️ Server accepted but balance unchanged. Check on SFL.',
+  'toast.energy_zero': '⚡ This recharge came up empty — the next one already started',
+  'energy.upto': 'up to',
   'toast.coins_insufficient': '💰 Insufficient DinoCoins! Need {n} DinoCoins.',
   'toast.no_dino_rarity': 'No dino available in that rarity yet.',
   'toast.buy_failed': '❌ Purchase failed: {err}',
@@ -4470,10 +4474,14 @@ const CHANGELOG = [
   {
     v: 'v2.0.2', date: '2026-09-06',
     pt: [
+      'Corrigido: quando a recarga vinha vazia, o próximo ciclo de 6 horas não começava e você ficava sem timer.',
+      'A recarga agora mostra "até 25⚡", porque nem toda coleta rende 25.',
       'Os números da energia e do tempo de recarga ficaram maiores e na fonte certa.',
       'Quando não dá pra entrar no mapa levando itens, a mensagem agora diz qual item causou.',
     ],
     en: [
+      'Fixed: when a recharge came up empty, the next 6-hour cycle never started and you were left with no timer.',
+      'The recharge now shows "up to 25⚡", since not every collect grants 25.',
       'Energy and recharge-timer numbers are bigger and use the right font.',
       'When entering the map with items fails, the message now names the item that caused it.',
     ],
@@ -8946,6 +8954,15 @@ window.dinoTutNext = dinoTutNext;
 window.closeDinoTutorial = closeDinoTutorial;
 const ENERGY_MAX = 100;
 const ENERGY_PER_TICK = 25;
+// Mínimo que a ação do painel pode render numa recarga. Ficou 0 em 06/09/2026 (antes era 25
+// fixo), então a coleta pode vir com MENOS que 25 — e o rótulo precisa dizer "até", senão o
+// jogador acha que o jogo comeu energia dele. Voltando o painel pra 25, é só pôr 25 aqui.
+const ENERGY_TICK_MIN = 0;
+function energyTickLabel() {
+  return (ENERGY_TICK_MIN < ENERGY_PER_TICK)
+    ? `+${t('energy.upto')} ${ENERGY_PER_TICK}⚡`
+    : `+${ENERGY_PER_TICK}⚡`;
+}
 const ENERGY_RECHARGE_HOURS = 6;
 const ENERGY_RECHARGE_MS = ENERGY_RECHARGE_HOURS * 60 * 60 * 1000;
 const SFL_API_BASE = 'https://economies-api.sunflower-land.com';
@@ -9678,13 +9695,18 @@ async function collectEnergy() {
   await syncFromSFL(true);
   const newSession = window._sflLastSession;
   const energyAfter = Number(newSession?.data?.playerEconomy?.balances?.['100']) || 0;
-  if (energyAfter > energyBefore) {
-    const gained = energyAfter - energyBefore;
+  const gained = energyAfter - energyBefore;
+  if (gained > 0) {
     showToast(t('toast.energy_collected', { n: gained }));
-    await ensureEnergyJobIfNeeded();
   } else {
-    showToast(t('toast.balance_unchanged'), 'error');
+    // A recarga pode render 0 desde que o mínimo da ação no painel passou a ser 0.
+    // Não é erro: a coleta ACONTECEU e o gerador foi consumido.
+    showToast(t('toast.energy_zero'), 'info');
   }
+  // ⚠️ SEMPRE recomeça o ciclo, tenha vindo energia ou não.
+  // Antes isto vivia dentro do `if (ganhou > 0)`: quando a coleta rendia 0, o gerador era
+  // consumido e NENHUM novo era iniciado — o timer sumia e o jogador ficava sem recarga.
+  await ensureEnergyJobIfNeeded();
   } finally {
   _collectInProgress = false;
   updateCollectEnergyButton();  // reflects new state (probably "still cooking" now)
@@ -9713,7 +9735,7 @@ function updateCollectEnergyButton() {
   if (ready) {
     btn.disabled = false;
     btn.title = 'Coletar +25 energia';
-    btn.innerHTML = '+25⚡';
+    btn.innerHTML = energyTickLabel();
     btn.style.opacity = '1';
     btn.style.animation = 'label-pulse 1.5s ease-in-out infinite';
     btn.style.cursor = 'pointer';
@@ -9738,7 +9760,7 @@ function updateCollectEnergyButton() {
   if (readyJobID) {
   btn.disabled = false;
   btn.title = 'Coletar +25 energia';
-  btn.innerHTML = '+25⚡';
+  btn.innerHTML = energyTickLabel();
   btn.style.opacity = '1';
   btn.style.animation = 'label-pulse 1.5s ease-in-out infinite';
   btn.style.cursor = 'pointer';
@@ -9827,9 +9849,9 @@ function formatTime(ms) {
   const h = Math.floor(ms / 3600000);
   const m = Math.floor((ms % 3600000) / 60000);
   const s = Math.floor((ms % 60000) / 1000);
-  if (h > 0) return `+${ENERGY_PER_TICK}⚡ ${t('time.in')} ${h}h ${m}m`;
-  if (m > 0) return `+${ENERGY_PER_TICK}⚡ ${t('time.in')} ${m}m ${s}s`;
-  return `+${ENERGY_PER_TICK}⚡ ${t('time.in')} ${s}s`;
+  if (h > 0) return `${energyTickLabel()} ${t('time.in')} ${h}h ${m}m`;
+  if (m > 0) return `${energyTickLabel()} ${t('time.in')} ${m}m ${s}s`;
+  return `${energyTickLabel()} ${t('time.in')} ${s}s`;
 }
 function updateHUD() {
   const energyEl = document.getElementById('energy-current');

@@ -549,7 +549,24 @@ Teste automatizado contra o Firestore **real** (não simulado), fingindo estar d
 
 O documento de teste (`missions/sfl_999999`) foi limpo no fim.
 
-### 🔴 "Insufficient 105" ao entrar no nível 10 (06/09/2026) — CAUSA MAIS PROVÁVEL NO PAINEL
+### 🔴 Energia: coleta vazia matava o ciclo (06/09/2026)
+O Michel mudou a ação da recarga no painel: era **mín. 25 / máx. 25** (sempre 25), virou
+**mín. 0** — ou seja, **uma coleta pode render menos que 25, inclusive 0**.
+
+O `collectEnergy()` chamava `ensureEnergyJobIfNeeded()` **dentro do `if (ganhou > 0)`**. Com
+mín. 0, uma coleta de 0 consumia o gerador e **não iniciava o próximo ciclo de 6h**: o timer
+sumia e o jogador ficava sem recarga nenhuma. Era isso o "energia não está sendo coletada
+corretamente". Agora o ciclo é reiniciado **sempre**, e a coleta vazia mostra um aviso
+informativo em vez de um erro de "saldo não mudou" (que parecia falha).
+
+O rótulo também mentia: o botão prometia "+25⚡" fixo. Existe agora `ENERGY_TICK_MIN` (hoje 0)
+e `energyTickLabel()`, que escreve **"+até 25⚡"** enquanto o mínimo for menor que 25.
+**Se o painel voltar pra 25 fixo, é só pôr `ENERGY_TICK_MIN = 25`** que o rótulo volta sozinho.
+
+Confirmado: `ENERGY_RECHARGE_MS` = **21600 s = 6 h**, igual ao painel.
+
+### 🔴 "Insufficient 105" ao entrar no nível 10 (06/09/2026) — ✅ RESOLVIDO NO PAINEL
+**Era a Tábua faltando na `deposit_exploracao`** — o Michel confirmou e corrigiu.
 O item **105 é a Tábua**. O erro vem da QUEIMA da entrada: a ação recusou queimar 1 Tábua
 porque o jogador tem 0 dela. Como o enchimento deveria ter criado esse 1 antes, a explicação
 mais provável é que **105 está na `retirada_exploracao` mas NÃO está na `deposit_exploracao`** —
