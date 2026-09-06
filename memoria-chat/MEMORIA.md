@@ -549,6 +549,32 @@ Teste automatizado contra o Firestore **real** (não simulado), fingindo estar d
 
 O documento de teste (`missions/sfl_999999`) foi limpo no fim.
 
+### 🔴 "Insufficient 105" ao entrar no nível 10 (06/09/2026) — CAUSA MAIS PROVÁVEL NO PAINEL
+O item **105 é a Tábua**. O erro vem da QUEIMA da entrada: a ação recusou queimar 1 Tábua
+porque o jogador tem 0 dela. Como o enchimento deveria ter criado esse 1 antes, a explicação
+mais provável é que **105 está na `retirada_exploracao` mas NÃO está na `deposit_exploracao`** —
+é exatamente a assimetria que o arquivo já avisava ser proibida (as duas ações TÊM que ter a
+mesma lista). ⚠️ **Michel: confira o 105 nas duas ações.**
+
+Duas defesas foram postas no código, mas **nenhuma substitui o acerto no painel**:
+1. **Confere se o enchimento nasceu.** O depósito pode responder OK e não criar nada. Agora,
+   depois do mint, o saldo é relido e, se o item continuar em 0, a entrada para com uma
+   mensagem dizendo qual item falta em qual ação — em vez do 400 cru lá na frente.
+2. **Segunda chance na queima.** Se o servidor disser "Insufficient <id>" de um item que era só
+   enchimento, o jogo cria esse 1 e repete a queima uma vez (cobre saldo velho, item gasto em
+   outra aba/aparelho). O item sai da lista de devolução, senão devolver de novo criaria uma
+   unidade do nada.
+
+A janela de erro também **não reconhecia** esse formato: ela só casava `"...for <id>"`, e
+`"Insufficient <id>"` passava batido — por isso o erro aparecia cru, sem nomear o item.
+Agora reconhece os dois.
+
+### ✅ Fonte da energia e do timer (06/09/2026)
+Os números da energia e do tempo de recarga usavam `Pixelify Sans`, que é a fonte de **texto**;
+o resto do HUD (moedas, missões) usa a **`SFLSecondary`**, a fonte de número do SFL — daí o
+destoe. Trocados para a mesma, com contorno igual ao das moedas: 21px no PC, 16px no celular
+(era 13px), e a barra ganhou altura pra caber. O botão do timer foi de 11px para 14px no celular.
+
 ### ✅ Mochila: arrastar move tudo, teto 64, e os itens que sumiam (05/09/2026)
 
 **1. Faltavam itens na tela do personagem (os totens).** "NA SUA CONTA" só listava o que estava

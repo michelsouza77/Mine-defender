@@ -151,9 +151,11 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .hud-stat-value{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:32px;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;}
 .energy-bar-wrap{display:flex;align-items:center;gap:8px;}
 .energy-bar-bg{position:relative;width:190px;height:26px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;box-shadow:inset 0 0 0 1px #0a1f20;}
-.hud-timer-btn{align-self:center;font-family:'Pixelify Sans',monospace;font-size:18px;font-weight:700;letter-spacing:.5px;padding:9px 16px;border:2px solid var(--gold-light);border-radius:10px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);cursor:pointer;white-space:nowrap;line-height:1.1;box-shadow:0 2px 6px rgba(0,0,0,.35);}
+.hud-timer-btn{align-self:center;font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:20px;font-weight:400;letter-spacing:.5px;padding:9px 16px;border:2px solid var(--gold-light);border-radius:10px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);cursor:pointer;white-space:nowrap;line-height:1.1;box-shadow:0 2px 6px rgba(0,0,0,.35);}
 .energy-bar-fill{height:100%;width:100%;background:#63c74d;border-radius:0;transition:width 0.4s steps(10);image-rendering:pixelated;}
-.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Pixelify Sans',monospace;font-size:18px !important;font-weight:700;color:#fff;text-shadow:-1px -1px 0 #2d2840,1px -1px 0 #2d2840,-1px 1px 0 #2d2840,1px 1px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
+/* Mesma fonte de número do resto do HUD (moedas, missões): a Secondary do SFL.
+   Antes era Pixelify Sans, que é a fonte de TEXTO — por isso os números destoavam. */
+.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:21px !important;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
 @keyframes pulse-energy{0%,100%{opacity:1;}
 50%{opacity:.7;}
 }
@@ -845,8 +847,8 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .hud-stat-label{font-size:8px !important;letter-spacing:0.3px !important;white-space:nowrap;}
 .hud-stat-value{font-size:22px !important;font-weight:700;}
 .energy-bar-wrap{gap:3px !important;}
-.energy-bar-bg{width:90px !important;height:18px !important;}
-.energy-bar-text{font-size:13px !important;}
+.energy-bar-bg{width:104px !important;height:22px !important;}
+.energy-bar-text{font-size:16px !important;}
 .amber-coin{width:22px !important;height:22px !important;}
 .coin-img{width:26px !important;height:26px !important;image-rendering:-webkit-optimize-contrast !important;image-rendering:crisp-edges !important;}
 .hud-coin-wrap{background:rgba(40,38,55,.45) !important;border:none !important;padding:4px 12px 4px 8px !important;border-radius:4px !important;}
@@ -854,8 +856,8 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .hud-player{display:flex !important;flex-direction:column;align-items:center;gap:1px;padding:3px 5px;margin:0;flex-shrink:0;border-left:1px solid var(--gold-dim);}
 .hud-player-name{font-size:9px !important;line-height:1.1;white-space:nowrap;}
 .hud-player-level{font-size:8px !important;line-height:1.1;white-space:nowrap;}
-#recharge-timer{font-size:10px !important;}
-#collect-energy-btn{padding:4px 8px !important;font-size:11px !important;flex-shrink:0;}
+#recharge-timer{font-size:13px !important;}
+#collect-energy-btn{padding:5px 9px !important;font-size:14px !important;flex-shrink:0;}
 .hud-energy-top{display:flex !important;align-items:center !important;justify-content:center !important;gap:6px !important;}
 #right-panel{width:100% !important;max-width:100% !important;}
 #left-panel{left:8px !important;right:8px !important;width:auto !important;max-width:none !important;}
@@ -877,8 +879,8 @@ to{transform:scale(1) rotate(0);opacity:1;}
 }
 @media (pointer:coarse) and (max-width:400px){.hud-stat-label{display:none;}
 .hud-logo{font-size:10px !important;}
-.energy-bar-bg{width:75px !important;}
-.energy-bar-text{font-size:12px !important;}
+.energy-bar-bg{width:88px !important;}
+.energy-bar-text{font-size:15px !important;}
 }
 .deck-slots-row{display:flex;justify-content:center;gap:14px;margin:20px 0;flex-wrap:wrap;}
 .deck-slot-col{display:flex;flex-direction:column;align-items:center;gap:6px;width:130px;flex:none;}
@@ -2084,6 +2086,7 @@ var I18N = {
   'loadout.already_empty': 'A mochila já está vazia',
   'loadout.dragtip': 'Arraste pra mover tudo (ou toque pra mover 1)',
   'loadout.stack_full': 'Cabem no máximo {n} por espaço',
+  'loadout.deposit_missing': 'O depósito respondeu OK mas não criou: {itens}. Esses itens estão na ação de retirada e FALTAM na ação {acao} no painel do SFL — as duas precisam ter a mesma lista.',
   'charslot.head': 'Cabeça', 'charslot.chest': 'Peito', 'charslot.weapon': 'Arma',
   'charslot.shield': 'Escudo', 'charslot.ring': 'Anel', 'charslot.boots': 'Botas',
   'charslot.pouch': 'Mochila de perna',
@@ -2683,6 +2686,7 @@ var I18N = {
   'loadout.already_empty': 'The backpack is already empty',
   'loadout.dragtip': 'Drag to move the whole stack (or tap to move 1)',
   'loadout.stack_full': 'Each slot holds at most {n}',
+  'loadout.deposit_missing': 'The deposit replied OK but created nothing: {itens}. Those items are in the withdraw action and are MISSING from the {acao} action in the SFL panel — both must have the same list.',
   'charslot.head': 'Head', 'charslot.chest': 'Chest', 'charslot.weapon': 'Weapon',
   'charslot.shield': 'Shield', 'charslot.ring': 'Ring', 'charslot.boots': 'Boots',
   'charslot.pouch': 'Leg pouch',
@@ -4463,6 +4467,17 @@ function showProfileMenu() {
 // não existe mais número de versão solto pra esquecer de atualizar.
 // Escreva só o que o JOGADOR percebe, de forma impessoal. Detalhe técnico não entra.
 const CHANGELOG = [
+  {
+    v: 'v2.0.2', date: '2026-09-06',
+    pt: [
+      'Os números da energia e do tempo de recarga ficaram maiores e na fonte certa.',
+      'Quando não dá pra entrar no mapa levando itens, a mensagem agora diz qual item causou.',
+    ],
+    en: [
+      'Energy and recharge-timer numbers are bigger and use the right font.',
+      'When entering the map with items fails, the message now names the item that caused it.',
+    ],
+  },
   {
     v: 'v2.0.1', date: '2026-09-05',
     pt: [
@@ -13039,8 +13054,46 @@ async function burnLoadout(l) {
       showActionError(EXP_DEPOSIT_ACTION, encher, e0);
       return false;
     }
+    // ⚠️ CONFERE SE O ITEM REALMENTE NASCEU.
+    // O depósito pode responder OK e mesmo assim não criar nada — é o que acontece quando o
+    // id está cadastrado na ação de RETIRADA mas NÃO na de DEPÓSITO (as duas TÊM que ter a
+    // mesma lista). Sem esta conferência a entrada seguia em frente e morria lá na frente
+    // com "Insufficient <id>" (erro 400), sem dizer qual das duas ações precisa ser corrigida.
+    try { await syncFromSFL(true); } catch (e) {}
+    const bal2 = window._sflLastSession?.data?.playerEconomy?.balances || {};
+    const naoNasceu = [];
+    for (const id in encher) {
+      if (encher[id] > 0 && Math.floor(Number(bal2[id]) || 0) < 1) naoNasceu.push(id);
+    }
+    if (naoNasceu.length) {
+      const lista = naoNasceu.map(i => i + ' (' + nomeDoItem(i) + ')').join(', ');
+      console.error('TOPUP SEM EFEITO →', lista);
+      showActionError(EXP_DEPOSIT_ACTION, encher,
+        t('loadout.deposit_missing', { itens: lista, acao: EXP_DEPOSIT_ACTION }));
+      return false;
+    }
   }
-  const res = await sflExecuteAction(EXP_WITHDRAW_ACTION, amounts);
+  let res = await sflExecuteAction(EXP_WITHDRAW_ACTION, amounts);
+  // SEGUNDA CHANCE para "Insufficient <id>" num item de ENCHIMENTO.
+  // O saldo lido pode estar velho (o item foi gasto em outra aba, no SFL ou no outro
+  // aparelho), e aí a queima do "1" simbólico bate num saldo 0. Cria esse 1 e repete.
+  // ⚠️ Como o item passa a ser CRIADO agora, ele sai da lista de devolução — devolver de
+  //    novo depois criaria uma unidade do nada.
+  if (res && !res.ok) {
+    const insuf = String(res.error || '').match(/insufficient\s+(\d+)/i);
+    const id = insuf && insuf[1];
+    if (id && amounts[id] === 1 && !encher[id]) {
+      const conserto = {};
+      for (const outro in amounts) conserto[outro] = 0;
+      conserto[id] = 1;
+      const r = await sflExecuteAction(EXP_DEPOSIT_ACTION, conserto);
+      if (r && r.ok) {
+        devolver[id] = 0;
+        precisaDevolver = Object.keys(devolver).reduce((a, k) => a + (devolver[k] > 0 ? 1 : 0), 0);
+        res = await sflExecuteAction(EXP_WITHDRAW_ACTION, amounts);
+      }
+    }
+  }
   if (!res || !res.ok) {
     // Falhou = NÃO pode entrar levando, senão o depósito da saída criaria item do nada.
     const err = String((res && res.error) || 'erro desconhecido');
@@ -13230,9 +13283,12 @@ function nomeDoItem(id) {
 }
 function showActionError(action, amounts, err) {
   const isEN = (typeof I18N_LANG !== 'undefined' && I18N_LANG === 'en');
-  // O servidor cita o id que faltou: "Missing or invalid mint amount for 104"
+  // O servidor cita o id que faltou, em DOIS formatos diferentes:
+  //   "Missing or invalid mint amount for 104"  → o item precisa estar no envio
+  //   "Insufficient 105"                        → o item está no envio mas o jogador não tem
+  // O segundo não era reconhecido, e por isso esse erro aparecia cru, sem dizer qual item era.
   // (nome próprio: mais abaixo já existe um `m` pro elemento do modal)
-  const citado = String(err).match(/for\s+(\d+)/);
+  const citado = String(err).match(/for\s+(\d+)/) || String(err).match(/insufficient\s+(\d+)/i);
   let aviso = '';
   if (citado) {
     const id = citado[1];
