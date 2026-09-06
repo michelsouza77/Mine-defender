@@ -577,9 +577,12 @@ Duas causas empilhadas:
 Por isso as duas tentativas erraram em direções opostas: `top:74px` caía **em cima** dele, e
 `top:100%` (fundo da caixa) caía **bem abaixo**, no vazio.
 
-Solução: `animateHomeSprite()` posiciona o `.hb-lb` e o escudo **na hora**, a partir dos pés e
-da cabeça reais — `BUMPKIN_FEET_Y = 39` e `BUMPKIN_HEAD_Y = 23`, multiplicados pela escala.
-Conferido: Ancião com caixa de 134px, pés em 82px, nome em **85px**; jogador em **93px**.
+Solução: `animateHomeSprite()` posiciona o `.hb-lb` e o escudo **na hora**, a partir da cabeça
+real — `BUMPKIN_HEAD_Y = 23` (e `BUMPKIN_FEET_Y = 39`, se um dia precisar dos pés), vezes a escala.
+
+**O nome fica ACIMA DA CABEÇA** (pedido do Michel), e o **escudo acima do nome** — empilhados,
+usando `lb.offsetHeight` pra não se cobrirem. Conferido no Ancião: cabeça em 48px, nome
+ocupando 26–44px, escudo terminando em 24px. Jogador: cabeça em 53px, nome terminando em 49px.
 
 ⚠️ **Nunca posicione nada em volta desses sprites por px fixo nem pelo fundo da caixa.**
 Use `BUMPKIN_FEET_Y`/`BUMPKIN_HEAD_Y` × escala.

@@ -13738,18 +13738,22 @@ function animateHomeSprite(el, sheet, S) {
     const cols = Math.max(1, Math.round(im.naturalWidth / EXP_FRAME_W));
     el.style.width = (EXP_FRAME_W * S) + 'px';
     el.style.height = (EXP_FRAME_H * S) + 'px';
-    // Encosta o nome logo abaixo dos pés e o escudo logo acima da cabeça, na escala deste
-    // sprite. Só age em quem tem esses filhos (o boneco dos painéis não tem).
+    // Nome ACIMA DA CABEÇA, e o escudo acima do nome — empilhados, sem se cobrir.
+    // Tudo medido a partir da cabeça real do sprite, na escala deste boneco.
+    // Só age em quem tem esses filhos (o boneco dos painéis não tem).
+    const topoCabeca = Math.round(BUMPKIN_HEAD_Y * S - 3);
+    let alturaNome = 0;
     const lb = el.querySelector('.hb-lb');
     if (lb) {
       lb.style.bottom = '';
-      lb.style.top = Math.round(BUMPKIN_FEET_Y * S + 3) + 'px';
-      lb.style.transform = 'translate(-50%,0)';
+      lb.style.top = topoCabeca + 'px';
+      lb.style.transform = 'translate(-50%,-100%)';   // encosta a BASE do nome na cabeça
+      alturaNome = lb.offsetHeight || 18;
     }
     const sh = el.querySelector('img[id$="-shield"]');
     if (sh) {
       sh.style.bottom = '';
-      sh.style.top = Math.round(BUMPKIN_HEAD_Y * S - 3) + 'px';
+      sh.style.top = (topoCabeca - alturaNome - 2) + 'px';   // logo acima do nome
       sh.style.transform = 'translate(-50%,-100%)';
     }
     el.style.backgroundImage = `url("${sheet}")`;
