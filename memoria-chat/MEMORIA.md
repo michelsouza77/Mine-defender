@@ -549,6 +549,31 @@ Teste automatizado contra o Firestore **real** (não simulado), fingindo estar d
 
 O documento de teste (`missions/sfl_999999`) foi limpo no fim.
 
+### 🆕 Tutorial da Caçada + "onde encontrar" nas recompensas (06/09/2026)
+**Tutorial** (`showExploreTutorial`, chamado no fim do `openExplore`): 5 linhas — objetivo, COMO
+SAIR (era o que ninguém descobria sozinho), inimigos e a perda da mochila ao morrer, ferramentas
+e baús. Caixa "não mostrar de novo" grava em `localStorage['dinohunt_exptut_off']`.
+Enquanto está aberto, `EXPLORE.paused = true`; ao fechar, **zera `exploreKeys`** — sem isso, uma
+tecla segurada durante a leitura fazia o boneco sair andando sozinho.
+
+**Onde encontrar:** `EXP_ITEM_SOURCE` liga cada item do mapa a um texto de origem, e a tela de
+recompensas mostra num balão ao tocar no item. Reusa a marcação dos baús (`.rw-chest` +
+`.rw-chest-tip`), então o abre/fecha e o clique-fora já vinham prontos.
+⚠️ **Os textos descrevem o código de verdade** (sucata só de pedra de ferro, osso 40% ao matar,
+ovo raro no chão). Mudando a geração, mude `EXP_ITEM_SOURCE` junto.
+
+### ✅ Mochila de perna não duplica mais o item (06/09/2026)
+O item equipado aparecia **na mochila E no slot**, parecendo duas pilhas. Agora sai da mochila:
+`renderBackpackGrid()` pula `it.key === EXPLORE.pouch`, e `charEquipPageHtml` filtra o `pick`.
+
+### ✅ Nome do Ancião por cima dele (06/09/2026)
+`animateHomeSprite()` **sobrescreve width/height** quando o sprite carrega: o Ancião ia de 56px
+pra ~134px (64 × 2.1). O rótulo estava fixo em `top:74px`, medida calculada pros 56px antigos —
+depois que o sprite carregava, ele caía no meio do personagem.
+Agora os rótulos usam `top:100%` (e o escudo `bottom:100%`), que acompanha qualquer altura.
+O nome do jogador tinha o mesmo defeito (`top:46px` numa caixa de 147px) e foi corrigido junto.
+**Lição: não use px fixo pra posicionar coisa em volta desses sprites — a altura muda em runtime.**
+
 ### 🔴 "Insufficient 111" ao clicar VÁRIAS VEZES em EXPLORAR (06/09/2026)
 O botão EXPLORAR **não tinha trava nenhuma**. Como a queima da entrada demora, o jogador acha
 que não começou e clica de novo — e aí duas entradas rodam **em paralelo**: as duas leem a
@@ -588,6 +613,15 @@ e `energyTickLabel()`, que escreve **"+até 25⚡"** enquanto o mínimo for meno
 **Se o painel voltar pra 25 fixo, é só pôr `ENERGY_TICK_MIN = 25`** que o rótulo volta sozinho.
 
 Confirmado: `ENERGY_RECHARGE_MS` = **21600 s = 6 h**, igual ao painel.
+
+### ⚠️ OS 5 OVOS FALTAM NA `deposit_exploracao` (06/09/2026) — AGUARDANDO O MICHEL
+Mesmo problema da Tábua, agora nomeado pela conferência nova:
+**114 (Ovo Comum), 115 (Ovo Incomum), 116 (Ovo Raro), 117 (Ovo Épico), 118 (Ovo Lendário)**
+estão na `retirada_exploracao` e **faltam na `deposit_exploracao`**.
+Enquanto não forem acrescentados, quem tiver 0 de qualquer um deles **não consegue entrar no
+mapa levando itens** — o enchimento não consegue criar o ovo pra queimar.
+Se a intenção for que ovo NÃO entre nas ações, o certo é tirá-lo das DUAS e remover 114–118 de
+`EXP_ACTION_EXTRA_IDS` aqui no código.
 
 ### 🔴 "Insufficient 105" ao entrar no nível 10 (06/09/2026) — ✅ RESOLVIDO NO PAINEL
 **Era a Tábua faltando na `deposit_exploracao`** — o Michel confirmou e corrigiu.

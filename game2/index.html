@@ -722,6 +722,7 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .rw-chest:hover .rw-chest-tip,.rw-chest.open .rw-chest-tip{display:block;}
 .rw-chest-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:var(--gold);}
 .rw-tip-title{font-family:'Pixelify Sans',monospace;font-size:15px;font-weight:700;color:var(--gold-light);text-align:center;margin-bottom:8px;letter-spacing:.5px;}
+.rw-tip-where{font-family:'Pixelify Sans',monospace;font-size:13px;color:#f2e4c4;line-height:1.5;text-align:center;}
 .rw-tip-row{display:flex;align-items:center;gap:8px;padding:3px 0;}
 .rw-tip-row img{width:26px;height:26px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
 .rw-tip-name{flex:1;font-family:'Pixelify Sans',monospace;font-size:13px;color:#f2e4c4;white-space:nowrap;}
@@ -1710,9 +1711,9 @@ to{transform:scale(1) rotate(0);opacity:1;}
 <!-- Elder's House: future level/rewards screen -->
 <button class="hb-build" style="left:51%;top:42%;" onclick="homeCharClick()"><img src="https://sunflower-land.com/game-assets/buildings/manor.png" style="width:120px;" onerror="this.outerHTML='🏠'"><span class="hb-lb" data-i18n="map.house.label">🏠 Casa</span></button>
 <!-- Your bumpkin, idling by the house (name on top; click = coming soon) -->
-<div id="home-char" style="left:67%;top:57%;" onclick="homeCharClick()"><div class="hb-lb" id="home-char-name" style="position:absolute;left:50%;top:46px;transform:translate(-50%,-100%);white-space:nowrap;"></div></div>
+<div id="home-char" style="left:67%;top:57%;" onclick="homeCharClick()"><div class="hb-lb" id="home-char-name" style="position:absolute;left:50%;top:100%;transform:translate(-50%,2px);white-space:nowrap;"></div></div>
 <!-- The ELDER (level NPC): wise bumpkin standing on the road by the top stones -->
-<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><img id="home-elder-shield" style="position:absolute;left:50%;top:44px;transform:translate(-50%,-100%);width:26px;height:26px;image-rendering:pixelated;display:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4));" alt=""><div class="hb-lb" data-i18n="map.elder.label" style="position:absolute;left:50%;top:74px;transform:translate(-50%,-100%);white-space:nowrap;">🧙 Ancião</div></div>
+<div class="home-npc" id="home-elder" style="left:53%;top:20%;" onclick="anciaoClick()"><img id="home-elder-shield" style="position:absolute;left:50%;bottom:100%;transform:translate(-50%,-2px);width:26px;height:26px;image-rendering:pixelated;display:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4));" alt=""><div class="hb-lb" data-i18n="map.elder.label" style="position:absolute;left:50%;top:100%;transform:translate(-50%,2px);white-space:nowrap;">🧙 Ancião</div></div>
 <!-- WORKBENCH (blacksmith bench with anvil): bottom-right corner of the island -->
 <button class="craft-station hb-station" id="craft-station-ferraria" style="left:84%;top:74%;" onclick="openWorkbench('ferraria')" title="Workbench">
 <div class="craft-station-img"><img src="https://sunflower-land.com/game-assets/buildings/workbench.png" alt="Workbench" style="width:82px;height:82px;" onerror="this.outerHTML='<span style=&quot;font-size:48px;&quot;>⚒️</span>';" /></div>
@@ -2268,6 +2269,22 @@ var I18N = {
   'energy.upto': 'até',
   'energy.auto_in': 'Toque pra coletar — ou o jogo coleta em {t}',
   'energy.collecting': 'Coletando...',
+  'source.wood': 'Derrubando árvores. Gasta machado.',
+  'source.stone': 'Quebrando pedras. Gasta picareta.',
+  'source.iron': 'Quebrando as pedras de ferro, as escuras. Gasta picareta.',
+  'source.scrab': 'Só sai ao quebrar pedra de ferro, e não vem sempre.',
+  'source.stick': 'Largados pelo chão do mapa. É só passar por cima.',
+  'source.mushroom': 'Colhidos à mão no chão, onde o mapa tem cogumelos.',
+  'source.bone': 'Cai de inimigos derrotados, quase metade das vezes.',
+  'source.egg': 'Muito raro. Aparece largado no chão do mapa.',
+  'exptut.title': '🗺️ Modo Caçada',
+  'exptut.goal': 'Junte recursos e volte vivo. O que estiver na sua mochila só é seu depois que você SAIR do mapa.',
+  'exptut.exit': 'Pra sair: toque em <b>Sair</b> no canto de cima, ou ande até qualquer beirada do mapa. O botão desenha uma trilha até a saída mais perto.',
+  'exptut.danger': 'Tem inimigos soltos pelo mapa. Se você morrer, <b>perde tudo que estava na mochila</b> — inclusive o que trouxe de casa.',
+  'exptut.tools': 'Machado derruba árvore, picareta quebra pedra. Sem eles você só junta o que está no chão.',
+  'exptut.chest': 'Baús dão os melhores itens. Abra todos que encontrar.',
+  'exptut.dontshow': 'Não mostrar de novo',
+  'exptut.start': 'Entendi, bora caçar!',
   'toast.coins_insufficient': '💰 DinoCoins insuficientes! Precisa de {n} DinoCoins.',
   'toast.no_dino_rarity': 'Nenhum dino disponível nessa raridade ainda.',
   'toast.buy_failed': '❌ Compra falhou: {err}',
@@ -2873,6 +2890,22 @@ var I18N = {
   'energy.upto': 'up to',
   'energy.auto_in': 'Tap to collect — or the game collects in {t}',
   'energy.collecting': 'Collecting...',
+  'source.wood': 'Chopping trees. Uses up axes.',
+  'source.stone': 'Breaking rocks. Uses up pickaxes.',
+  'source.iron': 'Breaking the iron rocks, the dark ones. Uses up pickaxes.',
+  'source.scrab': 'Only from breaking iron rocks, and not every time.',
+  'source.stick': 'Lying around on the ground. Just walk over them.',
+  'source.mushroom': 'Picked by hand off the ground, on maps that have mushrooms.',
+  'source.bone': 'Drops from defeated enemies, almost half the time.',
+  'source.egg': 'Very rare. Found lying on the ground.',
+  'exptut.title': '🗺️ Hunt Mode',
+  'exptut.goal': 'Gather resources and get out alive. What is in your backpack is only yours once you LEAVE the map.',
+  'exptut.exit': 'To leave: tap <b>Exit</b> at the top, or walk to any edge of the map. The button draws a trail to the nearest exit.',
+  'exptut.danger': 'There are enemies roaming the map. If you die, you <b>lose everything in your backpack</b> — including what you brought from home.',
+  'exptut.tools': 'Axes chop trees, pickaxes break rocks. Without them you can only pick up what is on the ground.',
+  'exptut.chest': 'Chests hold the best items. Open every one you find.',
+  'exptut.dontshow': 'Do not show again',
+  'exptut.start': 'Got it, let us hunt!',
   'toast.coins_insufficient': '💰 Insufficient DinoCoins! Need {n} DinoCoins.',
   'toast.no_dino_rarity': 'No dino available in that rarity yet.',
   'toast.buy_failed': '❌ Purchase failed: {err}',
@@ -4481,6 +4514,21 @@ function showProfileMenu() {
 // não existe mais número de versão solto pra esquecer de atualizar.
 // Escreva só o que o JOGADOR percebe, de forma impessoal. Detalhe técnico não entra.
 const CHANGELOG = [
+  {
+    v: 'v2.0.4', date: '2026-09-06',
+    pt: [
+      'Novo tutorial ao entrar na Caçada, explicando como sair do mapa e o que você arrisca. Tem uma caixinha pra não mostrar de novo.',
+      'Tocando num item das recompensas você vê onde encontrá-lo no mapa.',
+      'O item que vai na mochila de perna sai da mochila — antes aparecia nos dois lugares.',
+      'O nome do Ancião não fica mais por cima dele.',
+    ],
+    en: [
+      'New tutorial when you enter the Hunt, explaining how to leave the map and what you are risking. It has a "do not show again" box.',
+      'Tapping an item in the rewards list now shows where to find it on the map.',
+      'The item in the leg pouch leaves the backpack — it used to show up in both places.',
+      'The Elder name no longer sits on top of him.',
+    ],
+  },
   {
     v: 'v2.0.3', date: '2026-09-06',
     pt: [
@@ -11367,11 +11415,14 @@ function showHuntLevelPreview(n) {
   if (modal) modal.remove();
   const { isEN, diff, cost } = huntLevelInfo(n);
   const tbl = CHEST_DROP_TABLE[n] || CHEST_DROP_TABLE[1];
-  const tile = (img, fb, qty, chance, chanceColor) => `
-    <div class="drop-tile" style="padding:10px 6px;">
+  // `tip` = balão de "onde encontrar". Reusa a mesma marcação/CSS do balão dos baús
+  // (.rw-chest / .rw-chest-tip), então abre com toque e fecha ao clicar fora, de graça.
+  const tile = (img, fb, qty, chance, chanceColor, tip) => `
+    <div class="drop-tile${tip ? ' rw-chest' : ''}" style="padding:10px 6px;"${tip ? ' onclick="event.stopPropagation(); rwToggleChest(this);"' : ''}>
       <div class="drop-tile-img-wrap"><img src="${img}" style="width:58px;height:58px;object-fit:contain;image-rendering:pixelated;" onerror="this.outerHTML='<div class=&quot;drop-tile-fallback&quot; style=&quot;font-size:38px;&quot;>${fb}</div>'"></div>
       ${qty ? `<div class="drop-tile-qty" style="color:#fff;font-size:18px;text-shadow:1.5px 1.5px 0 #2d1810,-1.5px 1.5px 0 #2d1810,1.5px -1.5px 0 #2d1810,-1.5px -1.5px 0 #2d1810;">${qty}</div>` : ''}
       ${chance ? `<div class="drop-tile-chance" style="color:${chanceColor};font-size:16px;font-weight:800;text-shadow:1px 1px 0 #2d1810,-1px 1px 0 #2d1810,1px -1px 0 #2d1810,-1px -1px 0 #2d1810;">${chance}</div>` : ''}
+      ${tip || ''}
     </div>`;
   const chanceColorOf = (p) => p >= 60 ? '#63c74d' : (p >= 25 ? '#f0c040' : '#e05a4a');
   // 1) Itens que você pega DIRETO no mapa (normais): % + faixa de quantidade por mapa.
@@ -11380,7 +11431,13 @@ function showHuntLevelPreview(n) {
     const ch = rewardChance(key, n);
     if (ch <= 0) return;
     const d = LOOT_ITEMS[key];
-    mapTiles += tile(d.img, d.fb, mapItemQtyRange(key, n), ch + '%', chanceColorOf(ch));
+    // Balão com o nome do item e ONDE ele é encontrado neste mapa.
+    const ondeKey = EXP_ITEM_SOURCE[key];
+    const tip = ondeKey
+      ? `<div class="rw-chest-tip"><div class="rw-tip-title">${isEN ? d.en : d.pt}</div>
+           <div class="rw-tip-where">${t(ondeKey)}</div></div>`
+      : '';
+    mapTiles += tile(d.img, d.fb, mapItemQtyRange(key, n), ch + '%', chanceColorOf(ch), tip);
   });
   // 2) Baús que podem aparecer no mapa — hover (PC) ou toque (celular) mostra o conteúdo.
   let chestTiles = '';
@@ -12388,6 +12445,18 @@ function mapRewards(level) {
 // Itens que você pega DIRETO no mapa (não vêm do baú) → aparecem normais na tela.
 // Coins / DinoCoin / Poção só vêm do baú, então só aparecem no hover do baú.
 const EXP_MAP_DROP_KEYS = ['wood', 'stone', 'iron', 'scrab', 'stick', 'mushroom', 'bone', 'egg'];
+// ONDE ENCONTRAR cada item — mostrado ao tocar no item na tela de recompensas.
+// Confere com o código que realmente gera cada um; ao mudar a geração, mude aqui também.
+const EXP_ITEM_SOURCE = {
+  wood: 'source.wood',         // derrubando árvores (gasta machado)
+  stone: 'source.stone',       // quebrando pedras (gasta picareta)
+  iron: 'source.iron',         // pedras de ferro
+  scrab: 'source.scrab',       // só sai quebrando pedra de FERRO (rewardChance com gate:'iron')
+  stick: 'source.stick',       // largados pelo chão
+  mushroom: 'source.mushroom', // colhidos à mão (EXP_DECOR com pick:'mushroom')
+  bone: 'source.bone',         // 40% ao matar inimigo (killEnemy)
+  egg: 'source.egg',           // raríssimo, largado no chão
+};
 // Deriva de EXP_CHEST_NAME (definido acima) — antes eram duas listas soltas e o baú 3 tinha
 // dois nomes diferentes dependendo da tela. Agora existe UMA fonte de verdade.
 const CHEST_NAMES = {
@@ -13811,7 +13880,8 @@ function charEquipPageHtml(bagKeys, l, nameOf) {
     ? `<div class="charslot pouch filled pouch-drop" draggable="true" data-pouch="${pick}" onclick="charPouchPick()" title="${nameOf(pick)}"><img src="${d.img}" onerror="this.outerHTML='<span>${d.fb}</span>'"></div>`
     : `<div class="charslot pouch pouch-drop" onclick="charPouchPick()" title="${t('charslot.pouch')}"><span>+</span></div>`;
   // Mochila = a bolsa de viagem, desenhada igual à do painel do baú. Arrastável pro slot.
-  const bagHtml = bagKeys.map(k => {
+  // O item que está na mochila de perna NÃO aparece aqui — está num lugar só, igual no mapa.
+  const bagHtml = bagKeys.filter(k => !(inBag && k === pick)).map(k => {
     const dd = LOOT_ITEMS[k];
     return `<div class="ldoe-slot ldoe-slot-item" draggable="true" data-key="${k}" title="${nameOf(k)}">
       <img src="${dd.img}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated;pointer-events:none;" onerror="this.outerHTML='<span class=&quot;lfb&quot;>${dd.fb}</span>'">
@@ -14660,7 +14730,54 @@ function openExplore(level) {
   updateExploreCamera();
   setupExploreControls();
   EXPLORE.raf = requestAnimationFrame(exploreLoop);
+  showExploreTutorial();
 }
+
+// ── TUTORIAL DA CAÇADA ────────────────────────────────────────────────────────
+// Aparece ao entrar no mapa. Explica o essencial: o que fazer, que existe inimigo,
+// que morrer custa a mochila e COMO SAIR — que era o que ninguém descobria sozinho.
+// A caixa "não mostrar de novo" guarda a escolha no aparelho (localStorage).
+const EXPTUT_KEY = 'dinohunt_exptut_off';
+function exploreTutorialOff() {
+  try { return localStorage.getItem(EXPTUT_KEY) === '1'; } catch (e) { return false; }
+}
+function showExploreTutorial() {
+  if (exploreTutorialOff()) return;
+  const old = document.getElementById('exp-tut'); if (old) old.remove();
+  EXPLORE.paused = true;   // não dá pra abrir baú nem bater enquanto o tutorial está aberto
+  const linha = (emoji, txt) => `
+    <div style="display:flex;gap:10px;align-items:flex-start;text-align:left;">
+      <div style="font-size:20px;line-height:1.3;flex-shrink:0;">${emoji}</div>
+      <div style="font-family:'Pixelify Sans',monospace;font-size:14px;color:#2d1810;line-height:1.55;">${txt}</div>
+    </div>`;
+  const m = document.createElement('div');
+  m.id = 'exp-tut';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:4200;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px);';
+  m.innerHTML = `
+    <div class="lvprev-box" style="max-width:430px;width:100%;padding:22px 20px 18px;gap:13px;">
+      <div class="lvprev-num" style="font-size:20px;">${t('exptut.title')}</div>
+      ${linha('🎯', t('exptut.goal'))}
+      ${linha('🚪', t('exptut.exit'))}
+      ${linha('👹', t('exptut.danger'))}
+      ${linha('🪓', t('exptut.tools'))}
+      ${linha('🧰', t('exptut.chest'))}
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-family:'Pixelify Sans',monospace;font-size:13px;color:#4a2e14;align-self:flex-start;">
+        <input type="checkbox" id="exp-tut-off" style="width:17px;height:17px;cursor:pointer;accent-color:#63c74d;">
+        ${t('exptut.dontshow')}
+      </label>
+      <button class="lvprev-play" style="width:100%;" onclick="closeExploreTutorial()">${t('exptut.start')}</button>
+    </div>`;
+  document.body.appendChild(m);
+}
+function closeExploreTutorial() {
+  const cb = document.getElementById('exp-tut-off');
+  if (cb && cb.checked) { try { localStorage.setItem(EXPTUT_KEY, '1'); } catch (e) {} }
+  const m = document.getElementById('exp-tut'); if (m) m.remove();
+  EXPLORE.paused = false;
+  // Zera as teclas: se o jogador segurou alguma lendo o tutorial, o boneco sairia andando sozinho.
+  for (const k in exploreKeys) exploreKeys[k] = false;
+}
+window.closeExploreTutorial = closeExploreTutorial;
 
 function closeExplore() {
   const ov = document.getElementById('explore-overlay');
@@ -15820,7 +15937,12 @@ function renderBackpackGrid() {
   const items = [];
   if (EXPLORE.wood > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/wood.png', fb: '🪵', qty: EXPLORE.wood });
   if (EXPLORE.stone > 0) items.push({ img: 'https://sunflower-land.com/game-assets/resources/stone.png', fb: '🪨', qty: EXPLORE.stone });
-  Object.values(EXPLORE.inv || {}).forEach(it => items.push({ img: it.img, fb: it.fb, qty: it.qty, key: it.key }));
+  // O que está na MOCHILA DE PERNA sai da mochila: é um lugar só, não uma cópia.
+  // Antes o item aparecia nos dois e parecia que o jogador tinha duas pilhas dele.
+  Object.values(EXPLORE.inv || {}).forEach(it => {
+    if (it.key && it.key === EXPLORE.pouch) return;
+    items.push({ img: it.img, fb: it.fb, qty: it.qty, key: it.key });
+  });
   // Sem itens = a mochila aparece do mesmo jeito, só com os slots vazios (nada de aviso no lugar dela).
   // Power up = tocável: o toque manda o item pro slot da mochila de perna. Só o que ESTÁ no slot
   // ganha marca visual — o resto fica igual a qualquer outro item, sem poluir a mochila.
