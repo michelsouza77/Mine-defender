@@ -16,6 +16,10 @@
 
 <style>
 :root{--wood-dark:#2a1a08;--wood-mid:#3d2510;--wood-light:#5c3a1e;--wood-panel:#4a2e14;--gold:#c8960c;--gold-light:#e8b830;--gold-dim:#8a6508;--amber:#d4780a;--amber-light:#f0a020;--parchment:#f2e4c4;--parch-dark:#d4c090;--green-dark:#1a3020;--green-mid:#2d5030;--green-trim:#3d6b3a;--green-light:#5a9050;--red-rare:#8b1a1a;--stone:#3a3028;--text-dark:#1a0e04;--text-gold:#c8960c;--energy-col:#40c8e0;--hp-col:#e04040;--atk-col:#e08020;--def-col:#4080e0;
+/* Fonte LIMPA (sem pixel), usada só onde a leitura importa mais que o estilo:
+   número da energia e tempo de recarga. Vem do sistema, então não baixa nada e
+   sai sempre nítida — no Windows é a Segoe UI, no celular a do próprio aparelho. */
+--font-clean:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
 /* === SFL pixel-art palette === */
 --sfl-cream:#e0c08c;--sfl-cream-light:#f0d8a8;--sfl-brown:#5d3a1a;--sfl-brown-dark:#3a2410;--sfl-panel-bg:#e9b98a;--sfl-panel-bg-dark:#c98a64;--sfl-slot-bg:#b96f50;--sfl-slot-border:#2d2840;--sfl-light-border:url("https://sunflower-land.com/game-assets/ui/panel/light_border.png");--sfl-dark-border:url("https://sunflower-land.com/game-assets/ui/panel/dark_border.png");--sfl-green:#7eb949;--sfl-green-dark:#3d6b2a;--sfl-blue:#4a89cc;--sfl-blue-dark:#1d4a78;--sfl-red:#cc4949;--sfl-red-dark:#7a2424;
 }
@@ -151,11 +155,13 @@ button[onclick*="remove()"][style*="font-size:20px"]:active{
 .hud-stat-value{font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:32px;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;}
 .energy-bar-wrap{display:flex;align-items:center;gap:8px;}
 .energy-bar-bg{position:relative;width:190px;height:26px;background:#193c3e;border:2px solid #2d2840;border-radius:0;overflow:hidden;image-rendering:pixelated;box-shadow:inset 0 0 0 1px #0a1f20;}
-.hud-timer-btn{align-self:center;font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:20px;font-weight:400;letter-spacing:.5px;padding:9px 16px;border:2px solid var(--gold-light);border-radius:10px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);cursor:pointer;white-space:nowrap;line-height:1.1;box-shadow:0 2px 6px rgba(0,0,0,.35);}
+.hud-timer-btn{align-self:center;font-family:var(--font-clean);font-size:16px;font-weight:700;letter-spacing:.2px;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;padding:9px 16px;border:2px solid var(--gold-light);border-radius:10px;background:linear-gradient(145deg,var(--gold),var(--gold-light));color:var(--wood-dark);cursor:pointer;white-space:nowrap;line-height:1.1;box-shadow:0 2px 6px rgba(0,0,0,.35);}
 .energy-bar-fill{height:100%;width:100%;background:#63c74d;border-radius:0;transition:width 0.4s steps(10);image-rendering:pixelated;}
-/* Mesma fonte de número do resto do HUD (moedas, missões): a Secondary do SFL.
-   Antes era Pixelify Sans, que é a fonte de TEXTO — por isso os números destoavam. */
-.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'SFLSecondary','Pixelify Sans',monospace;font-size:21px !important;font-weight:400;color:#fff;text-shadow:-1.5px -1.5px 0 #2d2840,1.5px -1.5px 0 #2d2840,-1.5px 1.5px 0 #2d2840,1.5px 1.5px 0 #2d2840,0 2px 0 #2d2840;letter-spacing:0.5px;white-space:nowrap;z-index:2;pointer-events:none;}
+/* ⚠️ Energia e timer usam fonte LIMPA de propósito (pedido do Michel, 06/09/2026).
+   Todo o resto do jogo é pixel — aqui não: é o número que o jogador mais lê, e fonte de
+   pixel em número pequeno fica ruim de ler. Nada de Pixelify Sans nem SFLSecondary aqui.
+   Contorno trocado por uma sombra simples: contorno grosso suja fonte lisa. */
+.energy-bar-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-clean);font-size:18px !important;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 3px rgba(0,0,0,.6);letter-spacing:0.2px;white-space:nowrap;z-index:2;pointer-events:none;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
 @keyframes pulse-energy{0%,100%{opacity:1;}
 50%{opacity:.7;}
 }
@@ -848,7 +854,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .hud-stat-value{font-size:22px !important;font-weight:700;}
 .energy-bar-wrap{gap:3px !important;}
 .energy-bar-bg{width:104px !important;height:22px !important;}
-.energy-bar-text{font-size:16px !important;}
+.energy-bar-text{font-size:14px !important;}
 .amber-coin{width:22px !important;height:22px !important;}
 .coin-img{width:26px !important;height:26px !important;image-rendering:-webkit-optimize-contrast !important;image-rendering:crisp-edges !important;}
 .hud-coin-wrap{background:rgba(40,38,55,.45) !important;border:none !important;padding:4px 12px 4px 8px !important;border-radius:4px !important;}
@@ -856,8 +862,8 @@ to{transform:scale(1) rotate(0);opacity:1;}
 .hud-player{display:flex !important;flex-direction:column;align-items:center;gap:1px;padding:3px 5px;margin:0;flex-shrink:0;border-left:1px solid var(--gold-dim);}
 .hud-player-name{font-size:9px !important;line-height:1.1;white-space:nowrap;}
 .hud-player-level{font-size:8px !important;line-height:1.1;white-space:nowrap;}
-#recharge-timer{font-size:13px !important;}
-#collect-energy-btn{padding:5px 9px !important;font-size:14px !important;flex-shrink:0;}
+#recharge-timer{font-size:12px !important;}
+#collect-energy-btn{padding:5px 9px !important;font-size:13px !important;flex-shrink:0;}
 .hud-energy-top{display:flex !important;align-items:center !important;justify-content:center !important;gap:6px !important;}
 #right-panel{width:100% !important;max-width:100% !important;}
 #left-panel{left:8px !important;right:8px !important;width:auto !important;max-width:none !important;}
@@ -880,7 +886,7 @@ to{transform:scale(1) rotate(0);opacity:1;}
 @media (pointer:coarse) and (max-width:400px){.hud-stat-label{display:none;}
 .hud-logo{font-size:10px !important;}
 .energy-bar-bg{width:88px !important;}
-.energy-bar-text{font-size:15px !important;}
+.energy-bar-text{font-size:13px !important;}
 }
 .deck-slots-row{display:flex;justify-content:center;gap:14px;margin:20px 0;flex-wrap:wrap;}
 .deck-slot-col{display:flex;flex-direction:column;align-items:center;gap:6px;width:130px;flex:none;}

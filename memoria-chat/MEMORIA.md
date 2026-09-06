@@ -610,11 +610,20 @@ A janela de erro também **não reconhecia** esse formato: ela só casava `"...f
 `"Insufficient <id>"` passava batido — por isso o erro aparecia cru, sem nomear o item.
 Agora reconhece os dois.
 
-### ✅ Fonte da energia e do timer (06/09/2026)
-Os números da energia e do tempo de recarga usavam `Pixelify Sans`, que é a fonte de **texto**;
-o resto do HUD (moedas, missões) usa a **`SFLSecondary`**, a fonte de número do SFL — daí o
-destoe. Trocados para a mesma, com contorno igual ao das moedas: 21px no PC, 16px no celular
-(era 13px), e a barra ganhou altura pra caber. O botão do timer foi de 11px para 14px no celular.
+### ✅ Fonte da energia e do timer — LIMPA, de propósito (06/09/2026)
+⚠️ **Não "corrigir" isto de volta pro estilo do jogo.** Energia e tempo de recarga são os
+números que o jogador mais lê, e fonte de pixel em tamanho pequeno fica ruim de ler. O Michel
+pediu explicitamente "o mais limpo possível".
+
+Passaram por três estados no mesmo dia: `Pixelify Sans` (fonte de **texto**, destoava) →
+`SFLSecondary` (a de **número** do SFL, combinava com o HUD mas continuava pixel) → **fonte do
+sistema**, que é o estado final. Existe a variável `--font-clean`
+(`system-ui, -apple-system, 'Segoe UI', Roboto, …`): não baixa nada e sai sempre nítida.
+
+Detalhes que importam: o contorno de 4 lados virou **sombra simples** (contorno grosso suja
+fonte lisa), com `font-variant-numeric:tabular-nums` pro número não dançar ao mudar de dígito.
+Tamanhos: 18px no PC, 14px no celular, 13px na tela menor — menores que os da fonte de pixel
+porque fonte limpa **lê maior** no mesmo tamanho. O botão do timer ficou em 16px / 13px.
 
 ### ✅ Mochila: arrastar move tudo, teto 64, e os itens que sumiam (05/09/2026)
 
