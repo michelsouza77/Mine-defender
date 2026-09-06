@@ -549,6 +549,30 @@ Teste automatizado contra o Firestore **real** (não simulado), fingindo estar d
 
 O documento de teste (`missions/sfl_999999`) foi limpo no fim.
 
+### 🔴 "Insufficient 111" ao clicar VÁRIAS VEZES em EXPLORAR (06/09/2026)
+O botão EXPLORAR **não tinha trava nenhuma**. Como a queima da entrada demora, o jogador acha
+que não começou e clica de novo — e aí duas entradas rodam **em paralelo**: as duas leem a
+MESMA mochila e as duas mandam queimar, porque o `saveLoadout({})` só acontece no fim da
+primeira. Daí o "Insufficient 111": a segunda tentava queimar o que a primeira já tinha levado.
+⚠️ **No pior caso a segunda também dava certo e o jogador perdia os itens duas vezes.**
+
+Corrigido com `_huntEntering`: `huntPlay()` virou uma casca que tranca, chama
+`huntPlayInterno()` e destranca no `finally`; o botão também é desabilitado na hora.
+Testado: 3 cliques seguidos = **1 entrada só**.
+
+### ⚡ Energia: como funciona hoje (06/09/2026)
+**Por que o painel está em mín. 0 / máx. 25** (decisão do Michel): com 25 fixo, a coleta era
+**recusada** quando faltava menos de 25 pro topo. O mínimo 0 deixa o servidor creditar só o que
+cabe. **Não é sorteio** — com espaço sobrando vêm sempre 25. Por isso `ENERGY_TICK_MIN = 25`,
+e o rótulo promete 25 cravado. Se um dia a coleta vier aleatória, pôr 0 ali faz o rótulo voltar
+a dizer "até 25" sozinho.
+
+**Coleta automática:** o botão espera o jogador por `ENERGY_AUTOCOLLECT_MS` (1 min) e, se ele
+não coletar, o jogo coleta sozinho. `_energyReadySince` / `_energyAutoUuid` contam o tempo e
+zeram quando aparece um gerador novo; se a coleta falhar, espera outro minuto em vez de
+martelar o servidor. **Barra cheia não coleta** — `updateCollectEnergyButton()` sai antes
+quando a energia está no máximo, então os 25 ficam guardados no gerador até abrir espaço.
+
 ### 🔴 Energia: coleta vazia matava o ciclo (06/09/2026)
 O Michel mudou a ação da recarga no painel: era **mín. 25 / máx. 25** (sempre 25), virou
 **mín. 0** — ou seja, **uma coleta pode render menos que 25, inclusive 0**.

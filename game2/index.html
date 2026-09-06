@@ -2260,6 +2260,8 @@ var I18N = {
   'toast.balance_unchanged': '⚠️ Servidor aceitou mas saldo não mudou. Verifique no SFL.',
   'toast.energy_zero': '⚡ A recarga veio vazia desta vez — a próxima já começou',
   'energy.upto': 'até',
+  'energy.auto_in': 'Toque pra coletar — ou o jogo coleta em {t}',
+  'energy.collecting': 'Coletando...',
   'toast.coins_insufficient': '💰 DinoCoins insuficientes! Precisa de {n} DinoCoins.',
   'toast.no_dino_rarity': 'Nenhum dino disponível nessa raridade ainda.',
   'toast.buy_failed': '❌ Compra falhou: {err}',
@@ -2863,6 +2865,8 @@ var I18N = {
   'toast.balance_unchanged': '⚠️ Server accepted but balance unchanged. Check on SFL.',
   'toast.energy_zero': '⚡ This recharge came up empty — the next one already started',
   'energy.upto': 'up to',
+  'energy.auto_in': 'Tap to collect — or the game collects in {t}',
+  'energy.collecting': 'Collecting...',
   'toast.coins_insufficient': '💰 Insufficient DinoCoins! Need {n} DinoCoins.',
   'toast.no_dino_rarity': 'No dino available in that rarity yet.',
   'toast.buy_failed': '❌ Purchase failed: {err}',
@@ -4472,16 +4476,29 @@ function showProfileMenu() {
 // Escreva só o que o JOGADOR percebe, de forma impessoal. Detalhe técnico não entra.
 const CHANGELOG = [
   {
+    v: 'v2.0.3', date: '2026-09-06',
+    pt: [
+      'A recarga de energia agora é coletada sozinha se você não coletar em 1 minuto.',
+      'Com a barra cheia, os 25⚡ ficam guardados até abrir espaço — nada se perde.',
+      'Quando falta menos de 25 pro topo, a recarga completa só o que cabe, em vez de falhar.',
+      'Corrigido: clicar várias vezes em EXPLORAR tentava entrar duas vezes e dava erro nos itens da mochila.',
+    ],
+    en: [
+      'Energy recharge is now collected automatically if you do not collect within 1 minute.',
+      'With a full bar the 25⚡ stay saved until there is room — nothing is lost.',
+      'When less than 25 is missing, the recharge tops up only what fits instead of failing.',
+      'Fixed: clicking EXPLORE several times tried to enter twice and threw an error about your backpack items.',
+    ],
+  },
+  {
     v: 'v2.0.2', date: '2026-09-06',
     pt: [
       'Corrigido: quando a recarga vinha vazia, o próximo ciclo de 6 horas não começava e você ficava sem timer.',
-      'A recarga agora mostra "até 25⚡", porque nem toda coleta rende 25.',
       'Os números da energia e do tempo de recarga ficaram maiores e na fonte certa.',
       'Quando não dá pra entrar no mapa levando itens, a mensagem agora diz qual item causou.',
     ],
     en: [
       'Fixed: when a recharge came up empty, the next 6-hour cycle never started and you were left with no timer.',
-      'The recharge now shows "up to 25⚡", since not every collect grants 25.',
       'Energy and recharge-timer numbers are bigger and use the right font.',
       'When entering the map with items fails, the message now names the item that caused it.',
     ],
@@ -8954,10 +8971,16 @@ window.dinoTutNext = dinoTutNext;
 window.closeDinoTutorial = closeDinoTutorial;
 const ENERGY_MAX = 100;
 const ENERGY_PER_TICK = 25;
-// Mínimo que a ação do painel pode render numa recarga. Ficou 0 em 06/09/2026 (antes era 25
-// fixo), então a coleta pode vir com MENOS que 25 — e o rótulo precisa dizer "até", senão o
-// jogador acha que o jogo comeu energia dele. Voltando o painel pra 25, é só pôr 25 aqui.
-const ENERGY_TICK_MIN = 0;
+// Mínimo que a ação do painel rende numa recarga.
+// O painel está em mín. 0 / máx. 25 — mas isso NÃO é um sorteio: o mínimo 0 existe só pra
+// deixar o servidor creditar o que COUBER quando falta menos de 25 pro topo (com 25 fixo a
+// coleta era recusada por falta de espaço). Com espaço sobrando vêm sempre 25, então o
+// rótulo promete 25 cravado. Se um dia a coleta passar a vir aleatória, ponha 0 aqui de novo
+// que o rótulo volta a dizer "até 25".
+const ENERGY_TICK_MIN = 25;
+// Quanto tempo o botão fica esperando o jogador antes de o jogo coletar sozinho.
+// Barra cheia não coleta: os 25 ficam guardados no gerador até abrir espaço.
+const ENERGY_AUTOCOLLECT_MS = 60 * 1000;
 function energyTickLabel() {
   return (ENERGY_TICK_MIN < ENERGY_PER_TICK)
     ? `+${t('energy.upto')} ${ENERGY_PER_TICK}⚡`
@@ -9712,6 +9735,9 @@ async function collectEnergy() {
   updateCollectEnergyButton();  // reflects new state (probably "still cooking" now)
   }
 }
+// Desde quando o gerador está pronto (e de qual gerador), pra contar o minuto da coleta
+// automática. Zera quando aparece um gerador novo.
+let _energyReadySince = 0, _energyAutoUuid = '';
 function updateCollectEnergyButton() {
   const btn = document.getElementById('collect-energy-btn');
   if (!btn) return;
@@ -9758,8 +9784,21 @@ function updateCollectEnergyButton() {
   const session = window._sflLastSession;
   const readyJobID = findReadyGenerator(session);
   if (readyJobID) {
+  // ── COLETA SOZINHA depois de ENERGY_AUTOCOLLECT_MS ────────────────────────────
+  // O botão aparece pro jogador coletar; se ele não coletar em 1 minuto, o jogo coleta.
+  // Só chega aqui quando há ESPAÇO na barra (mais acima a função sai quando está cheia),
+  // então a barra cheia nunca dispara a coleta — os 25 ficam guardados no gerador.
+  const uuidAtual = readyJobID.uuid || String(readyJobID);
+  if (_energyAutoUuid !== uuidAtual) { _energyAutoUuid = uuidAtual; _energyReadySince = Date.now(); }
+  const faltaAuto = ENERGY_AUTOCOLLECT_MS - (Date.now() - _energyReadySince);
+  if (faltaAuto <= 0 && !_collectInProgress) {
+    _energyReadySince = Date.now();   // se falhar, espera outro minuto em vez de martelar
+    try { collectEnergy(); } catch (e) {}
+  }
   btn.disabled = false;
-  btn.title = 'Coletar +25 energia';
+  btn.title = faltaAuto > 0
+    ? t('energy.auto_in', { t: fmt(faltaAuto) })
+    : t('energy.collecting');
   btn.innerHTML = energyTickLabel();
   btn.style.opacity = '1';
   btn.style.animation = 'label-pulse 1.5s ease-in-out infinite';
@@ -11388,7 +11427,27 @@ function rwToggleChest(el) {
 // SFL actions explorar_lv1..explorar_lv10 exist in the minigame editor, each
 // burning item 100 (Energia) by that level's cost. Charged on ENTRY — dying does not refund.
 const HUNT_ENERGY_SFL_READY = true;
+// ⚠️ TRAVA DE ENTRADA — não remover.
+// O botão EXPLORAR não tinha trava nenhuma. Quem clicava duas vezes (achando que não tinha
+// começado, porque a queima demora) disparava DUAS entradas em paralelo: as duas liam a MESMA
+// mochila e as duas mandavam queimar, porque o `saveLoadout({})` só acontece no fim da
+// primeira. Daí o "Insufficient <id>" — a segunda tentava queimar o que a primeira já levou.
+// No pior caso a segunda também dava certo e o jogador PERDIA os itens duas vezes.
+let _huntEntering = false;
 async function huntPlay(n) {
+  if (_huntEntering) return;
+  _huntEntering = true;
+  const btnEntrada = document.querySelector('#level-preview .lvprev-play');
+  if (btnEntrada) { btnEntrada.disabled = true; btnEntrada.style.opacity = '0.5'; btnEntrada.style.cursor = 'wait'; }
+  try {
+    return await huntPlayInterno(n);
+  } finally {
+    _huntEntering = false;
+    const b = document.querySelector('#level-preview .lvprev-play');
+    if (b) { b.disabled = false; b.style.opacity = ''; b.style.cursor = ''; }
+  }
+}
+async function huntPlayInterno(n) {
   const { isEN, cost } = huntLevelInfo(n);
   // Queima o que você escolheu levar ANTES de cobrar a energia: se a queima falhar,
   // você não perde energia por uma entrada que não aconteceu.
