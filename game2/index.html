@@ -13722,6 +13722,13 @@ function setupHomeChar() {
   }
   setupHomeElder();
 }
+// ⚠️ MEDIDO do sheet do SFL (não chutar): num quadro de 96×64 o bumpkin ocupa só
+// y = 23..38 — 16px de altura — com 25px de VAZIO embaixo dos pés e 23px acima da cabeça.
+// Na escala do Ancião (2.1) esses 25px viram ~52px de espaço morto. Por isso NADA pode ser
+// posicionado pela caixa do elemento: rótulo e escudo têm que sair dos PÉS e da CABEÇA reais.
+// (Foi o que causou os dois bugs: `top:74px` caía em cima dele, `top:100%` caía longe embaixo.)
+const BUMPKIN_HEAD_Y = 23;   // primeira linha com pixel dentro do quadro
+const BUMPKIN_FEET_Y = 39;   // primeira linha vazia logo abaixo dos pés
 // Shared: run a bumpkin idle loop (frames 0..8) on an element, at the given scale.
 function animateHomeSprite(el, sheet, S) {
   if (!el || el._sheet === sheet) return;
@@ -13731,6 +13738,20 @@ function animateHomeSprite(el, sheet, S) {
     const cols = Math.max(1, Math.round(im.naturalWidth / EXP_FRAME_W));
     el.style.width = (EXP_FRAME_W * S) + 'px';
     el.style.height = (EXP_FRAME_H * S) + 'px';
+    // Encosta o nome logo abaixo dos pés e o escudo logo acima da cabeça, na escala deste
+    // sprite. Só age em quem tem esses filhos (o boneco dos painéis não tem).
+    const lb = el.querySelector('.hb-lb');
+    if (lb) {
+      lb.style.bottom = '';
+      lb.style.top = Math.round(BUMPKIN_FEET_Y * S + 3) + 'px';
+      lb.style.transform = 'translate(-50%,0)';
+    }
+    const sh = el.querySelector('img[id$="-shield"]');
+    if (sh) {
+      sh.style.bottom = '';
+      sh.style.top = Math.round(BUMPKIN_HEAD_Y * S - 3) + 'px';
+      sh.style.transform = 'translate(-50%,-100%)';
+    }
     el.style.backgroundImage = `url("${sheet}")`;
     el.style.backgroundSize = `${im.naturalWidth * S}px ${im.naturalHeight * S}px`;
     let f = 0;

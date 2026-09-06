@@ -566,13 +566,23 @@ ovo raro no chão). Mudando a geração, mude `EXP_ITEM_SOURCE` junto.
 O item equipado aparecia **na mochila E no slot**, parecendo duas pilhas. Agora sai da mochila:
 `renderBackpackGrid()` pula `it.key === EXPLORE.pouch`, e `charEquipPageHtml` filtra o `pick`.
 
-### ✅ Nome do Ancião por cima dele (06/09/2026)
-`animateHomeSprite()` **sobrescreve width/height** quando o sprite carrega: o Ancião ia de 56px
-pra ~134px (64 × 2.1). O rótulo estava fixo em `top:74px`, medida calculada pros 56px antigos —
-depois que o sprite carregava, ele caía no meio do personagem.
-Agora os rótulos usam `top:100%` (e o escudo `bottom:100%`), que acompanha qualquer altura.
-O nome do jogador tinha o mesmo defeito (`top:46px` numa caixa de 147px) e foi corrigido junto.
-**Lição: não use px fixo pra posicionar coisa em volta desses sprites — a altura muda em runtime.**
+### ✅ Nome do Ancião / do jogador fora de lugar (06/09/2026) — MEDIDO, não chutado
+Duas causas empilhadas:
+1. `animateHomeSprite()` **sobrescreve width/height** quando o sprite carrega (Ancião: 56px →
+   134px, ou seja 64 × 2.1). Qualquer `top` em px fixo vira lixo depois disso.
+2. **O bumpkin ocupa MUITO menos que o quadro.** Medido no sheet do SFL (canvas + alfa): num
+   quadro de **96×64** ele vai de **y=23 a y=38** — 16px de altura — com **25px de vazio
+   embaixo dos pés** e 23px em cima. Na escala 2.1 isso são ~52px de espaço morto.
+
+Por isso as duas tentativas erraram em direções opostas: `top:74px` caía **em cima** dele, e
+`top:100%` (fundo da caixa) caía **bem abaixo**, no vazio.
+
+Solução: `animateHomeSprite()` posiciona o `.hb-lb` e o escudo **na hora**, a partir dos pés e
+da cabeça reais — `BUMPKIN_FEET_Y = 39` e `BUMPKIN_HEAD_Y = 23`, multiplicados pela escala.
+Conferido: Ancião com caixa de 134px, pés em 82px, nome em **85px**; jogador em **93px**.
+
+⚠️ **Nunca posicione nada em volta desses sprites por px fixo nem pelo fundo da caixa.**
+Use `BUMPKIN_FEET_Y`/`BUMPKIN_HEAD_Y` × escala.
 
 ### 🔴 "Insufficient 111" ao clicar VÁRIAS VEZES em EXPLORAR (06/09/2026)
 O botão EXPLORAR **não tinha trava nenhuma**. Como a queima da entrada demora, o jogador acha
